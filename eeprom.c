@@ -173,15 +173,7 @@ void EEPROM_SaveGPS(float lattitude, float longitude ){
 }
 
 
-//void EEPROM_GPSLat(float lattitude){
-//    EEPROM_WriteBytes(EEPROM_LATTITUDE_REG, (uint8_t*)&lattitude, sizeof(int32_t));
-//    
-//}
-//
-//void EEPROM_GPSLong(float longitude){
-//    EEPROM_WriteBytes(EEPROM_LONGITUTE_REG, (uint8_t*)&longitude, sizeof(int32_t));
-//    
-//}
+
 
 
 void EEPROM_GetGPS(float* lattitude,  float* longitude){
@@ -276,6 +268,8 @@ void DeserializeLogEntry(const uint8_t* buffer, LogEntry* entry)
 }
 
 
-
+void GetDeviceTag(char* tag){
+    EEPROM_ReadBytes(EEPROM_DEVICE_TAG_REG, (uint8_t*)tag, DEVICE_TAG_LENGTH );
+}
 
 /* [] END OF FILE */

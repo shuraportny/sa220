@@ -38,6 +38,7 @@ extern Point circlePoints2[NUM_POINTS];
 //extern S_Sensor s;
 char firmwareVersion[10];
 char txt[50];
+char device_tag[DEVICE_TAG_LENGTH];
 
 uint8_t ch2Active=0;;
 
@@ -168,6 +169,10 @@ void InitSystem(){
     mySlaveAddr = EEPROM_GetMyAddress();
     msa = mySlaveAddr;
     i2cPeriod = EEPROM_GetI2CPeriod();
+    
+    GetDeviceTag(device_tag);
+    if(device_tag[0]==0xFF)
+        strcpy(device_tag, "SAFEGUARD ANALYTICS");
     
 #ifndef SINGLE_SENSOR_SYSTEM    
     ch2Active = EEPROM_GetCh2Activity();

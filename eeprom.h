@@ -65,9 +65,12 @@
 #define EEPROM_LATTITUDE_REG            20 // 4 bytes
 #define EEPROM_LONGITUTE_REG            24 // 4 bytes
 
+#define EEPROM_DEVICE_TAG_REG           0x30
+#define DEVICE_TAG_LENGTH               20
+
 #define LOG_PAGE_LENGTH                 0x80 // This chip has 1024 pages
-#define LOG_INDEX_ADDR                  0x0040
-#define LOG_DATA_START_ADDR             0x0050 // ch number(1byte)+ time stamp (2 bytes)+ sysreadnig(4 bytes) = 7 bytes total 
+#define LOG_INDEX_ADDR                  0x0140//0x0040
+#define LOG_DATA_START_ADDR             0x0150//0x0050 // ch number(1byte)+ time stamp (2 bytes)+ sysreadnig(4 bytes) = 7 bytes total 
 #define LOG_MAX_ENTRIES                 10 // 6 x 100=700 bytes?
 
 #define LOG_TXT_LENGTH                  40
@@ -108,6 +111,8 @@ void SaveLogEntry(uint8_t* idx, char* txt);
 void GetLog(char* log_record);
 void GetLogEntry(uint8_t idx, char* txt);
 void EraseLog(void);
+
+void GetDeviceTag(char* tag);
 
 #endif /* EEProm_H */
 /* [] END OF FILE */
