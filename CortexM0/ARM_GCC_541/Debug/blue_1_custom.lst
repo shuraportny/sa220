@@ -1,0 +1,2273 @@
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"blue_1_custom.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cyBle_customs
+  20              		.section	.rodata
+  21              		.align	2
+  22              		.type	cyBle_customs, %object
+  23              		.size	cyBle_customs, 372
+  24              	cyBle_customs:
+  25 0000 1000     		.short	16
+  26 0002 1200     		.short	18
+  27 0004 1300     		.short	19
+  28 0006 1400     		.short	20
+  29 0008 0000     		.short	0
+  30 000a 1600     		.short	22
+  31 000c 1700     		.short	23
+  32 000e 1800     		.short	24
+  33 0010 0000     		.short	0
+  34 0012 1A00     		.short	26
+  35 0014 1B00     		.short	27
+  36 0016 1C00     		.short	28
+  37 0018 0000     		.short	0
+  38 001a 1E00     		.short	30
+  39 001c 1F00     		.short	31
+  40 001e 0000     		.short	0
+  41 0020 0000     		.short	0
+  42 0022 2100     		.short	33
+  43 0024 2200     		.short	34
+  44 0026 0000     		.short	0
+  45 0028 0000     		.short	0
+  46 002a 2400     		.short	36
+  47 002c 2500     		.short	37
+  48 002e 0000     		.short	0
+  49 0030 0000     		.short	0
+  50 0032 2700     		.short	39
+  51 0034 2800     		.short	40
+  52 0036 2900     		.short	41
+  53 0038 0000     		.short	0
+  54 003a 2B00     		.short	43
+  55 003c 2C00     		.short	44
+  56 003e 0000     		.short	0
+  57 0040 0000     		.short	0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 2
+
+
+  58 0042 2E00     		.short	46
+  59 0044 2F00     		.short	47
+  60 0046 0000     		.short	0
+  61 0048 0000     		.short	0
+  62 004a 3100     		.short	49
+  63 004c 3200     		.short	50
+  64 004e 0000     		.short	0
+  65 0050 0000     		.short	0
+  66 0052 3400     		.short	52
+  67 0054 3500     		.short	53
+  68 0056 0000     		.short	0
+  69 0058 0000     		.short	0
+  70 005a 3700     		.short	55
+  71 005c 3800     		.short	56
+  72 005e 0000     		.short	0
+  73 0060 0000     		.short	0
+  74 0062 3A00     		.short	58
+  75 0064 3B00     		.short	59
+  76 0066 3C00     		.short	60
+  77 0068 3D00     		.short	61
+  78 006a 0000     		.short	0
+  79 006c 0000     		.short	0
+  80 006e 0000     		.short	0
+  81 0070 0000     		.short	0
+  82 0072 0000     		.short	0
+  83 0074 0000     		.short	0
+  84 0076 0000     		.short	0
+  85 0078 0000     		.short	0
+  86 007a 0000     		.short	0
+  87 007c 0000     		.short	0
+  88 007e 0000     		.short	0
+  89 0080 0000     		.short	0
+  90 0082 0000     		.short	0
+  91 0084 0000     		.short	0
+  92 0086 0000     		.short	0
+  93 0088 0000     		.short	0
+  94 008a 0000     		.short	0
+  95 008c 0000     		.short	0
+  96 008e 0000     		.short	0
+  97 0090 0000     		.short	0
+  98 0092 0000     		.short	0
+  99 0094 0000     		.short	0
+ 100 0096 0000     		.short	0
+ 101 0098 0000     		.short	0
+ 102 009a 0000     		.short	0
+ 103 009c 0000     		.short	0
+ 104 009e 0000     		.short	0
+ 105 00a0 0000     		.short	0
+ 106 00a2 0000     		.short	0
+ 107 00a4 0000     		.short	0
+ 108 00a6 0000     		.short	0
+ 109 00a8 0000     		.short	0
+ 110 00aa 0000     		.short	0
+ 111 00ac 0000     		.short	0
+ 112 00ae 0000     		.short	0
+ 113 00b0 0000     		.short	0
+ 114 00b2 0000     		.short	0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 3
+
+
+ 115 00b4 0000     		.short	0
+ 116 00b6 0000     		.short	0
+ 117 00b8 0000     		.short	0
+ 118 00ba 5100     		.short	81
+ 119 00bc 5300     		.short	83
+ 120 00be 5400     		.short	84
+ 121 00c0 0000     		.short	0
+ 122 00c2 0000     		.short	0
+ 123 00c4 5600     		.short	86
+ 124 00c6 5700     		.short	87
+ 125 00c8 0000     		.short	0
+ 126 00ca 0000     		.short	0
+ 127 00cc 5900     		.short	89
+ 128 00ce 5A00     		.short	90
+ 129 00d0 0000     		.short	0
+ 130 00d2 0000     		.short	0
+ 131 00d4 5C00     		.short	92
+ 132 00d6 5D00     		.short	93
+ 133 00d8 0000     		.short	0
+ 134 00da 0000     		.short	0
+ 135 00dc 5F00     		.short	95
+ 136 00de 6000     		.short	96
+ 137 00e0 0000     		.short	0
+ 138 00e2 0000     		.short	0
+ 139 00e4 6200     		.short	98
+ 140 00e6 6300     		.short	99
+ 141 00e8 6400     		.short	100
+ 142 00ea 0000     		.short	0
+ 143 00ec 6600     		.short	102
+ 144 00ee 6700     		.short	103
+ 145 00f0 6800     		.short	104
+ 146 00f2 0000     		.short	0
+ 147 00f4 6A00     		.short	106
+ 148 00f6 6B00     		.short	107
+ 149 00f8 0000     		.short	0
+ 150 00fa 0000     		.short	0
+ 151 00fc 6D00     		.short	109
+ 152 00fe 6E00     		.short	110
+ 153 0100 6F00     		.short	111
+ 154 0102 0000     		.short	0
+ 155 0104 7100     		.short	113
+ 156 0106 7200     		.short	114
+ 157 0108 7300     		.short	115
+ 158 010a 0000     		.short	0
+ 159 010c 7500     		.short	117
+ 160 010e 7600     		.short	118
+ 161 0110 7700     		.short	119
+ 162 0112 0000     		.short	0
+ 163 0114 7900     		.short	121
+ 164 0116 7A00     		.short	122
+ 165 0118 7B00     		.short	123
+ 166 011a 0000     		.short	0
+ 167 011c 7D00     		.short	125
+ 168 011e 7E00     		.short	126
+ 169 0120 7F00     		.short	127
+ 170 0122 0000     		.short	0
+ 171 0124 8100     		.short	129
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 4
+
+
+ 172 0126 8200     		.short	130
+ 173 0128 8300     		.short	131
+ 174 012a 0000     		.short	0
+ 175 012c 8500     		.short	133
+ 176 012e 8600     		.short	134
+ 177 0130 0000     		.short	0
+ 178 0132 0000     		.short	0
+ 179 0134 8800     		.short	136
+ 180 0136 8900     		.short	137
+ 181 0138 8A00     		.short	138
+ 182 013a 0000     		.short	0
+ 183 013c 8C00     		.short	140
+ 184 013e 8D00     		.short	141
+ 185 0140 8E00     		.short	142
+ 186 0142 0000     		.short	0
+ 187 0144 9000     		.short	144
+ 188 0146 9100     		.short	145
+ 189 0148 9200     		.short	146
+ 190 014a 0000     		.short	0
+ 191 014c 9400     		.short	148
+ 192 014e 9500     		.short	149
+ 193 0150 9600     		.short	150
+ 194 0152 0000     		.short	0
+ 195 0154 9800     		.short	152
+ 196 0156 9900     		.short	153
+ 197 0158 9A00     		.short	154
+ 198 015a 0000     		.short	0
+ 199 015c 9C00     		.short	156
+ 200 015e 9D00     		.short	157
+ 201 0160 9E00     		.short	158
+ 202 0162 0000     		.short	0
+ 203 0164 A000     		.short	160
+ 204 0166 A100     		.short	161
+ 205 0168 A200     		.short	162
+ 206 016a 0000     		.short	0
+ 207 016c A400     		.short	164
+ 208 016e A500     		.short	165
+ 209 0170 A600     		.short	166
+ 210 0172 0000     		.short	0
+ 211              		.section	.text.CyBle_CustomInit,"ax",%progbits
+ 212              		.align	2
+ 213              		.global	CyBle_CustomInit
+ 214              		.code	16
+ 215              		.thumb_func
+ 216              		.type	CyBle_CustomInit, %function
+ 217              	CyBle_CustomInit:
+ 218              	.LFB2:
+ 219              		.file 1 "Generated_Source\\PSoC4\\blue_1_custom.c"
+   1:Generated_Source\PSoC4/blue_1_custom.c **** /***************************************************************************//**
+   2:Generated_Source\PSoC4/blue_1_custom.c **** * \file CYBLE_custom.c
+   3:Generated_Source\PSoC4/blue_1_custom.c **** * \version 3.40
+   4:Generated_Source\PSoC4/blue_1_custom.c **** * 
+   5:Generated_Source\PSoC4/blue_1_custom.c **** * \brief
+   6:Generated_Source\PSoC4/blue_1_custom.c **** *  Contains the source code for the Custom Service.
+   7:Generated_Source\PSoC4/blue_1_custom.c **** * 
+   8:Generated_Source\PSoC4/blue_1_custom.c **** ********************************************************************************
+   9:Generated_Source\PSoC4/blue_1_custom.c **** * \copyright
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 5
+
+
+  10:Generated_Source\PSoC4/blue_1_custom.c **** * Copyright 2014-2016, Cypress Semiconductor Corporation.  All rights reserved.
+  11:Generated_Source\PSoC4/blue_1_custom.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC4/blue_1_custom.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC4/blue_1_custom.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC4/blue_1_custom.c **** *******************************************************************************/
+  15:Generated_Source\PSoC4/blue_1_custom.c **** 
+  16:Generated_Source\PSoC4/blue_1_custom.c **** 
+  17:Generated_Source\PSoC4/blue_1_custom.c **** #include "blue_1_eventHandler.h"
+  18:Generated_Source\PSoC4/blue_1_custom.c **** 
+  19:Generated_Source\PSoC4/blue_1_custom.c **** #ifdef CYBLE_CUSTOM_SERVER
+  20:Generated_Source\PSoC4/blue_1_custom.c **** 
+  21:Generated_Source\PSoC4/blue_1_custom.c **** /* If any custom service with custom characteristics is defined in the
+  22:Generated_Source\PSoC4/blue_1_custom.c **** * customizer's GUI their handles will be present in this array.
+  23:Generated_Source\PSoC4/blue_1_custom.c **** */
+  24:Generated_Source\PSoC4/blue_1_custom.c **** /* This array contains attribute handles for the defined Custom Services and their characteristics 
+  25:Generated_Source\PSoC4/blue_1_custom.c ****    The array index definitions are located in the CYBLE_custom.h file. */
+  26:Generated_Source\PSoC4/blue_1_custom.c **** const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
+  27:Generated_Source\PSoC4/blue_1_custom.c **** 
+  28:Generated_Source\PSoC4/blue_1_custom.c ****     /* SGA1 service */
+  29:Generated_Source\PSoC4/blue_1_custom.c ****     {
+  30:Generated_Source\PSoC4/blue_1_custom.c ****         0x0010u, /* Handle of the SGA1 service */ 
+  31:Generated_Source\PSoC4/blue_1_custom.c ****         {
+  32:Generated_Source\PSoC4/blue_1_custom.c **** 
+  33:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_REMOTE characteristic */
+  34:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  35:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0012u, /* Handle of the SYS_REMOTE characteristic */ 
+  36:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  37:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  38:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  39:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0013u, /* Handle of the Characteristic User Description descriptor */ 
+  40:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0014u, /* Handle of the Client Characteristic Configuration descriptor */ 
+  41:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  42:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+  43:Generated_Source\PSoC4/blue_1_custom.c ****             },
+  44:Generated_Source\PSoC4/blue_1_custom.c **** 
+  45:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_READING characteristic */
+  46:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  47:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0016u, /* Handle of the SYS_READING characteristic */ 
+  48:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  49:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  50:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  51:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0017u, /* Handle of the Characteristic User Description descriptor */ 
+  52:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0018u, /* Handle of the SYS_READING_CCCD descriptor */ 
+  53:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  54:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+  55:Generated_Source\PSoC4/blue_1_custom.c ****             },
+  56:Generated_Source\PSoC4/blue_1_custom.c **** 
+  57:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_STATUS characteristic */
+  58:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  59:Generated_Source\PSoC4/blue_1_custom.c ****                 0x001Au, /* Handle of the SYS_STATUS characteristic */ 
+  60:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  61:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  62:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  63:Generated_Source\PSoC4/blue_1_custom.c ****                     0x001Bu, /* Handle of the Characteristic User Description descriptor */ 
+  64:Generated_Source\PSoC4/blue_1_custom.c ****                     0x001Cu, /* Handle of the Client Characteristic Configuration descriptor */ 
+  65:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  66:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 6
+
+
+  67:Generated_Source\PSoC4/blue_1_custom.c ****             },
+  68:Generated_Source\PSoC4/blue_1_custom.c **** 
+  69:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_CAN_CHAN characteristic */
+  70:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  71:Generated_Source\PSoC4/blue_1_custom.c ****                 0x001Eu, /* Handle of the SYS_CAN_CHAN characteristic */ 
+  72:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  73:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  74:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  75:Generated_Source\PSoC4/blue_1_custom.c ****                     0x001Fu, /* Handle of the Characteristic User Description descriptor */ 
+  76:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  77:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  78:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+  79:Generated_Source\PSoC4/blue_1_custom.c ****             },
+  80:Generated_Source\PSoC4/blue_1_custom.c **** 
+  81:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_CAN_ID characteristic */
+  82:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  83:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0021u, /* Handle of the SYS_CAN_ID characteristic */ 
+  84:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  85:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  86:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  87:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0022u, /* Handle of the Characteristic User Description descriptor */ 
+  88:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  89:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+  90:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+  91:Generated_Source\PSoC4/blue_1_custom.c ****             },
+  92:Generated_Source\PSoC4/blue_1_custom.c **** 
+  93:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_CAL_LOOP characteristic */
+  94:Generated_Source\PSoC4/blue_1_custom.c ****             {
+  95:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0024u, /* Handle of the SYS_CAL_LOOP characteristic */ 
+  96:Generated_Source\PSoC4/blue_1_custom.c ****                 
+  97:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+  98:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+  99:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0025u, /* Handle of the Characteristic User Description descriptor */ 
+ 100:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 101:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 102:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 103:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 104:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 105:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_ADC characteristic */
+ 106:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 107:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0027u, /* Handle of the SYS_ADC characteristic */ 
+ 108:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 109:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 110:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 111:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0028u, /* Handle of the Characteristic User Description descriptor */ 
+ 112:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0029u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 113:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 114:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 115:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 116:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 117:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_ALERT_1 characteristic */
+ 118:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 119:Generated_Source\PSoC4/blue_1_custom.c ****                 0x002Bu, /* Handle of the SYS_ALERT_1 characteristic */ 
+ 120:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 121:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 122:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 123:Generated_Source\PSoC4/blue_1_custom.c ****                     0x002Cu, /* Handle of the Characteristic User Description descriptor */ 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 7
+
+
+ 124:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 125:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 126:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 127:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 128:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 129:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_ALERT_2 characteristic */
+ 130:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 131:Generated_Source\PSoC4/blue_1_custom.c ****                 0x002Eu, /* Handle of the SYS_ALERT_2 characteristic */ 
+ 132:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 133:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 134:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 135:Generated_Source\PSoC4/blue_1_custom.c ****                     0x002Fu, /* Handle of the Characteristic User Description descriptor */ 
+ 136:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 137:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 138:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 139:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 140:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 141:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_ALERT_1_ASC characteristic */
+ 142:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 143:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0031u, /* Handle of the SYS_ALERT_1_ASC characteristic */ 
+ 144:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 145:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 146:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 147:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0032u, /* Handle of the Characteristic User Description descriptor */ 
+ 148:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 149:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 150:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 151:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 152:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 153:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_ALERT_2_ASC characteristic */
+ 154:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 155:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0034u, /* Handle of the SYS_ALERT_2_ASC characteristic */ 
+ 156:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 157:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 158:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 159:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0035u, /* Handle of the Characteristic User Description descriptor */ 
+ 160:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 161:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 162:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 163:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 164:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 165:Generated_Source\PSoC4/blue_1_custom.c ****             /* SYS_FRACTIONAL characteristic */
+ 166:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 167:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0037u, /* Handle of the SYS_FRACTIONAL characteristic */ 
+ 168:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 169:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 170:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 171:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0038u, /* Handle of the Characteristic User Description descriptor */ 
+ 172:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 173:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 174:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 175:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 176:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 177:Generated_Source\PSoC4/blue_1_custom.c ****             /* RESOLUTION characteristic */
+ 178:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 179:Generated_Source\PSoC4/blue_1_custom.c ****                 0x003Au, /* Handle of the RESOLUTION characteristic */ 
+ 180:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 8
+
+
+ 181:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 182:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 183:Generated_Source\PSoC4/blue_1_custom.c ****                     0x003Bu, /* Handle of the Custom Descriptor descriptor */ 
+ 184:Generated_Source\PSoC4/blue_1_custom.c ****                     0x003Cu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 185:Generated_Source\PSoC4/blue_1_custom.c ****                     0x003Du, /* Handle of the Characteristic User Description descriptor */ 
+ 186:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 187:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 188:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 189:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 190:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 191:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 192:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 193:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 194:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 195:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 196:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 197:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 198:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 199:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 200:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 201:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 202:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 203:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 204:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 205:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 206:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 207:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 208:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 209:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 210:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 211:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 212:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 213:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 214:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 215:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 216:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 217:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 218:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 219:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 220:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 221:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 222:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 223:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 224:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 225:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 226:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 227:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 228:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 229:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 230:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 231:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 232:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 233:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 234:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 235:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 236:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 237:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 9
+
+
+ 238:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 239:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 240:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 241:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 242:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 243:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 244:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 245:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 246:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 247:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 248:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 249:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 250:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 251:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 252:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 253:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 254:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 255:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 256:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 257:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 258:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 259:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 260:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 261:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 262:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 263:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 264:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 265:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 266:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 267:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 268:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 269:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 270:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 271:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 272:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 273:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 274:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 275:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 276:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 277:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 278:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 279:Generated_Source\PSoC4/blue_1_custom.c ****                 CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 280:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 281:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 282:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 283:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 284:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 285:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 286:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 287:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 288:Generated_Source\PSoC4/blue_1_custom.c ****         }, 
+ 289:Generated_Source\PSoC4/blue_1_custom.c ****     },
+ 290:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 291:Generated_Source\PSoC4/blue_1_custom.c ****     /* SGA2 service */
+ 292:Generated_Source\PSoC4/blue_1_custom.c ****     {
+ 293:Generated_Source\PSoC4/blue_1_custom.c ****         0x0051u, /* Handle of the SGA2 service */ 
+ 294:Generated_Source\PSoC4/blue_1_custom.c ****         {
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 10
+
+
+ 295:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 296:Generated_Source\PSoC4/blue_1_custom.c ****             /* PIN characteristic */
+ 297:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 298:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0053u, /* Handle of the PIN characteristic */ 
+ 299:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 300:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 301:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 302:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0054u, /* Handle of the Characteristic User Description descriptor */ 
+ 303:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 304:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 305:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 306:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 307:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 308:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_TYPE characteristic */
+ 309:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 310:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0056u, /* Handle of the SENSOR_TYPE characteristic */ 
+ 311:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 312:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 313:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 314:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0057u, /* Handle of the Characteristic User Description descriptor */ 
+ 315:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 316:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 317:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 318:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 319:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 320:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_RANGE characteristic */
+ 321:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 322:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0059u, /* Handle of the SENSOR_RANGE characteristic */ 
+ 323:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 324:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 325:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 326:Generated_Source\PSoC4/blue_1_custom.c ****                     0x005Au, /* Handle of the Characteristic User Description descriptor */ 
+ 327:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 328:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 329:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 330:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 331:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 332:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_GAS_NOTE characteristic */
+ 333:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 334:Generated_Source\PSoC4/blue_1_custom.c ****                 0x005Cu, /* Handle of the SENSOR_GAS_NOTE characteristic */ 
+ 335:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 336:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 337:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 338:Generated_Source\PSoC4/blue_1_custom.c ****                     0x005Du, /* Handle of the Characteristic User Description descriptor */ 
+ 339:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 340:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 341:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 342:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 343:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 344:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_TAG characteristic */
+ 345:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 346:Generated_Source\PSoC4/blue_1_custom.c ****                 0x005Fu, /* Handle of the SENSOR_TAG characteristic */ 
+ 347:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 348:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 349:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 350:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0060u, /* Handle of the Characteristic User Description descriptor */ 
+ 351:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 11
+
+
+ 352:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 353:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 354:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 355:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 356:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_TEMPERATURE characteristic */
+ 357:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 358:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0062u, /* Handle of the SENSOR_TEMPERATURE characteristic */ 
+ 359:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 360:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 361:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 362:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0063u, /* Handle of the Characteristic User Description descriptor */ 
+ 363:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0064u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 364:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 365:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 366:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 367:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 368:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_CAL_LEVEL characteristic */
+ 369:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 370:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0066u, /* Handle of the SENSOR_CAL_LEVEL characteristic */ 
+ 371:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 372:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 373:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 374:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0067u, /* Handle of the Characteristic User Description descriptor */ 
+ 375:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0068u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 376:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 377:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 378:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 379:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 380:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_Z_COUNTS characteristic */
+ 381:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 382:Generated_Source\PSoC4/blue_1_custom.c ****                 0x006Au, /* Handle of the CAL_Z_COUNTS characteristic */ 
+ 383:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 384:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 385:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 386:Generated_Source\PSoC4/blue_1_custom.c ****                     0x006Bu, /* Handle of the Characteristic User Description descriptor */ 
+ 387:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 388:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 389:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 390:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 391:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 392:Generated_Source\PSoC4/blue_1_custom.c ****             /* ZERO_READING characteristic */
+ 393:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 394:Generated_Source\PSoC4/blue_1_custom.c ****                 0x006Du, /* Handle of the ZERO_READING characteristic */ 
+ 395:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 396:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 397:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 398:Generated_Source\PSoC4/blue_1_custom.c ****                     0x006Eu, /* Handle of the Characteristic User Description descriptor */ 
+ 399:Generated_Source\PSoC4/blue_1_custom.c ****                     0x006Fu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 400:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 401:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 402:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 403:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 404:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_ZERO_ERROR characteristic */
+ 405:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 406:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0071u, /* Handle of the CAL_ZERO_ERROR characteristic */ 
+ 407:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 408:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 12
+
+
+ 409:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 410:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0072u, /* Handle of the Characteristic User Description descriptor */ 
+ 411:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0073u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 412:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 413:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 414:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 415:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 416:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_STEP characteristic */
+ 417:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 418:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0075u, /* Handle of the CAL_STEP characteristic */ 
+ 419:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 420:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 421:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 422:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0076u, /* Handle of the Characteristic User Description descriptor */ 
+ 423:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0077u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 424:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 425:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 426:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 427:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 428:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_SPEED characteristic */
+ 429:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 430:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0079u, /* Handle of the CAL_SPEED characteristic */ 
+ 431:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 432:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 433:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 434:Generated_Source\PSoC4/blue_1_custom.c ****                     0x007Au, /* Handle of the Characteristic User Description descriptor */ 
+ 435:Generated_Source\PSoC4/blue_1_custom.c ****                     0x007Bu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 436:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 437:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 438:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 439:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 440:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_AS_FOUND characteristic */
+ 441:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 442:Generated_Source\PSoC4/blue_1_custom.c ****                 0x007Du, /* Handle of the CAL_AS_FOUND characteristic */ 
+ 443:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 444:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 445:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 446:Generated_Source\PSoC4/blue_1_custom.c ****                     0x007Eu, /* Handle of the Characteristic User Description descriptor */ 
+ 447:Generated_Source\PSoC4/blue_1_custom.c ****                     0x007Fu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 448:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 449:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 450:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 451:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 452:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_ADJUSTED characteristic */
+ 453:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 454:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0081u, /* Handle of the CAL_ADJUSTED characteristic */ 
+ 455:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 456:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 457:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 458:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0082u, /* Handle of the Characteristic User Description descriptor */ 
+ 459:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0083u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 460:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 461:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 462:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 463:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 464:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_COUNTS characteristic */
+ 465:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 13
+
+
+ 466:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0085u, /* Handle of the CAL_COUNTS characteristic */ 
+ 467:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 468:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 469:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 470:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0086u, /* Handle of the Characteristic User Description descriptor */ 
+ 471:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 472:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 473:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 474:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 475:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 476:Generated_Source\PSoC4/blue_1_custom.c ****             /* SENSOR_LIFE characteristic */
+ 477:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 478:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0088u, /* Handle of the SENSOR_LIFE characteristic */ 
+ 479:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 480:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 481:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 482:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0089u, /* Handle of the Characteristic User Description descriptor */ 
+ 483:Generated_Source\PSoC4/blue_1_custom.c ****                     0x008Au, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 484:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 485:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 486:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 487:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 488:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_CLEARING characteristic */
+ 489:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 490:Generated_Source\PSoC4/blue_1_custom.c ****                 0x008Cu, /* Handle of the CAL_CLEARING characteristic */ 
+ 491:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 492:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 493:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 494:Generated_Source\PSoC4/blue_1_custom.c ****                     0x008Du, /* Handle of the Characteristic User Description descriptor */ 
+ 495:Generated_Source\PSoC4/blue_1_custom.c ****                     0x008Eu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 496:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 497:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 498:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 499:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 500:Generated_Source\PSoC4/blue_1_custom.c ****             /* CAL_SPAN_ERROR characteristic */
+ 501:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 502:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0090u, /* Handle of the CAL_SPAN_ERROR characteristic */ 
+ 503:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 504:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 505:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 506:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0091u, /* Handle of the Characteristic User Description descriptor */ 
+ 507:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0092u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 508:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 509:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 510:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 511:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 512:Generated_Source\PSoC4/blue_1_custom.c ****             /* CALIBRATION_STATUS characteristic */
+ 513:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 514:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0094u, /* Handle of the CALIBRATION_STATUS characteristic */ 
+ 515:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 516:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 517:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 518:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0095u, /* Handle of the Characteristic User Description descriptor */ 
+ 519:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0096u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 520:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 521:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 522:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 14
+
+
+ 523:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 524:Generated_Source\PSoC4/blue_1_custom.c ****             /* READING_SCALED characteristic */
+ 525:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 526:Generated_Source\PSoC4/blue_1_custom.c ****                 0x0098u, /* Handle of the READING_SCALED characteristic */ 
+ 527:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 528:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 529:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 530:Generated_Source\PSoC4/blue_1_custom.c ****                     0x0099u, /* Handle of the Characteristic User Description descriptor */ 
+ 531:Generated_Source\PSoC4/blue_1_custom.c ****                     0x009Au, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 532:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 533:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 534:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 535:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 536:Generated_Source\PSoC4/blue_1_custom.c ****             /* ALERT_STATUS characteristic */
+ 537:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 538:Generated_Source\PSoC4/blue_1_custom.c ****                 0x009Cu, /* Handle of the ALERT_STATUS characteristic */ 
+ 539:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 540:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 541:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 542:Generated_Source\PSoC4/blue_1_custom.c ****                     0x009Du, /* Handle of the Characteristic User Description descriptor */ 
+ 543:Generated_Source\PSoC4/blue_1_custom.c ****                     0x009Eu, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 544:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 545:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 546:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 547:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 548:Generated_Source\PSoC4/blue_1_custom.c ****             /* ZERO_CAL_DATE characteristic */
+ 549:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 550:Generated_Source\PSoC4/blue_1_custom.c ****                 0x00A0u, /* Handle of the ZERO_CAL_DATE characteristic */ 
+ 551:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 552:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 553:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 554:Generated_Source\PSoC4/blue_1_custom.c ****                     0x00A1u, /* Handle of the Characteristic User Description descriptor */ 
+ 555:Generated_Source\PSoC4/blue_1_custom.c ****                     0x00A2u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 556:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 557:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 558:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 559:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 560:Generated_Source\PSoC4/blue_1_custom.c ****             /* SPAN_CAL_DATE characteristic */
+ 561:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 562:Generated_Source\PSoC4/blue_1_custom.c ****                 0x00A4u, /* Handle of the SPAN_CAL_DATE characteristic */ 
+ 563:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 564:Generated_Source\PSoC4/blue_1_custom.c ****                 /* Array of Descriptors handles */
+ 565:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 566:Generated_Source\PSoC4/blue_1_custom.c ****                     0x00A5u, /* Handle of the Characteristic User Description descriptor */ 
+ 567:Generated_Source\PSoC4/blue_1_custom.c ****                     0x00A6u, /* Handle of the Client Characteristic Configuration descriptor */ 
+ 568:Generated_Source\PSoC4/blue_1_custom.c ****                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+ 569:Generated_Source\PSoC4/blue_1_custom.c ****                 }, 
+ 570:Generated_Source\PSoC4/blue_1_custom.c ****             },
+ 571:Generated_Source\PSoC4/blue_1_custom.c ****         }, 
+ 572:Generated_Source\PSoC4/blue_1_custom.c ****     },
+ 573:Generated_Source\PSoC4/blue_1_custom.c **** };
+ 574:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 575:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 576:Generated_Source\PSoC4/blue_1_custom.c **** #endif /* (CYBLE_CUSTOM_SERVER) */
+ 577:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 578:Generated_Source\PSoC4/blue_1_custom.c **** #ifdef CYBLE_CUSTOM_CLIENT
+ 579:Generated_Source\PSoC4/blue_1_custom.c ****     
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 15
+
+
+ 580:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 581:Generated_Source\PSoC4/blue_1_custom.c **** static uint16 cyBle_customDisServIndex;
+ 582:Generated_Source\PSoC4/blue_1_custom.c **** static uint16 cyBle_customDisCharIndex;
+ 583:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 584:Generated_Source\PSoC4/blue_1_custom.c **** #endif /* (CYBLE_CUSTOM_CLIENT) */
+ 585:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 586:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 587:Generated_Source\PSoC4/blue_1_custom.c **** /****************************************************************************** 
+ 588:Generated_Source\PSoC4/blue_1_custom.c **** * Function Name: CyBle_CustomInit
+ 589:Generated_Source\PSoC4/blue_1_custom.c **** ***************************************************************************//**
+ 590:Generated_Source\PSoC4/blue_1_custom.c **** * 
+ 591:Generated_Source\PSoC4/blue_1_custom.c **** *  This function initializes Custom Service.
+ 592:Generated_Source\PSoC4/blue_1_custom.c **** * 
+ 593:Generated_Source\PSoC4/blue_1_custom.c **** * \return
+ 594:Generated_Source\PSoC4/blue_1_custom.c **** *  None
+ 595:Generated_Source\PSoC4/blue_1_custom.c **** * 
+ 596:Generated_Source\PSoC4/blue_1_custom.c **** ******************************************************************************/
+ 597:Generated_Source\PSoC4/blue_1_custom.c **** void CyBle_CustomInit(void)
+ 598:Generated_Source\PSoC4/blue_1_custom.c **** {
+ 220              		.loc 1 598 0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 0
+ 223              		@ frame_needed = 1, uses_anonymous_args = 0
+ 224 0000 80B5     		push	{r7, lr}
+ 225              		.cfi_def_cfa_offset 8
+ 226              		.cfi_offset 7, -8
+ 227              		.cfi_offset 14, -4
+ 228 0002 00AF     		add	r7, sp, #0
+ 229              		.cfi_def_cfa_register 7
+ 599:Generated_Source\PSoC4/blue_1_custom.c ****     
+ 600:Generated_Source\PSoC4/blue_1_custom.c **** #ifdef CYBLE_CUSTOM_CLIENT
+ 601:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 602:Generated_Source\PSoC4/blue_1_custom.c ****     uint16 locServIndex;
+ 603:Generated_Source\PSoC4/blue_1_custom.c ****     uint16 locCharIndex;
+ 604:Generated_Source\PSoC4/blue_1_custom.c ****     uint16 locDescIndex;
+ 605:Generated_Source\PSoC4/blue_1_custom.c ****     
+ 606:Generated_Source\PSoC4/blue_1_custom.c ****     for(locServIndex = 0u; locServIndex < CYBLE_CUSTOMC_SERVICE_COUNT; locServIndex++)
+ 607:Generated_Source\PSoC4/blue_1_custom.c ****     {
+ 608:Generated_Source\PSoC4/blue_1_custom.c ****         if(cyBle_serverInfo[CYBLE_SRVI_CUSTOMS + locServIndex].range.startHandle == CYBLE_GATT_INVA
+ 609:Generated_Source\PSoC4/blue_1_custom.c ****         {
+ 610:Generated_Source\PSoC4/blue_1_custom.c ****             for(locCharIndex = 0u; locCharIndex < cyBle_customCServ[locServIndex].charCount; locCha
+ 611:Generated_Source\PSoC4/blue_1_custom.c ****             {
+ 612:Generated_Source\PSoC4/blue_1_custom.c ****                 cyBle_customCServ[locServIndex].customServChar[locCharIndex].
+ 613:Generated_Source\PSoC4/blue_1_custom.c ****                     customServCharHandle = 0u;
+ 614:Generated_Source\PSoC4/blue_1_custom.c ****                 
+ 615:Generated_Source\PSoC4/blue_1_custom.c ****                 for(locDescIndex = 0u; locDescIndex < 
+ 616:Generated_Source\PSoC4/blue_1_custom.c ****                     cyBle_customCServ[locServIndex].customServChar[locCharIndex].descCount; 
+ 617:Generated_Source\PSoC4/blue_1_custom.c ****                         locDescIndex++)
+ 618:Generated_Source\PSoC4/blue_1_custom.c ****                 {
+ 619:Generated_Source\PSoC4/blue_1_custom.c ****                     cyBle_customCServ[locServIndex].customServChar[locCharIndex].
+ 620:Generated_Source\PSoC4/blue_1_custom.c ****                         customServCharDesc[locDescIndex].descHandle = 0u;
+ 621:Generated_Source\PSoC4/blue_1_custom.c ****                 }
+ 622:Generated_Source\PSoC4/blue_1_custom.c ****             }
+ 623:Generated_Source\PSoC4/blue_1_custom.c ****         }
+ 624:Generated_Source\PSoC4/blue_1_custom.c ****     }
+ 625:Generated_Source\PSoC4/blue_1_custom.c **** 
+ 626:Generated_Source\PSoC4/blue_1_custom.c **** #endif /* (CYBLE_CUSTOM_CLIENT) */
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 16
+
+
+ 627:Generated_Source\PSoC4/blue_1_custom.c **** }
+ 230              		.loc 1 627 0
+ 231 0004 C046     		nop
+ 232 0006 BD46     		mov	sp, r7
+ 233              		@ sp needed
+ 234 0008 80BD     		pop	{r7, pc}
+ 235              		.cfi_endproc
+ 236              	.LFE2:
+ 237              		.size	CyBle_CustomInit, .-CyBle_CustomInit
+ 238 000a C046     		.text
+ 239              	.Letext0:
+ 240              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
+ 241              		.file 3 "Generated_Source\\PSoC4\\blue_1_StackGatt.h"
+ 242              		.file 4 "Generated_Source\\PSoC4\\blue_1_custom.h"
+ 243              		.file 5 "Generated_Source\\PSoC4\\blue_1_Stack.h"
+ 244              		.file 6 "Generated_Source\\PSoC4\\blue_1_dis.h"
+ 245              		.section	.debug_info,"",%progbits
+ 246              	.Ldebug_info0:
+ 247 0000 67030000 		.4byte	0x367
+ 248 0004 0400     		.2byte	0x4
+ 249 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 250 000a 04       		.byte	0x4
+ 251 000b 01       		.uleb128 0x1
+ 252 000c A9040000 		.4byte	.LASF104
+ 253 0010 0C       		.byte	0xc
+ 254 0011 C0020000 		.4byte	.LASF105
+ 255 0015 23010000 		.4byte	.LASF106
+ 256 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 257 001d 00000000 		.4byte	0
+ 258 0021 00000000 		.4byte	.Ldebug_line0
+ 259 0025 02       		.uleb128 0x2
+ 260 0026 01       		.byte	0x1
+ 261 0027 06       		.byte	0x6
+ 262 0028 49060000 		.4byte	.LASF0
+ 263 002c 02       		.uleb128 0x2
+ 264 002d 01       		.byte	0x1
+ 265 002e 08       		.byte	0x8
+ 266 002f BB050000 		.4byte	.LASF1
+ 267 0033 02       		.uleb128 0x2
+ 268 0034 02       		.byte	0x2
+ 269 0035 05       		.byte	0x5
+ 270 0036 B7000000 		.4byte	.LASF2
+ 271 003a 02       		.uleb128 0x2
+ 272 003b 02       		.byte	0x2
+ 273 003c 07       		.byte	0x7
+ 274 003d 29080000 		.4byte	.LASF3
+ 275 0041 02       		.uleb128 0x2
+ 276 0042 04       		.byte	0x4
+ 277 0043 05       		.byte	0x5
+ 278 0044 BE030000 		.4byte	.LASF4
+ 279 0048 02       		.uleb128 0x2
+ 280 0049 04       		.byte	0x4
+ 281 004a 07       		.byte	0x7
+ 282 004b DA060000 		.4byte	.LASF5
+ 283 004f 02       		.uleb128 0x2
+ 284 0050 08       		.byte	0x8
+ 285 0051 05       		.byte	0x5
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 17
+
+
+ 286 0052 80010000 		.4byte	.LASF6
+ 287 0056 02       		.uleb128 0x2
+ 288 0057 08       		.byte	0x8
+ 289 0058 07       		.byte	0x7
+ 290 0059 71030000 		.4byte	.LASF7
+ 291 005d 03       		.uleb128 0x3
+ 292 005e 04       		.byte	0x4
+ 293 005f 05       		.byte	0x5
+ 294 0060 696E7400 		.ascii	"int\000"
+ 295 0064 02       		.uleb128 0x2
+ 296 0065 04       		.byte	0x4
+ 297 0066 07       		.byte	0x7
+ 298 0067 B2060000 		.4byte	.LASF8
+ 299 006b 04       		.uleb128 0x4
+ 300 006c 4F020000 		.4byte	.LASF86
+ 301 0070 02       		.byte	0x2
+ 302 0071 FD01     		.2byte	0x1fd
+ 303 0073 3A000000 		.4byte	0x3a
+ 304 0077 02       		.uleb128 0x2
+ 305 0078 04       		.byte	0x4
+ 306 0079 04       		.byte	0x4
+ 307 007a 08030000 		.4byte	.LASF9
+ 308 007e 02       		.uleb128 0x2
+ 309 007f 08       		.byte	0x8
+ 310 0080 04       		.byte	0x4
+ 311 0081 15090000 		.4byte	.LASF10
+ 312 0085 02       		.uleb128 0x2
+ 313 0086 01       		.byte	0x1
+ 314 0087 08       		.byte	0x8
+ 315 0088 08080000 		.4byte	.LASF11
+ 316 008c 02       		.uleb128 0x2
+ 317 008d 08       		.byte	0x8
+ 318 008e 04       		.byte	0x4
+ 319 008f 89050000 		.4byte	.LASF12
+ 320 0093 02       		.uleb128 0x2
+ 321 0094 04       		.byte	0x4
+ 322 0095 07       		.byte	0x7
+ 323 0096 F9000000 		.4byte	.LASF13
+ 324 009a 05       		.uleb128 0x5
+ 325 009b 01       		.byte	0x1
+ 326 009c 2C000000 		.4byte	0x2c
+ 327 00a0 05       		.byte	0x5
+ 328 00a1 3501     		.2byte	0x135
+ 329 00a3 58020000 		.4byte	0x258
+ 330 00a7 06       		.uleb128 0x6
+ 331 00a8 A9020000 		.4byte	.LASF14
+ 332 00ac 00       		.byte	0
+ 333 00ad 06       		.uleb128 0x6
+ 334 00ae E9010000 		.4byte	.LASF15
+ 335 00b2 01       		.byte	0x1
+ 336 00b3 06       		.uleb128 0x6
+ 337 00b4 D20A0000 		.4byte	.LASF16
+ 338 00b8 02       		.byte	0x2
+ 339 00b9 06       		.uleb128 0x6
+ 340 00ba 82090000 		.4byte	.LASF17
+ 341 00be 03       		.byte	0x3
+ 342 00bf 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 18
+
+
+ 343 00c0 C3010000 		.4byte	.LASF18
+ 344 00c4 04       		.byte	0x4
+ 345 00c5 06       		.uleb128 0x6
+ 346 00c6 50040000 		.4byte	.LASF19
+ 347 00ca 05       		.byte	0x5
+ 348 00cb 06       		.uleb128 0x6
+ 349 00cc 3E000000 		.4byte	.LASF20
+ 350 00d0 06       		.byte	0x6
+ 351 00d1 06       		.uleb128 0x6
+ 352 00d2 3C080000 		.4byte	.LASF21
+ 353 00d6 20       		.byte	0x20
+ 354 00d7 06       		.uleb128 0x6
+ 355 00d8 EC060000 		.4byte	.LASF22
+ 356 00dc 21       		.byte	0x21
+ 357 00dd 06       		.uleb128 0x6
+ 358 00de 00000000 		.4byte	.LASF23
+ 359 00e2 22       		.byte	0x22
+ 360 00e3 06       		.uleb128 0x6
+ 361 00e4 83040000 		.4byte	.LASF24
+ 362 00e8 23       		.byte	0x23
+ 363 00e9 06       		.uleb128 0x6
+ 364 00ea 96060000 		.4byte	.LASF25
+ 365 00ee 24       		.byte	0x24
+ 366 00ef 06       		.uleb128 0x6
+ 367 00f0 C1000000 		.4byte	.LASF26
+ 368 00f4 25       		.byte	0x25
+ 369 00f5 06       		.uleb128 0x6
+ 370 00f6 07040000 		.4byte	.LASF27
+ 371 00fa 26       		.byte	0x26
+ 372 00fb 06       		.uleb128 0x6
+ 373 00fc E8030000 		.4byte	.LASF28
+ 374 0100 27       		.byte	0x27
+ 375 0101 06       		.uleb128 0x6
+ 376 0102 71000000 		.4byte	.LASF29
+ 377 0106 28       		.byte	0x28
+ 378 0107 06       		.uleb128 0x6
+ 379 0108 24070000 		.4byte	.LASF30
+ 380 010c 29       		.byte	0x29
+ 381 010d 06       		.uleb128 0x6
+ 382 010e B8070000 		.4byte	.LASF31
+ 383 0112 2A       		.byte	0x2a
+ 384 0113 06       		.uleb128 0x6
+ 385 0114 B5080000 		.4byte	.LASF32
+ 386 0118 2B       		.byte	0x2b
+ 387 0119 06       		.uleb128 0x6
+ 388 011a 7C070000 		.4byte	.LASF33
+ 389 011e 2C       		.byte	0x2c
+ 390 011f 06       		.uleb128 0x6
+ 391 0120 27030000 		.4byte	.LASF34
+ 392 0124 2D       		.byte	0x2d
+ 393 0125 06       		.uleb128 0x6
+ 394 0126 93000000 		.4byte	.LASF35
+ 395 012a 2E       		.byte	0x2e
+ 396 012b 06       		.uleb128 0x6
+ 397 012c D00B0000 		.4byte	.LASF36
+ 398 0130 2F       		.byte	0x2f
+ 399 0131 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 19
+
+
+ 400 0132 02010000 		.4byte	.LASF37
+ 401 0136 30       		.byte	0x30
+ 402 0137 06       		.uleb128 0x6
+ 403 0138 65050000 		.4byte	.LASF38
+ 404 013c 31       		.byte	0x31
+ 405 013d 06       		.uleb128 0x6
+ 406 013e 50030000 		.4byte	.LASF39
+ 407 0142 32       		.byte	0x32
+ 408 0143 06       		.uleb128 0x6
+ 409 0144 E1070000 		.4byte	.LASF40
+ 410 0148 33       		.byte	0x33
+ 411 0149 06       		.uleb128 0x6
+ 412 014a 41070000 		.4byte	.LASF41
+ 413 014e 34       		.byte	0x34
+ 414 014f 06       		.uleb128 0x6
+ 415 0150 54090000 		.4byte	.LASF42
+ 416 0154 35       		.byte	0x35
+ 417 0155 06       		.uleb128 0x6
+ 418 0156 9D030000 		.4byte	.LASF43
+ 419 015a 36       		.byte	0x36
+ 420 015b 06       		.uleb128 0x6
+ 421 015c FC010000 		.4byte	.LASF44
+ 422 0160 37       		.byte	0x37
+ 423 0161 06       		.uleb128 0x6
+ 424 0162 57000000 		.4byte	.LASF45
+ 425 0166 40       		.byte	0x40
+ 426 0167 06       		.uleb128 0x6
+ 427 0168 BF060000 		.4byte	.LASF46
+ 428 016c 41       		.byte	0x41
+ 429 016d 06       		.uleb128 0x6
+ 430 016e DB000000 		.4byte	.LASF47
+ 431 0172 42       		.byte	0x42
+ 432 0173 06       		.uleb128 0x6
+ 433 0174 31020000 		.4byte	.LASF48
+ 434 0178 43       		.byte	0x43
+ 435 0179 06       		.uleb128 0x6
+ 436 017a 790A0000 		.4byte	.LASF49
+ 437 017e 44       		.byte	0x44
+ 438 017f 06       		.uleb128 0x6
+ 439 0180 1A0A0000 		.4byte	.LASF50
+ 440 0184 45       		.byte	0x45
+ 441 0185 06       		.uleb128 0x6
+ 442 0186 580A0000 		.4byte	.LASF51
+ 443 018a 46       		.byte	0x46
+ 444 018b 06       		.uleb128 0x6
+ 445 018c 2B060000 		.4byte	.LASF52
+ 446 0190 47       		.byte	0x47
+ 447 0191 06       		.uleb128 0x6
+ 448 0192 6F060000 		.4byte	.LASF53
+ 449 0196 48       		.byte	0x48
+ 450 0197 06       		.uleb128 0x6
+ 451 0198 0E030000 		.4byte	.LASF54
+ 452 019c 49       		.byte	0x49
+ 453 019d 06       		.uleb128 0x6
+ 454 019e 78080000 		.4byte	.LASF55
+ 455 01a2 4A       		.byte	0x4a
+ 456 01a3 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 20
+
+
+ 457 01a4 69020000 		.4byte	.LASF56
+ 458 01a8 4B       		.byte	0x4b
+ 459 01a9 06       		.uleb128 0x6
+ 460 01aa 55060000 		.4byte	.LASF57
+ 461 01ae 4C       		.byte	0x4c
+ 462 01af 06       		.uleb128 0x6
+ 463 01b0 24000000 		.4byte	.LASF58
+ 464 01b4 4D       		.byte	0x4d
+ 465 01b5 06       		.uleb128 0x6
+ 466 01b6 A5010000 		.4byte	.LASF59
+ 467 01ba 4E       		.byte	0x4e
+ 468 01bb 06       		.uleb128 0x6
+ 469 01bc D8050000 		.4byte	.LASF60
+ 470 01c0 4F       		.byte	0x4f
+ 471 01c1 06       		.uleb128 0x6
+ 472 01c2 3D0B0000 		.4byte	.LASF61
+ 473 01c6 50       		.byte	0x50
+ 474 01c7 06       		.uleb128 0x6
+ 475 01c8 96080000 		.4byte	.LASF62
+ 476 01cc 51       		.byte	0x51
+ 477 01cd 06       		.uleb128 0x6
+ 478 01ce 2F040000 		.4byte	.LASF63
+ 479 01d2 52       		.byte	0x52
+ 480 01d3 06       		.uleb128 0x6
+ 481 01d4 C7030000 		.4byte	.LASF64
+ 482 01d8 53       		.byte	0x53
+ 483 01d9 06       		.uleb128 0x6
+ 484 01da 88020000 		.4byte	.LASF65
+ 485 01de 54       		.byte	0x54
+ 486 01df 06       		.uleb128 0x6
+ 487 01e0 860B0000 		.4byte	.LASF66
+ 488 01e4 55       		.byte	0x55
+ 489 01e5 06       		.uleb128 0x6
+ 490 01e6 1B0B0000 		.4byte	.LASF67
+ 491 01ea 56       		.byte	0x56
+ 492 01eb 06       		.uleb128 0x6
+ 493 01ec F20A0000 		.4byte	.LASF68
+ 494 01f0 57       		.byte	0x57
+ 495 01f1 06       		.uleb128 0x6
+ 496 01f2 59070000 		.4byte	.LASF69
+ 497 01f6 58       		.byte	0x58
+ 498 01f7 06       		.uleb128 0x6
+ 499 01f8 95050000 		.4byte	.LASF70
+ 500 01fc 70       		.byte	0x70
+ 501 01fd 06       		.uleb128 0x6
+ 502 01fe BA090000 		.4byte	.LASF71
+ 503 0202 71       		.byte	0x71
+ 504 0203 06       		.uleb128 0x6
+ 505 0204 0D080000 		.4byte	.LASF72
+ 506 0208 72       		.byte	0x72
+ 507 0209 06       		.uleb128 0x6
+ 508 020a E0090000 		.4byte	.LASF73
+ 509 020e 73       		.byte	0x73
+ 510 020f 06       		.uleb128 0x6
+ 511 0210 47050000 		.4byte	.LASF74
+ 512 0214 74       		.byte	0x74
+ 513 0215 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 21
+
+
+ 514 0216 03070000 		.4byte	.LASF75
+ 515 021a 75       		.byte	0x75
+ 516 021b 06       		.uleb128 0x6
+ 517 021c E7020000 		.4byte	.LASF76
+ 518 0220 76       		.byte	0x76
+ 519 0221 06       		.uleb128 0x6
+ 520 0222 9B090000 		.4byte	.LASF77
+ 521 0226 77       		.byte	0x77
+ 522 0227 06       		.uleb128 0x6
+ 523 0228 F2080000 		.4byte	.LASF78
+ 524 022c 78       		.byte	0x78
+ 525 022d 06       		.uleb128 0x6
+ 526 022e 1C090000 		.4byte	.LASF79
+ 527 0232 79       		.byte	0x79
+ 528 0233 06       		.uleb128 0x6
+ 529 0234 AE0A0000 		.4byte	.LASF80
+ 530 0238 7A       		.byte	0x7a
+ 531 0239 06       		.uleb128 0x6
+ 532 023a D4080000 		.4byte	.LASF81
+ 533 023e FA       		.byte	0xfa
+ 534 023f 06       		.uleb128 0x6
+ 535 0240 F7050000 		.4byte	.LASF82
+ 536 0244 FB       		.byte	0xfb
+ 537 0245 06       		.uleb128 0x6
+ 538 0246 AA0B0000 		.4byte	.LASF83
+ 539 024a FC       		.byte	0xfc
+ 540 024b 06       		.uleb128 0x6
+ 541 024c A0070000 		.4byte	.LASF84
+ 542 0250 FD       		.byte	0xfd
+ 543 0251 06       		.uleb128 0x6
+ 544 0252 E40A0000 		.4byte	.LASF85
+ 545 0256 FF       		.byte	0xff
+ 546 0257 00       		.byte	0
+ 547 0258 04       		.uleb128 0x4
+ 548 0259 5C0B0000 		.4byte	.LASF87
+ 549 025d 03       		.byte	0x3
+ 550 025e 8901     		.2byte	0x189
+ 551 0260 6B000000 		.4byte	0x6b
+ 552 0264 07       		.uleb128 0x7
+ 553 0265 08       		.byte	0x8
+ 554 0266 04       		.byte	0x4
+ 555 0267 2001     		.2byte	0x120
+ 556 0269 88020000 		.4byte	0x288
+ 557 026d 08       		.uleb128 0x8
+ 558 026e 16060000 		.4byte	.LASF88
+ 559 0272 04       		.byte	0x4
+ 560 0273 2301     		.2byte	0x123
+ 561 0275 58020000 		.4byte	0x258
+ 562 0279 00       		.byte	0
+ 563 027a 08       		.uleb128 0x8
+ 564 027b 56020000 		.4byte	.LASF89
+ 565 027f 04       		.byte	0x4
+ 566 0280 2501     		.2byte	0x125
+ 567 0282 88020000 		.4byte	0x288
+ 568 0286 02       		.byte	0x2
+ 569 0287 00       		.byte	0
+ 570 0288 09       		.uleb128 0x9
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 22
+
+
+ 571 0289 58020000 		.4byte	0x258
+ 572 028d 98020000 		.4byte	0x298
+ 573 0291 0A       		.uleb128 0xa
+ 574 0292 93000000 		.4byte	0x93
+ 575 0296 02       		.byte	0x2
+ 576 0297 00       		.byte	0
+ 577 0298 04       		.uleb128 0x4
+ 578 0299 88030000 		.4byte	.LASF90
+ 579 029d 04       		.byte	0x4
+ 580 029e 2701     		.2byte	0x127
+ 581 02a0 64020000 		.4byte	0x264
+ 582 02a4 07       		.uleb128 0x7
+ 583 02a5 BA       		.byte	0xba
+ 584 02a6 04       		.byte	0x4
+ 585 02a7 2A01     		.2byte	0x12a
+ 586 02a9 C8020000 		.4byte	0x2c8
+ 587 02ad 08       		.uleb128 0x8
+ 588 02ae 71090000 		.4byte	.LASF91
+ 589 02b2 04       		.byte	0x4
+ 590 02b3 2D01     		.2byte	0x12d
+ 591 02b5 58020000 		.4byte	0x258
+ 592 02b9 00       		.byte	0
+ 593 02ba 08       		.uleb128 0x8
+ 594 02bb C9050000 		.4byte	.LASF92
+ 595 02bf 04       		.byte	0x4
+ 596 02c0 3001     		.2byte	0x130
+ 597 02c2 C8020000 		.4byte	0x2c8
+ 598 02c6 02       		.byte	0x2
+ 599 02c7 00       		.byte	0
+ 600 02c8 09       		.uleb128 0x9
+ 601 02c9 98020000 		.4byte	0x298
+ 602 02cd D8020000 		.4byte	0x2d8
+ 603 02d1 0A       		.uleb128 0xa
+ 604 02d2 93000000 		.4byte	0x93
+ 605 02d6 16       		.byte	0x16
+ 606 02d7 00       		.byte	0
+ 607 02d8 04       		.uleb128 0x4
+ 608 02d9 37050000 		.4byte	.LASF93
+ 609 02dd 04       		.byte	0x4
+ 610 02de 3201     		.2byte	0x132
+ 611 02e0 A4020000 		.4byte	0x2a4
+ 612 02e4 0B       		.uleb128 0xb
+ 613 02e5 01       		.byte	0x1
+ 614 02e6 2C000000 		.4byte	0x2c
+ 615 02ea 06       		.byte	0x6
+ 616 02eb 22       		.byte	0x22
+ 617 02ec 2D030000 		.4byte	0x32d
+ 618 02f0 06       		.uleb128 0x6
+ 619 02f1 FE090000 		.4byte	.LASF94
+ 620 02f5 00       		.byte	0
+ 621 02f6 06       		.uleb128 0x6
+ 622 02f7 6C040000 		.4byte	.LASF95
+ 623 02fb 01       		.byte	0x1
+ 624 02fc 06       		.uleb128 0x6
+ 625 02fd 68010000 		.4byte	.LASF96
+ 626 0301 02       		.byte	0x2
+ 627 0302 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 23
+
+
+ 628 0303 970A0000 		.4byte	.LASF97
+ 629 0307 03       		.byte	0x3
+ 630 0308 06       		.uleb128 0x6
+ 631 0309 410A0000 		.4byte	.LASF98
+ 632 030d 04       		.byte	0x4
+ 633 030e 06       		.uleb128 0x6
+ 634 030f 8E010000 		.4byte	.LASF99
+ 635 0313 05       		.byte	0x5
+ 636 0314 06       		.uleb128 0x6
+ 637 0315 BC0B0000 		.4byte	.LASF100
+ 638 0319 06       		.byte	0x6
+ 639 031a 06       		.uleb128 0x6
+ 640 031b 60080000 		.4byte	.LASF101
+ 641 031f 07       		.byte	0x7
+ 642 0320 06       		.uleb128 0x6
+ 643 0321 F90B0000 		.4byte	.LASF102
+ 644 0325 08       		.byte	0x8
+ 645 0326 06       		.uleb128 0x6
+ 646 0327 3F090000 		.4byte	.LASF103
+ 647 032b 09       		.byte	0x9
+ 648 032c 00       		.byte	0
+ 649 032d 0C       		.uleb128 0xc
+ 650 032e D8010000 		.4byte	.LASF107
+ 651 0332 01       		.byte	0x1
+ 652 0333 5502     		.2byte	0x255
+ 653 0335 00000000 		.4byte	.LFB2
+ 654 0339 0A000000 		.4byte	.LFE2-.LFB2
+ 655 033d 01       		.uleb128 0x1
+ 656 033e 9C       		.byte	0x9c
+ 657 033f 09       		.uleb128 0x9
+ 658 0340 4F030000 		.4byte	0x34f
+ 659 0344 4F030000 		.4byte	0x34f
+ 660 0348 0A       		.uleb128 0xa
+ 661 0349 93000000 		.4byte	0x93
+ 662 034d 01       		.byte	0x1
+ 663 034e 00       		.byte	0
+ 664 034f 0D       		.uleb128 0xd
+ 665 0350 D8020000 		.4byte	0x2d8
+ 666 0354 0E       		.uleb128 0xe
+ 667 0355 780B0000 		.4byte	.LASF108
+ 668 0359 01       		.byte	0x1
+ 669 035a 1A       		.byte	0x1a
+ 670 035b 65030000 		.4byte	0x365
+ 671 035f 05       		.uleb128 0x5
+ 672 0360 03       		.byte	0x3
+ 673 0361 00000000 		.4byte	cyBle_customs
+ 674 0365 0D       		.uleb128 0xd
+ 675 0366 3F030000 		.4byte	0x33f
+ 676 036a 00       		.byte	0
+ 677              		.section	.debug_abbrev,"",%progbits
+ 678              	.Ldebug_abbrev0:
+ 679 0000 01       		.uleb128 0x1
+ 680 0001 11       		.uleb128 0x11
+ 681 0002 01       		.byte	0x1
+ 682 0003 25       		.uleb128 0x25
+ 683 0004 0E       		.uleb128 0xe
+ 684 0005 13       		.uleb128 0x13
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 24
+
+
+ 685 0006 0B       		.uleb128 0xb
+ 686 0007 03       		.uleb128 0x3
+ 687 0008 0E       		.uleb128 0xe
+ 688 0009 1B       		.uleb128 0x1b
+ 689 000a 0E       		.uleb128 0xe
+ 690 000b 55       		.uleb128 0x55
+ 691 000c 17       		.uleb128 0x17
+ 692 000d 11       		.uleb128 0x11
+ 693 000e 01       		.uleb128 0x1
+ 694 000f 10       		.uleb128 0x10
+ 695 0010 17       		.uleb128 0x17
+ 696 0011 00       		.byte	0
+ 697 0012 00       		.byte	0
+ 698 0013 02       		.uleb128 0x2
+ 699 0014 24       		.uleb128 0x24
+ 700 0015 00       		.byte	0
+ 701 0016 0B       		.uleb128 0xb
+ 702 0017 0B       		.uleb128 0xb
+ 703 0018 3E       		.uleb128 0x3e
+ 704 0019 0B       		.uleb128 0xb
+ 705 001a 03       		.uleb128 0x3
+ 706 001b 0E       		.uleb128 0xe
+ 707 001c 00       		.byte	0
+ 708 001d 00       		.byte	0
+ 709 001e 03       		.uleb128 0x3
+ 710 001f 24       		.uleb128 0x24
+ 711 0020 00       		.byte	0
+ 712 0021 0B       		.uleb128 0xb
+ 713 0022 0B       		.uleb128 0xb
+ 714 0023 3E       		.uleb128 0x3e
+ 715 0024 0B       		.uleb128 0xb
+ 716 0025 03       		.uleb128 0x3
+ 717 0026 08       		.uleb128 0x8
+ 718 0027 00       		.byte	0
+ 719 0028 00       		.byte	0
+ 720 0029 04       		.uleb128 0x4
+ 721 002a 16       		.uleb128 0x16
+ 722 002b 00       		.byte	0
+ 723 002c 03       		.uleb128 0x3
+ 724 002d 0E       		.uleb128 0xe
+ 725 002e 3A       		.uleb128 0x3a
+ 726 002f 0B       		.uleb128 0xb
+ 727 0030 3B       		.uleb128 0x3b
+ 728 0031 05       		.uleb128 0x5
+ 729 0032 49       		.uleb128 0x49
+ 730 0033 13       		.uleb128 0x13
+ 731 0034 00       		.byte	0
+ 732 0035 00       		.byte	0
+ 733 0036 05       		.uleb128 0x5
+ 734 0037 04       		.uleb128 0x4
+ 735 0038 01       		.byte	0x1
+ 736 0039 0B       		.uleb128 0xb
+ 737 003a 0B       		.uleb128 0xb
+ 738 003b 49       		.uleb128 0x49
+ 739 003c 13       		.uleb128 0x13
+ 740 003d 3A       		.uleb128 0x3a
+ 741 003e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 25
+
+
+ 742 003f 3B       		.uleb128 0x3b
+ 743 0040 05       		.uleb128 0x5
+ 744 0041 01       		.uleb128 0x1
+ 745 0042 13       		.uleb128 0x13
+ 746 0043 00       		.byte	0
+ 747 0044 00       		.byte	0
+ 748 0045 06       		.uleb128 0x6
+ 749 0046 28       		.uleb128 0x28
+ 750 0047 00       		.byte	0
+ 751 0048 03       		.uleb128 0x3
+ 752 0049 0E       		.uleb128 0xe
+ 753 004a 1C       		.uleb128 0x1c
+ 754 004b 0B       		.uleb128 0xb
+ 755 004c 00       		.byte	0
+ 756 004d 00       		.byte	0
+ 757 004e 07       		.uleb128 0x7
+ 758 004f 13       		.uleb128 0x13
+ 759 0050 01       		.byte	0x1
+ 760 0051 0B       		.uleb128 0xb
+ 761 0052 0B       		.uleb128 0xb
+ 762 0053 3A       		.uleb128 0x3a
+ 763 0054 0B       		.uleb128 0xb
+ 764 0055 3B       		.uleb128 0x3b
+ 765 0056 05       		.uleb128 0x5
+ 766 0057 01       		.uleb128 0x1
+ 767 0058 13       		.uleb128 0x13
+ 768 0059 00       		.byte	0
+ 769 005a 00       		.byte	0
+ 770 005b 08       		.uleb128 0x8
+ 771 005c 0D       		.uleb128 0xd
+ 772 005d 00       		.byte	0
+ 773 005e 03       		.uleb128 0x3
+ 774 005f 0E       		.uleb128 0xe
+ 775 0060 3A       		.uleb128 0x3a
+ 776 0061 0B       		.uleb128 0xb
+ 777 0062 3B       		.uleb128 0x3b
+ 778 0063 05       		.uleb128 0x5
+ 779 0064 49       		.uleb128 0x49
+ 780 0065 13       		.uleb128 0x13
+ 781 0066 38       		.uleb128 0x38
+ 782 0067 0B       		.uleb128 0xb
+ 783 0068 00       		.byte	0
+ 784 0069 00       		.byte	0
+ 785 006a 09       		.uleb128 0x9
+ 786 006b 01       		.uleb128 0x1
+ 787 006c 01       		.byte	0x1
+ 788 006d 49       		.uleb128 0x49
+ 789 006e 13       		.uleb128 0x13
+ 790 006f 01       		.uleb128 0x1
+ 791 0070 13       		.uleb128 0x13
+ 792 0071 00       		.byte	0
+ 793 0072 00       		.byte	0
+ 794 0073 0A       		.uleb128 0xa
+ 795 0074 21       		.uleb128 0x21
+ 796 0075 00       		.byte	0
+ 797 0076 49       		.uleb128 0x49
+ 798 0077 13       		.uleb128 0x13
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 26
+
+
+ 799 0078 2F       		.uleb128 0x2f
+ 800 0079 0B       		.uleb128 0xb
+ 801 007a 00       		.byte	0
+ 802 007b 00       		.byte	0
+ 803 007c 0B       		.uleb128 0xb
+ 804 007d 04       		.uleb128 0x4
+ 805 007e 01       		.byte	0x1
+ 806 007f 0B       		.uleb128 0xb
+ 807 0080 0B       		.uleb128 0xb
+ 808 0081 49       		.uleb128 0x49
+ 809 0082 13       		.uleb128 0x13
+ 810 0083 3A       		.uleb128 0x3a
+ 811 0084 0B       		.uleb128 0xb
+ 812 0085 3B       		.uleb128 0x3b
+ 813 0086 0B       		.uleb128 0xb
+ 814 0087 01       		.uleb128 0x1
+ 815 0088 13       		.uleb128 0x13
+ 816 0089 00       		.byte	0
+ 817 008a 00       		.byte	0
+ 818 008b 0C       		.uleb128 0xc
+ 819 008c 2E       		.uleb128 0x2e
+ 820 008d 00       		.byte	0
+ 821 008e 3F       		.uleb128 0x3f
+ 822 008f 19       		.uleb128 0x19
+ 823 0090 03       		.uleb128 0x3
+ 824 0091 0E       		.uleb128 0xe
+ 825 0092 3A       		.uleb128 0x3a
+ 826 0093 0B       		.uleb128 0xb
+ 827 0094 3B       		.uleb128 0x3b
+ 828 0095 05       		.uleb128 0x5
+ 829 0096 27       		.uleb128 0x27
+ 830 0097 19       		.uleb128 0x19
+ 831 0098 11       		.uleb128 0x11
+ 832 0099 01       		.uleb128 0x1
+ 833 009a 12       		.uleb128 0x12
+ 834 009b 06       		.uleb128 0x6
+ 835 009c 40       		.uleb128 0x40
+ 836 009d 18       		.uleb128 0x18
+ 837 009e 9742     		.uleb128 0x2117
+ 838 00a0 19       		.uleb128 0x19
+ 839 00a1 00       		.byte	0
+ 840 00a2 00       		.byte	0
+ 841 00a3 0D       		.uleb128 0xd
+ 842 00a4 26       		.uleb128 0x26
+ 843 00a5 00       		.byte	0
+ 844 00a6 49       		.uleb128 0x49
+ 845 00a7 13       		.uleb128 0x13
+ 846 00a8 00       		.byte	0
+ 847 00a9 00       		.byte	0
+ 848 00aa 0E       		.uleb128 0xe
+ 849 00ab 34       		.uleb128 0x34
+ 850 00ac 00       		.byte	0
+ 851 00ad 03       		.uleb128 0x3
+ 852 00ae 0E       		.uleb128 0xe
+ 853 00af 3A       		.uleb128 0x3a
+ 854 00b0 0B       		.uleb128 0xb
+ 855 00b1 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 27
+
+
+ 856 00b2 0B       		.uleb128 0xb
+ 857 00b3 49       		.uleb128 0x49
+ 858 00b4 13       		.uleb128 0x13
+ 859 00b5 3F       		.uleb128 0x3f
+ 860 00b6 19       		.uleb128 0x19
+ 861 00b7 02       		.uleb128 0x2
+ 862 00b8 18       		.uleb128 0x18
+ 863 00b9 00       		.byte	0
+ 864 00ba 00       		.byte	0
+ 865 00bb 00       		.byte	0
+ 866              		.section	.debug_aranges,"",%progbits
+ 867 0000 1C000000 		.4byte	0x1c
+ 868 0004 0200     		.2byte	0x2
+ 869 0006 00000000 		.4byte	.Ldebug_info0
+ 870 000a 04       		.byte	0x4
+ 871 000b 00       		.byte	0
+ 872 000c 0000     		.2byte	0
+ 873 000e 0000     		.2byte	0
+ 874 0010 00000000 		.4byte	.LFB2
+ 875 0014 0A000000 		.4byte	.LFE2-.LFB2
+ 876 0018 00000000 		.4byte	0
+ 877 001c 00000000 		.4byte	0
+ 878              		.section	.debug_ranges,"",%progbits
+ 879              	.Ldebug_ranges0:
+ 880 0000 00000000 		.4byte	.LFB2
+ 881 0004 0A000000 		.4byte	.LFE2
+ 882 0008 00000000 		.4byte	0
+ 883 000c 00000000 		.4byte	0
+ 884              		.section	.debug_line,"",%progbits
+ 885              	.Ldebug_line0:
+ 886 0000 AE000000 		.section	.debug_str,"MS",%progbits,1
+ 886      02009500 
+ 886      00000201 
+ 886      FB0E0D00 
+ 886      01010101 
+ 887              	.LASF23:
+ 888 0000 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_ENTRY_REQUEST\000"
+ 888      455F4556 
+ 888      545F4741 
+ 888      505F5041 
+ 888      53534B45 
+ 889              	.LASF58:
+ 890 0024 4359424C 		.ascii	"CYBLE_EVT_GATTC_WRITE_RSP\000"
+ 890      455F4556 
+ 890      545F4741 
+ 890      5454435F 
+ 890      57524954 
+ 891              	.LASF20:
+ 892 003e 4359424C 		.ascii	"CYBLE_EVT_MEMORY_REQUEST\000"
+ 892      455F4556 
+ 892      545F4D45 
+ 892      4D4F5259 
+ 892      5F524551 
+ 893              	.LASF45:
+ 894 0057 4359424C 		.ascii	"CYBLE_EVT_GATTC_ERROR_RSP\000"
+ 894      455F4556 
+ 894      545F4741 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 28
+
+
+ 894      5454435F 
+ 894      4552524F 
+ 895              	.LASF29:
+ 896 0071 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_DISCONNECTED\000"
+ 896      455F4556 
+ 896      545F4741 
+ 896      505F4445 
+ 896      56494345 
+ 897              	.LASF35:
+ 898 0093 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYPRESS_NOTIFICATION\000"
+ 898      455F4556 
+ 898      545F4741 
+ 898      505F4B45 
+ 898      59505245 
+ 899              	.LASF2:
+ 900 00b7 73686F72 		.ascii	"short int\000"
+ 900      7420696E 
+ 900      7400
+ 901              	.LASF26:
+ 902 00c1 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_FAILED\000"
+ 902      455F4556 
+ 902      545F4741 
+ 902      505F4155 
+ 902      54485F46 
+ 903              	.LASF47:
+ 904 00db 4359424C 		.ascii	"CYBLE_EVT_GATT_DISCONNECT_IND\000"
+ 904      455F4556 
+ 904      545F4741 
+ 904      54545F44 
+ 904      4953434F 
+ 905              	.LASF13:
+ 906 00f9 73697A65 		.ascii	"sizetype\000"
+ 906      74797065 
+ 906      00
+ 907              	.LASF37:
+ 908 0102 4359424C 		.ascii	"CYBLE_EVT_GAP_DATA_LENGTH_CHANGE\000"
+ 908      455F4556 
+ 908      545F4741 
+ 908      505F4441 
+ 908      54415F4C 
+ 909              	.LASF106:
+ 910 0123 433A5C55 		.ascii	"C:\\Users\\alexport\\OneDrive - Safeguard Analytics"
+ 910      73657273 
+ 910      5C616C65 
+ 910      78706F72 
+ 910      745C4F6E 
+ 911 0153 5C53412D 		.ascii	"\\SA-220\\SA-220.cydsn\000"
+ 911      3232305C 
+ 911      53412D32 
+ 911      32302E63 
+ 911      7964736E 
+ 912              	.LASF96:
+ 913 0168 4359424C 		.ascii	"CYBLE_DIS_SERIAL_NUMBER\000"
+ 913      455F4449 
+ 913      535F5345 
+ 913      5249414C 
+ 913      5F4E554D 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 29
+
+
+ 914              	.LASF6:
+ 915 0180 6C6F6E67 		.ascii	"long long int\000"
+ 915      206C6F6E 
+ 915      6720696E 
+ 915      7400
+ 916              	.LASF99:
+ 917 018e 4359424C 		.ascii	"CYBLE_DIS_SOFTWARE_REV\000"
+ 917      455F4449 
+ 917      535F534F 
+ 917      46545741 
+ 917      52455F52 
+ 918              	.LASF59:
+ 919 01a5 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_CMD_REQ\000"
+ 919      455F4556 
+ 919      545F4741 
+ 919      5454535F 
+ 919      57524954 
+ 920              	.LASF18:
+ 921 01c3 4359424C 		.ascii	"CYBLE_EVT_HCI_STATUS\000"
+ 921      455F4556 
+ 921      545F4843 
+ 921      495F5354 
+ 921      41545553 
+ 922              	.LASF107:
+ 923 01d8 4379426C 		.ascii	"CyBle_CustomInit\000"
+ 923      655F4375 
+ 923      73746F6D 
+ 923      496E6974 
+ 923      00
+ 924              	.LASF15:
+ 925 01e9 4359424C 		.ascii	"CYBLE_EVT_STACK_ON\000"
+ 925      455F4556 
+ 925      545F5354 
+ 925      41434B5F 
+ 925      4F4E00
+ 926              	.LASF44:
+ 927 01fc 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_LOC_P256_KEYS_GEN_AND_SET_COMPLET"
+ 927      455F4556 
+ 927      545F4741 
+ 927      505F534D 
+ 927      505F4C4F 
+ 928 022f 4500     		.ascii	"E\000"
+ 929              	.LASF48:
+ 930 0231 4359424C 		.ascii	"CYBLE_EVT_GATTS_XCNHG_MTU_REQ\000"
+ 930      455F4556 
+ 930      545F4741 
+ 930      5454535F 
+ 930      58434E48 
+ 931              	.LASF86:
+ 932 024f 75696E74 		.ascii	"uint16\000"
+ 932      313600
+ 933              	.LASF89:
+ 934 0256 63757374 		.ascii	"customServCharDesc\000"
+ 934      6F6D5365 
+ 934      72764368 
+ 934      61724465 
+ 934      736300
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 30
+
+
+ 935              	.LASF56:
+ 936 0269 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_MULTI_RSP\000"
+ 936      455F4556 
+ 936      545F4741 
+ 936      5454435F 
+ 936      52454144 
+ 937              	.LASF65:
+ 938 0288 4359424C 		.ascii	"CYBLE_EVT_GATTS_HANDLE_VALUE_CNF\000"
+ 938      455F4556 
+ 938      545F4741 
+ 938      5454535F 
+ 938      48414E44 
+ 939              	.LASF14:
+ 940 02a9 4359424C 		.ascii	"CYBLE_EVT_HOST_INVALID\000"
+ 940      455F4556 
+ 940      545F484F 
+ 940      53545F49 
+ 940      4E56414C 
+ 941              	.LASF105:
+ 942 02c0 47656E65 		.ascii	"Generated_Source\\PSoC4\\blue_1_custom.c\000"
+ 942      72617465 
+ 942      645F536F 
+ 942      75726365 
+ 942      5C50536F 
+ 943              	.LASF76:
+ 944 02e7 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_CNF\000"
+ 944      455F4556 
+ 944      545F4C32 
+ 944      4341505F 
+ 944      43424643 
+ 945              	.LASF9:
+ 946 0308 666C6F61 		.ascii	"float\000"
+ 946      7400
+ 947              	.LASF54:
+ 948 030e 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_RSP\000"
+ 948      455F4556 
+ 948      545F4741 
+ 948      5454435F 
+ 948      52454144 
+ 949              	.LASF34:
+ 950 0327 4359424C 		.ascii	"CYBLE_EVT_GAP_NUMERIC_COMPARISON_REQUEST\000"
+ 950      455F4556 
+ 950      545F4741 
+ 950      505F4E55 
+ 950      4D455249 
+ 951              	.LASF39:
+ 952 0350 4359424C 		.ascii	"CYBLE_EVT_GAPC_DIRECT_ADV_REPORT\000"
+ 952      455F4556 
+ 952      545F4741 
+ 952      50435F44 
+ 952      49524543 
+ 953              	.LASF7:
+ 954 0371 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 954      206C6F6E 
+ 954      6720756E 
+ 954      7369676E 
+ 954      65642069 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 31
+
+
+ 955              	.LASF90:
+ 956 0388 4359424C 		.ascii	"CYBLE_CUSTOMS_INFO_T\000"
+ 956      455F4355 
+ 956      53544F4D 
+ 956      535F494E 
+ 956      464F5F54 
+ 957              	.LASF43:
+ 958 039d 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ_REPLY_ERR\000"
+ 958      455F4556 
+ 958      545F4741 
+ 958      505F4155 
+ 958      54485F52 
+ 959              	.LASF4:
+ 960 03be 6C6F6E67 		.ascii	"long int\000"
+ 960      20696E74 
+ 960      00
+ 961              	.LASF64:
+ 962 03c7 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_IND\000"
+ 962      455F4556 
+ 962      545F4741 
+ 962      5454435F 
+ 962      48414E44 
+ 963              	.LASF28:
+ 964 03e8 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_CONNECTED\000"
+ 964      455F4556 
+ 964      545F4741 
+ 964      505F4445 
+ 964      56494345 
+ 965              	.LASF27:
+ 966 0407 4359424C 		.ascii	"CYBLE_EVT_GAPP_ADVERTISEMENT_START_STOP\000"
+ 966      455F4556 
+ 966      545F4741 
+ 966      50505F41 
+ 966      44564552 
+ 967              	.LASF63:
+ 968 042f 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_NTF\000"
+ 968      455F4556 
+ 968      545F4741 
+ 968      5454435F 
+ 968      48414E44 
+ 969              	.LASF19:
+ 970 0450 4359424C 		.ascii	"CYBLE_EVT_STACK_BUSY_STATUS\000"
+ 970      455F4556 
+ 970      545F5354 
+ 970      41434B5F 
+ 970      42555359 
+ 971              	.LASF95:
+ 972 046c 4359424C 		.ascii	"CYBLE_DIS_MODEL_NUMBER\000"
+ 972      455F4449 
+ 972      535F4D4F 
+ 972      44454C5F 
+ 972      4E554D42 
+ 973              	.LASF24:
+ 974 0483 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_DISPLAY_REQUEST\000"
+ 974      455F4556 
+ 974      545F4741 
+ 974      505F5041 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 32
+
+
+ 974      53534B45 
+ 975              	.LASF104:
+ 976 04a9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 976      43313120 
+ 976      352E342E 
+ 976      31203230 
+ 976      31363036 
+ 977 04dc 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 977      20726576 
+ 977      6973696F 
+ 977      6E203233 
+ 977      37373135 
+ 978 050f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 978      66756E63 
+ 978      74696F6E 
+ 978      2D736563 
+ 978      74696F6E 
+ 979              	.LASF93:
+ 980 0537 4359424C 		.ascii	"CYBLE_CUSTOMS_T\000"
+ 980      455F4355 
+ 980      53544F4D 
+ 980      535F5400 
+ 981              	.LASF74:
+ 982 0547 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_CNF\000"
+ 982      455F4556 
+ 982      545F4C32 
+ 982      4341505F 
+ 982      43424643 
+ 983              	.LASF38:
+ 984 0565 4359424C 		.ascii	"CYBLE_EVT_GAP_ENHANCE_CONN_COMPLETE\000"
+ 984      455F4556 
+ 984      545F4741 
+ 984      505F454E 
+ 984      48414E43 
+ 985              	.LASF12:
+ 986 0589 6C6F6E67 		.ascii	"long double\000"
+ 986      20646F75 
+ 986      626C6500 
+ 987              	.LASF70:
+ 988 0595 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_REQ\000"
+ 988      455F4556 
+ 988      545F4C32 
+ 988      4341505F 
+ 988      434F4E4E 
+ 989              	.LASF1:
+ 990 05bb 756E7369 		.ascii	"unsigned char\000"
+ 990      676E6564 
+ 990      20636861 
+ 990      7200
+ 991              	.LASF92:
+ 992 05c9 63757374 		.ascii	"customServInfo\000"
+ 992      6F6D5365 
+ 992      7276496E 
+ 992      666F00
+ 993              	.LASF60:
+ 994 05d8 4359424C 		.ascii	"CYBLE_EVT_GATTS_PREP_WRITE_REQ\000"
+ 994      455F4556 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 33
+
+
+ 994      545F4741 
+ 994      5454535F 
+ 994      50524550 
+ 995              	.LASF82:
+ 996 05f7 4359424C 		.ascii	"CYBLE_EVT_LE_PING_AUTH_TIMEOUT\000"
+ 996      455F4556 
+ 996      545F4C45 
+ 996      5F50494E 
+ 996      475F4155 
+ 997              	.LASF88:
+ 998 0616 63757374 		.ascii	"customServCharHandle\000"
+ 998      6F6D5365 
+ 998      72764368 
+ 998      61724861 
+ 998      6E646C65 
+ 999              	.LASF52:
+ 1000 062b 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_INFO_RSP\000"
+ 1000      455F4556 
+ 1000      545F4741 
+ 1000      5454435F 
+ 1000      46494E44 
+ 1001              	.LASF0:
+ 1002 0649 7369676E 		.ascii	"signed char\000"
+ 1002      65642063 
+ 1002      68617200 
+ 1003              	.LASF57:
+ 1004 0655 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_REQ\000"
+ 1004      455F4556 
+ 1004      545F4741 
+ 1004      5454535F 
+ 1004      57524954 
+ 1005              	.LASF53:
+ 1006 066f 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_BY_TYPE_VALUE_RSP\000"
+ 1006      455F4556 
+ 1006      545F4741 
+ 1006      5454435F 
+ 1006      46494E44 
+ 1007              	.LASF25:
+ 1008 0696 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_COMPLETE\000"
+ 1008      455F4556 
+ 1008      545F4741 
+ 1008      505F4155 
+ 1008      54485F43 
+ 1009              	.LASF8:
+ 1010 06b2 756E7369 		.ascii	"unsigned int\000"
+ 1010      676E6564 
+ 1010      20696E74 
+ 1010      00
+ 1011              	.LASF46:
+ 1012 06bf 4359424C 		.ascii	"CYBLE_EVT_GATT_CONNECT_IND\000"
+ 1012      455F4556 
+ 1012      545F4741 
+ 1012      54545F43 
+ 1012      4F4E4E45 
+ 1013              	.LASF5:
+ 1014 06da 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1014      20756E73 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 34
+
+
+ 1014      69676E65 
+ 1014      6420696E 
+ 1014      7400
+ 1015              	.LASF22:
+ 1016 06ec 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ\000"
+ 1016      455F4556 
+ 1016      545F4741 
+ 1016      505F4155 
+ 1016      54485F52 
+ 1017              	.LASF75:
+ 1018 0703 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_IND\000"
+ 1018      455F4556 
+ 1018      545F4C32 
+ 1018      4341505F 
+ 1018      43424643 
+ 1019              	.LASF30:
+ 1020 0724 4359424C 		.ascii	"CYBLE_EVT_GAP_ENCRYPT_CHANGE\000"
+ 1020      455F4556 
+ 1020      545F4741 
+ 1020      505F454E 
+ 1020      43525950 
+ 1021              	.LASF41:
+ 1022 0741 4359424C 		.ascii	"CYBLE_EVT_GAP_CONN_ESTB\000"
+ 1022      455F4556 
+ 1022      545F4741 
+ 1022      505F434F 
+ 1022      4E4E5F45 
+ 1023              	.LASF69:
+ 1024 0759 4359424C 		.ascii	"CYBLE_EVT_GATTC_LONG_PROCEDURE_END\000"
+ 1024      455F4556 
+ 1024      545F4741 
+ 1024      5454435F 
+ 1024      4C4F4E47 
+ 1025              	.LASF33:
+ 1026 077c 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYINFO_EXCHNGE_CMPLT\000"
+ 1026      455F4556 
+ 1026      545F4741 
+ 1026      505F4B45 
+ 1026      59494E46 
+ 1027              	.LASF84:
+ 1028 07a0 4359424C 		.ascii	"CYBLE_EVT_FLASH_CORRUPT\000"
+ 1028      455F4556 
+ 1028      545F464C 
+ 1028      4153485F 
+ 1028      434F5252 
+ 1029              	.LASF31:
+ 1030 07b8 4359424C 		.ascii	"CYBLE_EVT_GAP_CONNECTION_UPDATE_COMPLETE\000"
+ 1030      455F4556 
+ 1030      545F4741 
+ 1030      505F434F 
+ 1030      4E4E4543 
+ 1031              	.LASF40:
+ 1032 07e1 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_NEGOTIATED_AUTH_INFO\000"
+ 1032      455F4556 
+ 1032      545F4741 
+ 1032      505F534D 
+ 1032      505F4E45 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 35
+
+
+ 1033              	.LASF11:
+ 1034 0808 63686172 		.ascii	"char\000"
+ 1034      00
+ 1035              	.LASF72:
+ 1036 080d 4359424C 		.ascii	"CYBLE_EVT_L2CAP_COMMAND_REJ\000"
+ 1036      455F4556 
+ 1036      545F4C32 
+ 1036      4341505F 
+ 1036      434F4D4D 
+ 1037              	.LASF3:
+ 1038 0829 73686F72 		.ascii	"short unsigned int\000"
+ 1038      7420756E 
+ 1038      7369676E 
+ 1038      65642069 
+ 1038      6E7400
+ 1039              	.LASF21:
+ 1040 083c 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_PROGRESS_RESULT\000"
+ 1040      455F4556 
+ 1040      545F4741 
+ 1040      50435F53 
+ 1040      43414E5F 
+ 1041              	.LASF101:
+ 1042 0860 4359424C 		.ascii	"CYBLE_DIS_REG_CERT_DATA\000"
+ 1042      455F4449 
+ 1042      535F5245 
+ 1042      475F4345 
+ 1042      52545F44 
+ 1043              	.LASF55:
+ 1044 0878 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BLOB_RSP\000"
+ 1044      455F4556 
+ 1044      545F4741 
+ 1044      5454435F 
+ 1044      52454144 
+ 1045              	.LASF62:
+ 1046 0896 4359424C 		.ascii	"CYBLE_EVT_GATTC_EXEC_WRITE_RSP\000"
+ 1046      455F4556 
+ 1046      545F4741 
+ 1046      5454435F 
+ 1046      45584543 
+ 1047              	.LASF32:
+ 1048 08b5 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_START_STOP\000"
+ 1048      455F4556 
+ 1048      545F4741 
+ 1048      50435F53 
+ 1048      43414E5F 
+ 1049              	.LASF81:
+ 1050 08d4 4359424C 		.ascii	"CYBLE_EVT_PENDING_FLASH_WRITE\000"
+ 1050      455F4556 
+ 1050      545F5045 
+ 1050      4E44494E 
+ 1050      475F464C 
+ 1051              	.LASF78:
+ 1052 08f2 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_RX_CREDIT_IND\000"
+ 1052      455F4556 
+ 1052      545F4C32 
+ 1052      4341505F 
+ 1052      43424643 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 36
+
+
+ 1053              	.LASF10:
+ 1054 0915 646F7562 		.ascii	"double\000"
+ 1054      6C6500
+ 1055              	.LASF79:
+ 1056 091c 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_TX_CREDIT_IND\000"
+ 1056      455F4556 
+ 1056      545F4C32 
+ 1056      4341505F 
+ 1056      43424643 
+ 1057              	.LASF103:
+ 1058 093f 4359424C 		.ascii	"CYBLE_DIS_CHAR_COUNT\000"
+ 1058      455F4449 
+ 1058      535F4348 
+ 1058      41525F43 
+ 1058      4F554E54 
+ 1059              	.LASF42:
+ 1060 0954 4359424C 		.ascii	"CYBLE_EVT_GAP_SCAN_REQ_RECVD\000"
+ 1060      455F4556 
+ 1060      545F4741 
+ 1060      505F5343 
+ 1060      414E5F52 
+ 1061              	.LASF91:
+ 1062 0971 63757374 		.ascii	"customServHandle\000"
+ 1062      6F6D5365 
+ 1062      72764861 
+ 1062      6E646C65 
+ 1062      00
+ 1063              	.LASF17:
+ 1064 0982 4359424C 		.ascii	"CYBLE_EVT_HARDWARE_ERROR\000"
+ 1064      455F4556 
+ 1064      545F4841 
+ 1064      52445741 
+ 1064      52455F45 
+ 1065              	.LASF77:
+ 1066 099b 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_READ\000"
+ 1066      455F4556 
+ 1066      545F4C32 
+ 1066      4341505F 
+ 1066      43424643 
+ 1067              	.LASF71:
+ 1068 09ba 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_RSP\000"
+ 1068      455F4556 
+ 1068      545F4C32 
+ 1068      4341505F 
+ 1068      434F4E4E 
+ 1069              	.LASF73:
+ 1070 09e0 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_IND\000"
+ 1070      455F4556 
+ 1070      545F4C32 
+ 1070      4341505F 
+ 1070      43424643 
+ 1071              	.LASF94:
+ 1072 09fe 4359424C 		.ascii	"CYBLE_DIS_MANUFACTURER_NAME\000"
+ 1072      455F4449 
+ 1072      535F4D41 
+ 1072      4E554641 
+ 1072      43545552 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 37
+
+
+ 1073              	.LASF50:
+ 1074 0a1a 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_GROUP_TYPE_RSP\000"
+ 1074      455F4556 
+ 1074      545F4741 
+ 1074      5454435F 
+ 1074      52454144 
+ 1075              	.LASF98:
+ 1076 0a41 4359424C 		.ascii	"CYBLE_DIS_FIRMWARE_REV\000"
+ 1076      455F4449 
+ 1076      535F4649 
+ 1076      524D5741 
+ 1076      52455F52 
+ 1077              	.LASF51:
+ 1078 0a58 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_TYPE_RSP\000"
+ 1078      455F4556 
+ 1078      545F4741 
+ 1078      5454435F 
+ 1078      52454144 
+ 1079              	.LASF49:
+ 1080 0a79 4359424C 		.ascii	"CYBLE_EVT_GATTC_XCHNG_MTU_RSP\000"
+ 1080      455F4556 
+ 1080      545F4741 
+ 1080      5454435F 
+ 1080      5843484E 
+ 1081              	.LASF97:
+ 1082 0a97 4359424C 		.ascii	"CYBLE_DIS_HARDWARE_REV\000"
+ 1082      455F4449 
+ 1082      535F4841 
+ 1082      52445741 
+ 1082      52455F52 
+ 1083              	.LASF80:
+ 1084 0aae 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_WRITE_IND\000"
+ 1084      455F4556 
+ 1084      545F4C32 
+ 1084      4341505F 
+ 1084      43424643 
+ 1085              	.LASF16:
+ 1086 0ad2 4359424C 		.ascii	"CYBLE_EVT_TIMEOUT\000"
+ 1086      455F4556 
+ 1086      545F5449 
+ 1086      4D454F55 
+ 1086      5400
+ 1087              	.LASF85:
+ 1088 0ae4 4359424C 		.ascii	"CYBLE_EVT_MAX\000"
+ 1088      455F4556 
+ 1088      545F4D41 
+ 1088      5800
+ 1089              	.LASF68:
+ 1090 0af2 4359424C 		.ascii	"CYBLE_EVT_GATTS_READ_CHAR_VAL_ACCESS_REQ\000"
+ 1090      455F4556 
+ 1090      545F4741 
+ 1090      5454535F 
+ 1090      52454144 
+ 1091              	.LASF67:
+ 1092 0b1b 4359424C 		.ascii	"CYBLE_EVT_GATTC_STOP_CMD_COMPLETE\000"
+ 1092      455F4556 
+ 1092      545F4741 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccxY0USk.s 			page 38
+
+
+ 1092      5454435F 
+ 1092      53544F50 
+ 1093              	.LASF61:
+ 1094 0b3d 4359424C 		.ascii	"CYBLE_EVT_GATTS_EXEC_WRITE_REQ\000"
+ 1094      455F4556 
+ 1094      545F4741 
+ 1094      5454535F 
+ 1094      45584543 
+ 1095              	.LASF87:
+ 1096 0b5c 4359424C 		.ascii	"CYBLE_GATT_DB_ATTR_HANDLE_T\000"
+ 1096      455F4741 
+ 1096      54545F44 
+ 1096      425F4154 
+ 1096      54525F48 
+ 1097              	.LASF108:
+ 1098 0b78 6379426C 		.ascii	"cyBle_customs\000"
+ 1098      655F6375 
+ 1098      73746F6D 
+ 1098      7300
+ 1099              	.LASF66:
+ 1100 0b86 4359424C 		.ascii	"CYBLE_EVT_GATTS_DATA_SIGNED_CMD_REQ\000"
+ 1100      455F4556 
+ 1100      545F4741 
+ 1100      5454535F 
+ 1100      44415441 
+ 1101              	.LASF83:
+ 1102 0baa 4359424C 		.ascii	"CYBLE_EVT_HCI_PKT\000"
+ 1102      455F4556 
+ 1102      545F4843 
+ 1102      495F504B 
+ 1102      5400
+ 1103              	.LASF100:
+ 1104 0bbc 4359424C 		.ascii	"CYBLE_DIS_SYSTEM_ID\000"
+ 1104      455F4449 
+ 1104      535F5359 
+ 1104      5354454D 
+ 1104      5F494400 
+ 1105              	.LASF36:
+ 1106 0bd0 4359424C 		.ascii	"CYBLE_EVT_GAP_OOB_GENERATED_NOTIFICATION\000"
+ 1106      455F4556 
+ 1106      545F4741 
+ 1106      505F4F4F 
+ 1106      425F4745 
+ 1107              	.LASF102:
+ 1108 0bf9 4359424C 		.ascii	"CYBLE_DIS_PNP_ID\000"
+ 1108      455F4449 
+ 1108      535F504E 
+ 1108      505F4944 
+ 1108      00
+ 1109              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

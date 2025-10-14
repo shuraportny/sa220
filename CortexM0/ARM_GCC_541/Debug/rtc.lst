@@ -1,0 +1,3270 @@
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"rtc.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_uidiv
+  20              		.global	__aeabi_uidivmod
+  21              		.section	.text.DecToBCD,"ax",%progbits
+  22              		.align	2
+  23              		.code	16
+  24              		.thumb_func
+  25              		.type	DecToBCD, %function
+  26              	DecToBCD:
+  27              	.LFB35:
+  28              		.file 1 "rtc.c"
+   1:rtc.c         **** /* ========================================
+   2:rtc.c         ****  *
+   3:rtc.c         ****  * Copyright YOUR COMPANY, THE YEAR
+   4:rtc.c         ****  * All Rights Reserved
+   5:rtc.c         ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:rtc.c         ****  *
+   7:rtc.c         ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:rtc.c         ****  * WHICH IS THE PROPERTY OF your company.
+   9:rtc.c         ****  *
+  10:rtc.c         ****  * ========================================
+  11:rtc.c         **** */
+  12:rtc.c         **** #include "rtc.h"
+  13:rtc.c         **** 
+  14:rtc.c         **** 
+  15:rtc.c         **** static uint8_t DecToBCD(uint8_t val) {
+  29              		.loc 1 15 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 90B5     		push	{r4, r7, lr}
+  34              		.cfi_def_cfa_offset 12
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 83B0     		sub	sp, sp, #12
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              		.cfi_def_cfa_register 7
+  42 0006 0200     		movs	r2, r0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 2
+
+
+  43 0008 FB1D     		adds	r3, r7, #7
+  44 000a 1A70     		strb	r2, [r3]
+  16:rtc.c         ****     return ((val / 10) << 4) | (val % 10);
+  45              		.loc 1 16 0
+  46 000c FB1D     		adds	r3, r7, #7
+  47 000e 1B78     		ldrb	r3, [r3]
+  48 0010 0A21     		movs	r1, #10
+  49 0012 1800     		movs	r0, r3
+  50 0014 FFF7FEFF 		bl	__aeabi_uidiv
+  51 0018 0300     		movs	r3, r0
+  52 001a DBB2     		uxtb	r3, r3
+  53 001c 1B01     		lsls	r3, r3, #4
+  54 001e 5CB2     		sxtb	r4, r3
+  55 0020 FB1D     		adds	r3, r7, #7
+  56 0022 1B78     		ldrb	r3, [r3]
+  57 0024 0A21     		movs	r1, #10
+  58 0026 1800     		movs	r0, r3
+  59 0028 FFF7FEFF 		bl	__aeabi_uidivmod
+  60 002c 0B00     		movs	r3, r1
+  61 002e DBB2     		uxtb	r3, r3
+  62 0030 5BB2     		sxtb	r3, r3
+  63 0032 2343     		orrs	r3, r4
+  64 0034 5BB2     		sxtb	r3, r3
+  65 0036 DBB2     		uxtb	r3, r3
+  17:rtc.c         **** }
+  66              		.loc 1 17 0
+  67 0038 1800     		movs	r0, r3
+  68 003a BD46     		mov	sp, r7
+  69 003c 03B0     		add	sp, sp, #12
+  70              		@ sp needed
+  71 003e 90BD     		pop	{r4, r7, pc}
+  72              		.cfi_endproc
+  73              	.LFE35:
+  74              		.size	DecToBCD, .-DecToBCD
+  75              		.section	.text.BCDToDec,"ax",%progbits
+  76              		.align	2
+  77              		.code	16
+  78              		.thumb_func
+  79              		.type	BCDToDec, %function
+  80              	BCDToDec:
+  81              	.LFB36:
+  18:rtc.c         **** 
+  19:rtc.c         **** // Helper: Convert BCD to Decimal
+  20:rtc.c         **** static uint8_t BCDToDec(uint8_t val) {
+  82              		.loc 1 20 0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 8
+  85              		@ frame_needed = 1, uses_anonymous_args = 0
+  86 0000 80B5     		push	{r7, lr}
+  87              		.cfi_def_cfa_offset 8
+  88              		.cfi_offset 7, -8
+  89              		.cfi_offset 14, -4
+  90 0002 82B0     		sub	sp, sp, #8
+  91              		.cfi_def_cfa_offset 16
+  92 0004 00AF     		add	r7, sp, #0
+  93              		.cfi_def_cfa_register 7
+  94 0006 0200     		movs	r2, r0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 3
+
+
+  95 0008 FB1D     		adds	r3, r7, #7
+  96 000a 1A70     		strb	r2, [r3]
+  21:rtc.c         ****     return (val >> 4) * 10 + (val & 0x0F);
+  97              		.loc 1 21 0
+  98 000c FB1D     		adds	r3, r7, #7
+  99 000e 1B78     		ldrb	r3, [r3]
+ 100 0010 1B09     		lsrs	r3, r3, #4
+ 101 0012 DBB2     		uxtb	r3, r3
+ 102 0014 1A1C     		adds	r2, r3, #0
+ 103 0016 9200     		lsls	r2, r2, #2
+ 104 0018 D318     		adds	r3, r2, r3
+ 105 001a DB18     		adds	r3, r3, r3
+ 106 001c DAB2     		uxtb	r2, r3
+ 107 001e FB1D     		adds	r3, r7, #7
+ 108 0020 1B78     		ldrb	r3, [r3]
+ 109 0022 0F21     		movs	r1, #15
+ 110 0024 0B40     		ands	r3, r1
+ 111 0026 DBB2     		uxtb	r3, r3
+ 112 0028 D318     		adds	r3, r2, r3
+ 113 002a DBB2     		uxtb	r3, r3
+  22:rtc.c         **** }
+ 114              		.loc 1 22 0
+ 115 002c 1800     		movs	r0, r3
+ 116 002e BD46     		mov	sp, r7
+ 117 0030 02B0     		add	sp, sp, #8
+ 118              		@ sp needed
+ 119 0032 80BD     		pop	{r7, pc}
+ 120              		.cfi_endproc
+ 121              	.LFE36:
+ 122              		.size	BCDToDec, .-BCDToDec
+ 123              		.section	.text.DS3231_EnableDateTime,"ax",%progbits
+ 124              		.align	2
+ 125              		.global	DS3231_EnableDateTime
+ 126              		.code	16
+ 127              		.thumb_func
+ 128              		.type	DS3231_EnableDateTime, %function
+ 129              	DS3231_EnableDateTime:
+ 130              	.LFB37:
+  23:rtc.c         **** 
+  24:rtc.c         **** void DS3231_EnableDateTime(void ){
+ 131              		.loc 1 24 0
+ 132              		.cfi_startproc
+ 133              		@ args = 0, pretend = 0, frame = 8
+ 134              		@ frame_needed = 1, uses_anonymous_args = 0
+ 135 0000 80B5     		push	{r7, lr}
+ 136              		.cfi_def_cfa_offset 8
+ 137              		.cfi_offset 7, -8
+ 138              		.cfi_offset 14, -4
+ 139 0002 82B0     		sub	sp, sp, #8
+ 140              		.cfi_def_cfa_offset 16
+ 141 0004 00AF     		add	r7, sp, #0
+ 142              		.cfi_def_cfa_register 7
+  25:rtc.c         ****     uint8_t data[2];
+  26:rtc.c         ****     data[0] = 0x00; // Start at seconds register
+ 143              		.loc 1 26 0
+ 144 0006 3B1D     		adds	r3, r7, #4
+ 145 0008 0022     		movs	r2, #0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 4
+
+
+ 146 000a 1A70     		strb	r2, [r3]
+  27:rtc.c         ****     data[1] = 0x00;
+ 147              		.loc 1 27 0
+ 148 000c 3B1D     		adds	r3, r7, #4
+ 149 000e 0022     		movs	r2, #0
+ 150 0010 5A70     		strb	r2, [r3, #1]
+  28:rtc.c         ****     
+  29:rtc.c         ****     I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, data, sizeof(data), I2C_I2C_MODE_COMPLETE_XFER);
+ 151              		.loc 1 29 0
+ 152 0012 391D     		adds	r1, r7, #4
+ 153 0014 0023     		movs	r3, #0
+ 154 0016 0222     		movs	r2, #2
+ 155 0018 6820     		movs	r0, #104
+ 156 001a FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  30:rtc.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP);
+ 157              		.loc 1 30 0
+ 158 001e C046     		nop
+ 159              	.L6:
+ 160              		.loc 1 30 0 is_stmt 0 discriminator 1
+ 161 0020 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 162 0024 0200     		movs	r2, r0
+ 163 0026 0423     		movs	r3, #4
+ 164 0028 1340     		ands	r3, r2
+ 165 002a F9D1     		bne	.L6
+  31:rtc.c         **** }
+ 166              		.loc 1 31 0 is_stmt 1
+ 167 002c C046     		nop
+ 168 002e BD46     		mov	sp, r7
+ 169 0030 02B0     		add	sp, sp, #8
+ 170              		@ sp needed
+ 171 0032 80BD     		pop	{r7, pc}
+ 172              		.cfi_endproc
+ 173              	.LFE37:
+ 174              		.size	DS3231_EnableDateTime, .-DS3231_EnableDateTime
+ 175              		.section	.text.DS3231_SetDateTime,"ax",%progbits
+ 176              		.align	2
+ 177              		.global	DS3231_SetDateTime
+ 178              		.code	16
+ 179              		.thumb_func
+ 180              		.type	DS3231_SetDateTime, %function
+ 181              	DS3231_SetDateTime:
+ 182              	.LFB38:
+  32:rtc.c         **** 
+  33:rtc.c         **** void DS3231_SetDateTime(const S_DateTime* dt) {
+ 183              		.loc 1 33 0
+ 184              		.cfi_startproc
+ 185              		@ args = 0, pretend = 0, frame = 16
+ 186              		@ frame_needed = 1, uses_anonymous_args = 0
+ 187 0000 80B5     		push	{r7, lr}
+ 188              		.cfi_def_cfa_offset 8
+ 189              		.cfi_offset 7, -8
+ 190              		.cfi_offset 14, -4
+ 191 0002 84B0     		sub	sp, sp, #16
+ 192              		.cfi_def_cfa_offset 24
+ 193 0004 00AF     		add	r7, sp, #0
+ 194              		.cfi_def_cfa_register 7
+ 195 0006 7860     		str	r0, [r7, #4]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 5
+
+
+  34:rtc.c         ****     uint8_t data[8];
+  35:rtc.c         ****     
+  36:rtc.c         ****     data[0] = 0x00; // Start at seconds register
+ 196              		.loc 1 36 0
+ 197 0008 0823     		movs	r3, #8
+ 198 000a FB18     		adds	r3, r7, r3
+ 199 000c 0022     		movs	r2, #0
+ 200 000e 1A70     		strb	r2, [r3]
+  37:rtc.c         ****     data[1] = DecToBCD(dt->seconds);
+ 201              		.loc 1 37 0
+ 202 0010 7B68     		ldr	r3, [r7, #4]
+ 203 0012 1B78     		ldrb	r3, [r3]
+ 204 0014 1800     		movs	r0, r3
+ 205 0016 FFF7FEFF 		bl	DecToBCD
+ 206 001a 0300     		movs	r3, r0
+ 207 001c 1A00     		movs	r2, r3
+ 208 001e 0823     		movs	r3, #8
+ 209 0020 FB18     		adds	r3, r7, r3
+ 210 0022 5A70     		strb	r2, [r3, #1]
+  38:rtc.c         ****     data[2] = DecToBCD(dt->minutes);
+ 211              		.loc 1 38 0
+ 212 0024 7B68     		ldr	r3, [r7, #4]
+ 213 0026 5B78     		ldrb	r3, [r3, #1]
+ 214 0028 1800     		movs	r0, r3
+ 215 002a FFF7FEFF 		bl	DecToBCD
+ 216 002e 0300     		movs	r3, r0
+ 217 0030 1A00     		movs	r2, r3
+ 218 0032 0823     		movs	r3, #8
+ 219 0034 FB18     		adds	r3, r7, r3
+ 220 0036 9A70     		strb	r2, [r3, #2]
+  39:rtc.c         ****     data[3] = DecToBCD(dt->hours);
+ 221              		.loc 1 39 0
+ 222 0038 7B68     		ldr	r3, [r7, #4]
+ 223 003a 9B78     		ldrb	r3, [r3, #2]
+ 224 003c 1800     		movs	r0, r3
+ 225 003e FFF7FEFF 		bl	DecToBCD
+ 226 0042 0300     		movs	r3, r0
+ 227 0044 1A00     		movs	r2, r3
+ 228 0046 0823     		movs	r3, #8
+ 229 0048 FB18     		adds	r3, r7, r3
+ 230 004a DA70     		strb	r2, [r3, #3]
+  40:rtc.c         ****     data[4] = DecToBCD(dt->dayOfWeek);
+ 231              		.loc 1 40 0
+ 232 004c 7B68     		ldr	r3, [r7, #4]
+ 233 004e DB78     		ldrb	r3, [r3, #3]
+ 234 0050 1800     		movs	r0, r3
+ 235 0052 FFF7FEFF 		bl	DecToBCD
+ 236 0056 0300     		movs	r3, r0
+ 237 0058 1A00     		movs	r2, r3
+ 238 005a 0823     		movs	r3, #8
+ 239 005c FB18     		adds	r3, r7, r3
+ 240 005e 1A71     		strb	r2, [r3, #4]
+  41:rtc.c         ****     data[5] = DecToBCD(dt->day);
+ 241              		.loc 1 41 0
+ 242 0060 7B68     		ldr	r3, [r7, #4]
+ 243 0062 1B79     		ldrb	r3, [r3, #4]
+ 244 0064 1800     		movs	r0, r3
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 6
+
+
+ 245 0066 FFF7FEFF 		bl	DecToBCD
+ 246 006a 0300     		movs	r3, r0
+ 247 006c 1A00     		movs	r2, r3
+ 248 006e 0823     		movs	r3, #8
+ 249 0070 FB18     		adds	r3, r7, r3
+ 250 0072 5A71     		strb	r2, [r3, #5]
+  42:rtc.c         ****     data[6] = DecToBCD(dt->month);
+ 251              		.loc 1 42 0
+ 252 0074 7B68     		ldr	r3, [r7, #4]
+ 253 0076 5B79     		ldrb	r3, [r3, #5]
+ 254 0078 1800     		movs	r0, r3
+ 255 007a FFF7FEFF 		bl	DecToBCD
+ 256 007e 0300     		movs	r3, r0
+ 257 0080 1A00     		movs	r2, r3
+ 258 0082 0823     		movs	r3, #8
+ 259 0084 FB18     		adds	r3, r7, r3
+ 260 0086 9A71     		strb	r2, [r3, #6]
+  43:rtc.c         ****     data[7] = DecToBCD(dt->year);
+ 261              		.loc 1 43 0
+ 262 0088 7B68     		ldr	r3, [r7, #4]
+ 263 008a 9B79     		ldrb	r3, [r3, #6]
+ 264 008c 1800     		movs	r0, r3
+ 265 008e FFF7FEFF 		bl	DecToBCD
+ 266 0092 0300     		movs	r3, r0
+ 267 0094 1A00     		movs	r2, r3
+ 268 0096 0823     		movs	r3, #8
+ 269 0098 FB18     		adds	r3, r7, r3
+ 270 009a DA71     		strb	r2, [r3, #7]
+  44:rtc.c         ****    
+  45:rtc.c         ****     
+  46:rtc.c         ****     I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, data, sizeof(data)+1, I2C_I2C_MODE_COMPLETE_XFER);
+ 271              		.loc 1 46 0
+ 272 009c 0823     		movs	r3, #8
+ 273 009e F918     		adds	r1, r7, r3
+ 274 00a0 0023     		movs	r3, #0
+ 275 00a2 0922     		movs	r2, #9
+ 276 00a4 6820     		movs	r0, #104
+ 277 00a6 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  47:rtc.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP);
+ 278              		.loc 1 47 0
+ 279 00aa C046     		nop
+ 280              	.L8:
+ 281              		.loc 1 47 0 is_stmt 0 discriminator 1
+ 282 00ac FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 283 00b0 0200     		movs	r2, r0
+ 284 00b2 0423     		movs	r3, #4
+ 285 00b4 1340     		ands	r3, r2
+ 286 00b6 F9D1     		bne	.L8
+  48:rtc.c         **** 
+  49:rtc.c         **** }
+ 287              		.loc 1 49 0 is_stmt 1
+ 288 00b8 C046     		nop
+ 289 00ba BD46     		mov	sp, r7
+ 290 00bc 04B0     		add	sp, sp, #16
+ 291              		@ sp needed
+ 292 00be 80BD     		pop	{r7, pc}
+ 293              		.cfi_endproc
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 7
+
+
+ 294              	.LFE38:
+ 295              		.size	DS3231_SetDateTime, .-DS3231_SetDateTime
+ 296              		.section	.text.DS3231_GetDateTime,"ax",%progbits
+ 297              		.align	2
+ 298              		.global	DS3231_GetDateTime
+ 299              		.code	16
+ 300              		.thumb_func
+ 301              		.type	DS3231_GetDateTime, %function
+ 302              	DS3231_GetDateTime:
+ 303              	.LFB39:
+  50:rtc.c         **** 
+  51:rtc.c         **** void DS3231_GetDateTime(S_DateTime* dt) {
+ 304              		.loc 1 51 0
+ 305              		.cfi_startproc
+ 306              		@ args = 0, pretend = 0, frame = 16
+ 307              		@ frame_needed = 1, uses_anonymous_args = 0
+ 308 0000 80B5     		push	{r7, lr}
+ 309              		.cfi_def_cfa_offset 8
+ 310              		.cfi_offset 7, -8
+ 311              		.cfi_offset 14, -4
+ 312 0002 84B0     		sub	sp, sp, #16
+ 313              		.cfi_def_cfa_offset 24
+ 314 0004 00AF     		add	r7, sp, #0
+ 315              		.cfi_def_cfa_register 7
+ 316 0006 7860     		str	r0, [r7, #4]
+  52:rtc.c         ****     uint8_t reg = 0x00;
+ 317              		.loc 1 52 0
+ 318 0008 0F23     		movs	r3, #15
+ 319 000a FB18     		adds	r3, r7, r3
+ 320 000c 0022     		movs	r2, #0
+ 321 000e 1A70     		strb	r2, [r3]
+  53:rtc.c         ****     uint8_t data[7];
+  54:rtc.c         **** 
+  55:rtc.c         ****     // Send memory address
+  56:rtc.c         ****     I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, &reg, 1, I2C_I2C_MODE_COMPLETE_XFER);
+ 322              		.loc 1 56 0
+ 323 0010 0F23     		movs	r3, #15
+ 324 0012 F918     		adds	r1, r7, r3
+ 325 0014 0023     		movs	r3, #0
+ 326 0016 0122     		movs	r2, #1
+ 327 0018 6820     		movs	r0, #104
+ 328 001a FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  57:rtc.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP);
+ 329              		.loc 1 57 0
+ 330 001e C046     		nop
+ 331              	.L10:
+ 332              		.loc 1 57 0 is_stmt 0 discriminator 1
+ 333 0020 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 334 0024 0200     		movs	r2, r0
+ 335 0026 0423     		movs	r3, #4
+ 336 0028 1340     		ands	r3, r2
+ 337 002a F9D1     		bne	.L10
+  58:rtc.c         **** 
+  59:rtc.c         ****     // Read data
+  60:rtc.c         ****     I2C_I2CMasterReadBuf(I2C_RTC_SLAVE_ADDR, data, 7, I2C_I2C_MODE_COMPLETE_XFER);
+ 338              		.loc 1 60 0 is_stmt 1
+ 339 002c 0823     		movs	r3, #8
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 8
+
+
+ 340 002e F918     		adds	r1, r7, r3
+ 341 0030 0023     		movs	r3, #0
+ 342 0032 0722     		movs	r2, #7
+ 343 0034 6820     		movs	r0, #104
+ 344 0036 FFF7FEFF 		bl	I2C_I2CMasterReadBuf
+  61:rtc.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP);
+ 345              		.loc 1 61 0
+ 346 003a C046     		nop
+ 347              	.L11:
+ 348              		.loc 1 61 0 is_stmt 0 discriminator 1
+ 349 003c FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 350 0040 0200     		movs	r2, r0
+ 351 0042 0423     		movs	r3, #4
+ 352 0044 1340     		ands	r3, r2
+ 353 0046 F9D1     		bne	.L11
+  62:rtc.c         ****     
+  63:rtc.c         ****     dt->seconds    = BCDToDec(data[0]);
+ 354              		.loc 1 63 0 is_stmt 1
+ 355 0048 0823     		movs	r3, #8
+ 356 004a FB18     		adds	r3, r7, r3
+ 357 004c 1B78     		ldrb	r3, [r3]
+ 358 004e 1800     		movs	r0, r3
+ 359 0050 FFF7FEFF 		bl	BCDToDec
+ 360 0054 0300     		movs	r3, r0
+ 361 0056 1A00     		movs	r2, r3
+ 362 0058 7B68     		ldr	r3, [r7, #4]
+ 363 005a 1A70     		strb	r2, [r3]
+  64:rtc.c         ****     dt->minutes    = BCDToDec(data[1]);
+ 364              		.loc 1 64 0
+ 365 005c 0823     		movs	r3, #8
+ 366 005e FB18     		adds	r3, r7, r3
+ 367 0060 5B78     		ldrb	r3, [r3, #1]
+ 368 0062 1800     		movs	r0, r3
+ 369 0064 FFF7FEFF 		bl	BCDToDec
+ 370 0068 0300     		movs	r3, r0
+ 371 006a 1A00     		movs	r2, r3
+ 372 006c 7B68     		ldr	r3, [r7, #4]
+ 373 006e 5A70     		strb	r2, [r3, #1]
+  65:rtc.c         ****     dt->hours      = BCDToDec(data[2] & 0x3F);
+ 374              		.loc 1 65 0
+ 375 0070 0823     		movs	r3, #8
+ 376 0072 FB18     		adds	r3, r7, r3
+ 377 0074 9B78     		ldrb	r3, [r3, #2]
+ 378 0076 3F22     		movs	r2, #63
+ 379 0078 1340     		ands	r3, r2
+ 380 007a DBB2     		uxtb	r3, r3
+ 381 007c 1800     		movs	r0, r3
+ 382 007e FFF7FEFF 		bl	BCDToDec
+ 383 0082 0300     		movs	r3, r0
+ 384 0084 1A00     		movs	r2, r3
+ 385 0086 7B68     		ldr	r3, [r7, #4]
+ 386 0088 9A70     		strb	r2, [r3, #2]
+  66:rtc.c         ****     dt->dayOfWeek  = BCDToDec(data[3]);
+ 387              		.loc 1 66 0
+ 388 008a 0823     		movs	r3, #8
+ 389 008c FB18     		adds	r3, r7, r3
+ 390 008e DB78     		ldrb	r3, [r3, #3]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 9
+
+
+ 391 0090 1800     		movs	r0, r3
+ 392 0092 FFF7FEFF 		bl	BCDToDec
+ 393 0096 0300     		movs	r3, r0
+ 394 0098 1A00     		movs	r2, r3
+ 395 009a 7B68     		ldr	r3, [r7, #4]
+ 396 009c DA70     		strb	r2, [r3, #3]
+  67:rtc.c         ****     dt->day        = BCDToDec(data[4]);
+ 397              		.loc 1 67 0
+ 398 009e 0823     		movs	r3, #8
+ 399 00a0 FB18     		adds	r3, r7, r3
+ 400 00a2 1B79     		ldrb	r3, [r3, #4]
+ 401 00a4 1800     		movs	r0, r3
+ 402 00a6 FFF7FEFF 		bl	BCDToDec
+ 403 00aa 0300     		movs	r3, r0
+ 404 00ac 1A00     		movs	r2, r3
+ 405 00ae 7B68     		ldr	r3, [r7, #4]
+ 406 00b0 1A71     		strb	r2, [r3, #4]
+  68:rtc.c         ****     dt->month      = BCDToDec(data[5] & 0x1F); // remove century bit
+ 407              		.loc 1 68 0
+ 408 00b2 0823     		movs	r3, #8
+ 409 00b4 FB18     		adds	r3, r7, r3
+ 410 00b6 5B79     		ldrb	r3, [r3, #5]
+ 411 00b8 1F22     		movs	r2, #31
+ 412 00ba 1340     		ands	r3, r2
+ 413 00bc DBB2     		uxtb	r3, r3
+ 414 00be 1800     		movs	r0, r3
+ 415 00c0 FFF7FEFF 		bl	BCDToDec
+ 416 00c4 0300     		movs	r3, r0
+ 417 00c6 1A00     		movs	r2, r3
+ 418 00c8 7B68     		ldr	r3, [r7, #4]
+ 419 00ca 5A71     		strb	r2, [r3, #5]
+  69:rtc.c         ****     dt->year       = BCDToDec(data[6]);
+ 420              		.loc 1 69 0
+ 421 00cc 0823     		movs	r3, #8
+ 422 00ce FB18     		adds	r3, r7, r3
+ 423 00d0 9B79     		ldrb	r3, [r3, #6]
+ 424 00d2 1800     		movs	r0, r3
+ 425 00d4 FFF7FEFF 		bl	BCDToDec
+ 426 00d8 0300     		movs	r3, r0
+ 427 00da 1A00     		movs	r2, r3
+ 428 00dc 7B68     		ldr	r3, [r7, #4]
+ 429 00de 9A71     		strb	r2, [r3, #6]
+  70:rtc.c         ****     
+  71:rtc.c         ****     
+  72:rtc.c         **** }
+ 430              		.loc 1 72 0
+ 431 00e0 C046     		nop
+ 432 00e2 BD46     		mov	sp, r7
+ 433 00e4 04B0     		add	sp, sp, #16
+ 434              		@ sp needed
+ 435 00e6 80BD     		pop	{r7, pc}
+ 436              		.cfi_endproc
+ 437              	.LFE39:
+ 438              		.size	DS3231_GetDateTime, .-DS3231_GetDateTime
+ 439              		.global	write_result
+ 440              		.bss
+ 441              		.align	2
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 10
+
+
+ 442              		.type	write_result, %object
+ 443              		.size	write_result, 4
+ 444              	write_result:
+ 445 0000 00000000 		.space	4
+ 446              		.global	read_result
+ 447              		.align	2
+ 448              		.type	read_result, %object
+ 449              		.size	read_result, 4
+ 450              	read_result:
+ 451 0004 00000000 		.space	4
+ 452              		.global	result
+ 453              		.align	2
+ 454              		.type	result, %object
+ 455              		.size	result, 4
+ 456              	result:
+ 457 0008 00000000 		.space	4
+ 458              		.section	.text.read_RTC,"ax",%progbits
+ 459              		.align	2
+ 460              		.global	read_RTC
+ 461              		.code	16
+ 462              		.thumb_func
+ 463              		.type	read_RTC, %function
+ 464              	read_RTC:
+ 465              	.LFB40:
+  73:rtc.c         **** 
+  74:rtc.c         **** 
+  75:rtc.c         **** volatile uint32_t write_result = 0;
+  76:rtc.c         **** volatile uint32_t read_result = 0;
+  77:rtc.c         **** uint32 result = 0;
+  78:rtc.c         **** 
+  79:rtc.c         **** void read_RTC( S_DateTime *rtc) {
+ 466              		.loc 1 79 0
+ 467              		.cfi_startproc
+ 468              		@ args = 0, pretend = 0, frame = 24
+ 469              		@ frame_needed = 1, uses_anonymous_args = 0
+ 470 0000 80B5     		push	{r7, lr}
+ 471              		.cfi_def_cfa_offset 8
+ 472              		.cfi_offset 7, -8
+ 473              		.cfi_offset 14, -4
+ 474 0002 86B0     		sub	sp, sp, #24
+ 475              		.cfi_def_cfa_offset 32
+ 476 0004 00AF     		add	r7, sp, #0
+ 477              		.cfi_def_cfa_register 7
+ 478 0006 7860     		str	r0, [r7, #4]
+  80:rtc.c         ****     
+  81:rtc.c         ****     uint8 WriteBuf[1] = {0};
+ 479              		.loc 1 81 0
+ 480 0008 1423     		movs	r3, #20
+ 481 000a FB18     		adds	r3, r7, r3
+ 482 000c 0022     		movs	r2, #0
+ 483 000e 1A70     		strb	r2, [r3]
+  82:rtc.c         ****     WriteBuf[0] = 0;
+ 484              		.loc 1 82 0
+ 485 0010 1423     		movs	r3, #20
+ 486 0012 FB18     		adds	r3, r7, r3
+ 487 0014 0022     		movs	r2, #0
+ 488 0016 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 11
+
+
+  83:rtc.c         ****     S_DateTime chip_rtc;
+  84:rtc.c         ****    
+  85:rtc.c         ****     
+  86:rtc.c         ****     
+  87:rtc.c         ****     write_result = I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, (uint8 *) WriteBuf, 1, I2C_I2C_MODE_NO
+ 489              		.loc 1 87 0
+ 490 0018 1423     		movs	r3, #20
+ 491 001a F918     		adds	r1, r7, r3
+ 492 001c 0223     		movs	r3, #2
+ 493 001e 0122     		movs	r2, #1
+ 494 0020 6820     		movs	r0, #104
+ 495 0022 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+ 496 0026 0200     		movs	r2, r0
+ 497 0028 5A4B     		ldr	r3, .L20
+ 498 002a 1A60     		str	r2, [r3]
+  88:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_WR_CMPLT) == 0) {
+ 499              		.loc 1 88 0
+ 500 002c 03E0     		b	.L13
+ 501              	.L14:
+  89:rtc.c         ****         write_result = result;
+ 502              		.loc 1 89 0
+ 503 002e 5A4B     		ldr	r3, .L20+4
+ 504 0030 1A68     		ldr	r2, [r3]
+ 505 0032 584B     		ldr	r3, .L20
+ 506 0034 1A60     		str	r2, [r3]
+ 507              	.L13:
+  88:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_WR_CMPLT) == 0) {
+ 508              		.loc 1 88 0
+ 509 0036 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 510 003a 0200     		movs	r2, r0
+ 511 003c 564B     		ldr	r3, .L20+4
+ 512 003e 1A60     		str	r2, [r3]
+ 513 0040 554B     		ldr	r3, .L20+4
+ 514 0042 1B68     		ldr	r3, [r3]
+ 515 0044 0222     		movs	r2, #2
+ 516 0046 1340     		ands	r3, r2
+ 517 0048 F1D0     		beq	.L14
+  90:rtc.c         ****     }
+  91:rtc.c         ****     
+  92:rtc.c         ****     //CyDelay(10);
+  93:rtc.c         ****     
+  94:rtc.c         ****     read_result = I2C_I2CMasterReadBuf(I2C_RTC_SLAVE_ADDR, (uint8 *) &chip_rtc, sizeof( S_DateTime)
+ 518              		.loc 1 94 0
+ 519 004a 0C23     		movs	r3, #12
+ 520 004c F918     		adds	r1, r7, r3
+ 521 004e 0123     		movs	r3, #1
+ 522 0050 0722     		movs	r2, #7
+ 523 0052 6820     		movs	r0, #104
+ 524 0054 FFF7FEFF 		bl	I2C_I2CMasterReadBuf
+ 525 0058 0200     		movs	r2, r0
+ 526 005a 504B     		ldr	r3, .L20+8
+ 527 005c 1A60     		str	r2, [r3]
+  95:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_RD_CMPLT) == 0) {};
+ 528              		.loc 1 95 0
+ 529 005e C046     		nop
+ 530              	.L15:
+ 531              		.loc 1 95 0 is_stmt 0 discriminator 1
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 12
+
+
+ 532 0060 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 533 0064 0200     		movs	r2, r0
+ 534 0066 4C4B     		ldr	r3, .L20+4
+ 535 0068 1A60     		str	r2, [r3]
+ 536 006a 4B4B     		ldr	r3, .L20+4
+ 537 006c 1B68     		ldr	r3, [r3]
+ 538 006e 0122     		movs	r2, #1
+ 539 0070 1340     		ands	r3, r2
+ 540 0072 F5D0     		beq	.L15
+  96:rtc.c         ****     
+  97:rtc.c         ****     
+  98:rtc.c         ****     // convert chip date to real rtc info
+  99:rtc.c         ****     rtc->seconds = ((chip_rtc.seconds >> 4) * 10) + (chip_rtc.seconds & 0x0F);
+ 541              		.loc 1 99 0 is_stmt 1
+ 542 0074 0C23     		movs	r3, #12
+ 543 0076 FB18     		adds	r3, r7, r3
+ 544 0078 1B78     		ldrb	r3, [r3]
+ 545 007a 1B09     		lsrs	r3, r3, #4
+ 546 007c DBB2     		uxtb	r3, r3
+ 547 007e 1A1C     		adds	r2, r3, #0
+ 548 0080 9200     		lsls	r2, r2, #2
+ 549 0082 D318     		adds	r3, r2, r3
+ 550 0084 DB18     		adds	r3, r3, r3
+ 551 0086 DAB2     		uxtb	r2, r3
+ 552 0088 0C23     		movs	r3, #12
+ 553 008a FB18     		adds	r3, r7, r3
+ 554 008c 1B78     		ldrb	r3, [r3]
+ 555 008e 0F21     		movs	r1, #15
+ 556 0090 0B40     		ands	r3, r1
+ 557 0092 DBB2     		uxtb	r3, r3
+ 558 0094 D318     		adds	r3, r2, r3
+ 559 0096 DAB2     		uxtb	r2, r3
+ 560 0098 7B68     		ldr	r3, [r7, #4]
+ 561 009a 1A70     		strb	r2, [r3]
+ 100:rtc.c         ****     rtc->minutes =  ((chip_rtc.minutes >> 4) * 10) + (chip_rtc.minutes & 0x0F);
+ 562              		.loc 1 100 0
+ 563 009c 0C23     		movs	r3, #12
+ 564 009e FB18     		adds	r3, r7, r3
+ 565 00a0 5B78     		ldrb	r3, [r3, #1]
+ 566 00a2 1B09     		lsrs	r3, r3, #4
+ 567 00a4 DBB2     		uxtb	r3, r3
+ 568 00a6 1A1C     		adds	r2, r3, #0
+ 569 00a8 9200     		lsls	r2, r2, #2
+ 570 00aa D318     		adds	r3, r2, r3
+ 571 00ac DB18     		adds	r3, r3, r3
+ 572 00ae DAB2     		uxtb	r2, r3
+ 573 00b0 0C23     		movs	r3, #12
+ 574 00b2 FB18     		adds	r3, r7, r3
+ 575 00b4 5B78     		ldrb	r3, [r3, #1]
+ 576 00b6 0F21     		movs	r1, #15
+ 577 00b8 0B40     		ands	r3, r1
+ 578 00ba DBB2     		uxtb	r3, r3
+ 579 00bc D318     		adds	r3, r2, r3
+ 580 00be DAB2     		uxtb	r2, r3
+ 581 00c0 7B68     		ldr	r3, [r7, #4]
+ 582 00c2 5A70     		strb	r2, [r3, #1]
+ 101:rtc.c         ****     //fix hour check with AM/PM vs 24hr bit
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 13
+
+
+ 102:rtc.c         ****     // rtc->hours = (((chip_rtc.hours & 0x1F) >> 4) * 10) + (chip_rtc.hours & 0x0F); (Wrong!!)_
+ 103:rtc.c         ****     
+ 104:rtc.c         **** 
+ 105:rtc.c         ****     // TODO check 12/24n bit (0x40)
+ 106:rtc.c         ****     if (chip_rtc.hours & 0x20) rtc->hours = 20; // 20hr Flag?
+ 583              		.loc 1 106 0
+ 584 00c4 0C23     		movs	r3, #12
+ 585 00c6 FB18     		adds	r3, r7, r3
+ 586 00c8 9B78     		ldrb	r3, [r3, #2]
+ 587 00ca 1A00     		movs	r2, r3
+ 588 00cc 2023     		movs	r3, #32
+ 589 00ce 1340     		ands	r3, r2
+ 590 00d0 03D0     		beq	.L16
+ 591              		.loc 1 106 0 is_stmt 0 discriminator 1
+ 592 00d2 7B68     		ldr	r3, [r7, #4]
+ 593 00d4 1422     		movs	r2, #20
+ 594 00d6 9A70     		strb	r2, [r3, #2]
+ 595 00d8 0DE0     		b	.L17
+ 596              	.L16:
+ 107:rtc.c         ****     else if (chip_rtc.hours & 0x10) rtc->hours = 10;  // 10hr Flag ?
+ 597              		.loc 1 107 0 is_stmt 1
+ 598 00da 0C23     		movs	r3, #12
+ 599 00dc FB18     		adds	r3, r7, r3
+ 600 00de 9B78     		ldrb	r3, [r3, #2]
+ 601 00e0 1A00     		movs	r2, r3
+ 602 00e2 1023     		movs	r3, #16
+ 603 00e4 1340     		ands	r3, r2
+ 604 00e6 03D0     		beq	.L18
+ 605              		.loc 1 107 0 is_stmt 0 discriminator 1
+ 606 00e8 7B68     		ldr	r3, [r7, #4]
+ 607 00ea 0A22     		movs	r2, #10
+ 608 00ec 9A70     		strb	r2, [r3, #2]
+ 609 00ee 02E0     		b	.L17
+ 610              	.L18:
+ 108:rtc.c         ****     else rtc->hours = 0; // no flags.
+ 611              		.loc 1 108 0 is_stmt 1
+ 612 00f0 7B68     		ldr	r3, [r7, #4]
+ 613 00f2 0022     		movs	r2, #0
+ 614 00f4 9A70     		strb	r2, [r3, #2]
+ 615              	.L17:
+ 109:rtc.c         **** 
+ 110:rtc.c         ****     rtc->hours +=  (chip_rtc.hours & 0x0F);
+ 616              		.loc 1 110 0
+ 617 00f6 7B68     		ldr	r3, [r7, #4]
+ 618 00f8 9A78     		ldrb	r2, [r3, #2]
+ 619 00fa 0C23     		movs	r3, #12
+ 620 00fc FB18     		adds	r3, r7, r3
+ 621 00fe 9B78     		ldrb	r3, [r3, #2]
+ 622 0100 0F21     		movs	r1, #15
+ 623 0102 0B40     		ands	r3, r1
+ 624 0104 DBB2     		uxtb	r3, r3
+ 625 0106 D318     		adds	r3, r2, r3
+ 626 0108 DAB2     		uxtb	r2, r3
+ 627 010a 7B68     		ldr	r3, [r7, #4]
+ 628 010c 9A70     		strb	r2, [r3, #2]
+ 111:rtc.c         **** 
+ 112:rtc.c         **** //     rtc->date = (((chip_rtc.date & 0x3F) >> 4) * 10) + (chip_rtc.date & 0x0F);
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 14
+
+
+ 113:rtc.c         ****     
+ 114:rtc.c         ****     rtc->day = ((chip_rtc.day >> 4) * 10) + (chip_rtc.day & 0x0F);
+ 629              		.loc 1 114 0
+ 630 010e 0C23     		movs	r3, #12
+ 631 0110 FB18     		adds	r3, r7, r3
+ 632 0112 1B79     		ldrb	r3, [r3, #4]
+ 633 0114 1B09     		lsrs	r3, r3, #4
+ 634 0116 DBB2     		uxtb	r3, r3
+ 635 0118 1A1C     		adds	r2, r3, #0
+ 636 011a 9200     		lsls	r2, r2, #2
+ 637 011c D318     		adds	r3, r2, r3
+ 638 011e DB18     		adds	r3, r3, r3
+ 639 0120 DAB2     		uxtb	r2, r3
+ 640 0122 0C23     		movs	r3, #12
+ 641 0124 FB18     		adds	r3, r7, r3
+ 642 0126 1B79     		ldrb	r3, [r3, #4]
+ 643 0128 0F21     		movs	r1, #15
+ 644 012a 0B40     		ands	r3, r1
+ 645 012c DBB2     		uxtb	r3, r3
+ 646 012e D318     		adds	r3, r2, r3
+ 647 0130 DAB2     		uxtb	r2, r3
+ 648 0132 7B68     		ldr	r3, [r7, #4]
+ 649 0134 1A71     		strb	r2, [r3, #4]
+ 115:rtc.c         ****     //if (chip_rtc.date & 0x30) rtc->date = 30;       // 30 day Flag?
+ 116:rtc.c         ****     //else if (chip_rtc.date & 0x20) rtc->date = 20;  // 20 day Flag?
+ 117:rtc.c         ****     //else if (chip_rtc.date & 0x10) rtc->date = 10;  // 10 day Flag ?
+ 118:rtc.c         ****     //else rtc->date = 0; // no flags.
+ 119:rtc.c         **** 
+ 120:rtc.c         ****     //rtc->date +=  (chip_rtc.date & 0x0F);    
+ 121:rtc.c         ****     
+ 122:rtc.c         ****     
+ 123:rtc.c         ****     //check century bit in month byte?
+ 124:rtc.c         ****     rtc->month = (((chip_rtc.month & 0x1F) >> 4) * 10) + (chip_rtc.month & 0x0F);
+ 650              		.loc 1 124 0
+ 651 0136 0C23     		movs	r3, #12
+ 652 0138 FB18     		adds	r3, r7, r3
+ 653 013a 5B79     		ldrb	r3, [r3, #5]
+ 654 013c 1B11     		asrs	r3, r3, #4
+ 655 013e DBB2     		uxtb	r3, r3
+ 656 0140 0122     		movs	r2, #1
+ 657 0142 1340     		ands	r3, r2
+ 658 0144 DBB2     		uxtb	r3, r3
+ 659 0146 1A1C     		adds	r2, r3, #0
+ 660 0148 9200     		lsls	r2, r2, #2
+ 661 014a D318     		adds	r3, r2, r3
+ 662 014c DB18     		adds	r3, r3, r3
+ 663 014e DAB2     		uxtb	r2, r3
+ 664 0150 0C23     		movs	r3, #12
+ 665 0152 FB18     		adds	r3, r7, r3
+ 666 0154 5B79     		ldrb	r3, [r3, #5]
+ 667 0156 0F21     		movs	r1, #15
+ 668 0158 0B40     		ands	r3, r1
+ 669 015a DBB2     		uxtb	r3, r3
+ 670 015c D318     		adds	r3, r2, r3
+ 671 015e DAB2     		uxtb	r2, r3
+ 672 0160 7B68     		ldr	r3, [r7, #4]
+ 673 0162 5A71     		strb	r2, [r3, #5]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 15
+
+
+ 125:rtc.c         ****     rtc->year = ((chip_rtc.year >> 4) * 10) + (chip_rtc.year & 0x0F); // + 2000;  // Chip isnt desi
+ 674              		.loc 1 125 0
+ 675 0164 0C23     		movs	r3, #12
+ 676 0166 FB18     		adds	r3, r7, r3
+ 677 0168 9B79     		ldrb	r3, [r3, #6]
+ 678 016a 1B09     		lsrs	r3, r3, #4
+ 679 016c DBB2     		uxtb	r3, r3
+ 680 016e 1A1C     		adds	r2, r3, #0
+ 681 0170 9200     		lsls	r2, r2, #2
+ 682 0172 D318     		adds	r3, r2, r3
+ 683 0174 DB18     		adds	r3, r3, r3
+ 684 0176 DAB2     		uxtb	r2, r3
+ 685 0178 0C23     		movs	r3, #12
+ 686 017a FB18     		adds	r3, r7, r3
+ 687 017c 9B79     		ldrb	r3, [r3, #6]
+ 688 017e 0F21     		movs	r1, #15
+ 689 0180 0B40     		ands	r3, r1
+ 690 0182 DBB2     		uxtb	r3, r3
+ 691 0184 D318     		adds	r3, r2, r3
+ 692 0186 DAB2     		uxtb	r2, r3
+ 693 0188 7B68     		ldr	r3, [r7, #4]
+ 694 018a 9A71     		strb	r2, [r3, #6]
+ 126:rtc.c         ****     
+ 127:rtc.c         ****     return;   
+ 695              		.loc 1 127 0
+ 696 018c C046     		nop
+ 128:rtc.c         ****     
+ 129:rtc.c         **** }
+ 697              		.loc 1 129 0
+ 698 018e BD46     		mov	sp, r7
+ 699 0190 06B0     		add	sp, sp, #24
+ 700              		@ sp needed
+ 701 0192 80BD     		pop	{r7, pc}
+ 702              	.L21:
+ 703              		.align	2
+ 704              	.L20:
+ 705 0194 00000000 		.word	write_result
+ 706 0198 00000000 		.word	result
+ 707 019c 00000000 		.word	read_result
+ 708              		.cfi_endproc
+ 709              	.LFE40:
+ 710              		.size	read_RTC, .-read_RTC
+ 711              		.section	.text.write_RTC,"ax",%progbits
+ 712              		.align	2
+ 713              		.global	write_RTC
+ 714              		.code	16
+ 715              		.thumb_func
+ 716              		.type	write_RTC, %function
+ 717              	write_RTC:
+ 718              	.LFB41:
+ 130:rtc.c         **** 
+ 131:rtc.c         **** 
+ 132:rtc.c         **** void write_RTC( S_DateTime *rtc) {
+ 719              		.loc 1 132 0
+ 720              		.cfi_startproc
+ 721              		@ args = 0, pretend = 0, frame = 32
+ 722              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 16
+
+
+ 723 0000 90B5     		push	{r4, r7, lr}
+ 724              		.cfi_def_cfa_offset 12
+ 725              		.cfi_offset 4, -12
+ 726              		.cfi_offset 7, -8
+ 727              		.cfi_offset 14, -4
+ 728 0002 89B0     		sub	sp, sp, #36
+ 729              		.cfi_def_cfa_offset 48
+ 730 0004 00AF     		add	r7, sp, #0
+ 731              		.cfi_def_cfa_register 7
+ 732 0006 7860     		str	r0, [r7, #4]
+ 133:rtc.c         ****     
+ 134:rtc.c         ****     uint8 WriteBuf[8] = {0};
+ 733              		.loc 1 134 0
+ 734 0008 1423     		movs	r3, #20
+ 735 000a FB18     		adds	r3, r7, r3
+ 736 000c 1800     		movs	r0, r3
+ 737 000e 0823     		movs	r3, #8
+ 738 0010 1A00     		movs	r2, r3
+ 739 0012 0021     		movs	r1, #0
+ 740 0014 FFF7FEFF 		bl	memset
+ 135:rtc.c         ****     WriteBuf[0] = 0;
+ 741              		.loc 1 135 0
+ 742 0018 1423     		movs	r3, #20
+ 743 001a FB18     		adds	r3, r7, r3
+ 744 001c 0022     		movs	r2, #0
+ 745 001e 1A70     		strb	r2, [r3]
+ 136:rtc.c         ****     
+ 137:rtc.c         ****     S_DateTime chip_rtc;
+ 138:rtc.c         ****     uint16 year, modulus;
+ 139:rtc.c         **** 
+ 140:rtc.c         ****     // convert real rtc info to Chip data
+ 141:rtc.c         ****     chip_rtc.seconds = ((uint8)(rtc->seconds / 10) << 4 )  | (rtc->seconds%10);
+ 746              		.loc 1 141 0
+ 747 0020 7B68     		ldr	r3, [r7, #4]
+ 748 0022 1B78     		ldrb	r3, [r3]
+ 749 0024 0A21     		movs	r1, #10
+ 750 0026 1800     		movs	r0, r3
+ 751 0028 FFF7FEFF 		bl	__aeabi_uidiv
+ 752 002c 0300     		movs	r3, r0
+ 753 002e DBB2     		uxtb	r3, r3
+ 754 0030 1B01     		lsls	r3, r3, #4
+ 755 0032 5CB2     		sxtb	r4, r3
+ 756 0034 7B68     		ldr	r3, [r7, #4]
+ 757 0036 1B78     		ldrb	r3, [r3]
+ 758 0038 0A21     		movs	r1, #10
+ 759 003a 1800     		movs	r0, r3
+ 760 003c FFF7FEFF 		bl	__aeabi_uidivmod
+ 761 0040 0B00     		movs	r3, r1
+ 762 0042 DBB2     		uxtb	r3, r3
+ 763 0044 5BB2     		sxtb	r3, r3
+ 764 0046 2343     		orrs	r3, r4
+ 765 0048 5BB2     		sxtb	r3, r3
+ 766 004a DAB2     		uxtb	r2, r3
+ 767 004c 0C23     		movs	r3, #12
+ 768 004e FB18     		adds	r3, r7, r3
+ 769 0050 1A70     		strb	r2, [r3]
+ 142:rtc.c         ****     chip_rtc.minutes = ((uint8)(rtc->minutes / 10) << 4 )  | (rtc->minutes%10);
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 17
+
+
+ 770              		.loc 1 142 0
+ 771 0052 7B68     		ldr	r3, [r7, #4]
+ 772 0054 5B78     		ldrb	r3, [r3, #1]
+ 773 0056 0A21     		movs	r1, #10
+ 774 0058 1800     		movs	r0, r3
+ 775 005a FFF7FEFF 		bl	__aeabi_uidiv
+ 776 005e 0300     		movs	r3, r0
+ 777 0060 DBB2     		uxtb	r3, r3
+ 778 0062 1B01     		lsls	r3, r3, #4
+ 779 0064 5CB2     		sxtb	r4, r3
+ 780 0066 7B68     		ldr	r3, [r7, #4]
+ 781 0068 5B78     		ldrb	r3, [r3, #1]
+ 782 006a 0A21     		movs	r1, #10
+ 783 006c 1800     		movs	r0, r3
+ 784 006e FFF7FEFF 		bl	__aeabi_uidivmod
+ 785 0072 0B00     		movs	r3, r1
+ 786 0074 DBB2     		uxtb	r3, r3
+ 787 0076 5BB2     		sxtb	r3, r3
+ 788 0078 2343     		orrs	r3, r4
+ 789 007a 5BB2     		sxtb	r3, r3
+ 790 007c DAB2     		uxtb	r2, r3
+ 791 007e 0C23     		movs	r3, #12
+ 792 0080 FB18     		adds	r3, r7, r3
+ 793 0082 5A70     		strb	r2, [r3, #1]
+ 143:rtc.c         ****    // chip_rtc.hours = ((uint8)(rtc->hours / 10) << 4 )  | (rtc->hours%10);
+ 144:rtc.c         ****     chip_rtc.day = 7;
+ 794              		.loc 1 144 0
+ 795 0084 0C23     		movs	r3, #12
+ 796 0086 FB18     		adds	r3, r7, r3
+ 797 0088 0722     		movs	r2, #7
+ 798 008a 1A71     		strb	r2, [r3, #4]
+ 145:rtc.c         **** 
+ 146:rtc.c         ****     if (rtc->hours >= 20) {
+ 799              		.loc 1 146 0
+ 800 008c 7B68     		ldr	r3, [r7, #4]
+ 801 008e 9B78     		ldrb	r3, [r3, #2]
+ 802 0090 132B     		cmp	r3, #19
+ 803 0092 0AD9     		bls	.L23
+ 147:rtc.c         ****         chip_rtc.hours = 0x20; // set 20hr Flag?
+ 804              		.loc 1 147 0
+ 805 0094 0C23     		movs	r3, #12
+ 806 0096 FB18     		adds	r3, r7, r3
+ 807 0098 2022     		movs	r2, #32
+ 808 009a 9A70     		strb	r2, [r3, #2]
+ 148:rtc.c         ****         rtc->hours -= 20;
+ 809              		.loc 1 148 0
+ 810 009c 7B68     		ldr	r3, [r7, #4]
+ 811 009e 9B78     		ldrb	r3, [r3, #2]
+ 812 00a0 143B     		subs	r3, r3, #20
+ 813 00a2 DAB2     		uxtb	r2, r3
+ 814 00a4 7B68     		ldr	r3, [r7, #4]
+ 815 00a6 9A70     		strb	r2, [r3, #2]
+ 816 00a8 12E0     		b	.L24
+ 817              	.L23:
+ 149:rtc.c         ****     } else if (rtc->hours >= 10) { 
+ 818              		.loc 1 149 0
+ 819 00aa 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 18
+
+
+ 820 00ac 9B78     		ldrb	r3, [r3, #2]
+ 821 00ae 092B     		cmp	r3, #9
+ 822 00b0 0AD9     		bls	.L25
+ 150:rtc.c         ****         chip_rtc.hours = 0x10;  // set 10hr Flag ?
+ 823              		.loc 1 150 0
+ 824 00b2 0C23     		movs	r3, #12
+ 825 00b4 FB18     		adds	r3, r7, r3
+ 826 00b6 1022     		movs	r2, #16
+ 827 00b8 9A70     		strb	r2, [r3, #2]
+ 151:rtc.c         ****         rtc->hours -= 10;   
+ 828              		.loc 1 151 0
+ 829 00ba 7B68     		ldr	r3, [r7, #4]
+ 830 00bc 9B78     		ldrb	r3, [r3, #2]
+ 831 00be 0A3B     		subs	r3, r3, #10
+ 832 00c0 DAB2     		uxtb	r2, r3
+ 833 00c2 7B68     		ldr	r3, [r7, #4]
+ 834 00c4 9A70     		strb	r2, [r3, #2]
+ 835 00c6 03E0     		b	.L24
+ 836              	.L25:
+ 152:rtc.c         ****     }
+ 153:rtc.c         ****     else chip_rtc.hours  = 0; // clear flags.
+ 837              		.loc 1 153 0
+ 838 00c8 0C23     		movs	r3, #12
+ 839 00ca FB18     		adds	r3, r7, r3
+ 840 00cc 0022     		movs	r2, #0
+ 841 00ce 9A70     		strb	r2, [r3, #2]
+ 842              	.L24:
+ 154:rtc.c         ****     
+ 155:rtc.c         ****     chip_rtc.hours |= rtc->hours;
+ 843              		.loc 1 155 0
+ 844 00d0 0C23     		movs	r3, #12
+ 845 00d2 FB18     		adds	r3, r7, r3
+ 846 00d4 9A78     		ldrb	r2, [r3, #2]
+ 847 00d6 7B68     		ldr	r3, [r7, #4]
+ 848 00d8 9B78     		ldrb	r3, [r3, #2]
+ 849 00da 1343     		orrs	r3, r2
+ 850 00dc DAB2     		uxtb	r2, r3
+ 851 00de 0C23     		movs	r3, #12
+ 852 00e0 FB18     		adds	r3, r7, r3
+ 853 00e2 9A70     		strb	r2, [r3, #2]
+ 156:rtc.c         ****     
+ 157:rtc.c         ****     
+ 158:rtc.c         ****        
+ 159:rtc.c         ****     chip_rtc.day = ((uint8)(rtc->day / 10) << 4 )  | (rtc->day % 10);
+ 854              		.loc 1 159 0
+ 855 00e4 7B68     		ldr	r3, [r7, #4]
+ 856 00e6 1B79     		ldrb	r3, [r3, #4]
+ 857 00e8 0A21     		movs	r1, #10
+ 858 00ea 1800     		movs	r0, r3
+ 859 00ec FFF7FEFF 		bl	__aeabi_uidiv
+ 860 00f0 0300     		movs	r3, r0
+ 861 00f2 DBB2     		uxtb	r3, r3
+ 862 00f4 1B01     		lsls	r3, r3, #4
+ 863 00f6 5CB2     		sxtb	r4, r3
+ 864 00f8 7B68     		ldr	r3, [r7, #4]
+ 865 00fa 1B79     		ldrb	r3, [r3, #4]
+ 866 00fc 0A21     		movs	r1, #10
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 19
+
+
+ 867 00fe 1800     		movs	r0, r3
+ 868 0100 FFF7FEFF 		bl	__aeabi_uidivmod
+ 869 0104 0B00     		movs	r3, r1
+ 870 0106 DBB2     		uxtb	r3, r3
+ 871 0108 5BB2     		sxtb	r3, r3
+ 872 010a 2343     		orrs	r3, r4
+ 873 010c 5BB2     		sxtb	r3, r3
+ 874 010e DAB2     		uxtb	r2, r3
+ 875 0110 0C23     		movs	r3, #12
+ 876 0112 FB18     		adds	r3, r7, r3
+ 877 0114 1A71     		strb	r2, [r3, #4]
+ 160:rtc.c         ****                
+ 161:rtc.c         **** //    if (rtc->date >  30) {             
+ 162:rtc.c         **** //            chip_rtc.date = 0x30; //  Set 30 day Flag
+ 163:rtc.c         **** //            rtc->date -= 30;
+ 164:rtc.c         **** //    }
+ 165:rtc.c         **** //    else if (rtc->date >  20) {             
+ 166:rtc.c         **** //            chip_rtc.date = 0x20; //  Set 20 day Flag
+ 167:rtc.c         **** //            rtc->date -= 20;
+ 168:rtc.c         **** //    }    
+ 169:rtc.c         **** //    else if (rtc->date >= 10) { 
+ 170:rtc.c         **** //        chip_rtc.date = 0x10;  // set 10 day Flag ?
+ 171:rtc.c         **** //        rtc->date -= 10;   
+ 172:rtc.c         **** //    }
+ 173:rtc.c         **** //    else chip_rtc.date  = 0; // clear flags.
+ 174:rtc.c         ****     
+ 175:rtc.c         **** //    chip_rtc.date |= rtc->date;
+ 176:rtc.c         ****         
+ 177:rtc.c         ****     
+ 178:rtc.c         ****     chip_rtc.month = rtc->month;
+ 878              		.loc 1 178 0
+ 879 0116 7B68     		ldr	r3, [r7, #4]
+ 880 0118 5A79     		ldrb	r2, [r3, #5]
+ 881 011a 0C23     		movs	r3, #12
+ 882 011c FB18     		adds	r3, r7, r3
+ 883 011e 5A71     		strb	r2, [r3, #5]
+ 179:rtc.c         ****  
+ 180:rtc.c         ****     year = rtc->year; // Chip isnt designed for Centuries..    
+ 884              		.loc 1 180 0
+ 885 0120 7B68     		ldr	r3, [r7, #4]
+ 886 0122 9A79     		ldrb	r2, [r3, #6]
+ 887 0124 1E23     		movs	r3, #30
+ 888 0126 FB18     		adds	r3, r7, r3
+ 889 0128 1A80     		strh	r2, [r3]
+ 181:rtc.c         ****     chip_rtc.year = ((uint8)(year / 10) << 4 )  | (year%10);
+ 890              		.loc 1 181 0
+ 891 012a 1E23     		movs	r3, #30
+ 892 012c FB18     		adds	r3, r7, r3
+ 893 012e 1B88     		ldrh	r3, [r3]
+ 894 0130 0A21     		movs	r1, #10
+ 895 0132 1800     		movs	r0, r3
+ 896 0134 FFF7FEFF 		bl	__aeabi_uidiv
+ 897 0138 0300     		movs	r3, r0
+ 898 013a 9BB2     		uxth	r3, r3
+ 899 013c DBB2     		uxtb	r3, r3
+ 900 013e 1B01     		lsls	r3, r3, #4
+ 901 0140 5CB2     		sxtb	r4, r3
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 20
+
+
+ 902 0142 1E23     		movs	r3, #30
+ 903 0144 FB18     		adds	r3, r7, r3
+ 904 0146 1B88     		ldrh	r3, [r3]
+ 905 0148 0A21     		movs	r1, #10
+ 906 014a 1800     		movs	r0, r3
+ 907 014c FFF7FEFF 		bl	__aeabi_uidivmod
+ 908 0150 0B00     		movs	r3, r1
+ 909 0152 9BB2     		uxth	r3, r3
+ 910 0154 5BB2     		sxtb	r3, r3
+ 911 0156 2343     		orrs	r3, r4
+ 912 0158 5BB2     		sxtb	r3, r3
+ 913 015a DAB2     		uxtb	r2, r3
+ 914 015c 0C23     		movs	r3, #12
+ 915 015e FB18     		adds	r3, r7, r3
+ 916 0160 9A71     		strb	r2, [r3, #6]
+ 182:rtc.c         ****     
+ 183:rtc.c         ****     // copy buffer 
+ 184:rtc.c         ****     
+ 185:rtc.c         ****     memcpy(&WriteBuf[1],&chip_rtc, sizeof(S_DateTime));
+ 917              		.loc 1 185 0
+ 918 0162 1423     		movs	r3, #20
+ 919 0164 FB18     		adds	r3, r7, r3
+ 920 0166 0122     		movs	r2, #1
+ 921 0168 0C21     		movs	r1, #12
+ 922 016a 7918     		adds	r1, r7, r1
+ 923 016c 9B18     		adds	r3, r3, r2
+ 924 016e 0722     		movs	r2, #7
+ 925 0170 1800     		movs	r0, r3
+ 926 0172 FFF7FEFF 		bl	memcpy
+ 186:rtc.c         ****     
+ 187:rtc.c         ****     
+ 188:rtc.c         ****    // I2CM_I2CMasterWriteBuf(DS3231MZ_ADDR, (uint8 *) WriteBuf, 0, I2CM_I2C_MODE_COMPLETE_XFER);  /
+ 189:rtc.c         ****    // while((I2CM_I2CMasterStatus() & I2CM_I2C_MSTAT_WR_CMPLT) == 0) {};
+ 190:rtc.c         **** 
+ 191:rtc.c         ****     //CyDelay(10);
+ 192:rtc.c         ****     
+ 193:rtc.c         ****     I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, (uint8 *) &WriteBuf[0],  sizeof(S_DateTime)+1 , I2C_I
+ 927              		.loc 1 193 0
+ 928 0176 1423     		movs	r3, #20
+ 929 0178 F918     		adds	r1, r7, r3
+ 930 017a 0023     		movs	r3, #0
+ 931 017c 0822     		movs	r2, #8
+ 932 017e 6820     		movs	r0, #104
+ 933 0180 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+ 194:rtc.c         ****     //I2CM_I2CMasterWriteBuf(DS3231MZ_ADDR, (uint8 *) &chip_rtc,  sizeof(struct rtc_date_struct) , 
+ 195:rtc.c         **** //    I2CM_I2CMasterWriteBuf(DS3231MZ_ADDR, (uint8 *) &chip_rtc,  sizeof(struct ds3231mz_date_struc
+ 196:rtc.c         ****     while((I2C_I2CMasterStatus() & I2C_I2C_MSTAT_WR_CMPLT) == 0) {};
+ 934              		.loc 1 196 0
+ 935 0184 C046     		nop
+ 936              	.L26:
+ 937              		.loc 1 196 0 is_stmt 0 discriminator 1
+ 938 0186 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 939 018a 0200     		movs	r2, r0
+ 940 018c 0223     		movs	r3, #2
+ 941 018e 1340     		ands	r3, r2
+ 942 0190 F9D0     		beq	.L26
+ 197:rtc.c         ****     
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 21
+
+
+ 198:rtc.c         ****     return;   
+ 943              		.loc 1 198 0 is_stmt 1
+ 944 0192 C046     		nop
+ 199:rtc.c         ****     
+ 200:rtc.c         **** }
+ 945              		.loc 1 200 0
+ 946 0194 BD46     		mov	sp, r7
+ 947 0196 09B0     		add	sp, sp, #36
+ 948              		@ sp needed
+ 949 0198 90BD     		pop	{r4, r7, pc}
+ 950              		.cfi_endproc
+ 951              	.LFE41:
+ 952              		.size	write_RTC, .-write_RTC
+ 953 019a C046     		.section	.text.read_RTCReg,"ax",%progbits
+ 954              		.align	2
+ 955              		.global	read_RTCReg
+ 956              		.code	16
+ 957              		.thumb_func
+ 958              		.type	read_RTCReg, %function
+ 959              	read_RTCReg:
+ 960              	.LFB42:
+ 201:rtc.c         **** 
+ 202:rtc.c         **** 
+ 203:rtc.c         **** uint8_t read_RTCReg( uint8_t reg){
+ 961              		.loc 1 203 0
+ 962              		.cfi_startproc
+ 963              		@ args = 0, pretend = 0, frame = 16
+ 964              		@ frame_needed = 1, uses_anonymous_args = 0
+ 965 0000 80B5     		push	{r7, lr}
+ 966              		.cfi_def_cfa_offset 8
+ 967              		.cfi_offset 7, -8
+ 968              		.cfi_offset 14, -4
+ 969 0002 84B0     		sub	sp, sp, #16
+ 970              		.cfi_def_cfa_offset 24
+ 971 0004 00AF     		add	r7, sp, #0
+ 972              		.cfi_def_cfa_register 7
+ 973 0006 0200     		movs	r2, r0
+ 974 0008 FB1D     		adds	r3, r7, #7
+ 975 000a 1A70     		strb	r2, [r3]
+ 204:rtc.c         ****     //uint8_t reg = 0x0E;
+ 205:rtc.c         ****     uint8_t data;
+ 206:rtc.c         ****     write_result = I2C_I2CMasterWriteBuf(I2C_RTC_SLAVE_ADDR, (uint8 *) &reg, 1, I2C_I2C_MODE_NO_STO
+ 976              		.loc 1 206 0
+ 977 000c F91D     		adds	r1, r7, #7
+ 978 000e 0223     		movs	r3, #2
+ 979 0010 0122     		movs	r2, #1
+ 980 0012 6820     		movs	r0, #104
+ 981 0014 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+ 982 0018 0200     		movs	r2, r0
+ 983 001a 164B     		ldr	r3, .L33
+ 984 001c 1A60     		str	r2, [r3]
+ 207:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_WR_CMPLT) == 0) {
+ 985              		.loc 1 207 0
+ 986 001e 03E0     		b	.L29
+ 987              	.L30:
+ 208:rtc.c         ****         write_result = result;
+ 988              		.loc 1 208 0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 22
+
+
+ 989 0020 154B     		ldr	r3, .L33+4
+ 990 0022 1A68     		ldr	r2, [r3]
+ 991 0024 134B     		ldr	r3, .L33
+ 992 0026 1A60     		str	r2, [r3]
+ 993              	.L29:
+ 207:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_WR_CMPLT) == 0) {
+ 994              		.loc 1 207 0
+ 995 0028 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 996 002c 0200     		movs	r2, r0
+ 997 002e 124B     		ldr	r3, .L33+4
+ 998 0030 1A60     		str	r2, [r3]
+ 999 0032 114B     		ldr	r3, .L33+4
+ 1000 0034 1B68     		ldr	r3, [r3]
+ 1001 0036 0222     		movs	r2, #2
+ 1002 0038 1340     		ands	r3, r2
+ 1003 003a F1D0     		beq	.L30
+ 209:rtc.c         ****     }
+ 210:rtc.c         ****     
+ 211:rtc.c         ****     read_result = I2C_I2CMasterReadBuf(I2C_RTC_SLAVE_ADDR, (uint8 *) &data, 1 , I2C_I2C_MODE_REPEAT
+ 1004              		.loc 1 211 0
+ 1005 003c 0F23     		movs	r3, #15
+ 1006 003e F918     		adds	r1, r7, r3
+ 1007 0040 0123     		movs	r3, #1
+ 1008 0042 0122     		movs	r2, #1
+ 1009 0044 6820     		movs	r0, #104
+ 1010 0046 FFF7FEFF 		bl	I2C_I2CMasterReadBuf
+ 1011 004a 0200     		movs	r2, r0
+ 1012 004c 0B4B     		ldr	r3, .L33+8
+ 1013 004e 1A60     		str	r2, [r3]
+ 212:rtc.c         ****     while(((result = I2C_I2CMasterStatus()) & I2C_I2C_MSTAT_RD_CMPLT) == 0) {};
+ 1014              		.loc 1 212 0
+ 1015 0050 C046     		nop
+ 1016              	.L31:
+ 1017              		.loc 1 212 0 is_stmt 0 discriminator 1
+ 1018 0052 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 1019 0056 0200     		movs	r2, r0
+ 1020 0058 074B     		ldr	r3, .L33+4
+ 1021 005a 1A60     		str	r2, [r3]
+ 1022 005c 064B     		ldr	r3, .L33+4
+ 1023 005e 1B68     		ldr	r3, [r3]
+ 1024 0060 0122     		movs	r2, #1
+ 1025 0062 1340     		ands	r3, r2
+ 1026 0064 F5D0     		beq	.L31
+ 213:rtc.c         ****     
+ 214:rtc.c         ****     return data;
+ 1027              		.loc 1 214 0 is_stmt 1
+ 1028 0066 0F23     		movs	r3, #15
+ 1029 0068 FB18     		adds	r3, r7, r3
+ 1030 006a 1B78     		ldrb	r3, [r3]
+ 215:rtc.c         **** }
+ 1031              		.loc 1 215 0
+ 1032 006c 1800     		movs	r0, r3
+ 1033 006e BD46     		mov	sp, r7
+ 1034 0070 04B0     		add	sp, sp, #16
+ 1035              		@ sp needed
+ 1036 0072 80BD     		pop	{r7, pc}
+ 1037              	.L34:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 23
+
+
+ 1038              		.align	2
+ 1039              	.L33:
+ 1040 0074 00000000 		.word	write_result
+ 1041 0078 00000000 		.word	result
+ 1042 007c 00000000 		.word	read_result
+ 1043              		.cfi_endproc
+ 1044              	.LFE42:
+ 1045              		.size	read_RTCReg, .-read_RTCReg
+ 1046              		.text
+ 1047              	.Letext0:
+ 1048              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1049              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1050              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 1051              		.file 5 "Generated_Source\\PSoC4/blue_Stack.h"
+ 1052              		.file 6 "Generated_Source\\PSoC4/blue_dis.h"
+ 1053              		.file 7 "rtc.h"
+ 1054              		.section	.debug_info,"",%progbits
+ 1055              	.Ldebug_info0:
+ 1056 0000 96050000 		.4byte	0x596
+ 1057 0004 0400     		.2byte	0x4
+ 1058 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1059 000a 04       		.byte	0x4
+ 1060 000b 01       		.uleb128 0x1
+ 1061 000c C4050000 		.4byte	.LASF123
+ 1062 0010 0C       		.byte	0xc
+ 1063 0011 8F080000 		.4byte	.LASF124
+ 1064 0015 080B0000 		.4byte	.LASF125
+ 1065 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1066 001d 00000000 		.4byte	0
+ 1067 0021 00000000 		.4byte	.Ldebug_line0
+ 1068 0025 02       		.uleb128 0x2
+ 1069 0026 01       		.byte	0x1
+ 1070 0027 06       		.byte	0x6
+ 1071 0028 01020000 		.4byte	.LASF0
+ 1072 002c 03       		.uleb128 0x3
+ 1073 002d F7000000 		.4byte	.LASF5
+ 1074 0031 02       		.byte	0x2
+ 1075 0032 1D       		.byte	0x1d
+ 1076 0033 37000000 		.4byte	0x37
+ 1077 0037 02       		.uleb128 0x2
+ 1078 0038 01       		.byte	0x1
+ 1079 0039 08       		.byte	0x8
+ 1080 003a C6080000 		.4byte	.LASF1
+ 1081 003e 02       		.uleb128 0x2
+ 1082 003f 02       		.byte	0x2
+ 1083 0040 05       		.byte	0x5
+ 1084 0041 F2080000 		.4byte	.LASF2
+ 1085 0045 02       		.uleb128 0x2
+ 1086 0046 02       		.byte	0x2
+ 1087 0047 07       		.byte	0x7
+ 1088 0048 CF040000 		.4byte	.LASF3
+ 1089 004c 02       		.uleb128 0x2
+ 1090 004d 04       		.byte	0x4
+ 1091 004e 05       		.byte	0x5
+ 1092 004f 1F010000 		.4byte	.LASF4
+ 1093 0053 03       		.uleb128 0x3
+ 1094 0054 65030000 		.4byte	.LASF6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 24
+
+
+ 1095 0058 02       		.byte	0x2
+ 1096 0059 41       		.byte	0x41
+ 1097 005a 5E000000 		.4byte	0x5e
+ 1098 005e 02       		.uleb128 0x2
+ 1099 005f 04       		.byte	0x4
+ 1100 0060 07       		.byte	0x7
+ 1101 0061 1B040000 		.4byte	.LASF7
+ 1102 0065 02       		.uleb128 0x2
+ 1103 0066 08       		.byte	0x8
+ 1104 0067 05       		.byte	0x5
+ 1105 0068 F3010000 		.4byte	.LASF8
+ 1106 006c 02       		.uleb128 0x2
+ 1107 006d 08       		.byte	0x8
+ 1108 006e 07       		.byte	0x7
+ 1109 006f 28010000 		.4byte	.LASF9
+ 1110 0073 04       		.uleb128 0x4
+ 1111 0074 04       		.byte	0x4
+ 1112 0075 05       		.byte	0x5
+ 1113 0076 696E7400 		.ascii	"int\000"
+ 1114 007a 02       		.uleb128 0x2
+ 1115 007b 04       		.byte	0x4
+ 1116 007c 07       		.byte	0x7
+ 1117 007d EF030000 		.4byte	.LASF10
+ 1118 0081 03       		.uleb128 0x3
+ 1119 0082 4D0B0000 		.4byte	.LASF11
+ 1120 0086 03       		.byte	0x3
+ 1121 0087 18       		.byte	0x18
+ 1122 0088 2C000000 		.4byte	0x2c
+ 1123 008c 03       		.uleb128 0x3
+ 1124 008d FF0A0000 		.4byte	.LASF12
+ 1125 0091 03       		.byte	0x3
+ 1126 0092 30       		.byte	0x30
+ 1127 0093 53000000 		.4byte	0x53
+ 1128 0097 05       		.uleb128 0x5
+ 1129 0098 C4040000 		.4byte	.LASF13
+ 1130 009c 04       		.byte	0x4
+ 1131 009d FC01     		.2byte	0x1fc
+ 1132 009f 37000000 		.4byte	0x37
+ 1133 00a3 05       		.uleb128 0x5
+ 1134 00a4 3F000000 		.4byte	.LASF14
+ 1135 00a8 04       		.byte	0x4
+ 1136 00a9 FD01     		.2byte	0x1fd
+ 1137 00ab 45000000 		.4byte	0x45
+ 1138 00af 05       		.uleb128 0x5
+ 1139 00b0 39030000 		.4byte	.LASF15
+ 1140 00b4 04       		.byte	0x4
+ 1141 00b5 FE01     		.2byte	0x1fe
+ 1142 00b7 5E000000 		.4byte	0x5e
+ 1143 00bb 02       		.uleb128 0x2
+ 1144 00bc 04       		.byte	0x4
+ 1145 00bd 04       		.byte	0x4
+ 1146 00be 76080000 		.4byte	.LASF16
+ 1147 00c2 02       		.uleb128 0x2
+ 1148 00c3 08       		.byte	0x8
+ 1149 00c4 04       		.byte	0x4
+ 1150 00c5 12030000 		.4byte	.LASF17
+ 1151 00c9 02       		.uleb128 0x2
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 25
+
+
+ 1152 00ca 01       		.byte	0x1
+ 1153 00cb 08       		.byte	0x8
+ 1154 00cc 0B0A0000 		.4byte	.LASF18
+ 1155 00d0 02       		.uleb128 0x2
+ 1156 00d1 08       		.byte	0x8
+ 1157 00d2 04       		.byte	0x4
+ 1158 00d3 D0090000 		.4byte	.LASF19
+ 1159 00d7 02       		.uleb128 0x2
+ 1160 00d8 04       		.byte	0x4
+ 1161 00d9 07       		.byte	0x7
+ 1162 00da 52070000 		.4byte	.LASF20
+ 1163 00de 06       		.uleb128 0x6
+ 1164 00df 01       		.byte	0x1
+ 1165 00e0 37000000 		.4byte	0x37
+ 1166 00e4 05       		.byte	0x5
+ 1167 00e5 3501     		.2byte	0x135
+ 1168 00e7 9C020000 		.4byte	0x29c
+ 1169 00eb 07       		.uleb128 0x7
+ 1170 00ec E2040000 		.4byte	.LASF21
+ 1171 00f0 00       		.byte	0
+ 1172 00f1 07       		.uleb128 0x7
+ 1173 00f2 0D020000 		.4byte	.LASF22
+ 1174 00f6 01       		.byte	0x1
+ 1175 00f7 07       		.uleb128 0x7
+ 1176 00f8 0D010000 		.4byte	.LASF23
+ 1177 00fc 02       		.byte	0x2
+ 1178 00fd 07       		.uleb128 0x7
+ 1179 00fe E60A0000 		.4byte	.LASF24
+ 1180 0102 03       		.byte	0x3
+ 1181 0103 07       		.uleb128 0x7
+ 1182 0104 48010000 		.4byte	.LASF25
+ 1183 0108 04       		.byte	0x4
+ 1184 0109 07       		.uleb128 0x7
+ 1185 010a 23000000 		.4byte	.LASF26
+ 1186 010e 05       		.byte	0x5
+ 1187 010f 07       		.uleb128 0x7
+ 1188 0110 17050000 		.4byte	.LASF27
+ 1189 0114 06       		.byte	0x6
+ 1190 0115 07       		.uleb128 0x7
+ 1191 0116 99060000 		.4byte	.LASF28
+ 1192 011a 20       		.byte	0x20
+ 1193 011b 07       		.uleb128 0x7
+ 1194 011c 3F020000 		.4byte	.LASF29
+ 1195 0120 21       		.byte	0x21
+ 1196 0121 07       		.uleb128 0x7
+ 1197 0122 4F050000 		.4byte	.LASF30
+ 1198 0126 22       		.byte	0x22
+ 1199 0127 07       		.uleb128 0x7
+ 1200 0128 C00A0000 		.4byte	.LASF31
+ 1201 012c 23       		.byte	0x23
+ 1202 012d 07       		.uleb128 0x7
+ 1203 012e E9070000 		.4byte	.LASF32
+ 1204 0132 24       		.byte	0x24
+ 1205 0133 07       		.uleb128 0x7
+ 1206 0134 5B070000 		.4byte	.LASF33
+ 1207 0138 25       		.byte	0x25
+ 1208 0139 07       		.uleb128 0x7
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 26
+
+
+ 1209 013a A5020000 		.4byte	.LASF34
+ 1210 013e 26       		.byte	0x26
+ 1211 013f 07       		.uleb128 0x7
+ 1212 0140 73050000 		.4byte	.LASF35
+ 1213 0144 27       		.byte	0x27
+ 1214 0145 07       		.uleb128 0x7
+ 1215 0146 100A0000 		.4byte	.LASF36
+ 1216 014a 28       		.byte	0x28
+ 1217 014b 07       		.uleb128 0x7
+ 1218 014c AD010000 		.4byte	.LASF37
+ 1219 0150 29       		.byte	0x29
+ 1220 0151 07       		.uleb128 0x7
+ 1221 0152 65000000 		.4byte	.LASF38
+ 1222 0156 2A       		.byte	0x2a
+ 1223 0157 07       		.uleb128 0x7
+ 1224 0158 20020000 		.4byte	.LASF39
+ 1225 015c 2B       		.byte	0x2b
+ 1226 015d 07       		.uleb128 0x7
+ 1227 015e 7C0B0000 		.4byte	.LASF40
+ 1228 0162 2C       		.byte	0x2c
+ 1229 0163 07       		.uleb128 0x7
+ 1230 0164 CA010000 		.4byte	.LASF41
+ 1231 0168 2D       		.byte	0x2d
+ 1232 0169 07       		.uleb128 0x7
+ 1233 016a 5B0A0000 		.4byte	.LASF42
+ 1234 016e 2E       		.byte	0x2e
+ 1235 016f 07       		.uleb128 0x7
+ 1236 0170 AF000000 		.4byte	.LASF43
+ 1237 0174 2F       		.byte	0x2f
+ 1238 0175 07       		.uleb128 0x7
+ 1239 0176 B0070000 		.4byte	.LASF44
+ 1240 017a 30       		.byte	0x30
+ 1241 017b 07       		.uleb128 0x7
+ 1242 017c F10B0000 		.4byte	.LASF45
+ 1243 0180 31       		.byte	0x31
+ 1244 0181 07       		.uleb128 0x7
+ 1245 0182 8F070000 		.4byte	.LASF46
+ 1246 0186 32       		.byte	0x32
+ 1247 0187 07       		.uleb128 0x7
+ 1248 0188 A0090000 		.4byte	.LASF47
+ 1249 018c 33       		.byte	0x33
+ 1250 018d 07       		.uleb128 0x7
+ 1251 018e 2D040000 		.4byte	.LASF48
+ 1252 0192 34       		.byte	0x34
+ 1253 0193 07       		.uleb128 0x7
+ 1254 0194 AA030000 		.4byte	.LASF49
+ 1255 0198 35       		.byte	0x35
+ 1256 0199 07       		.uleb128 0x7
+ 1257 019a 92050000 		.4byte	.LASF50
+ 1258 019e 36       		.byte	0x36
+ 1259 019f 07       		.uleb128 0x7
+ 1260 01a0 D1060000 		.4byte	.LASF51
+ 1261 01a4 37       		.byte	0x37
+ 1262 01a5 07       		.uleb128 0x7
+ 1263 01a6 86090000 		.4byte	.LASF52
+ 1264 01aa 40       		.byte	0x40
+ 1265 01ab 07       		.uleb128 0x7
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 27
+
+
+ 1266 01ac 52060000 		.4byte	.LASF53
+ 1267 01b0 41       		.byte	0x41
+ 1268 01b1 07       		.uleb128 0x7
+ 1269 01b2 380C0000 		.4byte	.LASF54
+ 1270 01b6 42       		.byte	0x42
+ 1271 01b7 07       		.uleb128 0x7
+ 1272 01b8 D5020000 		.4byte	.LASF55
+ 1273 01bc 43       		.byte	0x43
+ 1274 01bd 07       		.uleb128 0x7
+ 1275 01be 5F040000 		.4byte	.LASF56
+ 1276 01c2 44       		.byte	0x44
+ 1277 01c3 07       		.uleb128 0x7
+ 1278 01c4 4F080000 		.4byte	.LASF57
+ 1279 01c8 45       		.byte	0x45
+ 1280 01c9 07       		.uleb128 0x7
+ 1281 01ca 24070000 		.4byte	.LASF58
+ 1282 01ce 46       		.byte	0x46
+ 1283 01cf 07       		.uleb128 0x7
+ 1284 01d0 F9040000 		.4byte	.LASF59
+ 1285 01d4 47       		.byte	0x47
+ 1286 01d5 07       		.uleb128 0x7
+ 1287 01d6 550B0000 		.4byte	.LASF60
+ 1288 01da 48       		.byte	0x48
+ 1289 01db 07       		.uleb128 0x7
+ 1290 01dc 56020000 		.4byte	.LASF61
+ 1291 01e0 49       		.byte	0x49
+ 1292 01e1 07       		.uleb128 0x7
+ 1293 01e2 A20A0000 		.4byte	.LASF62
+ 1294 01e6 4A       		.byte	0x4a
+ 1295 01e7 07       		.uleb128 0x7
+ 1296 01e8 D8000000 		.4byte	.LASF63
+ 1297 01ec 4B       		.byte	0x4b
+ 1298 01ed 07       		.uleb128 0x7
+ 1299 01ee 45040000 		.4byte	.LASF64
+ 1300 01f2 4C       		.byte	0x4c
+ 1301 01f3 07       		.uleb128 0x7
+ 1302 01f4 75070000 		.4byte	.LASF65
+ 1303 01f8 4D       		.byte	0x4d
+ 1304 01f9 07       		.uleb128 0x7
+ 1305 01fa 87020000 		.4byte	.LASF66
+ 1306 01fe 4E       		.byte	0x4e
+ 1307 01ff 07       		.uleb128 0x7
+ 1308 0200 46090000 		.4byte	.LASF67
+ 1309 0204 4F       		.byte	0x4f
+ 1310 0205 07       		.uleb128 0x7
+ 1311 0206 30050000 		.4byte	.LASF68
+ 1312 020a 50       		.byte	0x50
+ 1313 020b 07       		.uleb128 0x7
+ 1314 020c F3020000 		.4byte	.LASF69
+ 1315 0210 51       		.byte	0x51
+ 1316 0211 07       		.uleb128 0x7
+ 1317 0212 05080000 		.4byte	.LASF70
+ 1318 0216 52       		.byte	0x52
+ 1319 0217 07       		.uleb128 0x7
+ 1320 0218 FC080000 		.4byte	.LASF71
+ 1321 021c 53       		.byte	0x53
+ 1322 021d 07       		.uleb128 0x7
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 28
+
+
+ 1323 021e 65090000 		.4byte	.LASF72
+ 1324 0222 54       		.byte	0x54
+ 1325 0223 07       		.uleb128 0x7
+ 1326 0224 7D040000 		.4byte	.LASF73
+ 1327 0228 55       		.byte	0x55
+ 1328 0229 07       		.uleb128 0x7
+ 1329 022a C7030000 		.4byte	.LASF74
+ 1330 022e 56       		.byte	0x56
+ 1331 022f 07       		.uleb128 0x7
+ 1332 0230 320A0000 		.4byte	.LASF75
+ 1333 0234 57       		.byte	0x57
+ 1334 0235 07       		.uleb128 0x7
+ 1335 0236 A1040000 		.4byte	.LASF76
+ 1336 023a 58       		.byte	0x58
+ 1337 023b 07       		.uleb128 0x7
+ 1338 023c 87010000 		.4byte	.LASF77
+ 1339 0240 70       		.byte	0x70
+ 1340 0241 07       		.uleb128 0x7
+ 1341 0242 C10B0000 		.4byte	.LASF78
+ 1342 0246 71       		.byte	0x71
+ 1343 0247 07       		.uleb128 0x7
+ 1344 0248 7D060000 		.4byte	.LASF79
+ 1345 024c 72       		.byte	0x72
+ 1346 024d 07       		.uleb128 0x7
+ 1347 024e 06070000 		.4byte	.LASF80
+ 1348 0252 73       		.byte	0x73
+ 1349 0253 07       		.uleb128 0x7
+ 1350 0254 31080000 		.4byte	.LASF81
+ 1351 0258 74       		.byte	0x74
+ 1352 0259 07       		.uleb128 0x7
+ 1353 025a A00B0000 		.4byte	.LASF82
+ 1354 025e 75       		.byte	0x75
+ 1355 025f 07       		.uleb128 0x7
+ 1356 0260 8E000000 		.4byte	.LASF83
+ 1357 0264 76       		.byte	0x76
+ 1358 0265 07       		.uleb128 0x7
+ 1359 0266 46000000 		.4byte	.LASF84
+ 1360 026a 77       		.byte	0x77
+ 1361 026b 07       		.uleb128 0x7
+ 1362 026c 00000000 		.4byte	.LASF85
+ 1363 0270 78       		.byte	0x78
+ 1364 0271 07       		.uleb128 0x7
+ 1365 0272 7F0A0000 		.4byte	.LASF86
+ 1366 0276 79       		.byte	0x79
+ 1367 0277 07       		.uleb128 0x7
+ 1368 0278 86030000 		.4byte	.LASF87
+ 1369 027c 7A       		.byte	0x7a
+ 1370 027d 07       		.uleb128 0x7
+ 1371 027e 69010000 		.4byte	.LASF88
+ 1372 0282 FA       		.byte	0xfa
+ 1373 0283 07       		.uleb128 0x7
+ 1374 0284 FC030000 		.4byte	.LASF89
+ 1375 0288 FB       		.byte	0xfb
+ 1376 0289 07       		.uleb128 0x7
+ 1377 028a 1D090000 		.4byte	.LASF90
+ 1378 028e FC       		.byte	0xfc
+ 1379 028f 07       		.uleb128 0x7
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 29
+
+
+ 1380 0290 DC090000 		.4byte	.LASF91
+ 1381 0294 FD       		.byte	0xfd
+ 1382 0295 07       		.uleb128 0x7
+ 1383 0296 57030000 		.4byte	.LASF92
+ 1384 029a FF       		.byte	0xff
+ 1385 029b 00       		.byte	0
+ 1386 029c 08       		.uleb128 0x8
+ 1387 029d 01       		.byte	0x1
+ 1388 029e 37000000 		.4byte	0x37
+ 1389 02a2 06       		.byte	0x6
+ 1390 02a3 22       		.byte	0x22
+ 1391 02a4 E5020000 		.4byte	0x2e5
+ 1392 02a8 07       		.uleb128 0x7
+ 1393 02a9 150C0000 		.4byte	.LASF93
+ 1394 02ad 00       		.byte	0
+ 1395 02ae 07       		.uleb128 0x7
+ 1396 02af F4090000 		.4byte	.LASF94
+ 1397 02b3 01       		.byte	0x1
+ 1398 02b4 07       		.uleb128 0x7
+ 1399 02b5 AE080000 		.4byte	.LASF95
+ 1400 02b9 02       		.byte	0x2
+ 1401 02ba 07       		.uleb128 0x7
+ 1402 02bb 40030000 		.4byte	.LASF96
+ 1403 02bf 03       		.byte	0x3
+ 1404 02c0 07       		.uleb128 0x7
+ 1405 02c1 19030000 		.4byte	.LASF97
+ 1406 02c5 04       		.byte	0x4
+ 1407 02c6 07       		.uleb128 0x7
+ 1408 02c7 2F090000 		.4byte	.LASF98
+ 1409 02cb 05       		.byte	0x5
+ 1410 02cc 07       		.uleb128 0x7
+ 1411 02cd BD060000 		.4byte	.LASF99
+ 1412 02d1 06       		.byte	0x6
+ 1413 02d2 07       		.uleb128 0x7
+ 1414 02d3 D1070000 		.4byte	.LASF100
+ 1415 02d7 07       		.byte	0x7
+ 1416 02d8 07       		.uleb128 0x7
+ 1417 02d9 B3050000 		.4byte	.LASF101
+ 1418 02dd 08       		.byte	0x8
+ 1419 02de 07       		.uleb128 0x7
+ 1420 02df D4080000 		.4byte	.LASF102
+ 1421 02e3 09       		.byte	0x9
+ 1422 02e4 00       		.byte	0
+ 1423 02e5 09       		.uleb128 0x9
+ 1424 02e6 8C000000 		.4byte	0x8c
+ 1425 02ea 0A       		.uleb128 0xa
+ 1426 02eb 07       		.byte	0x7
+ 1427 02ec 07       		.byte	0x7
+ 1428 02ed 0F       		.byte	0xf
+ 1429 02ee 47030000 		.4byte	0x347
+ 1430 02f2 0B       		.uleb128 0xb
+ 1431 02f3 95080000 		.4byte	.LASF103
+ 1432 02f7 07       		.byte	0x7
+ 1433 02f8 10       		.byte	0x10
+ 1434 02f9 81000000 		.4byte	0x81
+ 1435 02fd 00       		.byte	0
+ 1436 02fe 0B       		.uleb128 0xb
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 30
+
+
+ 1437 02ff 9D080000 		.4byte	.LASF104
+ 1438 0303 07       		.byte	0x7
+ 1439 0304 11       		.byte	0x11
+ 1440 0305 81000000 		.4byte	0x81
+ 1441 0309 01       		.byte	0x1
+ 1442 030a 0B       		.uleb128 0xb
+ 1443 030b 6D060000 		.4byte	.LASF105
+ 1444 030f 07       		.byte	0x7
+ 1445 0310 12       		.byte	0x12
+ 1446 0311 81000000 		.4byte	0x81
+ 1447 0315 02       		.byte	0x2
+ 1448 0316 0B       		.uleb128 0xb
+ 1449 0317 73060000 		.4byte	.LASF106
+ 1450 031b 07       		.byte	0x7
+ 1451 031c 13       		.byte	0x13
+ 1452 031d 81000000 		.4byte	0x81
+ 1453 0321 03       		.byte	0x3
+ 1454 0322 0C       		.uleb128 0xc
+ 1455 0323 64617900 		.ascii	"day\000"
+ 1456 0327 07       		.byte	0x7
+ 1457 0328 14       		.byte	0x14
+ 1458 0329 81000000 		.4byte	0x81
+ 1459 032d 04       		.byte	0x4
+ 1460 032e 0B       		.uleb128 0xb
+ 1461 032f E9030000 		.4byte	.LASF107
+ 1462 0333 07       		.byte	0x7
+ 1463 0334 15       		.byte	0x15
+ 1464 0335 81000000 		.4byte	0x81
+ 1465 0339 05       		.byte	0x5
+ 1466 033a 0B       		.uleb128 0xb
+ 1467 033b 82020000 		.4byte	.LASF108
+ 1468 033f 07       		.byte	0x7
+ 1469 0340 16       		.byte	0x16
+ 1470 0341 81000000 		.4byte	0x81
+ 1471 0345 06       		.byte	0x6
+ 1472 0346 00       		.byte	0
+ 1473 0347 03       		.uleb128 0x3
+ 1474 0348 26080000 		.4byte	.LASF109
+ 1475 034c 07       		.byte	0x7
+ 1476 034d 17       		.byte	0x17
+ 1477 034e EA020000 		.4byte	0x2ea
+ 1478 0352 0D       		.uleb128 0xd
+ 1479 0353 C7090000 		.4byte	.LASF110
+ 1480 0357 01       		.byte	0x1
+ 1481 0358 0F       		.byte	0xf
+ 1482 0359 81000000 		.4byte	0x81
+ 1483 035d 00000000 		.4byte	.LFB35
+ 1484 0361 40000000 		.4byte	.LFE35-.LFB35
+ 1485 0365 01       		.uleb128 0x1
+ 1486 0366 9C       		.byte	0x9c
+ 1487 0367 7A030000 		.4byte	0x37a
+ 1488 036b 0E       		.uleb128 0xe
+ 1489 036c 76616C00 		.ascii	"val\000"
+ 1490 0370 01       		.byte	0x1
+ 1491 0371 0F       		.byte	0xf
+ 1492 0372 81000000 		.4byte	0x81
+ 1493 0376 02       		.uleb128 0x2
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 31
+
+
+ 1494 0377 91       		.byte	0x91
+ 1495 0378 6F       		.sleb128 -17
+ 1496 0379 00       		.byte	0
+ 1497 037a 0F       		.uleb128 0xf
+ 1498 037b A5080000 		.4byte	.LASF111
+ 1499 037f 01       		.byte	0x1
+ 1500 0380 14       		.byte	0x14
+ 1501 0381 81000000 		.4byte	0x81
+ 1502 0385 00000000 		.4byte	.LFB36
+ 1503 0389 34000000 		.4byte	.LFE36-.LFB36
+ 1504 038d 01       		.uleb128 0x1
+ 1505 038e 9C       		.byte	0x9c
+ 1506 038f A2030000 		.4byte	0x3a2
+ 1507 0393 0E       		.uleb128 0xe
+ 1508 0394 76616C00 		.ascii	"val\000"
+ 1509 0398 01       		.byte	0x1
+ 1510 0399 14       		.byte	0x14
+ 1511 039a 81000000 		.4byte	0x81
+ 1512 039e 02       		.uleb128 0x2
+ 1513 039f 91       		.byte	0x91
+ 1514 03a0 77       		.sleb128 -9
+ 1515 03a1 00       		.byte	0
+ 1516 03a2 10       		.uleb128 0x10
+ 1517 03a3 70030000 		.4byte	.LASF112
+ 1518 03a7 01       		.byte	0x1
+ 1519 03a8 18       		.byte	0x18
+ 1520 03a9 00000000 		.4byte	.LFB37
+ 1521 03ad 34000000 		.4byte	.LFE37-.LFB37
+ 1522 03b1 01       		.uleb128 0x1
+ 1523 03b2 9C       		.byte	0x9c
+ 1524 03b3 C6030000 		.4byte	0x3c6
+ 1525 03b7 11       		.uleb128 0x11
+ 1526 03b8 CA040000 		.4byte	.LASF114
+ 1527 03bc 01       		.byte	0x1
+ 1528 03bd 19       		.byte	0x19
+ 1529 03be C6030000 		.4byte	0x3c6
+ 1530 03c2 02       		.uleb128 0x2
+ 1531 03c3 91       		.byte	0x91
+ 1532 03c4 74       		.sleb128 -12
+ 1533 03c5 00       		.byte	0
+ 1534 03c6 12       		.uleb128 0x12
+ 1535 03c7 81000000 		.4byte	0x81
+ 1536 03cb D6030000 		.4byte	0x3d6
+ 1537 03cf 13       		.uleb128 0x13
+ 1538 03d0 D7000000 		.4byte	0xd7
+ 1539 03d4 01       		.byte	0x1
+ 1540 03d5 00       		.byte	0
+ 1541 03d6 10       		.uleb128 0x10
+ 1542 03d7 6F020000 		.4byte	.LASF113
+ 1543 03db 01       		.byte	0x1
+ 1544 03dc 21       		.byte	0x21
+ 1545 03dd 00000000 		.4byte	.LFB38
+ 1546 03e1 C0000000 		.4byte	.LFE38-.LFB38
+ 1547 03e5 01       		.uleb128 0x1
+ 1548 03e6 9C       		.byte	0x9c
+ 1549 03e7 07040000 		.4byte	0x407
+ 1550 03eb 0E       		.uleb128 0xe
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 32
+
+
+ 1551 03ec 647400   		.ascii	"dt\000"
+ 1552 03ef 01       		.byte	0x1
+ 1553 03f0 21       		.byte	0x21
+ 1554 03f1 07040000 		.4byte	0x407
+ 1555 03f5 02       		.uleb128 0x2
+ 1556 03f6 91       		.byte	0x91
+ 1557 03f7 6C       		.sleb128 -20
+ 1558 03f8 11       		.uleb128 0x11
+ 1559 03f9 CA040000 		.4byte	.LASF114
+ 1560 03fd 01       		.byte	0x1
+ 1561 03fe 22       		.byte	0x22
+ 1562 03ff 12040000 		.4byte	0x412
+ 1563 0403 02       		.uleb128 0x2
+ 1564 0404 91       		.byte	0x91
+ 1565 0405 70       		.sleb128 -16
+ 1566 0406 00       		.byte	0
+ 1567 0407 14       		.uleb128 0x14
+ 1568 0408 04       		.byte	0x4
+ 1569 0409 0D040000 		.4byte	0x40d
+ 1570 040d 15       		.uleb128 0x15
+ 1571 040e 47030000 		.4byte	0x347
+ 1572 0412 12       		.uleb128 0x12
+ 1573 0413 81000000 		.4byte	0x81
+ 1574 0417 22040000 		.4byte	0x422
+ 1575 041b 13       		.uleb128 0x13
+ 1576 041c D7000000 		.4byte	0xd7
+ 1577 0420 07       		.byte	0x7
+ 1578 0421 00       		.byte	0
+ 1579 0422 10       		.uleb128 0x10
+ 1580 0423 7C080000 		.4byte	.LASF115
+ 1581 0427 01       		.byte	0x1
+ 1582 0428 33       		.byte	0x33
+ 1583 0429 00000000 		.4byte	.LFB39
+ 1584 042d E8000000 		.4byte	.LFE39-.LFB39
+ 1585 0431 01       		.uleb128 0x1
+ 1586 0432 9C       		.byte	0x9c
+ 1587 0433 61040000 		.4byte	0x461
+ 1588 0437 0E       		.uleb128 0xe
+ 1589 0438 647400   		.ascii	"dt\000"
+ 1590 043b 01       		.byte	0x1
+ 1591 043c 33       		.byte	0x33
+ 1592 043d 61040000 		.4byte	0x461
+ 1593 0441 02       		.uleb128 0x2
+ 1594 0442 91       		.byte	0x91
+ 1595 0443 6C       		.sleb128 -20
+ 1596 0444 16       		.uleb128 0x16
+ 1597 0445 72656700 		.ascii	"reg\000"
+ 1598 0449 01       		.byte	0x1
+ 1599 044a 34       		.byte	0x34
+ 1600 044b 81000000 		.4byte	0x81
+ 1601 044f 02       		.uleb128 0x2
+ 1602 0450 91       		.byte	0x91
+ 1603 0451 77       		.sleb128 -9
+ 1604 0452 11       		.uleb128 0x11
+ 1605 0453 CA040000 		.4byte	.LASF114
+ 1606 0457 01       		.byte	0x1
+ 1607 0458 35       		.byte	0x35
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 33
+
+
+ 1608 0459 67040000 		.4byte	0x467
+ 1609 045d 02       		.uleb128 0x2
+ 1610 045e 91       		.byte	0x91
+ 1611 045f 70       		.sleb128 -16
+ 1612 0460 00       		.byte	0
+ 1613 0461 14       		.uleb128 0x14
+ 1614 0462 04       		.byte	0x4
+ 1615 0463 47030000 		.4byte	0x347
+ 1616 0467 12       		.uleb128 0x12
+ 1617 0468 81000000 		.4byte	0x81
+ 1618 046c 77040000 		.4byte	0x477
+ 1619 0470 13       		.uleb128 0x13
+ 1620 0471 D7000000 		.4byte	0xd7
+ 1621 0475 06       		.byte	0x6
+ 1622 0476 00       		.byte	0
+ 1623 0477 10       		.uleb128 0x10
+ 1624 0478 30030000 		.4byte	.LASF116
+ 1625 047c 01       		.byte	0x1
+ 1626 047d 4F       		.byte	0x4f
+ 1627 047e 00000000 		.4byte	.LFB40
+ 1628 0482 A0010000 		.4byte	.LFE40-.LFB40
+ 1629 0486 01       		.uleb128 0x1
+ 1630 0487 9C       		.byte	0x9c
+ 1631 0488 B7040000 		.4byte	0x4b7
+ 1632 048c 0E       		.uleb128 0xe
+ 1633 048d 72746300 		.ascii	"rtc\000"
+ 1634 0491 01       		.byte	0x1
+ 1635 0492 4F       		.byte	0x4f
+ 1636 0493 61040000 		.4byte	0x461
+ 1637 0497 02       		.uleb128 0x2
+ 1638 0498 91       		.byte	0x91
+ 1639 0499 64       		.sleb128 -28
+ 1640 049a 11       		.uleb128 0x11
+ 1641 049b 3F010000 		.4byte	.LASF117
+ 1642 049f 01       		.byte	0x1
+ 1643 04a0 51       		.byte	0x51
+ 1644 04a1 B7040000 		.4byte	0x4b7
+ 1645 04a5 02       		.uleb128 0x2
+ 1646 04a6 91       		.byte	0x91
+ 1647 04a7 74       		.sleb128 -12
+ 1648 04a8 11       		.uleb128 0x11
+ 1649 04a9 E9080000 		.4byte	.LASF118
+ 1650 04ad 01       		.byte	0x1
+ 1651 04ae 53       		.byte	0x53
+ 1652 04af 47030000 		.4byte	0x347
+ 1653 04b3 02       		.uleb128 0x2
+ 1654 04b4 91       		.byte	0x91
+ 1655 04b5 6C       		.sleb128 -20
+ 1656 04b6 00       		.byte	0
+ 1657 04b7 12       		.uleb128 0x12
+ 1658 04b8 97000000 		.4byte	0x97
+ 1659 04bc C7040000 		.4byte	0x4c7
+ 1660 04c0 13       		.uleb128 0x13
+ 1661 04c1 D7000000 		.4byte	0xd7
+ 1662 04c5 00       		.byte	0
+ 1663 04c6 00       		.byte	0
+ 1664 04c7 10       		.uleb128 0x10
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 34
+
+
+ 1665 04c8 E70B0000 		.4byte	.LASF119
+ 1666 04cc 01       		.byte	0x1
+ 1667 04cd 84       		.byte	0x84
+ 1668 04ce 00000000 		.4byte	.LFB41
+ 1669 04d2 9A010000 		.4byte	.LFE41-.LFB41
+ 1670 04d6 01       		.uleb128 0x1
+ 1671 04d7 9C       		.byte	0x9c
+ 1672 04d8 20050000 		.4byte	0x520
+ 1673 04dc 0E       		.uleb128 0xe
+ 1674 04dd 72746300 		.ascii	"rtc\000"
+ 1675 04e1 01       		.byte	0x1
+ 1676 04e2 84       		.byte	0x84
+ 1677 04e3 61040000 		.4byte	0x461
+ 1678 04e7 02       		.uleb128 0x2
+ 1679 04e8 91       		.byte	0x91
+ 1680 04e9 54       		.sleb128 -44
+ 1681 04ea 11       		.uleb128 0x11
+ 1682 04eb 3F010000 		.4byte	.LASF117
+ 1683 04ef 01       		.byte	0x1
+ 1684 04f0 86       		.byte	0x86
+ 1685 04f1 20050000 		.4byte	0x520
+ 1686 04f5 02       		.uleb128 0x2
+ 1687 04f6 91       		.byte	0x91
+ 1688 04f7 64       		.sleb128 -28
+ 1689 04f8 11       		.uleb128 0x11
+ 1690 04f9 E9080000 		.4byte	.LASF118
+ 1691 04fd 01       		.byte	0x1
+ 1692 04fe 89       		.byte	0x89
+ 1693 04ff 47030000 		.4byte	0x347
+ 1694 0503 02       		.uleb128 0x2
+ 1695 0504 91       		.byte	0x91
+ 1696 0505 5C       		.sleb128 -36
+ 1697 0506 11       		.uleb128 0x11
+ 1698 0507 82020000 		.4byte	.LASF108
+ 1699 050b 01       		.byte	0x1
+ 1700 050c 8A       		.byte	0x8a
+ 1701 050d A3000000 		.4byte	0xa3
+ 1702 0511 02       		.uleb128 0x2
+ 1703 0512 91       		.byte	0x91
+ 1704 0513 6E       		.sleb128 -18
+ 1705 0514 17       		.uleb128 0x17
+ 1706 0515 CD020000 		.4byte	.LASF126
+ 1707 0519 01       		.byte	0x1
+ 1708 051a 8A       		.byte	0x8a
+ 1709 051b A3000000 		.4byte	0xa3
+ 1710 051f 00       		.byte	0
+ 1711 0520 12       		.uleb128 0x12
+ 1712 0521 97000000 		.4byte	0x97
+ 1713 0525 30050000 		.4byte	0x530
+ 1714 0529 13       		.uleb128 0x13
+ 1715 052a D7000000 		.4byte	0xd7
+ 1716 052e 07       		.byte	0x7
+ 1717 052f 00       		.byte	0
+ 1718 0530 18       		.uleb128 0x18
+ 1719 0531 5D010000 		.4byte	.LASF127
+ 1720 0535 01       		.byte	0x1
+ 1721 0536 CB       		.byte	0xcb
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 35
+
+
+ 1722 0537 81000000 		.4byte	0x81
+ 1723 053b 00000000 		.4byte	.LFB42
+ 1724 053f 80000000 		.4byte	.LFE42-.LFB42
+ 1725 0543 01       		.uleb128 0x1
+ 1726 0544 9C       		.byte	0x9c
+ 1727 0545 66050000 		.4byte	0x566
+ 1728 0549 0E       		.uleb128 0xe
+ 1729 054a 72656700 		.ascii	"reg\000"
+ 1730 054e 01       		.byte	0x1
+ 1731 054f CB       		.byte	0xcb
+ 1732 0550 81000000 		.4byte	0x81
+ 1733 0554 02       		.uleb128 0x2
+ 1734 0555 91       		.byte	0x91
+ 1735 0556 6F       		.sleb128 -17
+ 1736 0557 11       		.uleb128 0x11
+ 1737 0558 CA040000 		.4byte	.LASF114
+ 1738 055c 01       		.byte	0x1
+ 1739 055d CD       		.byte	0xcd
+ 1740 055e 81000000 		.4byte	0x81
+ 1741 0562 02       		.uleb128 0x2
+ 1742 0563 91       		.byte	0x91
+ 1743 0564 77       		.sleb128 -9
+ 1744 0565 00       		.byte	0
+ 1745 0566 19       		.uleb128 0x19
+ 1746 0567 45070000 		.4byte	.LASF120
+ 1747 056b 01       		.byte	0x1
+ 1748 056c 4B       		.byte	0x4b
+ 1749 056d E5020000 		.4byte	0x2e5
+ 1750 0571 05       		.uleb128 0x5
+ 1751 0572 03       		.byte	0x3
+ 1752 0573 00000000 		.4byte	write_result
+ 1753 0577 19       		.uleb128 0x19
+ 1754 0578 01010000 		.4byte	.LASF121
+ 1755 057c 01       		.byte	0x1
+ 1756 057d 4C       		.byte	0x4c
+ 1757 057e E5020000 		.4byte	0x2e5
+ 1758 0582 05       		.uleb128 0x5
+ 1759 0583 03       		.byte	0x3
+ 1760 0584 00000000 		.4byte	read_result
+ 1761 0588 19       		.uleb128 0x19
+ 1762 0589 310C0000 		.4byte	.LASF122
+ 1763 058d 01       		.byte	0x1
+ 1764 058e 4D       		.byte	0x4d
+ 1765 058f AF000000 		.4byte	0xaf
+ 1766 0593 05       		.uleb128 0x5
+ 1767 0594 03       		.byte	0x3
+ 1768 0595 00000000 		.4byte	result
+ 1769 0599 00       		.byte	0
+ 1770              		.section	.debug_abbrev,"",%progbits
+ 1771              	.Ldebug_abbrev0:
+ 1772 0000 01       		.uleb128 0x1
+ 1773 0001 11       		.uleb128 0x11
+ 1774 0002 01       		.byte	0x1
+ 1775 0003 25       		.uleb128 0x25
+ 1776 0004 0E       		.uleb128 0xe
+ 1777 0005 13       		.uleb128 0x13
+ 1778 0006 0B       		.uleb128 0xb
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 36
+
+
+ 1779 0007 03       		.uleb128 0x3
+ 1780 0008 0E       		.uleb128 0xe
+ 1781 0009 1B       		.uleb128 0x1b
+ 1782 000a 0E       		.uleb128 0xe
+ 1783 000b 55       		.uleb128 0x55
+ 1784 000c 17       		.uleb128 0x17
+ 1785 000d 11       		.uleb128 0x11
+ 1786 000e 01       		.uleb128 0x1
+ 1787 000f 10       		.uleb128 0x10
+ 1788 0010 17       		.uleb128 0x17
+ 1789 0011 00       		.byte	0
+ 1790 0012 00       		.byte	0
+ 1791 0013 02       		.uleb128 0x2
+ 1792 0014 24       		.uleb128 0x24
+ 1793 0015 00       		.byte	0
+ 1794 0016 0B       		.uleb128 0xb
+ 1795 0017 0B       		.uleb128 0xb
+ 1796 0018 3E       		.uleb128 0x3e
+ 1797 0019 0B       		.uleb128 0xb
+ 1798 001a 03       		.uleb128 0x3
+ 1799 001b 0E       		.uleb128 0xe
+ 1800 001c 00       		.byte	0
+ 1801 001d 00       		.byte	0
+ 1802 001e 03       		.uleb128 0x3
+ 1803 001f 16       		.uleb128 0x16
+ 1804 0020 00       		.byte	0
+ 1805 0021 03       		.uleb128 0x3
+ 1806 0022 0E       		.uleb128 0xe
+ 1807 0023 3A       		.uleb128 0x3a
+ 1808 0024 0B       		.uleb128 0xb
+ 1809 0025 3B       		.uleb128 0x3b
+ 1810 0026 0B       		.uleb128 0xb
+ 1811 0027 49       		.uleb128 0x49
+ 1812 0028 13       		.uleb128 0x13
+ 1813 0029 00       		.byte	0
+ 1814 002a 00       		.byte	0
+ 1815 002b 04       		.uleb128 0x4
+ 1816 002c 24       		.uleb128 0x24
+ 1817 002d 00       		.byte	0
+ 1818 002e 0B       		.uleb128 0xb
+ 1819 002f 0B       		.uleb128 0xb
+ 1820 0030 3E       		.uleb128 0x3e
+ 1821 0031 0B       		.uleb128 0xb
+ 1822 0032 03       		.uleb128 0x3
+ 1823 0033 08       		.uleb128 0x8
+ 1824 0034 00       		.byte	0
+ 1825 0035 00       		.byte	0
+ 1826 0036 05       		.uleb128 0x5
+ 1827 0037 16       		.uleb128 0x16
+ 1828 0038 00       		.byte	0
+ 1829 0039 03       		.uleb128 0x3
+ 1830 003a 0E       		.uleb128 0xe
+ 1831 003b 3A       		.uleb128 0x3a
+ 1832 003c 0B       		.uleb128 0xb
+ 1833 003d 3B       		.uleb128 0x3b
+ 1834 003e 05       		.uleb128 0x5
+ 1835 003f 49       		.uleb128 0x49
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 37
+
+
+ 1836 0040 13       		.uleb128 0x13
+ 1837 0041 00       		.byte	0
+ 1838 0042 00       		.byte	0
+ 1839 0043 06       		.uleb128 0x6
+ 1840 0044 04       		.uleb128 0x4
+ 1841 0045 01       		.byte	0x1
+ 1842 0046 0B       		.uleb128 0xb
+ 1843 0047 0B       		.uleb128 0xb
+ 1844 0048 49       		.uleb128 0x49
+ 1845 0049 13       		.uleb128 0x13
+ 1846 004a 3A       		.uleb128 0x3a
+ 1847 004b 0B       		.uleb128 0xb
+ 1848 004c 3B       		.uleb128 0x3b
+ 1849 004d 05       		.uleb128 0x5
+ 1850 004e 01       		.uleb128 0x1
+ 1851 004f 13       		.uleb128 0x13
+ 1852 0050 00       		.byte	0
+ 1853 0051 00       		.byte	0
+ 1854 0052 07       		.uleb128 0x7
+ 1855 0053 28       		.uleb128 0x28
+ 1856 0054 00       		.byte	0
+ 1857 0055 03       		.uleb128 0x3
+ 1858 0056 0E       		.uleb128 0xe
+ 1859 0057 1C       		.uleb128 0x1c
+ 1860 0058 0B       		.uleb128 0xb
+ 1861 0059 00       		.byte	0
+ 1862 005a 00       		.byte	0
+ 1863 005b 08       		.uleb128 0x8
+ 1864 005c 04       		.uleb128 0x4
+ 1865 005d 01       		.byte	0x1
+ 1866 005e 0B       		.uleb128 0xb
+ 1867 005f 0B       		.uleb128 0xb
+ 1868 0060 49       		.uleb128 0x49
+ 1869 0061 13       		.uleb128 0x13
+ 1870 0062 3A       		.uleb128 0x3a
+ 1871 0063 0B       		.uleb128 0xb
+ 1872 0064 3B       		.uleb128 0x3b
+ 1873 0065 0B       		.uleb128 0xb
+ 1874 0066 01       		.uleb128 0x1
+ 1875 0067 13       		.uleb128 0x13
+ 1876 0068 00       		.byte	0
+ 1877 0069 00       		.byte	0
+ 1878 006a 09       		.uleb128 0x9
+ 1879 006b 35       		.uleb128 0x35
+ 1880 006c 00       		.byte	0
+ 1881 006d 49       		.uleb128 0x49
+ 1882 006e 13       		.uleb128 0x13
+ 1883 006f 00       		.byte	0
+ 1884 0070 00       		.byte	0
+ 1885 0071 0A       		.uleb128 0xa
+ 1886 0072 13       		.uleb128 0x13
+ 1887 0073 01       		.byte	0x1
+ 1888 0074 0B       		.uleb128 0xb
+ 1889 0075 0B       		.uleb128 0xb
+ 1890 0076 3A       		.uleb128 0x3a
+ 1891 0077 0B       		.uleb128 0xb
+ 1892 0078 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 38
+
+
+ 1893 0079 0B       		.uleb128 0xb
+ 1894 007a 01       		.uleb128 0x1
+ 1895 007b 13       		.uleb128 0x13
+ 1896 007c 00       		.byte	0
+ 1897 007d 00       		.byte	0
+ 1898 007e 0B       		.uleb128 0xb
+ 1899 007f 0D       		.uleb128 0xd
+ 1900 0080 00       		.byte	0
+ 1901 0081 03       		.uleb128 0x3
+ 1902 0082 0E       		.uleb128 0xe
+ 1903 0083 3A       		.uleb128 0x3a
+ 1904 0084 0B       		.uleb128 0xb
+ 1905 0085 3B       		.uleb128 0x3b
+ 1906 0086 0B       		.uleb128 0xb
+ 1907 0087 49       		.uleb128 0x49
+ 1908 0088 13       		.uleb128 0x13
+ 1909 0089 38       		.uleb128 0x38
+ 1910 008a 0B       		.uleb128 0xb
+ 1911 008b 00       		.byte	0
+ 1912 008c 00       		.byte	0
+ 1913 008d 0C       		.uleb128 0xc
+ 1914 008e 0D       		.uleb128 0xd
+ 1915 008f 00       		.byte	0
+ 1916 0090 03       		.uleb128 0x3
+ 1917 0091 08       		.uleb128 0x8
+ 1918 0092 3A       		.uleb128 0x3a
+ 1919 0093 0B       		.uleb128 0xb
+ 1920 0094 3B       		.uleb128 0x3b
+ 1921 0095 0B       		.uleb128 0xb
+ 1922 0096 49       		.uleb128 0x49
+ 1923 0097 13       		.uleb128 0x13
+ 1924 0098 38       		.uleb128 0x38
+ 1925 0099 0B       		.uleb128 0xb
+ 1926 009a 00       		.byte	0
+ 1927 009b 00       		.byte	0
+ 1928 009c 0D       		.uleb128 0xd
+ 1929 009d 2E       		.uleb128 0x2e
+ 1930 009e 01       		.byte	0x1
+ 1931 009f 03       		.uleb128 0x3
+ 1932 00a0 0E       		.uleb128 0xe
+ 1933 00a1 3A       		.uleb128 0x3a
+ 1934 00a2 0B       		.uleb128 0xb
+ 1935 00a3 3B       		.uleb128 0x3b
+ 1936 00a4 0B       		.uleb128 0xb
+ 1937 00a5 27       		.uleb128 0x27
+ 1938 00a6 19       		.uleb128 0x19
+ 1939 00a7 49       		.uleb128 0x49
+ 1940 00a8 13       		.uleb128 0x13
+ 1941 00a9 11       		.uleb128 0x11
+ 1942 00aa 01       		.uleb128 0x1
+ 1943 00ab 12       		.uleb128 0x12
+ 1944 00ac 06       		.uleb128 0x6
+ 1945 00ad 40       		.uleb128 0x40
+ 1946 00ae 18       		.uleb128 0x18
+ 1947 00af 9642     		.uleb128 0x2116
+ 1948 00b1 19       		.uleb128 0x19
+ 1949 00b2 01       		.uleb128 0x1
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 39
+
+
+ 1950 00b3 13       		.uleb128 0x13
+ 1951 00b4 00       		.byte	0
+ 1952 00b5 00       		.byte	0
+ 1953 00b6 0E       		.uleb128 0xe
+ 1954 00b7 05       		.uleb128 0x5
+ 1955 00b8 00       		.byte	0
+ 1956 00b9 03       		.uleb128 0x3
+ 1957 00ba 08       		.uleb128 0x8
+ 1958 00bb 3A       		.uleb128 0x3a
+ 1959 00bc 0B       		.uleb128 0xb
+ 1960 00bd 3B       		.uleb128 0x3b
+ 1961 00be 0B       		.uleb128 0xb
+ 1962 00bf 49       		.uleb128 0x49
+ 1963 00c0 13       		.uleb128 0x13
+ 1964 00c1 02       		.uleb128 0x2
+ 1965 00c2 18       		.uleb128 0x18
+ 1966 00c3 00       		.byte	0
+ 1967 00c4 00       		.byte	0
+ 1968 00c5 0F       		.uleb128 0xf
+ 1969 00c6 2E       		.uleb128 0x2e
+ 1970 00c7 01       		.byte	0x1
+ 1971 00c8 03       		.uleb128 0x3
+ 1972 00c9 0E       		.uleb128 0xe
+ 1973 00ca 3A       		.uleb128 0x3a
+ 1974 00cb 0B       		.uleb128 0xb
+ 1975 00cc 3B       		.uleb128 0x3b
+ 1976 00cd 0B       		.uleb128 0xb
+ 1977 00ce 27       		.uleb128 0x27
+ 1978 00cf 19       		.uleb128 0x19
+ 1979 00d0 49       		.uleb128 0x49
+ 1980 00d1 13       		.uleb128 0x13
+ 1981 00d2 11       		.uleb128 0x11
+ 1982 00d3 01       		.uleb128 0x1
+ 1983 00d4 12       		.uleb128 0x12
+ 1984 00d5 06       		.uleb128 0x6
+ 1985 00d6 40       		.uleb128 0x40
+ 1986 00d7 18       		.uleb128 0x18
+ 1987 00d8 9742     		.uleb128 0x2117
+ 1988 00da 19       		.uleb128 0x19
+ 1989 00db 01       		.uleb128 0x1
+ 1990 00dc 13       		.uleb128 0x13
+ 1991 00dd 00       		.byte	0
+ 1992 00de 00       		.byte	0
+ 1993 00df 10       		.uleb128 0x10
+ 1994 00e0 2E       		.uleb128 0x2e
+ 1995 00e1 01       		.byte	0x1
+ 1996 00e2 3F       		.uleb128 0x3f
+ 1997 00e3 19       		.uleb128 0x19
+ 1998 00e4 03       		.uleb128 0x3
+ 1999 00e5 0E       		.uleb128 0xe
+ 2000 00e6 3A       		.uleb128 0x3a
+ 2001 00e7 0B       		.uleb128 0xb
+ 2002 00e8 3B       		.uleb128 0x3b
+ 2003 00e9 0B       		.uleb128 0xb
+ 2004 00ea 27       		.uleb128 0x27
+ 2005 00eb 19       		.uleb128 0x19
+ 2006 00ec 11       		.uleb128 0x11
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 40
+
+
+ 2007 00ed 01       		.uleb128 0x1
+ 2008 00ee 12       		.uleb128 0x12
+ 2009 00ef 06       		.uleb128 0x6
+ 2010 00f0 40       		.uleb128 0x40
+ 2011 00f1 18       		.uleb128 0x18
+ 2012 00f2 9642     		.uleb128 0x2116
+ 2013 00f4 19       		.uleb128 0x19
+ 2014 00f5 01       		.uleb128 0x1
+ 2015 00f6 13       		.uleb128 0x13
+ 2016 00f7 00       		.byte	0
+ 2017 00f8 00       		.byte	0
+ 2018 00f9 11       		.uleb128 0x11
+ 2019 00fa 34       		.uleb128 0x34
+ 2020 00fb 00       		.byte	0
+ 2021 00fc 03       		.uleb128 0x3
+ 2022 00fd 0E       		.uleb128 0xe
+ 2023 00fe 3A       		.uleb128 0x3a
+ 2024 00ff 0B       		.uleb128 0xb
+ 2025 0100 3B       		.uleb128 0x3b
+ 2026 0101 0B       		.uleb128 0xb
+ 2027 0102 49       		.uleb128 0x49
+ 2028 0103 13       		.uleb128 0x13
+ 2029 0104 02       		.uleb128 0x2
+ 2030 0105 18       		.uleb128 0x18
+ 2031 0106 00       		.byte	0
+ 2032 0107 00       		.byte	0
+ 2033 0108 12       		.uleb128 0x12
+ 2034 0109 01       		.uleb128 0x1
+ 2035 010a 01       		.byte	0x1
+ 2036 010b 49       		.uleb128 0x49
+ 2037 010c 13       		.uleb128 0x13
+ 2038 010d 01       		.uleb128 0x1
+ 2039 010e 13       		.uleb128 0x13
+ 2040 010f 00       		.byte	0
+ 2041 0110 00       		.byte	0
+ 2042 0111 13       		.uleb128 0x13
+ 2043 0112 21       		.uleb128 0x21
+ 2044 0113 00       		.byte	0
+ 2045 0114 49       		.uleb128 0x49
+ 2046 0115 13       		.uleb128 0x13
+ 2047 0116 2F       		.uleb128 0x2f
+ 2048 0117 0B       		.uleb128 0xb
+ 2049 0118 00       		.byte	0
+ 2050 0119 00       		.byte	0
+ 2051 011a 14       		.uleb128 0x14
+ 2052 011b 0F       		.uleb128 0xf
+ 2053 011c 00       		.byte	0
+ 2054 011d 0B       		.uleb128 0xb
+ 2055 011e 0B       		.uleb128 0xb
+ 2056 011f 49       		.uleb128 0x49
+ 2057 0120 13       		.uleb128 0x13
+ 2058 0121 00       		.byte	0
+ 2059 0122 00       		.byte	0
+ 2060 0123 15       		.uleb128 0x15
+ 2061 0124 26       		.uleb128 0x26
+ 2062 0125 00       		.byte	0
+ 2063 0126 49       		.uleb128 0x49
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 41
+
+
+ 2064 0127 13       		.uleb128 0x13
+ 2065 0128 00       		.byte	0
+ 2066 0129 00       		.byte	0
+ 2067 012a 16       		.uleb128 0x16
+ 2068 012b 34       		.uleb128 0x34
+ 2069 012c 00       		.byte	0
+ 2070 012d 03       		.uleb128 0x3
+ 2071 012e 08       		.uleb128 0x8
+ 2072 012f 3A       		.uleb128 0x3a
+ 2073 0130 0B       		.uleb128 0xb
+ 2074 0131 3B       		.uleb128 0x3b
+ 2075 0132 0B       		.uleb128 0xb
+ 2076 0133 49       		.uleb128 0x49
+ 2077 0134 13       		.uleb128 0x13
+ 2078 0135 02       		.uleb128 0x2
+ 2079 0136 18       		.uleb128 0x18
+ 2080 0137 00       		.byte	0
+ 2081 0138 00       		.byte	0
+ 2082 0139 17       		.uleb128 0x17
+ 2083 013a 34       		.uleb128 0x34
+ 2084 013b 00       		.byte	0
+ 2085 013c 03       		.uleb128 0x3
+ 2086 013d 0E       		.uleb128 0xe
+ 2087 013e 3A       		.uleb128 0x3a
+ 2088 013f 0B       		.uleb128 0xb
+ 2089 0140 3B       		.uleb128 0x3b
+ 2090 0141 0B       		.uleb128 0xb
+ 2091 0142 49       		.uleb128 0x49
+ 2092 0143 13       		.uleb128 0x13
+ 2093 0144 00       		.byte	0
+ 2094 0145 00       		.byte	0
+ 2095 0146 18       		.uleb128 0x18
+ 2096 0147 2E       		.uleb128 0x2e
+ 2097 0148 01       		.byte	0x1
+ 2098 0149 3F       		.uleb128 0x3f
+ 2099 014a 19       		.uleb128 0x19
+ 2100 014b 03       		.uleb128 0x3
+ 2101 014c 0E       		.uleb128 0xe
+ 2102 014d 3A       		.uleb128 0x3a
+ 2103 014e 0B       		.uleb128 0xb
+ 2104 014f 3B       		.uleb128 0x3b
+ 2105 0150 0B       		.uleb128 0xb
+ 2106 0151 27       		.uleb128 0x27
+ 2107 0152 19       		.uleb128 0x19
+ 2108 0153 49       		.uleb128 0x49
+ 2109 0154 13       		.uleb128 0x13
+ 2110 0155 11       		.uleb128 0x11
+ 2111 0156 01       		.uleb128 0x1
+ 2112 0157 12       		.uleb128 0x12
+ 2113 0158 06       		.uleb128 0x6
+ 2114 0159 40       		.uleb128 0x40
+ 2115 015a 18       		.uleb128 0x18
+ 2116 015b 9642     		.uleb128 0x2116
+ 2117 015d 19       		.uleb128 0x19
+ 2118 015e 01       		.uleb128 0x1
+ 2119 015f 13       		.uleb128 0x13
+ 2120 0160 00       		.byte	0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 42
+
+
+ 2121 0161 00       		.byte	0
+ 2122 0162 19       		.uleb128 0x19
+ 2123 0163 34       		.uleb128 0x34
+ 2124 0164 00       		.byte	0
+ 2125 0165 03       		.uleb128 0x3
+ 2126 0166 0E       		.uleb128 0xe
+ 2127 0167 3A       		.uleb128 0x3a
+ 2128 0168 0B       		.uleb128 0xb
+ 2129 0169 3B       		.uleb128 0x3b
+ 2130 016a 0B       		.uleb128 0xb
+ 2131 016b 49       		.uleb128 0x49
+ 2132 016c 13       		.uleb128 0x13
+ 2133 016d 3F       		.uleb128 0x3f
+ 2134 016e 19       		.uleb128 0x19
+ 2135 016f 02       		.uleb128 0x2
+ 2136 0170 18       		.uleb128 0x18
+ 2137 0171 00       		.byte	0
+ 2138 0172 00       		.byte	0
+ 2139 0173 00       		.byte	0
+ 2140              		.section	.debug_aranges,"",%progbits
+ 2141 0000 54000000 		.4byte	0x54
+ 2142 0004 0200     		.2byte	0x2
+ 2143 0006 00000000 		.4byte	.Ldebug_info0
+ 2144 000a 04       		.byte	0x4
+ 2145 000b 00       		.byte	0
+ 2146 000c 0000     		.2byte	0
+ 2147 000e 0000     		.2byte	0
+ 2148 0010 00000000 		.4byte	.LFB35
+ 2149 0014 40000000 		.4byte	.LFE35-.LFB35
+ 2150 0018 00000000 		.4byte	.LFB36
+ 2151 001c 34000000 		.4byte	.LFE36-.LFB36
+ 2152 0020 00000000 		.4byte	.LFB37
+ 2153 0024 34000000 		.4byte	.LFE37-.LFB37
+ 2154 0028 00000000 		.4byte	.LFB38
+ 2155 002c C0000000 		.4byte	.LFE38-.LFB38
+ 2156 0030 00000000 		.4byte	.LFB39
+ 2157 0034 E8000000 		.4byte	.LFE39-.LFB39
+ 2158 0038 00000000 		.4byte	.LFB40
+ 2159 003c A0010000 		.4byte	.LFE40-.LFB40
+ 2160 0040 00000000 		.4byte	.LFB41
+ 2161 0044 9A010000 		.4byte	.LFE41-.LFB41
+ 2162 0048 00000000 		.4byte	.LFB42
+ 2163 004c 80000000 		.4byte	.LFE42-.LFB42
+ 2164 0050 00000000 		.4byte	0
+ 2165 0054 00000000 		.4byte	0
+ 2166              		.section	.debug_ranges,"",%progbits
+ 2167              	.Ldebug_ranges0:
+ 2168 0000 00000000 		.4byte	.LFB35
+ 2169 0004 40000000 		.4byte	.LFE35
+ 2170 0008 00000000 		.4byte	.LFB36
+ 2171 000c 34000000 		.4byte	.LFE36
+ 2172 0010 00000000 		.4byte	.LFB37
+ 2173 0014 34000000 		.4byte	.LFE37
+ 2174 0018 00000000 		.4byte	.LFB38
+ 2175 001c C0000000 		.4byte	.LFE38
+ 2176 0020 00000000 		.4byte	.LFB39
+ 2177 0024 E8000000 		.4byte	.LFE39
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 43
+
+
+ 2178 0028 00000000 		.4byte	.LFB40
+ 2179 002c A0010000 		.4byte	.LFE40
+ 2180 0030 00000000 		.4byte	.LFB41
+ 2181 0034 9A010000 		.4byte	.LFE41
+ 2182 0038 00000000 		.4byte	.LFB42
+ 2183 003c 80000000 		.4byte	.LFE42
+ 2184 0040 00000000 		.4byte	0
+ 2185 0044 00000000 		.4byte	0
+ 2186              		.section	.debug_line,"",%progbits
+ 2187              	.Ldebug_line0:
+ 2188 0000 84020000 		.section	.debug_str,"MS",%progbits,1
+ 2188      02006401 
+ 2188      00000201 
+ 2188      FB0E0D00 
+ 2188      01010101 
+ 2189              	.LASF85:
+ 2190 0000 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_RX_CREDIT_IND\000"
+ 2190      455F4556 
+ 2190      545F4C32 
+ 2190      4341505F 
+ 2190      43424643 
+ 2191              	.LASF26:
+ 2192 0023 4359424C 		.ascii	"CYBLE_EVT_STACK_BUSY_STATUS\000"
+ 2192      455F4556 
+ 2192      545F5354 
+ 2192      41434B5F 
+ 2192      42555359 
+ 2193              	.LASF14:
+ 2194 003f 75696E74 		.ascii	"uint16\000"
+ 2194      313600
+ 2195              	.LASF84:
+ 2196 0046 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_READ\000"
+ 2196      455F4556 
+ 2196      545F4C32 
+ 2196      4341505F 
+ 2196      43424643 
+ 2197              	.LASF38:
+ 2198 0065 4359424C 		.ascii	"CYBLE_EVT_GAP_CONNECTION_UPDATE_COMPLETE\000"
+ 2198      455F4556 
+ 2198      545F4741 
+ 2198      505F434F 
+ 2198      4E4E4543 
+ 2199              	.LASF83:
+ 2200 008e 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_CNF\000"
+ 2200      455F4556 
+ 2200      545F4C32 
+ 2200      4341505F 
+ 2200      43424643 
+ 2201              	.LASF43:
+ 2202 00af 4359424C 		.ascii	"CYBLE_EVT_GAP_OOB_GENERATED_NOTIFICATION\000"
+ 2202      455F4556 
+ 2202      545F4741 
+ 2202      505F4F4F 
+ 2202      425F4745 
+ 2203              	.LASF63:
+ 2204 00d8 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_MULTI_RSP\000"
+ 2204      455F4556 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 44
+
+
+ 2204      545F4741 
+ 2204      5454435F 
+ 2204      52454144 
+ 2205              	.LASF5:
+ 2206 00f7 5F5F7569 		.ascii	"__uint8_t\000"
+ 2206      6E74385F 
+ 2206      7400
+ 2207              	.LASF121:
+ 2208 0101 72656164 		.ascii	"read_result\000"
+ 2208      5F726573 
+ 2208      756C7400 
+ 2209              	.LASF23:
+ 2210 010d 4359424C 		.ascii	"CYBLE_EVT_TIMEOUT\000"
+ 2210      455F4556 
+ 2210      545F5449 
+ 2210      4D454F55 
+ 2210      5400
+ 2211              	.LASF4:
+ 2212 011f 6C6F6E67 		.ascii	"long int\000"
+ 2212      20696E74 
+ 2212      00
+ 2213              	.LASF9:
+ 2214 0128 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2214      206C6F6E 
+ 2214      6720756E 
+ 2214      7369676E 
+ 2214      65642069 
+ 2215              	.LASF117:
+ 2216 013f 57726974 		.ascii	"WriteBuf\000"
+ 2216      65427566 
+ 2216      00
+ 2217              	.LASF25:
+ 2218 0148 4359424C 		.ascii	"CYBLE_EVT_HCI_STATUS\000"
+ 2218      455F4556 
+ 2218      545F4843 
+ 2218      495F5354 
+ 2218      41545553 
+ 2219              	.LASF127:
+ 2220 015d 72656164 		.ascii	"read_RTCReg\000"
+ 2220      5F525443 
+ 2220      52656700 
+ 2221              	.LASF88:
+ 2222 0169 4359424C 		.ascii	"CYBLE_EVT_PENDING_FLASH_WRITE\000"
+ 2222      455F4556 
+ 2222      545F5045 
+ 2222      4E44494E 
+ 2222      475F464C 
+ 2223              	.LASF77:
+ 2224 0187 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_REQ\000"
+ 2224      455F4556 
+ 2224      545F4C32 
+ 2224      4341505F 
+ 2224      434F4E4E 
+ 2225              	.LASF37:
+ 2226 01ad 4359424C 		.ascii	"CYBLE_EVT_GAP_ENCRYPT_CHANGE\000"
+ 2226      455F4556 
+ 2226      545F4741 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 45
+
+
+ 2226      505F454E 
+ 2226      43525950 
+ 2227              	.LASF41:
+ 2228 01ca 4359424C 		.ascii	"CYBLE_EVT_GAP_NUMERIC_COMPARISON_REQUEST\000"
+ 2228      455F4556 
+ 2228      545F4741 
+ 2228      505F4E55 
+ 2228      4D455249 
+ 2229              	.LASF8:
+ 2230 01f3 6C6F6E67 		.ascii	"long long int\000"
+ 2230      206C6F6E 
+ 2230      6720696E 
+ 2230      7400
+ 2231              	.LASF0:
+ 2232 0201 7369676E 		.ascii	"signed char\000"
+ 2232      65642063 
+ 2232      68617200 
+ 2233              	.LASF22:
+ 2234 020d 4359424C 		.ascii	"CYBLE_EVT_STACK_ON\000"
+ 2234      455F4556 
+ 2234      545F5354 
+ 2234      41434B5F 
+ 2234      4F4E00
+ 2235              	.LASF39:
+ 2236 0220 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_START_STOP\000"
+ 2236      455F4556 
+ 2236      545F4741 
+ 2236      50435F53 
+ 2236      43414E5F 
+ 2237              	.LASF29:
+ 2238 023f 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ\000"
+ 2238      455F4556 
+ 2238      545F4741 
+ 2238      505F4155 
+ 2238      54485F52 
+ 2239              	.LASF61:
+ 2240 0256 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_RSP\000"
+ 2240      455F4556 
+ 2240      545F4741 
+ 2240      5454435F 
+ 2240      52454144 
+ 2241              	.LASF113:
+ 2242 026f 44533332 		.ascii	"DS3231_SetDateTime\000"
+ 2242      33315F53 
+ 2242      65744461 
+ 2242      74655469 
+ 2242      6D6500
+ 2243              	.LASF108:
+ 2244 0282 79656172 		.ascii	"year\000"
+ 2244      00
+ 2245              	.LASF66:
+ 2246 0287 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_CMD_REQ\000"
+ 2246      455F4556 
+ 2246      545F4741 
+ 2246      5454535F 
+ 2246      57524954 
+ 2247              	.LASF34:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 46
+
+
+ 2248 02a5 4359424C 		.ascii	"CYBLE_EVT_GAPP_ADVERTISEMENT_START_STOP\000"
+ 2248      455F4556 
+ 2248      545F4741 
+ 2248      50505F41 
+ 2248      44564552 
+ 2249              	.LASF126:
+ 2250 02cd 6D6F6475 		.ascii	"modulus\000"
+ 2250      6C757300 
+ 2251              	.LASF55:
+ 2252 02d5 4359424C 		.ascii	"CYBLE_EVT_GATTS_XCNHG_MTU_REQ\000"
+ 2252      455F4556 
+ 2252      545F4741 
+ 2252      5454535F 
+ 2252      58434E48 
+ 2253              	.LASF69:
+ 2254 02f3 4359424C 		.ascii	"CYBLE_EVT_GATTC_EXEC_WRITE_RSP\000"
+ 2254      455F4556 
+ 2254      545F4741 
+ 2254      5454435F 
+ 2254      45584543 
+ 2255              	.LASF17:
+ 2256 0312 646F7562 		.ascii	"double\000"
+ 2256      6C6500
+ 2257              	.LASF97:
+ 2258 0319 4359424C 		.ascii	"CYBLE_DIS_FIRMWARE_REV\000"
+ 2258      455F4449 
+ 2258      535F4649 
+ 2258      524D5741 
+ 2258      52455F52 
+ 2259              	.LASF116:
+ 2260 0330 72656164 		.ascii	"read_RTC\000"
+ 2260      5F525443 
+ 2260      00
+ 2261              	.LASF15:
+ 2262 0339 75696E74 		.ascii	"uint32\000"
+ 2262      333200
+ 2263              	.LASF96:
+ 2264 0340 4359424C 		.ascii	"CYBLE_DIS_HARDWARE_REV\000"
+ 2264      455F4449 
+ 2264      535F4841 
+ 2264      52445741 
+ 2264      52455F52 
+ 2265              	.LASF92:
+ 2266 0357 4359424C 		.ascii	"CYBLE_EVT_MAX\000"
+ 2266      455F4556 
+ 2266      545F4D41 
+ 2266      5800
+ 2267              	.LASF6:
+ 2268 0365 5F5F7569 		.ascii	"__uint32_t\000"
+ 2268      6E743332 
+ 2268      5F7400
+ 2269              	.LASF112:
+ 2270 0370 44533332 		.ascii	"DS3231_EnableDateTime\000"
+ 2270      33315F45 
+ 2270      6E61626C 
+ 2270      65446174 
+ 2270      6554696D 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 47
+
+
+ 2271              	.LASF87:
+ 2272 0386 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_WRITE_IND\000"
+ 2272      455F4556 
+ 2272      545F4C32 
+ 2272      4341505F 
+ 2272      43424643 
+ 2273              	.LASF49:
+ 2274 03aa 4359424C 		.ascii	"CYBLE_EVT_GAP_SCAN_REQ_RECVD\000"
+ 2274      455F4556 
+ 2274      545F4741 
+ 2274      505F5343 
+ 2274      414E5F52 
+ 2275              	.LASF74:
+ 2276 03c7 4359424C 		.ascii	"CYBLE_EVT_GATTC_STOP_CMD_COMPLETE\000"
+ 2276      455F4556 
+ 2276      545F4741 
+ 2276      5454435F 
+ 2276      53544F50 
+ 2277              	.LASF107:
+ 2278 03e9 6D6F6E74 		.ascii	"month\000"
+ 2278      6800
+ 2279              	.LASF10:
+ 2280 03ef 756E7369 		.ascii	"unsigned int\000"
+ 2280      676E6564 
+ 2280      20696E74 
+ 2280      00
+ 2281              	.LASF89:
+ 2282 03fc 4359424C 		.ascii	"CYBLE_EVT_LE_PING_AUTH_TIMEOUT\000"
+ 2282      455F4556 
+ 2282      545F4C45 
+ 2282      5F50494E 
+ 2282      475F4155 
+ 2283              	.LASF7:
+ 2284 041b 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2284      20756E73 
+ 2284      69676E65 
+ 2284      6420696E 
+ 2284      7400
+ 2285              	.LASF48:
+ 2286 042d 4359424C 		.ascii	"CYBLE_EVT_GAP_CONN_ESTB\000"
+ 2286      455F4556 
+ 2286      545F4741 
+ 2286      505F434F 
+ 2286      4E4E5F45 
+ 2287              	.LASF64:
+ 2288 0445 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_REQ\000"
+ 2288      455F4556 
+ 2288      545F4741 
+ 2288      5454535F 
+ 2288      57524954 
+ 2289              	.LASF56:
+ 2290 045f 4359424C 		.ascii	"CYBLE_EVT_GATTC_XCHNG_MTU_RSP\000"
+ 2290      455F4556 
+ 2290      545F4741 
+ 2290      5454435F 
+ 2290      5843484E 
+ 2291              	.LASF73:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 48
+
+
+ 2292 047d 4359424C 		.ascii	"CYBLE_EVT_GATTS_DATA_SIGNED_CMD_REQ\000"
+ 2292      455F4556 
+ 2292      545F4741 
+ 2292      5454535F 
+ 2292      44415441 
+ 2293              	.LASF76:
+ 2294 04a1 4359424C 		.ascii	"CYBLE_EVT_GATTC_LONG_PROCEDURE_END\000"
+ 2294      455F4556 
+ 2294      545F4741 
+ 2294      5454435F 
+ 2294      4C4F4E47 
+ 2295              	.LASF13:
+ 2296 04c4 75696E74 		.ascii	"uint8\000"
+ 2296      3800
+ 2297              	.LASF114:
+ 2298 04ca 64617461 		.ascii	"data\000"
+ 2298      00
+ 2299              	.LASF3:
+ 2300 04cf 73686F72 		.ascii	"short unsigned int\000"
+ 2300      7420756E 
+ 2300      7369676E 
+ 2300      65642069 
+ 2300      6E7400
+ 2301              	.LASF21:
+ 2302 04e2 4359424C 		.ascii	"CYBLE_EVT_HOST_INVALID\000"
+ 2302      455F4556 
+ 2302      545F484F 
+ 2302      53545F49 
+ 2302      4E56414C 
+ 2303              	.LASF59:
+ 2304 04f9 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_INFO_RSP\000"
+ 2304      455F4556 
+ 2304      545F4741 
+ 2304      5454435F 
+ 2304      46494E44 
+ 2305              	.LASF27:
+ 2306 0517 4359424C 		.ascii	"CYBLE_EVT_MEMORY_REQUEST\000"
+ 2306      455F4556 
+ 2306      545F4D45 
+ 2306      4D4F5259 
+ 2306      5F524551 
+ 2307              	.LASF68:
+ 2308 0530 4359424C 		.ascii	"CYBLE_EVT_GATTS_EXEC_WRITE_REQ\000"
+ 2308      455F4556 
+ 2308      545F4741 
+ 2308      5454535F 
+ 2308      45584543 
+ 2309              	.LASF30:
+ 2310 054f 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_ENTRY_REQUEST\000"
+ 2310      455F4556 
+ 2310      545F4741 
+ 2310      505F5041 
+ 2310      53534B45 
+ 2311              	.LASF35:
+ 2312 0573 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_CONNECTED\000"
+ 2312      455F4556 
+ 2312      545F4741 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 49
+
+
+ 2312      505F4445 
+ 2312      56494345 
+ 2313              	.LASF50:
+ 2314 0592 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ_REPLY_ERR\000"
+ 2314      455F4556 
+ 2314      545F4741 
+ 2314      505F4155 
+ 2314      54485F52 
+ 2315              	.LASF101:
+ 2316 05b3 4359424C 		.ascii	"CYBLE_DIS_PNP_ID\000"
+ 2316      455F4449 
+ 2316      535F504E 
+ 2316      505F4944 
+ 2316      00
+ 2317              	.LASF123:
+ 2318 05c4 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2318      43313120 
+ 2318      352E342E 
+ 2318      31203230 
+ 2318      31363036 
+ 2319 05f7 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 2319      20726576 
+ 2319      6973696F 
+ 2319      6E203233 
+ 2319      37373135 
+ 2320 062a 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2320      66756E63 
+ 2320      74696F6E 
+ 2320      2D736563 
+ 2320      74696F6E 
+ 2321              	.LASF53:
+ 2322 0652 4359424C 		.ascii	"CYBLE_EVT_GATT_CONNECT_IND\000"
+ 2322      455F4556 
+ 2322      545F4741 
+ 2322      54545F43 
+ 2322      4F4E4E45 
+ 2323              	.LASF105:
+ 2324 066d 686F7572 		.ascii	"hours\000"
+ 2324      7300
+ 2325              	.LASF106:
+ 2326 0673 6461794F 		.ascii	"dayOfWeek\000"
+ 2326      66576565 
+ 2326      6B00
+ 2327              	.LASF79:
+ 2328 067d 4359424C 		.ascii	"CYBLE_EVT_L2CAP_COMMAND_REJ\000"
+ 2328      455F4556 
+ 2328      545F4C32 
+ 2328      4341505F 
+ 2328      434F4D4D 
+ 2329              	.LASF28:
+ 2330 0699 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_PROGRESS_RESULT\000"
+ 2330      455F4556 
+ 2330      545F4741 
+ 2330      50435F53 
+ 2330      43414E5F 
+ 2331              	.LASF99:
+ 2332 06bd 4359424C 		.ascii	"CYBLE_DIS_SYSTEM_ID\000"
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 50
+
+
+ 2332      455F4449 
+ 2332      535F5359 
+ 2332      5354454D 
+ 2332      5F494400 
+ 2333              	.LASF51:
+ 2334 06d1 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_LOC_P256_KEYS_GEN_AND_SET_COMPLET"
+ 2334      455F4556 
+ 2334      545F4741 
+ 2334      505F534D 
+ 2334      505F4C4F 
+ 2335 0704 4500     		.ascii	"E\000"
+ 2336              	.LASF80:
+ 2337 0706 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_IND\000"
+ 2337      455F4556 
+ 2337      545F4C32 
+ 2337      4341505F 
+ 2337      43424643 
+ 2338              	.LASF58:
+ 2339 0724 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_TYPE_RSP\000"
+ 2339      455F4556 
+ 2339      545F4741 
+ 2339      5454435F 
+ 2339      52454144 
+ 2340              	.LASF120:
+ 2341 0745 77726974 		.ascii	"write_result\000"
+ 2341      655F7265 
+ 2341      73756C74 
+ 2341      00
+ 2342              	.LASF20:
+ 2343 0752 73697A65 		.ascii	"sizetype\000"
+ 2343      74797065 
+ 2343      00
+ 2344              	.LASF33:
+ 2345 075b 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_FAILED\000"
+ 2345      455F4556 
+ 2345      545F4741 
+ 2345      505F4155 
+ 2345      54485F46 
+ 2346              	.LASF65:
+ 2347 0775 4359424C 		.ascii	"CYBLE_EVT_GATTC_WRITE_RSP\000"
+ 2347      455F4556 
+ 2347      545F4741 
+ 2347      5454435F 
+ 2347      57524954 
+ 2348              	.LASF46:
+ 2349 078f 4359424C 		.ascii	"CYBLE_EVT_GAPC_DIRECT_ADV_REPORT\000"
+ 2349      455F4556 
+ 2349      545F4741 
+ 2349      50435F44 
+ 2349      49524543 
+ 2350              	.LASF44:
+ 2351 07b0 4359424C 		.ascii	"CYBLE_EVT_GAP_DATA_LENGTH_CHANGE\000"
+ 2351      455F4556 
+ 2351      545F4741 
+ 2351      505F4441 
+ 2351      54415F4C 
+ 2352              	.LASF100:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 51
+
+
+ 2353 07d1 4359424C 		.ascii	"CYBLE_DIS_REG_CERT_DATA\000"
+ 2353      455F4449 
+ 2353      535F5245 
+ 2353      475F4345 
+ 2353      52545F44 
+ 2354              	.LASF32:
+ 2355 07e9 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_COMPLETE\000"
+ 2355      455F4556 
+ 2355      545F4741 
+ 2355      505F4155 
+ 2355      54485F43 
+ 2356              	.LASF70:
+ 2357 0805 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_NTF\000"
+ 2357      455F4556 
+ 2357      545F4741 
+ 2357      5454435F 
+ 2357      48414E44 
+ 2358              	.LASF109:
+ 2359 0826 535F4461 		.ascii	"S_DateTime\000"
+ 2359      74655469 
+ 2359      6D6500
+ 2360              	.LASF81:
+ 2361 0831 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_CNF\000"
+ 2361      455F4556 
+ 2361      545F4C32 
+ 2361      4341505F 
+ 2361      43424643 
+ 2362              	.LASF57:
+ 2363 084f 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_GROUP_TYPE_RSP\000"
+ 2363      455F4556 
+ 2363      545F4741 
+ 2363      5454435F 
+ 2363      52454144 
+ 2364              	.LASF16:
+ 2365 0876 666C6F61 		.ascii	"float\000"
+ 2365      7400
+ 2366              	.LASF115:
+ 2367 087c 44533332 		.ascii	"DS3231_GetDateTime\000"
+ 2367      33315F47 
+ 2367      65744461 
+ 2367      74655469 
+ 2367      6D6500
+ 2368              	.LASF124:
+ 2369 088f 7274632E 		.ascii	"rtc.c\000"
+ 2369      6300
+ 2370              	.LASF103:
+ 2371 0895 7365636F 		.ascii	"seconds\000"
+ 2371      6E647300 
+ 2372              	.LASF104:
+ 2373 089d 6D696E75 		.ascii	"minutes\000"
+ 2373      74657300 
+ 2374              	.LASF111:
+ 2375 08a5 42434454 		.ascii	"BCDToDec\000"
+ 2375      6F446563 
+ 2375      00
+ 2376              	.LASF95:
+ 2377 08ae 4359424C 		.ascii	"CYBLE_DIS_SERIAL_NUMBER\000"
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 52
+
+
+ 2377      455F4449 
+ 2377      535F5345 
+ 2377      5249414C 
+ 2377      5F4E554D 
+ 2378              	.LASF1:
+ 2379 08c6 756E7369 		.ascii	"unsigned char\000"
+ 2379      676E6564 
+ 2379      20636861 
+ 2379      7200
+ 2380              	.LASF102:
+ 2381 08d4 4359424C 		.ascii	"CYBLE_DIS_CHAR_COUNT\000"
+ 2381      455F4449 
+ 2381      535F4348 
+ 2381      41525F43 
+ 2381      4F554E54 
+ 2382              	.LASF118:
+ 2383 08e9 63686970 		.ascii	"chip_rtc\000"
+ 2383      5F727463 
+ 2383      00
+ 2384              	.LASF2:
+ 2385 08f2 73686F72 		.ascii	"short int\000"
+ 2385      7420696E 
+ 2385      7400
+ 2386              	.LASF71:
+ 2387 08fc 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_IND\000"
+ 2387      455F4556 
+ 2387      545F4741 
+ 2387      5454435F 
+ 2387      48414E44 
+ 2388              	.LASF90:
+ 2389 091d 4359424C 		.ascii	"CYBLE_EVT_HCI_PKT\000"
+ 2389      455F4556 
+ 2389      545F4843 
+ 2389      495F504B 
+ 2389      5400
+ 2390              	.LASF98:
+ 2391 092f 4359424C 		.ascii	"CYBLE_DIS_SOFTWARE_REV\000"
+ 2391      455F4449 
+ 2391      535F534F 
+ 2391      46545741 
+ 2391      52455F52 
+ 2392              	.LASF67:
+ 2393 0946 4359424C 		.ascii	"CYBLE_EVT_GATTS_PREP_WRITE_REQ\000"
+ 2393      455F4556 
+ 2393      545F4741 
+ 2393      5454535F 
+ 2393      50524550 
+ 2394              	.LASF72:
+ 2395 0965 4359424C 		.ascii	"CYBLE_EVT_GATTS_HANDLE_VALUE_CNF\000"
+ 2395      455F4556 
+ 2395      545F4741 
+ 2395      5454535F 
+ 2395      48414E44 
+ 2396              	.LASF52:
+ 2397 0986 4359424C 		.ascii	"CYBLE_EVT_GATTC_ERROR_RSP\000"
+ 2397      455F4556 
+ 2397      545F4741 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 53
+
+
+ 2397      5454435F 
+ 2397      4552524F 
+ 2398              	.LASF47:
+ 2399 09a0 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_NEGOTIATED_AUTH_INFO\000"
+ 2399      455F4556 
+ 2399      545F4741 
+ 2399      505F534D 
+ 2399      505F4E45 
+ 2400              	.LASF110:
+ 2401 09c7 44656354 		.ascii	"DecToBCD\000"
+ 2401      6F424344 
+ 2401      00
+ 2402              	.LASF19:
+ 2403 09d0 6C6F6E67 		.ascii	"long double\000"
+ 2403      20646F75 
+ 2403      626C6500 
+ 2404              	.LASF91:
+ 2405 09dc 4359424C 		.ascii	"CYBLE_EVT_FLASH_CORRUPT\000"
+ 2405      455F4556 
+ 2405      545F464C 
+ 2405      4153485F 
+ 2405      434F5252 
+ 2406              	.LASF94:
+ 2407 09f4 4359424C 		.ascii	"CYBLE_DIS_MODEL_NUMBER\000"
+ 2407      455F4449 
+ 2407      535F4D4F 
+ 2407      44454C5F 
+ 2407      4E554D42 
+ 2408              	.LASF18:
+ 2409 0a0b 63686172 		.ascii	"char\000"
+ 2409      00
+ 2410              	.LASF36:
+ 2411 0a10 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_DISCONNECTED\000"
+ 2411      455F4556 
+ 2411      545F4741 
+ 2411      505F4445 
+ 2411      56494345 
+ 2412              	.LASF75:
+ 2413 0a32 4359424C 		.ascii	"CYBLE_EVT_GATTS_READ_CHAR_VAL_ACCESS_REQ\000"
+ 2413      455F4556 
+ 2413      545F4741 
+ 2413      5454535F 
+ 2413      52454144 
+ 2414              	.LASF42:
+ 2415 0a5b 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYPRESS_NOTIFICATION\000"
+ 2415      455F4556 
+ 2415      545F4741 
+ 2415      505F4B45 
+ 2415      59505245 
+ 2416              	.LASF86:
+ 2417 0a7f 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_TX_CREDIT_IND\000"
+ 2417      455F4556 
+ 2417      545F4C32 
+ 2417      4341505F 
+ 2417      43424643 
+ 2418              	.LASF62:
+ 2419 0aa2 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BLOB_RSP\000"
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 54
+
+
+ 2419      455F4556 
+ 2419      545F4741 
+ 2419      5454435F 
+ 2419      52454144 
+ 2420              	.LASF31:
+ 2421 0ac0 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_DISPLAY_REQUEST\000"
+ 2421      455F4556 
+ 2421      545F4741 
+ 2421      505F5041 
+ 2421      53534B45 
+ 2422              	.LASF24:
+ 2423 0ae6 4359424C 		.ascii	"CYBLE_EVT_HARDWARE_ERROR\000"
+ 2423      455F4556 
+ 2423      545F4841 
+ 2423      52445741 
+ 2423      52455F45 
+ 2424              	.LASF12:
+ 2425 0aff 75696E74 		.ascii	"uint32_t\000"
+ 2425      33325F74 
+ 2425      00
+ 2426              	.LASF125:
+ 2427 0b08 433A5C55 		.ascii	"C:\\Users\\alexport\\OneDrive - Safeguard Analytics"
+ 2427      73657273 
+ 2427      5C616C65 
+ 2427      78706F72 
+ 2427      745C4F6E 
+ 2428 0b38 5C53412D 		.ascii	"\\SA-220\\SA-220.cydsn\000"
+ 2428      3232305C 
+ 2428      53412D32 
+ 2428      32302E63 
+ 2428      7964736E 
+ 2429              	.LASF11:
+ 2430 0b4d 75696E74 		.ascii	"uint8_t\000"
+ 2430      385F7400 
+ 2431              	.LASF60:
+ 2432 0b55 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_BY_TYPE_VALUE_RSP\000"
+ 2432      455F4556 
+ 2432      545F4741 
+ 2432      5454435F 
+ 2432      46494E44 
+ 2433              	.LASF40:
+ 2434 0b7c 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYINFO_EXCHNGE_CMPLT\000"
+ 2434      455F4556 
+ 2434      545F4741 
+ 2434      505F4B45 
+ 2434      59494E46 
+ 2435              	.LASF82:
+ 2436 0ba0 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_IND\000"
+ 2436      455F4556 
+ 2436      545F4C32 
+ 2436      4341505F 
+ 2436      43424643 
+ 2437              	.LASF78:
+ 2438 0bc1 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_RSP\000"
+ 2438      455F4556 
+ 2438      545F4C32 
+ 2438      4341505F 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccMvG6ge.s 			page 55
+
+
+ 2438      434F4E4E 
+ 2439              	.LASF119:
+ 2440 0be7 77726974 		.ascii	"write_RTC\000"
+ 2440      655F5254 
+ 2440      4300
+ 2441              	.LASF45:
+ 2442 0bf1 4359424C 		.ascii	"CYBLE_EVT_GAP_ENHANCE_CONN_COMPLETE\000"
+ 2442      455F4556 
+ 2442      545F4741 
+ 2442      505F454E 
+ 2442      48414E43 
+ 2443              	.LASF93:
+ 2444 0c15 4359424C 		.ascii	"CYBLE_DIS_MANUFACTURER_NAME\000"
+ 2444      455F4449 
+ 2444      535F4D41 
+ 2444      4E554641 
+ 2444      43545552 
+ 2445              	.LASF122:
+ 2446 0c31 72657375 		.ascii	"result\000"
+ 2446      6C7400
+ 2447              	.LASF54:
+ 2448 0c38 4359424C 		.ascii	"CYBLE_EVT_GATT_DISCONNECT_IND\000"
+ 2448      455F4556 
+ 2448      545F4741 
+ 2448      54545F44 
+ 2448      4953434F 
+ 2449              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

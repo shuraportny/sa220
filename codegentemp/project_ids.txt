@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|6e228038-08b0-493a-99e2-3096ce3bcb52
+C:\Users\alexport\OneDrive - Safeguard Analytics\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|aed9dcf7-16b7-4aa4-9189-536a8d23de2f
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|0ff1257b-42fc-494a-a678-fc5a863a1002
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c646a382-a1c4-401e-a42b-dfac27c18178
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|5e3658fd-fe60-41e0-87da-77b19c8b464d
+C:\Users\alexport\OneDrive - Safeguard Analytics\SA-220\SA-220.cydsn\SA-220.cyprj|3afb9dae-a8b4-4fac-a388-4f7063223f9a

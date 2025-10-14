@@ -1,0 +1,1623 @@
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"PM_DMA_LimitUV.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.PM_DMA_LimitUV_ChEnable,"ax",%progbits
+  20              		.align	2
+  21              		.code	16
+  22              		.thumb_func
+  23              		.type	PM_DMA_LimitUV_ChEnable, %function
+  24              	PM_DMA_LimitUV_ChEnable:
+  25              	.LFB0:
+  26              		.file 1 "Generated_Source\\PSoC4\\PM_DMA_LimitUV.h"
+   1:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+   2:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * File Name: PM_DMA_LimitUV.h
+   3:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Version 1.0
+   4:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+   5:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Description:
+   6:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This file provides DMA channel defines and API function definitions.
+   7:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+   8:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+   9:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Copyright 2015, Cypress Semiconductor Corporation. All rights reserved.
+  10:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+  14:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  15:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** #ifndef CY_DMA_CHANNEL_PM_DMA_LimitUV_H
+  16:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** #define CY_DMA_CHANNEL_PM_DMA_LimitUV_H
+  17:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  18:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** #include "CyDMA.h"
+  19:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  20:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     
+  21:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /***************************************
+  22:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *   Conditional Compilation Parameters
+  23:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ***************************************/
+  24:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  25:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** #define PM_DMA_LimitUV_CHANNEL           (PM_DMA_LimitUV__CHANNEL_NUMBER)
+  26:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** #define PM_DMA_LimitUV_CHANNEL_MASK      ((uint32)(1UL << PM_DMA_LimitUV_CHANNEL))
+  27:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  28:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  29:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /***************************************
+  30:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *        Function Prototypes
+  31:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ***************************************/
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 2
+
+
+  32:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  33:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /* Functions specific to this DMA channel */
+  34:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** void PM_DMA_LimitUV_Init(void);
+  35:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** void PM_DMA_LimitUV_Start(void * srcAddress, void * dstAddress);
+  36:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  37:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /* Inline functions that call global API functions */
+  38:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_ChEnable(void);
+  39:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_ChDisable(void);
+  40:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_Trigger(void);
+  41:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetPriority(int32 priority);
+  42:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static int32  PM_DMA_LimitUV_GetPriority(void);
+  43:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetNextDescriptor(int32 descriptor);
+  44:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static int32  PM_DMA_LimitUV_GetNextDescriptor(void);
+  45:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetConfiguration(int32 descriptor, const cydma_init_struct * config);
+  46:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_ValidateDescriptor(int32 descriptor);
+  47:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetDescriptorStatus(int32 descriptor);
+  48:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetSrcAddress(int32 descriptor, void * srcAddress);
+  49:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void * PM_DMA_LimitUV_GetSrcAddress(int32 descriptor);
+  50:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetDstAddress(int32 descriptor, void * dstAddress);
+  51:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void * PM_DMA_LimitUV_GetDstAddress(int32 descriptor);
+  52:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetDataElementSize(int32 descriptor, uint32 dataElementSize);
+  53:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetDataElementSize(int32 descriptor);
+  54:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetNumDataElements(int32 descriptor, int32 numDataElements);
+  55:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static int32  PM_DMA_LimitUV_GetNumDataElements(int32 descriptor);
+  56:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetSrcDstTransferWidth(int32 descriptor, uint32 transferWidth);
+  57:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetSrcDstTransferWidth(int32 descriptor);
+  58:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetAddressIncrement(int32 descriptor, uint32 addressIncrement);
+  59:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetAddressIncrement(int32 descriptor);
+  60:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetTriggerType(int32 descriptor, uint32 triggerType);
+  61:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetTriggerType(int32 descriptor);
+  62:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetTransferMode(int32 descriptor, uint32 transferMode);
+  63:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetTransferMode(int32 descriptor);
+  64:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetPreemptable(int32 descriptor, uint32 preemptable);
+  65:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetPreemptable(int32 descriptor);
+  66:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static void   PM_DMA_LimitUV_SetPostCompletionActions(int32 descriptor, uint32 actions);
+  67:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static uint32 PM_DMA_LimitUV_GetPostCompletionAction(int32 descriptor);
+  68:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static cydma_callback_t PM_DMA_LimitUV_SetInterruptCallback(cydma_callback_t callback);
+  69:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static cydma_callback_t PM_DMA_LimitUV_GetInterruptCallback(void);
+  70:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  71:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  72:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+  73:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_ChEnable
+  74:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+  75:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+  76:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+  77:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Enables the DMA channel. It is not necessary to call PM_DMA_LimitUV_ChEnable()
+  78:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  because the PM_DMA_LimitUV_Start() API calls this function, which is the
+  79:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  preferred method to begin the component operation.
+  80:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+  81:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+  82:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+  83:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+  84:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+  85:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+  86:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+  87:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+  88:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  If this function is called before PM_DMA_LimitUV_Start(), or PM_DMA_LimitUV_Init()
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 3
+
+
+  89:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  or PM_DMA_LimitUV_SetConfiguration(), and PM_DMA_LimitUV_SetSrcAddress()
+  90:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  and PM_DMA_LimitUV_SetDstAddress the operation of the DMA is 
+  91:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  undefined and could result in system data corruption. 
+  92:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+  93:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+  94:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_ChEnable(void)
+  95:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+  27              		.loc 1 95 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  96:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaChEnable(PM_DMA_LimitUV_CHANNEL);
+  37              		.loc 1 96 0
+  38 0004 0220     		movs	r0, #2
+  39 0006 FFF7FEFF 		bl	CyDmaChEnable
+  97:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+  40              		.loc 1 97 0
+  41 000a C046     		nop
+  42 000c BD46     		mov	sp, r7
+  43              		@ sp needed
+  44 000e 80BD     		pop	{r7, pc}
+  45              		.cfi_endproc
+  46              	.LFE0:
+  47              		.size	PM_DMA_LimitUV_ChEnable, .-PM_DMA_LimitUV_ChEnable
+  48              		.section	.text.PM_DMA_LimitUV_ValidateDescriptor,"ax",%progbits
+  49              		.align	2
+  50              		.code	16
+  51              		.thumb_func
+  52              		.type	PM_DMA_LimitUV_ValidateDescriptor, %function
+  53              	PM_DMA_LimitUV_ValidateDescriptor:
+  54              	.LFB8:
+  98:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+  99:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 100:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 101:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_ChDisable
+ 102:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 103:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 104:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 105:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Disables the DMA channel.
+ 106:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 107:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 108:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 109:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 110:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 111:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 112:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 113:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 114:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  If this function is called during a DMA transfer the transfer is aborted. 
+ 115:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 116:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 117:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_ChDisable(void)
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 4
+
+
+ 118:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 119:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaChDisable(PM_DMA_LimitUV_CHANNEL);
+ 120:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 121:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 122:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 123:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 124:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_Trigger
+ 125:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 126:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 127:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 128:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Triggers the DMA channel, this is useful only for software triggers. This is
+ 129:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  not needed when hardware triggers are used.
+ 130:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 131:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 132:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 133:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 134:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 135:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None. 
+ 136:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 137:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 138:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_Trigger(void)
+ 139:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 140:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaTrigger(PM_DMA_LimitUV_CHANNEL);
+ 141:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 142:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 143:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 144:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 145:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_SetPriority
+ 146:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 147:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 148:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 149:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Sets the priority for the channel.
+ 150:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 151:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 152:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  priority: Priority for channel. Priority can be 0,1,2, or 3.
+ 153:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *            0 is the highest priority.
+ 154:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 155:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 156:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 157:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 158:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 159:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This function should not be called while the channel is enabled.
+ 160:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 161:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 162:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_SetPriority(int32 priority)
+ 163:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 164:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaSetPriority(PM_DMA_LimitUV_CHANNEL, priority);
+ 165:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 166:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 167:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 168:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 169:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_GetPriority
+ 170:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 171:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 172:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 173:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Gets the priority for the channel.
+ 174:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 5
+
+
+ 175:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 176:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 177:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 178:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 179:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Priority for channel. Priority can be 0,1,2, or 3. 0 is the highest priority.
+ 180:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 181:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 182:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE int32 PM_DMA_LimitUV_GetPriority(void)
+ 183:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 184:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     return (CyDmaGetPriority(PM_DMA_LimitUV_CHANNEL));
+ 185:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 186:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 187:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 188:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 189:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_SetNextDescriptor
+ 190:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 191:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 192:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 193:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Sets the descriptor that should be run the next time the channel is
+ 194:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  triggered.
+ 195:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 196:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 197:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Next Descriptor to run (0 or 1).
+ 198:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 199:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 200:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This function should not be called while the channel is enabled.
+ 201:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 202:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 203:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_SetNextDescriptor(int32 descriptor)
+ 204:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 205:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaSetNextDescriptor(PM_DMA_LimitUV_CHANNEL, descriptor);
+ 206:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 207:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 208:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 209:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 210:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_GetNextDescriptor
+ 211:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 212:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 213:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 214:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Returns the next descriptor that should be run, as set by 
+ 215:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  PM_DMA_LimitUV_SetNextDescriptor().
+ 216:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 217:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 218:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 219:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 220:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 221:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Next Descriptor to run (0 or 1).
+ 222:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 223:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 224:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE int32 PM_DMA_LimitUV_GetNextDescriptor(void)
+ 225:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 226:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     return (CyDmaGetNextDescriptor(PM_DMA_LimitUV_CHANNEL));
+ 227:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 228:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 229:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 230:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 231:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_SetConfiguration
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 6
+
+
+ 232:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 233:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 234:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 235:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Sets configuration information for the specified descriptor.
+ 236:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 237:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 238:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Descriptor (0 or 1) modified by this function.
+ 239:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  config: Pointer to a configuration structure. Refer to cydma_init_struct
+ 240:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *          structure definition in CyDMA_P4.h or the component datasheet.
+ 241:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 242:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 243:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 244:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 245:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 246:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  The status register associated with the specified descriptor is reset to
+ 247:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  zero after this function call. This function also validates the descriptor.
+ 248:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This function should not be called while the descriptor is active.
+ 249:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This can be checked by calling CyDmaGetStatus().
+ 250:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 251:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 252:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_SetConfiguration(int32 descriptor, const cydma_init_struct * c
+ 253:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 254:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaSetConfiguration(PM_DMA_LimitUV_CHANNEL, descriptor, config);
+ 255:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 256:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 257:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 258:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 259:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_ValidateDescriptor
+ 260:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 261:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 262:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 263:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Validates the specified descriptor after it has been invalidated.
+ 264:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 265:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 266:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Descriptor (0 or 1) modified by this function.
+ 267:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 268:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 269:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None. 
+ 270:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 271:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 272:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  The status register associated with the specified descriptor is reset to
+ 273:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  zero after this function call. This function should not be called while the
+ 274:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor is active. This can be checked by calling CyDmaGetStatus().
+ 275:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 276:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 277:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_ValidateDescriptor(int32 descriptor)
+ 278:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+  55              		.loc 1 278 0
+  56              		.cfi_startproc
+  57              		@ args = 0, pretend = 0, frame = 8
+  58              		@ frame_needed = 1, uses_anonymous_args = 0
+  59 0000 80B5     		push	{r7, lr}
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 7, -8
+  62              		.cfi_offset 14, -4
+  63 0002 82B0     		sub	sp, sp, #8
+  64              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 7
+
+
+  65 0004 00AF     		add	r7, sp, #0
+  66              		.cfi_def_cfa_register 7
+  67 0006 7860     		str	r0, [r7, #4]
+ 279:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaValidateDescriptor(PM_DMA_LimitUV_CHANNEL, descriptor);
+  68              		.loc 1 279 0
+  69 0008 7B68     		ldr	r3, [r7, #4]
+  70 000a 1900     		movs	r1, r3
+  71 000c 0220     		movs	r0, #2
+  72 000e FFF7FEFF 		bl	CyDmaValidateDescriptor
+ 280:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+  73              		.loc 1 280 0
+  74 0012 C046     		nop
+  75 0014 BD46     		mov	sp, r7
+  76 0016 02B0     		add	sp, sp, #8
+  77              		@ sp needed
+  78 0018 80BD     		pop	{r7, pc}
+  79              		.cfi_endproc
+  80              	.LFE8:
+  81              		.size	PM_DMA_LimitUV_ValidateDescriptor, .-PM_DMA_LimitUV_ValidateDescriptor
+  82 001a C046     		.section	.text.PM_DMA_LimitUV_SetSrcAddress,"ax",%progbits
+  83              		.align	2
+  84              		.code	16
+  85              		.thumb_func
+  86              		.type	PM_DMA_LimitUV_SetSrcAddress, %function
+  87              	PM_DMA_LimitUV_SetSrcAddress:
+  88              	.LFB10:
+ 281:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 282:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 283:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 284:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_GetDescriptorStatus
+ 285:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 286:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 287:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 288:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Returns the status of the specified descriptor.
+ 289:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 290:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 291:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Descriptor (0 or 1) modified by this function.
+ 292:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 293:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 294:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Returns the contents of the specified descriptors status register. Refer to 
+ 295:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor status register bit definitions in CyDMA_P4.h or the API
+ 296:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  description in the DMA channel datasheet for more information.
+ 297:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 298:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 299:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE uint32 PM_DMA_LimitUV_GetDescriptorStatus(int32 descriptor)
+ 300:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 301:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     return (CyDmaGetDescriptorStatus(PM_DMA_LimitUV_CHANNEL, descriptor));
+ 302:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 303:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 304:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 305:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 306:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_SetSrcAddress
+ 307:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 308:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 309:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 310:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Configures the source address for the specified descriptor.
+ 311:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 8
+
+
+ 312:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 313:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Descriptor (0 or 1) modified by this function.
+ 314:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  srcAddress: Address of DMA transfer source.
+ 315:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 316:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 317:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 318:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 319:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 320:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This function should not be called when the specified descriptor is active
+ 321:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  in the DMA transfer engine. This can be checked by calling CyDmaGetStatus(). 
+ 322:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 323:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 324:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_SetSrcAddress(int32 descriptor, void * srcAddress)
+ 325:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+  89              		.loc 1 325 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 8
+  92              		@ frame_needed = 1, uses_anonymous_args = 0
+  93 0000 80B5     		push	{r7, lr}
+  94              		.cfi_def_cfa_offset 8
+  95              		.cfi_offset 7, -8
+  96              		.cfi_offset 14, -4
+  97 0002 82B0     		sub	sp, sp, #8
+  98              		.cfi_def_cfa_offset 16
+  99 0004 00AF     		add	r7, sp, #0
+ 100              		.cfi_def_cfa_register 7
+ 101 0006 7860     		str	r0, [r7, #4]
+ 102 0008 3960     		str	r1, [r7]
+ 326:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaSetSrcAddress(PM_DMA_LimitUV_CHANNEL, descriptor, srcAddress);
+ 103              		.loc 1 326 0
+ 104 000a 3A68     		ldr	r2, [r7]
+ 105 000c 7B68     		ldr	r3, [r7, #4]
+ 106 000e 1900     		movs	r1, r3
+ 107 0010 0220     		movs	r0, #2
+ 108 0012 FFF7FEFF 		bl	CyDmaSetSrcAddress
+ 327:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 109              		.loc 1 327 0
+ 110 0016 C046     		nop
+ 111 0018 BD46     		mov	sp, r7
+ 112 001a 02B0     		add	sp, sp, #8
+ 113              		@ sp needed
+ 114 001c 80BD     		pop	{r7, pc}
+ 115              		.cfi_endproc
+ 116              	.LFE10:
+ 117              		.size	PM_DMA_LimitUV_SetSrcAddress, .-PM_DMA_LimitUV_SetSrcAddress
+ 118 001e C046     		.section	.text.PM_DMA_LimitUV_SetDstAddress,"ax",%progbits
+ 119              		.align	2
+ 120              		.code	16
+ 121              		.thumb_func
+ 122              		.type	PM_DMA_LimitUV_SetDstAddress, %function
+ 123              	PM_DMA_LimitUV_SetDstAddress:
+ 124              	.LFB12:
+ 328:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 329:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 330:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 331:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_GetSrcAddress
+ 332:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 9
+
+
+ 333:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 334:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 335:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Returns the source address for the specified descriptor, set by either 
+ 336:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  PM_DMA_LimitUV_Start() or PM_DMA_LimitUV_SetSrcAddress().
+ 337:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 338:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 339:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Specifies descriptor (0 or 1) used by this function.
+ 340:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 341:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 342:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Source address written to specified descriptor.
+ 343:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 344:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 345:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void * PM_DMA_LimitUV_GetSrcAddress(int32 descriptor)
+ 346:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 347:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     return (CyDmaGetSrcAddress(PM_DMA_LimitUV_CHANNEL, descriptor));
+ 348:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 349:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 350:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** 
+ 351:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** /*******************************************************************************
+ 352:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Function Name: PM_DMA_LimitUV_SetDstAddress
+ 353:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** ********************************************************************************
+ 354:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 355:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Summary:
+ 356:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  Configures the destination address for the specified descriptor.
+ 357:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 358:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Parameters:
+ 359:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  descriptor: Descriptor (0 or 1) modified by this function.
+ 360:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  dstAddress: Address of DMA transfer destination.
+ 361:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *                   
+ 362:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Return:
+ 363:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  None.
+ 364:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 365:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** * Side effect:
+ 366:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  This function should not be called when the specified descriptor is active
+ 367:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *  in the DMA transfer engine. This can be checked by calling CyDmaGetStatus(). 
+ 368:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *
+ 369:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** *******************************************************************************/
+ 370:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** static CY_INLINE void PM_DMA_LimitUV_SetDstAddress(int32 descriptor, void * dstAddress)
+ 371:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** {
+ 125              		.loc 1 371 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 8
+ 128              		@ frame_needed = 1, uses_anonymous_args = 0
+ 129 0000 80B5     		push	{r7, lr}
+ 130              		.cfi_def_cfa_offset 8
+ 131              		.cfi_offset 7, -8
+ 132              		.cfi_offset 14, -4
+ 133 0002 82B0     		sub	sp, sp, #8
+ 134              		.cfi_def_cfa_offset 16
+ 135 0004 00AF     		add	r7, sp, #0
+ 136              		.cfi_def_cfa_register 7
+ 137 0006 7860     		str	r0, [r7, #4]
+ 138 0008 3960     		str	r1, [r7]
+ 372:Generated_Source\PSoC4/PM_DMA_LimitUV.h ****     CyDmaSetDstAddress(PM_DMA_LimitUV_CHANNEL, descriptor, dstAddress);
+ 139              		.loc 1 372 0
+ 140 000a 3A68     		ldr	r2, [r7]
+ 141 000c 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 10
+
+
+ 142 000e 1900     		movs	r1, r3
+ 143 0010 0220     		movs	r0, #2
+ 144 0012 FFF7FEFF 		bl	CyDmaSetDstAddress
+ 373:Generated_Source\PSoC4/PM_DMA_LimitUV.h **** }
+ 145              		.loc 1 373 0
+ 146 0016 C046     		nop
+ 147 0018 BD46     		mov	sp, r7
+ 148 001a 02B0     		add	sp, sp, #8
+ 149              		@ sp needed
+ 150 001c 80BD     		pop	{r7, pc}
+ 151              		.cfi_endproc
+ 152              	.LFE12:
+ 153              		.size	PM_DMA_LimitUV_SetDstAddress, .-PM_DMA_LimitUV_SetDstAddress
+ 154              		.global	PM_DMA_LimitUV_initVar
+ 155 001e C046     		.bss
+ 156              		.type	PM_DMA_LimitUV_initVar, %object
+ 157              		.size	PM_DMA_LimitUV_initVar, 1
+ 158              	PM_DMA_LimitUV_initVar:
+ 159 0000 00       		.space	1
+ 160              		.section	.text.PM_DMA_LimitUV_Start,"ax",%progbits
+ 161              		.align	2
+ 162              		.global	PM_DMA_LimitUV_Start
+ 163              		.code	16
+ 164              		.thumb_func
+ 165              		.type	PM_DMA_LimitUV_Start, %function
+ 166              	PM_DMA_LimitUV_Start:
+ 167              	.LFB32:
+ 168              		.file 2 "Generated_Source\\PSoC4\\PM_DMA_LimitUV.c"
+   1:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** /*******************************************************************************
+   2:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * File Name: PM_DMA_LimitUV.h
+   3:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Version 1.0
+   4:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+   5:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Description:
+   6:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  This file contains all of the channel DMA API functions.
+   7:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+   8:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** ********************************************************************************
+   9:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Copyright 2015, Cypress Semiconductor Corporation. All rights reserved.
+  10:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * You may use this file only in accordance with the license, terms, conditions,
+  11:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  12:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * the software package with which this file was provided.
+  13:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *******************************************************************************/
+  14:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  15:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** #include "PM_DMA_LimitUV.h"
+  16:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  17:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** uint8 PM_DMA_LimitUV_initVar = 0u;
+  18:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  19:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  20:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** /*******************************************************************************
+  21:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Function Name: PM_DMA_LimitUV_Start
+  22:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** ********************************************************************************
+  23:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  24:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Summary:
+  25:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  Calls Init() to configure the DMA channel based on the customizer settings if
+  26:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  the channel has not been initialized before.
+  27:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  Sets source and destination address, validates descriptor 0 and enables the
+  28:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  channel. After calling this function the DMA channel is active and waiting
+  29:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  for a trigger.
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 11
+
+
+  30:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  31:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Parameters:
+  32:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  srcAddress: Address of DMA transfer source for descriptor 0.
+  33:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  dstAddress: Address of DMA transfer destination for descriptor 0.
+  34:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *                   
+  35:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Return:
+  36:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  None.
+  37:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  38:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *******************************************************************************/
+  39:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** void PM_DMA_LimitUV_Start(void * srcAddress, void * dstAddress)
+  40:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** {
+ 169              		.loc 2 40 0
+ 170              		.cfi_startproc
+ 171              		@ args = 0, pretend = 0, frame = 8
+ 172              		@ frame_needed = 1, uses_anonymous_args = 0
+ 173 0000 80B5     		push	{r7, lr}
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 7, -8
+ 176              		.cfi_offset 14, -4
+ 177 0002 82B0     		sub	sp, sp, #8
+ 178              		.cfi_def_cfa_offset 16
+ 179 0004 00AF     		add	r7, sp, #0
+ 180              		.cfi_def_cfa_register 7
+ 181 0006 7860     		str	r0, [r7, #4]
+ 182 0008 3960     		str	r1, [r7]
+  41:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     if(0u == PM_DMA_LimitUV_initVar)
+ 183              		.loc 2 41 0
+ 184 000a 0F4B     		ldr	r3, .L7
+ 185 000c 1B78     		ldrb	r3, [r3]
+ 186 000e 002B     		cmp	r3, #0
+ 187 0010 04D1     		bne	.L6
+  42:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     {
+  43:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****         PM_DMA_LimitUV_Init();
+ 188              		.loc 2 43 0
+ 189 0012 FFF7FEFF 		bl	PM_DMA_LimitUV_Init
+  44:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****         PM_DMA_LimitUV_initVar = 1u;
+ 190              		.loc 2 44 0
+ 191 0016 0C4B     		ldr	r3, .L7
+ 192 0018 0122     		movs	r2, #1
+ 193 001a 1A70     		strb	r2, [r3]
+ 194              	.L6:
+  45:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     }
+  46:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     CyDmaEnable();
+ 195              		.loc 2 46 0
+ 196 001c FFF7FEFF 		bl	CyDmaEnable
+  47:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     PM_DMA_LimitUV_SetSrcAddress(0, srcAddress);
+ 197              		.loc 2 47 0
+ 198 0020 7B68     		ldr	r3, [r7, #4]
+ 199 0022 1900     		movs	r1, r3
+ 200 0024 0020     		movs	r0, #0
+ 201 0026 FFF7FEFF 		bl	PM_DMA_LimitUV_SetSrcAddress
+  48:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     PM_DMA_LimitUV_SetDstAddress(0, dstAddress);
+ 202              		.loc 2 48 0
+ 203 002a 3B68     		ldr	r3, [r7]
+ 204 002c 1900     		movs	r1, r3
+ 205 002e 0020     		movs	r0, #0
+ 206 0030 FFF7FEFF 		bl	PM_DMA_LimitUV_SetDstAddress
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 12
+
+
+  49:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     PM_DMA_LimitUV_ValidateDescriptor(0);
+ 207              		.loc 2 49 0
+ 208 0034 0020     		movs	r0, #0
+ 209 0036 FFF7FEFF 		bl	PM_DMA_LimitUV_ValidateDescriptor
+  50:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     PM_DMA_LimitUV_ChEnable();
+ 210              		.loc 2 50 0
+ 211 003a FFF7FEFF 		bl	PM_DMA_LimitUV_ChEnable
+  51:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** }
+ 212              		.loc 2 51 0
+ 213 003e C046     		nop
+ 214 0040 BD46     		mov	sp, r7
+ 215 0042 02B0     		add	sp, sp, #8
+ 216              		@ sp needed
+ 217 0044 80BD     		pop	{r7, pc}
+ 218              	.L8:
+ 219 0046 C046     		.align	2
+ 220              	.L7:
+ 221 0048 00000000 		.word	PM_DMA_LimitUV_initVar
+ 222              		.cfi_endproc
+ 223              	.LFE32:
+ 224              		.size	PM_DMA_LimitUV_Start, .-PM_DMA_LimitUV_Start
+ 225              		.section	.text.PM_DMA_LimitUV_Init,"ax",%progbits
+ 226              		.align	2
+ 227              		.global	PM_DMA_LimitUV_Init
+ 228              		.code	16
+ 229              		.thumb_func
+ 230              		.type	PM_DMA_LimitUV_Init, %function
+ 231              	PM_DMA_LimitUV_Init:
+ 232              	.LFB33:
+  52:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  53:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  54:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** /*******************************************************************************
+  55:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Function Name: PM_DMA_LimitUV_Init
+  56:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** ********************************************************************************
+  57:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  58:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Summary:
+  59:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  Initializes the DMA channel based on the parameters set in the component
+  60:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  customizer. It is not necessary to call PM_DMA_LimitUV_Init() because the
+  61:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  PM_DMA_LimitUV_Start() API calls this function, which is the preferred method
+  62:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  to begin component operation.
+  63:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  64:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Parameters:
+  65:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  None.
+  66:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *                   
+  67:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Return:
+  68:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  None.
+  69:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  70:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** * Side effect:
+  71:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  The first descriptor is set to descriptor 0. This function should not be
+  72:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  called while the channel is enabled. All settings will be reset to their
+  73:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *  initial values.
+  74:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *
+  75:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** *******************************************************************************/
+  76:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** void PM_DMA_LimitUV_Init(void)
+  77:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** {
+ 233              		.loc 2 77 0
+ 234              		.cfi_startproc
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 13
+
+
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 1, uses_anonymous_args = 0
+ 237 0000 80B5     		push	{r7, lr}
+ 238              		.cfi_def_cfa_offset 8
+ 239              		.cfi_offset 7, -8
+ 240              		.cfi_offset 14, -4
+ 241 0002 00AF     		add	r7, sp, #0
+ 242              		.cfi_def_cfa_register 7
+  78:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     CYDMA_CH_CTL_BASE.ctl[PM_DMA_LimitUV_CHANNEL] = PM_DMA_LimitUV_CHANNEL_CFG;
+ 243              		.loc 2 78 0
+ 244 0004 064B     		ldr	r3, .L10
+ 245 0006 C022     		movs	r2, #192
+ 246 0008 9205     		lsls	r2, r2, #22
+ 247 000a 9A60     		str	r2, [r3, #8]
+  79:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     CYDMA_DESCR_BASE.descriptor[PM_DMA_LimitUV_CHANNEL][0].ctl = PM_DMA_LimitUV_DESCR0_CFG;
+ 248              		.loc 2 79 0
+ 249 000c 054B     		ldr	r3, .L10+4
+ 250 000e 8122     		movs	r2, #129
+ 251 0010 1204     		lsls	r2, r2, #16
+ 252 0012 9A64     		str	r2, [r3, #72]
+  80:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     CYDMA_DESCR_BASE.descriptor[PM_DMA_LimitUV_CHANNEL][1].ctl = PM_DMA_LimitUV_DESCR1_CFG;
+ 253              		.loc 2 80 0
+ 254 0014 034B     		ldr	r3, .L10+4
+ 255 0016 0022     		movs	r2, #0
+ 256 0018 9A65     		str	r2, [r3, #88]
+  81:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** 
+  82:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     /* If the Generate IRQ option is selected for descriptor 0 or 1, set the
+  83:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     * channel bit field in the DMA interrupt mask register.
+  84:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     */
+  85:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     #if (0u != ((PM_DMA_LimitUV_DESCR0_CFG | PM_DMA_LimitUV_DESCR1_CFG) & CYDMA_GENERATE_IRQ))
+  86:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****         CYDMA_INTR_MASK_REG |= PM_DMA_LimitUV_CHANNEL_MASK;
+  87:Generated_Source\PSoC4/PM_DMA_LimitUV.c ****     #endif /* (0u != ((PM_DMA_LimitUV_DESCR0_CFG | PM_DMA_LimitUV_DESCR1_CFG) & CYDMA_GENERATE_IRQ)
+  88:Generated_Source\PSoC4/PM_DMA_LimitUV.c **** }
+ 257              		.loc 2 88 0
+ 258 001a C046     		nop
+ 259 001c BD46     		mov	sp, r7
+ 260              		@ sp needed
+ 261 001e 80BD     		pop	{r7, pc}
+ 262              	.L11:
+ 263              		.align	2
+ 264              	.L10:
+ 265 0020 80101040 		.word	1074794624
+ 266 0024 00181040 		.word	1074796544
+ 267              		.cfi_endproc
+ 268              	.LFE33:
+ 269              		.size	PM_DMA_LimitUV_Init, .-PM_DMA_LimitUV_Init
+ 270              		.text
+ 271              	.Letext0:
+ 272              		.file 3 "Generated_Source\\PSoC4\\cytypes.h"
+ 273              		.file 4 "Generated_Source\\PSoC4\\CyDMA.h"
+ 274              		.section	.debug_info,"",%progbits
+ 275              	.Ldebug_info0:
+ 276 0000 4A020000 		.4byte	0x24a
+ 277 0004 0400     		.2byte	0x4
+ 278 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 279 000a 04       		.byte	0x4
+ 280 000b 01       		.uleb128 0x1
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 14
+
+
+ 281 000c 10010000 		.4byte	.LASF26
+ 282 0010 0C       		.byte	0xc
+ 283 0011 BC000000 		.4byte	.LASF27
+ 284 0015 3B000000 		.4byte	.LASF28
+ 285 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 286 001d 00000000 		.4byte	0
+ 287 0021 00000000 		.4byte	.Ldebug_line0
+ 288 0025 02       		.uleb128 0x2
+ 289 0026 01       		.byte	0x1
+ 290 0027 06       		.byte	0x6
+ 291 0028 C0010000 		.4byte	.LASF0
+ 292 002c 02       		.uleb128 0x2
+ 293 002d 01       		.byte	0x1
+ 294 002e 08       		.byte	0x8
+ 295 002f B2010000 		.4byte	.LASF1
+ 296 0033 02       		.uleb128 0x2
+ 297 0034 02       		.byte	0x2
+ 298 0035 05       		.byte	0x5
+ 299 0036 28000000 		.4byte	.LASF2
+ 300 003a 02       		.uleb128 0x2
+ 301 003b 02       		.byte	0x2
+ 302 003c 07       		.byte	0x7
+ 303 003d F0010000 		.4byte	.LASF3
+ 304 0041 02       		.uleb128 0x2
+ 305 0042 04       		.byte	0x4
+ 306 0043 05       		.byte	0x5
+ 307 0044 F2000000 		.4byte	.LASF4
+ 308 0048 02       		.uleb128 0x2
+ 309 0049 04       		.byte	0x4
+ 310 004a 07       		.byte	0x7
+ 311 004b 72020000 		.4byte	.LASF5
+ 312 004f 02       		.uleb128 0x2
+ 313 0050 08       		.byte	0x8
+ 314 0051 05       		.byte	0x5
+ 315 0052 E4000000 		.4byte	.LASF6
+ 316 0056 02       		.uleb128 0x2
+ 317 0057 08       		.byte	0x8
+ 318 0058 07       		.byte	0x7
+ 319 0059 CC010000 		.4byte	.LASF7
+ 320 005d 03       		.uleb128 0x3
+ 321 005e 04       		.byte	0x4
+ 322 005f 05       		.byte	0x5
+ 323 0060 696E7400 		.ascii	"int\000"
+ 324 0064 02       		.uleb128 0x2
+ 325 0065 04       		.byte	0x4
+ 326 0066 07       		.byte	0x7
+ 327 0067 E3010000 		.4byte	.LASF8
+ 328 006b 04       		.uleb128 0x4
+ 329 006c B0000000 		.4byte	.LASF9
+ 330 0070 03       		.byte	0x3
+ 331 0071 FC01     		.2byte	0x1fc
+ 332 0073 2C000000 		.4byte	0x2c
+ 333 0077 04       		.uleb128 0x4
+ 334 0078 6B020000 		.4byte	.LASF10
+ 335 007c 03       		.byte	0x3
+ 336 007d FE01     		.2byte	0x1fe
+ 337 007f 48000000 		.4byte	0x48
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 15
+
+
+ 338 0083 04       		.uleb128 0x4
+ 339 0084 84020000 		.4byte	.LASF11
+ 340 0088 03       		.byte	0x3
+ 341 0089 0102     		.2byte	0x201
+ 342 008b 41000000 		.4byte	0x41
+ 343 008f 02       		.uleb128 0x2
+ 344 0090 04       		.byte	0x4
+ 345 0091 04       		.byte	0x4
+ 346 0092 B6000000 		.4byte	.LASF12
+ 347 0096 02       		.uleb128 0x2
+ 348 0097 08       		.byte	0x8
+ 349 0098 04       		.byte	0x4
+ 350 0099 8A020000 		.4byte	.LASF13
+ 351 009d 02       		.uleb128 0x2
+ 352 009e 01       		.byte	0x1
+ 353 009f 08       		.byte	0x8
+ 354 00a0 26020000 		.4byte	.LASF14
+ 355 00a4 05       		.uleb128 0x5
+ 356 00a5 20       		.byte	0x20
+ 357 00a6 04       		.byte	0x4
+ 358 00a7 26       		.byte	0x26
+ 359 00a8 B9000000 		.4byte	0xb9
+ 360 00ac 06       		.uleb128 0x6
+ 361 00ad 63746C00 		.ascii	"ctl\000"
+ 362 00b1 04       		.byte	0x4
+ 363 00b2 28       		.byte	0x28
+ 364 00b3 B9000000 		.4byte	0xb9
+ 365 00b7 00       		.byte	0
+ 366 00b8 00       		.byte	0
+ 367 00b9 07       		.uleb128 0x7
+ 368 00ba 77000000 		.4byte	0x77
+ 369 00be C9000000 		.4byte	0xc9
+ 370 00c2 08       		.uleb128 0x8
+ 371 00c3 C9000000 		.4byte	0xc9
+ 372 00c7 07       		.byte	0x7
+ 373 00c8 00       		.byte	0
+ 374 00c9 02       		.uleb128 0x2
+ 375 00ca 04       		.byte	0x4
+ 376 00cb 07       		.byte	0x7
+ 377 00cc 32000000 		.4byte	.LASF15
+ 378 00d0 09       		.uleb128 0x9
+ 379 00d1 97000000 		.4byte	.LASF16
+ 380 00d5 04       		.byte	0x4
+ 381 00d6 29       		.byte	0x29
+ 382 00d7 A4000000 		.4byte	0xa4
+ 383 00db 05       		.uleb128 0x5
+ 384 00dc 10       		.byte	0x10
+ 385 00dd 04       		.byte	0x4
+ 386 00de 2C       		.byte	0x2c
+ 387 00df 14010000 		.4byte	0x114
+ 388 00e3 06       		.uleb128 0x6
+ 389 00e4 73726300 		.ascii	"src\000"
+ 390 00e8 04       		.byte	0x4
+ 391 00e9 2E       		.byte	0x2e
+ 392 00ea 14010000 		.4byte	0x114
+ 393 00ee 00       		.byte	0
+ 394 00ef 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 16
+
+
+ 395 00f0 64737400 		.ascii	"dst\000"
+ 396 00f4 04       		.byte	0x4
+ 397 00f5 2F       		.byte	0x2f
+ 398 00f6 14010000 		.4byte	0x114
+ 399 00fa 04       		.byte	0x4
+ 400 00fb 06       		.uleb128 0x6
+ 401 00fc 63746C00 		.ascii	"ctl\000"
+ 402 0100 04       		.byte	0x4
+ 403 0101 30       		.byte	0x30
+ 404 0102 77000000 		.4byte	0x77
+ 405 0106 08       		.byte	0x8
+ 406 0107 0A       		.uleb128 0xa
+ 407 0108 03020000 		.4byte	.LASF17
+ 408 010c 04       		.byte	0x4
+ 409 010d 31       		.byte	0x31
+ 410 010e 77000000 		.4byte	0x77
+ 411 0112 0C       		.byte	0xc
+ 412 0113 00       		.byte	0
+ 413 0114 0B       		.uleb128 0xb
+ 414 0115 04       		.byte	0x4
+ 415 0116 09       		.uleb128 0x9
+ 416 0117 2B020000 		.4byte	.LASF18
+ 417 011b 04       		.byte	0x4
+ 418 011c 32       		.byte	0x32
+ 419 011d DB000000 		.4byte	0xdb
+ 420 0121 0C       		.uleb128 0xc
+ 421 0122 0001     		.2byte	0x100
+ 422 0124 04       		.byte	0x4
+ 423 0125 38       		.byte	0x38
+ 424 0126 37010000 		.4byte	0x137
+ 425 012a 0A       		.uleb128 0xa
+ 426 012b CB020000 		.4byte	.LASF19
+ 427 012f 04       		.byte	0x4
+ 428 0130 3A       		.byte	0x3a
+ 429 0131 37010000 		.4byte	0x137
+ 430 0135 00       		.byte	0
+ 431 0136 00       		.byte	0
+ 432 0137 07       		.uleb128 0x7
+ 433 0138 16010000 		.4byte	0x116
+ 434 013c 4D010000 		.4byte	0x14d
+ 435 0140 08       		.uleb128 0x8
+ 436 0141 C9000000 		.4byte	0xc9
+ 437 0145 07       		.byte	0x7
+ 438 0146 08       		.uleb128 0x8
+ 439 0147 C9000000 		.4byte	0xc9
+ 440 014b 01       		.byte	0x1
+ 441 014c 00       		.byte	0
+ 442 014d 09       		.uleb128 0x9
+ 443 014e 0A020000 		.4byte	.LASF20
+ 444 0152 04       		.byte	0x4
+ 445 0153 3B       		.byte	0x3b
+ 446 0154 21010000 		.4byte	0x121
+ 447 0158 0D       		.uleb128 0xd
+ 448 0159 B3020000 		.4byte	.LASF29
+ 449 015d 01       		.byte	0x1
+ 450 015e 5E       		.byte	0x5e
+ 451 015f 00000000 		.4byte	.LFB0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 17
+
+
+ 452 0163 10000000 		.4byte	.LFE0-.LFB0
+ 453 0167 01       		.uleb128 0x1
+ 454 0168 9C       		.byte	0x9c
+ 455 0169 0E       		.uleb128 0xe
+ 456 016a 91020000 		.4byte	.LASF21
+ 457 016e 01       		.byte	0x1
+ 458 016f 1501     		.2byte	0x115
+ 459 0171 00000000 		.4byte	.LFB8
+ 460 0175 1A000000 		.4byte	.LFE8-.LFB8
+ 461 0179 01       		.uleb128 0x1
+ 462 017a 9C       		.byte	0x9c
+ 463 017b 8F010000 		.4byte	0x18f
+ 464 017f 0F       		.uleb128 0xf
+ 465 0180 CB020000 		.4byte	.LASF19
+ 466 0184 01       		.byte	0x1
+ 467 0185 1501     		.2byte	0x115
+ 468 0187 83000000 		.4byte	0x83
+ 469 018b 02       		.uleb128 0x2
+ 470 018c 91       		.byte	0x91
+ 471 018d 74       		.sleb128 -12
+ 472 018e 00       		.byte	0
+ 473 018f 0E       		.uleb128 0xe
+ 474 0190 4E020000 		.4byte	.LASF22
+ 475 0194 01       		.byte	0x1
+ 476 0195 4401     		.2byte	0x144
+ 477 0197 00000000 		.4byte	.LFB10
+ 478 019b 1E000000 		.4byte	.LFE10-.LFB10
+ 479 019f 01       		.uleb128 0x1
+ 480 01a0 9C       		.byte	0x9c
+ 481 01a1 C4010000 		.4byte	0x1c4
+ 482 01a5 0F       		.uleb128 0xf
+ 483 01a6 CB020000 		.4byte	.LASF19
+ 484 01aa 01       		.byte	0x1
+ 485 01ab 4401     		.2byte	0x144
+ 486 01ad 83000000 		.4byte	0x83
+ 487 01b1 02       		.uleb128 0x2
+ 488 01b2 91       		.byte	0x91
+ 489 01b3 74       		.sleb128 -12
+ 490 01b4 0F       		.uleb128 0xf
+ 491 01b5 43020000 		.4byte	.LASF23
+ 492 01b9 01       		.byte	0x1
+ 493 01ba 4401     		.2byte	0x144
+ 494 01bc 14010000 		.4byte	0x114
+ 495 01c0 02       		.uleb128 0x2
+ 496 01c1 91       		.byte	0x91
+ 497 01c2 70       		.sleb128 -16
+ 498 01c3 00       		.byte	0
+ 499 01c4 0E       		.uleb128 0xe
+ 500 01c5 0B000000 		.4byte	.LASF24
+ 501 01c9 01       		.byte	0x1
+ 502 01ca 7201     		.2byte	0x172
+ 503 01cc 00000000 		.4byte	.LFB12
+ 504 01d0 1E000000 		.4byte	.LFE12-.LFB12
+ 505 01d4 01       		.uleb128 0x1
+ 506 01d5 9C       		.byte	0x9c
+ 507 01d6 F9010000 		.4byte	0x1f9
+ 508 01da 0F       		.uleb128 0xf
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 18
+
+
+ 509 01db CB020000 		.4byte	.LASF19
+ 510 01df 01       		.byte	0x1
+ 511 01e0 7201     		.2byte	0x172
+ 512 01e2 83000000 		.4byte	0x83
+ 513 01e6 02       		.uleb128 0x2
+ 514 01e7 91       		.byte	0x91
+ 515 01e8 74       		.sleb128 -12
+ 516 01e9 0F       		.uleb128 0xf
+ 517 01ea 00000000 		.4byte	.LASF25
+ 518 01ee 01       		.byte	0x1
+ 519 01ef 7201     		.2byte	0x172
+ 520 01f1 14010000 		.4byte	0x114
+ 521 01f5 02       		.uleb128 0x2
+ 522 01f6 91       		.byte	0x91
+ 523 01f7 70       		.sleb128 -16
+ 524 01f8 00       		.byte	0
+ 525 01f9 10       		.uleb128 0x10
+ 526 01fa FB000000 		.4byte	.LASF30
+ 527 01fe 02       		.byte	0x2
+ 528 01ff 27       		.byte	0x27
+ 529 0200 00000000 		.4byte	.LFB32
+ 530 0204 4C000000 		.4byte	.LFE32-.LFB32
+ 531 0208 01       		.uleb128 0x1
+ 532 0209 9C       		.byte	0x9c
+ 533 020a 2B020000 		.4byte	0x22b
+ 534 020e 11       		.uleb128 0x11
+ 535 020f 43020000 		.4byte	.LASF23
+ 536 0213 02       		.byte	0x2
+ 537 0214 27       		.byte	0x27
+ 538 0215 14010000 		.4byte	0x114
+ 539 0219 02       		.uleb128 0x2
+ 540 021a 91       		.byte	0x91
+ 541 021b 74       		.sleb128 -12
+ 542 021c 11       		.uleb128 0x11
+ 543 021d 00000000 		.4byte	.LASF25
+ 544 0221 02       		.byte	0x2
+ 545 0222 27       		.byte	0x27
+ 546 0223 14010000 		.4byte	0x114
+ 547 0227 02       		.uleb128 0x2
+ 548 0228 91       		.byte	0x91
+ 549 0229 70       		.sleb128 -16
+ 550 022a 00       		.byte	0
+ 551 022b 12       		.uleb128 0x12
+ 552 022c 9E010000 		.4byte	.LASF31
+ 553 0230 02       		.byte	0x2
+ 554 0231 4C       		.byte	0x4c
+ 555 0232 00000000 		.4byte	.LFB33
+ 556 0236 28000000 		.4byte	.LFE33-.LFB33
+ 557 023a 01       		.uleb128 0x1
+ 558 023b 9C       		.byte	0x9c
+ 559 023c 13       		.uleb128 0x13
+ 560 023d 80000000 		.4byte	.LASF32
+ 561 0241 02       		.byte	0x2
+ 562 0242 11       		.byte	0x11
+ 563 0243 6B000000 		.4byte	0x6b
+ 564 0247 05       		.uleb128 0x5
+ 565 0248 03       		.byte	0x3
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 19
+
+
+ 566 0249 00000000 		.4byte	PM_DMA_LimitUV_initVar
+ 567 024d 00       		.byte	0
+ 568              		.section	.debug_abbrev,"",%progbits
+ 569              	.Ldebug_abbrev0:
+ 570 0000 01       		.uleb128 0x1
+ 571 0001 11       		.uleb128 0x11
+ 572 0002 01       		.byte	0x1
+ 573 0003 25       		.uleb128 0x25
+ 574 0004 0E       		.uleb128 0xe
+ 575 0005 13       		.uleb128 0x13
+ 576 0006 0B       		.uleb128 0xb
+ 577 0007 03       		.uleb128 0x3
+ 578 0008 0E       		.uleb128 0xe
+ 579 0009 1B       		.uleb128 0x1b
+ 580 000a 0E       		.uleb128 0xe
+ 581 000b 55       		.uleb128 0x55
+ 582 000c 17       		.uleb128 0x17
+ 583 000d 11       		.uleb128 0x11
+ 584 000e 01       		.uleb128 0x1
+ 585 000f 10       		.uleb128 0x10
+ 586 0010 17       		.uleb128 0x17
+ 587 0011 00       		.byte	0
+ 588 0012 00       		.byte	0
+ 589 0013 02       		.uleb128 0x2
+ 590 0014 24       		.uleb128 0x24
+ 591 0015 00       		.byte	0
+ 592 0016 0B       		.uleb128 0xb
+ 593 0017 0B       		.uleb128 0xb
+ 594 0018 3E       		.uleb128 0x3e
+ 595 0019 0B       		.uleb128 0xb
+ 596 001a 03       		.uleb128 0x3
+ 597 001b 0E       		.uleb128 0xe
+ 598 001c 00       		.byte	0
+ 599 001d 00       		.byte	0
+ 600 001e 03       		.uleb128 0x3
+ 601 001f 24       		.uleb128 0x24
+ 602 0020 00       		.byte	0
+ 603 0021 0B       		.uleb128 0xb
+ 604 0022 0B       		.uleb128 0xb
+ 605 0023 3E       		.uleb128 0x3e
+ 606 0024 0B       		.uleb128 0xb
+ 607 0025 03       		.uleb128 0x3
+ 608 0026 08       		.uleb128 0x8
+ 609 0027 00       		.byte	0
+ 610 0028 00       		.byte	0
+ 611 0029 04       		.uleb128 0x4
+ 612 002a 16       		.uleb128 0x16
+ 613 002b 00       		.byte	0
+ 614 002c 03       		.uleb128 0x3
+ 615 002d 0E       		.uleb128 0xe
+ 616 002e 3A       		.uleb128 0x3a
+ 617 002f 0B       		.uleb128 0xb
+ 618 0030 3B       		.uleb128 0x3b
+ 619 0031 05       		.uleb128 0x5
+ 620 0032 49       		.uleb128 0x49
+ 621 0033 13       		.uleb128 0x13
+ 622 0034 00       		.byte	0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 20
+
+
+ 623 0035 00       		.byte	0
+ 624 0036 05       		.uleb128 0x5
+ 625 0037 13       		.uleb128 0x13
+ 626 0038 01       		.byte	0x1
+ 627 0039 0B       		.uleb128 0xb
+ 628 003a 0B       		.uleb128 0xb
+ 629 003b 3A       		.uleb128 0x3a
+ 630 003c 0B       		.uleb128 0xb
+ 631 003d 3B       		.uleb128 0x3b
+ 632 003e 0B       		.uleb128 0xb
+ 633 003f 01       		.uleb128 0x1
+ 634 0040 13       		.uleb128 0x13
+ 635 0041 00       		.byte	0
+ 636 0042 00       		.byte	0
+ 637 0043 06       		.uleb128 0x6
+ 638 0044 0D       		.uleb128 0xd
+ 639 0045 00       		.byte	0
+ 640 0046 03       		.uleb128 0x3
+ 641 0047 08       		.uleb128 0x8
+ 642 0048 3A       		.uleb128 0x3a
+ 643 0049 0B       		.uleb128 0xb
+ 644 004a 3B       		.uleb128 0x3b
+ 645 004b 0B       		.uleb128 0xb
+ 646 004c 49       		.uleb128 0x49
+ 647 004d 13       		.uleb128 0x13
+ 648 004e 38       		.uleb128 0x38
+ 649 004f 0B       		.uleb128 0xb
+ 650 0050 00       		.byte	0
+ 651 0051 00       		.byte	0
+ 652 0052 07       		.uleb128 0x7
+ 653 0053 01       		.uleb128 0x1
+ 654 0054 01       		.byte	0x1
+ 655 0055 49       		.uleb128 0x49
+ 656 0056 13       		.uleb128 0x13
+ 657 0057 01       		.uleb128 0x1
+ 658 0058 13       		.uleb128 0x13
+ 659 0059 00       		.byte	0
+ 660 005a 00       		.byte	0
+ 661 005b 08       		.uleb128 0x8
+ 662 005c 21       		.uleb128 0x21
+ 663 005d 00       		.byte	0
+ 664 005e 49       		.uleb128 0x49
+ 665 005f 13       		.uleb128 0x13
+ 666 0060 2F       		.uleb128 0x2f
+ 667 0061 0B       		.uleb128 0xb
+ 668 0062 00       		.byte	0
+ 669 0063 00       		.byte	0
+ 670 0064 09       		.uleb128 0x9
+ 671 0065 16       		.uleb128 0x16
+ 672 0066 00       		.byte	0
+ 673 0067 03       		.uleb128 0x3
+ 674 0068 0E       		.uleb128 0xe
+ 675 0069 3A       		.uleb128 0x3a
+ 676 006a 0B       		.uleb128 0xb
+ 677 006b 3B       		.uleb128 0x3b
+ 678 006c 0B       		.uleb128 0xb
+ 679 006d 49       		.uleb128 0x49
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 21
+
+
+ 680 006e 13       		.uleb128 0x13
+ 681 006f 00       		.byte	0
+ 682 0070 00       		.byte	0
+ 683 0071 0A       		.uleb128 0xa
+ 684 0072 0D       		.uleb128 0xd
+ 685 0073 00       		.byte	0
+ 686 0074 03       		.uleb128 0x3
+ 687 0075 0E       		.uleb128 0xe
+ 688 0076 3A       		.uleb128 0x3a
+ 689 0077 0B       		.uleb128 0xb
+ 690 0078 3B       		.uleb128 0x3b
+ 691 0079 0B       		.uleb128 0xb
+ 692 007a 49       		.uleb128 0x49
+ 693 007b 13       		.uleb128 0x13
+ 694 007c 38       		.uleb128 0x38
+ 695 007d 0B       		.uleb128 0xb
+ 696 007e 00       		.byte	0
+ 697 007f 00       		.byte	0
+ 698 0080 0B       		.uleb128 0xb
+ 699 0081 0F       		.uleb128 0xf
+ 700 0082 00       		.byte	0
+ 701 0083 0B       		.uleb128 0xb
+ 702 0084 0B       		.uleb128 0xb
+ 703 0085 00       		.byte	0
+ 704 0086 00       		.byte	0
+ 705 0087 0C       		.uleb128 0xc
+ 706 0088 13       		.uleb128 0x13
+ 707 0089 01       		.byte	0x1
+ 708 008a 0B       		.uleb128 0xb
+ 709 008b 05       		.uleb128 0x5
+ 710 008c 3A       		.uleb128 0x3a
+ 711 008d 0B       		.uleb128 0xb
+ 712 008e 3B       		.uleb128 0x3b
+ 713 008f 0B       		.uleb128 0xb
+ 714 0090 01       		.uleb128 0x1
+ 715 0091 13       		.uleb128 0x13
+ 716 0092 00       		.byte	0
+ 717 0093 00       		.byte	0
+ 718 0094 0D       		.uleb128 0xd
+ 719 0095 2E       		.uleb128 0x2e
+ 720 0096 00       		.byte	0
+ 721 0097 03       		.uleb128 0x3
+ 722 0098 0E       		.uleb128 0xe
+ 723 0099 3A       		.uleb128 0x3a
+ 724 009a 0B       		.uleb128 0xb
+ 725 009b 3B       		.uleb128 0x3b
+ 726 009c 0B       		.uleb128 0xb
+ 727 009d 27       		.uleb128 0x27
+ 728 009e 19       		.uleb128 0x19
+ 729 009f 11       		.uleb128 0x11
+ 730 00a0 01       		.uleb128 0x1
+ 731 00a1 12       		.uleb128 0x12
+ 732 00a2 06       		.uleb128 0x6
+ 733 00a3 40       		.uleb128 0x40
+ 734 00a4 18       		.uleb128 0x18
+ 735 00a5 9642     		.uleb128 0x2116
+ 736 00a7 19       		.uleb128 0x19
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 22
+
+
+ 737 00a8 00       		.byte	0
+ 738 00a9 00       		.byte	0
+ 739 00aa 0E       		.uleb128 0xe
+ 740 00ab 2E       		.uleb128 0x2e
+ 741 00ac 01       		.byte	0x1
+ 742 00ad 03       		.uleb128 0x3
+ 743 00ae 0E       		.uleb128 0xe
+ 744 00af 3A       		.uleb128 0x3a
+ 745 00b0 0B       		.uleb128 0xb
+ 746 00b1 3B       		.uleb128 0x3b
+ 747 00b2 05       		.uleb128 0x5
+ 748 00b3 27       		.uleb128 0x27
+ 749 00b4 19       		.uleb128 0x19
+ 750 00b5 11       		.uleb128 0x11
+ 751 00b6 01       		.uleb128 0x1
+ 752 00b7 12       		.uleb128 0x12
+ 753 00b8 06       		.uleb128 0x6
+ 754 00b9 40       		.uleb128 0x40
+ 755 00ba 18       		.uleb128 0x18
+ 756 00bb 9642     		.uleb128 0x2116
+ 757 00bd 19       		.uleb128 0x19
+ 758 00be 01       		.uleb128 0x1
+ 759 00bf 13       		.uleb128 0x13
+ 760 00c0 00       		.byte	0
+ 761 00c1 00       		.byte	0
+ 762 00c2 0F       		.uleb128 0xf
+ 763 00c3 05       		.uleb128 0x5
+ 764 00c4 00       		.byte	0
+ 765 00c5 03       		.uleb128 0x3
+ 766 00c6 0E       		.uleb128 0xe
+ 767 00c7 3A       		.uleb128 0x3a
+ 768 00c8 0B       		.uleb128 0xb
+ 769 00c9 3B       		.uleb128 0x3b
+ 770 00ca 05       		.uleb128 0x5
+ 771 00cb 49       		.uleb128 0x49
+ 772 00cc 13       		.uleb128 0x13
+ 773 00cd 02       		.uleb128 0x2
+ 774 00ce 18       		.uleb128 0x18
+ 775 00cf 00       		.byte	0
+ 776 00d0 00       		.byte	0
+ 777 00d1 10       		.uleb128 0x10
+ 778 00d2 2E       		.uleb128 0x2e
+ 779 00d3 01       		.byte	0x1
+ 780 00d4 3F       		.uleb128 0x3f
+ 781 00d5 19       		.uleb128 0x19
+ 782 00d6 03       		.uleb128 0x3
+ 783 00d7 0E       		.uleb128 0xe
+ 784 00d8 3A       		.uleb128 0x3a
+ 785 00d9 0B       		.uleb128 0xb
+ 786 00da 3B       		.uleb128 0x3b
+ 787 00db 0B       		.uleb128 0xb
+ 788 00dc 27       		.uleb128 0x27
+ 789 00dd 19       		.uleb128 0x19
+ 790 00de 11       		.uleb128 0x11
+ 791 00df 01       		.uleb128 0x1
+ 792 00e0 12       		.uleb128 0x12
+ 793 00e1 06       		.uleb128 0x6
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 23
+
+
+ 794 00e2 40       		.uleb128 0x40
+ 795 00e3 18       		.uleb128 0x18
+ 796 00e4 9642     		.uleb128 0x2116
+ 797 00e6 19       		.uleb128 0x19
+ 798 00e7 01       		.uleb128 0x1
+ 799 00e8 13       		.uleb128 0x13
+ 800 00e9 00       		.byte	0
+ 801 00ea 00       		.byte	0
+ 802 00eb 11       		.uleb128 0x11
+ 803 00ec 05       		.uleb128 0x5
+ 804 00ed 00       		.byte	0
+ 805 00ee 03       		.uleb128 0x3
+ 806 00ef 0E       		.uleb128 0xe
+ 807 00f0 3A       		.uleb128 0x3a
+ 808 00f1 0B       		.uleb128 0xb
+ 809 00f2 3B       		.uleb128 0x3b
+ 810 00f3 0B       		.uleb128 0xb
+ 811 00f4 49       		.uleb128 0x49
+ 812 00f5 13       		.uleb128 0x13
+ 813 00f6 02       		.uleb128 0x2
+ 814 00f7 18       		.uleb128 0x18
+ 815 00f8 00       		.byte	0
+ 816 00f9 00       		.byte	0
+ 817 00fa 12       		.uleb128 0x12
+ 818 00fb 2E       		.uleb128 0x2e
+ 819 00fc 00       		.byte	0
+ 820 00fd 3F       		.uleb128 0x3f
+ 821 00fe 19       		.uleb128 0x19
+ 822 00ff 03       		.uleb128 0x3
+ 823 0100 0E       		.uleb128 0xe
+ 824 0101 3A       		.uleb128 0x3a
+ 825 0102 0B       		.uleb128 0xb
+ 826 0103 3B       		.uleb128 0x3b
+ 827 0104 0B       		.uleb128 0xb
+ 828 0105 27       		.uleb128 0x27
+ 829 0106 19       		.uleb128 0x19
+ 830 0107 11       		.uleb128 0x11
+ 831 0108 01       		.uleb128 0x1
+ 832 0109 12       		.uleb128 0x12
+ 833 010a 06       		.uleb128 0x6
+ 834 010b 40       		.uleb128 0x40
+ 835 010c 18       		.uleb128 0x18
+ 836 010d 9742     		.uleb128 0x2117
+ 837 010f 19       		.uleb128 0x19
+ 838 0110 00       		.byte	0
+ 839 0111 00       		.byte	0
+ 840 0112 13       		.uleb128 0x13
+ 841 0113 34       		.uleb128 0x34
+ 842 0114 00       		.byte	0
+ 843 0115 03       		.uleb128 0x3
+ 844 0116 0E       		.uleb128 0xe
+ 845 0117 3A       		.uleb128 0x3a
+ 846 0118 0B       		.uleb128 0xb
+ 847 0119 3B       		.uleb128 0x3b
+ 848 011a 0B       		.uleb128 0xb
+ 849 011b 49       		.uleb128 0x49
+ 850 011c 13       		.uleb128 0x13
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 24
+
+
+ 851 011d 3F       		.uleb128 0x3f
+ 852 011e 19       		.uleb128 0x19
+ 853 011f 02       		.uleb128 0x2
+ 854 0120 18       		.uleb128 0x18
+ 855 0121 00       		.byte	0
+ 856 0122 00       		.byte	0
+ 857 0123 00       		.byte	0
+ 858              		.section	.debug_aranges,"",%progbits
+ 859 0000 44000000 		.4byte	0x44
+ 860 0004 0200     		.2byte	0x2
+ 861 0006 00000000 		.4byte	.Ldebug_info0
+ 862 000a 04       		.byte	0x4
+ 863 000b 00       		.byte	0
+ 864 000c 0000     		.2byte	0
+ 865 000e 0000     		.2byte	0
+ 866 0010 00000000 		.4byte	.LFB0
+ 867 0014 10000000 		.4byte	.LFE0-.LFB0
+ 868 0018 00000000 		.4byte	.LFB8
+ 869 001c 1A000000 		.4byte	.LFE8-.LFB8
+ 870 0020 00000000 		.4byte	.LFB10
+ 871 0024 1E000000 		.4byte	.LFE10-.LFB10
+ 872 0028 00000000 		.4byte	.LFB12
+ 873 002c 1E000000 		.4byte	.LFE12-.LFB12
+ 874 0030 00000000 		.4byte	.LFB32
+ 875 0034 4C000000 		.4byte	.LFE32-.LFB32
+ 876 0038 00000000 		.4byte	.LFB33
+ 877 003c 28000000 		.4byte	.LFE33-.LFB33
+ 878 0040 00000000 		.4byte	0
+ 879 0044 00000000 		.4byte	0
+ 880              		.section	.debug_ranges,"",%progbits
+ 881              	.Ldebug_ranges0:
+ 882 0000 00000000 		.4byte	.LFB0
+ 883 0004 10000000 		.4byte	.LFE0
+ 884 0008 00000000 		.4byte	.LFB8
+ 885 000c 1A000000 		.4byte	.LFE8
+ 886 0010 00000000 		.4byte	.LFB10
+ 887 0014 1E000000 		.4byte	.LFE10
+ 888 0018 00000000 		.4byte	.LFB12
+ 889 001c 1E000000 		.4byte	.LFE12
+ 890 0020 00000000 		.4byte	.LFB32
+ 891 0024 4C000000 		.4byte	.LFE32
+ 892 0028 00000000 		.4byte	.LFB33
+ 893 002c 28000000 		.4byte	.LFE33
+ 894 0030 00000000 		.4byte	0
+ 895 0034 00000000 		.4byte	0
+ 896              		.section	.debug_line,"",%progbits
+ 897              	.Ldebug_line0:
+ 898 0000 E8000000 		.section	.debug_str,"MS",%progbits,1
+ 898      02006A00 
+ 898      00000201 
+ 898      FB0E0D00 
+ 898      01010101 
+ 899              	.LASF25:
+ 900 0000 64737441 		.ascii	"dstAddress\000"
+ 900      64647265 
+ 900      737300
+ 901              	.LASF24:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 25
+
+
+ 902 000b 504D5F44 		.ascii	"PM_DMA_LimitUV_SetDstAddress\000"
+ 902      4D415F4C 
+ 902      696D6974 
+ 902      55565F53 
+ 902      65744473 
+ 903              	.LASF2:
+ 904 0028 73686F72 		.ascii	"short int\000"
+ 904      7420696E 
+ 904      7400
+ 905              	.LASF15:
+ 906 0032 73697A65 		.ascii	"sizetype\000"
+ 906      74797065 
+ 906      00
+ 907              	.LASF28:
+ 908 003b 433A5C55 		.ascii	"C:\\Users\\alexport\\OneDrive - Safeguard Analytics"
+ 908      73657273 
+ 908      5C616C65 
+ 908      78706F72 
+ 908      745C4F6E 
+ 909 006b 5C53412D 		.ascii	"\\SA-220\\SA-220.cydsn\000"
+ 909      3232305C 
+ 909      53412D32 
+ 909      32302E63 
+ 909      7964736E 
+ 910              	.LASF32:
+ 911 0080 504D5F44 		.ascii	"PM_DMA_LimitUV_initVar\000"
+ 911      4D415F4C 
+ 911      696D6974 
+ 911      55565F69 
+ 911      6E697456 
+ 912              	.LASF16:
+ 913 0097 6379646D 		.ascii	"cydma_channel_ctl_struct\000"
+ 913      615F6368 
+ 913      616E6E65 
+ 913      6C5F6374 
+ 913      6C5F7374 
+ 914              	.LASF9:
+ 915 00b0 75696E74 		.ascii	"uint8\000"
+ 915      3800
+ 916              	.LASF12:
+ 917 00b6 666C6F61 		.ascii	"float\000"
+ 917      7400
+ 918              	.LASF27:
+ 919 00bc 47656E65 		.ascii	"Generated_Source\\PSoC4\\PM_DMA_LimitUV.c\000"
+ 919      72617465 
+ 919      645F536F 
+ 919      75726365 
+ 919      5C50536F 
+ 920              	.LASF6:
+ 921 00e4 6C6F6E67 		.ascii	"long long int\000"
+ 921      206C6F6E 
+ 921      6720696E 
+ 921      7400
+ 922              	.LASF4:
+ 923 00f2 6C6F6E67 		.ascii	"long int\000"
+ 923      20696E74 
+ 923      00
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 26
+
+
+ 924              	.LASF30:
+ 925 00fb 504D5F44 		.ascii	"PM_DMA_LimitUV_Start\000"
+ 925      4D415F4C 
+ 925      696D6974 
+ 925      55565F53 
+ 925      74617274 
+ 926              	.LASF26:
+ 927 0110 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 927      43313120 
+ 927      352E342E 
+ 927      31203230 
+ 927      31363036 
+ 928 0143 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 928      20726576 
+ 928      6973696F 
+ 928      6E203233 
+ 928      37373135 
+ 929 0176 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 929      66756E63 
+ 929      74696F6E 
+ 929      2D736563 
+ 929      74696F6E 
+ 930              	.LASF31:
+ 931 019e 504D5F44 		.ascii	"PM_DMA_LimitUV_Init\000"
+ 931      4D415F4C 
+ 931      696D6974 
+ 931      55565F49 
+ 931      6E697400 
+ 932              	.LASF1:
+ 933 01b2 756E7369 		.ascii	"unsigned char\000"
+ 933      676E6564 
+ 933      20636861 
+ 933      7200
+ 934              	.LASF0:
+ 935 01c0 7369676E 		.ascii	"signed char\000"
+ 935      65642063 
+ 935      68617200 
+ 936              	.LASF7:
+ 937 01cc 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 937      206C6F6E 
+ 937      6720756E 
+ 937      7369676E 
+ 937      65642069 
+ 938              	.LASF8:
+ 939 01e3 756E7369 		.ascii	"unsigned int\000"
+ 939      676E6564 
+ 939      20696E74 
+ 939      00
+ 940              	.LASF3:
+ 941 01f0 73686F72 		.ascii	"short unsigned int\000"
+ 941      7420756E 
+ 941      7369676E 
+ 941      65642069 
+ 941      6E7400
+ 942              	.LASF17:
+ 943 0203 73746174 		.ascii	"status\000"
+ 943      757300
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 27
+
+
+ 944              	.LASF20:
+ 945 020a 6379646D 		.ascii	"cydma_descriptor_ram_struct\000"
+ 945      615F6465 
+ 945      73637269 
+ 945      70746F72 
+ 945      5F72616D 
+ 946              	.LASF14:
+ 947 0226 63686172 		.ascii	"char\000"
+ 947      00
+ 948              	.LASF18:
+ 949 022b 6379646D 		.ascii	"cydma_descriptor_struct\000"
+ 949      615F6465 
+ 949      73637269 
+ 949      70746F72 
+ 949      5F737472 
+ 950              	.LASF23:
+ 951 0243 73726341 		.ascii	"srcAddress\000"
+ 951      64647265 
+ 951      737300
+ 952              	.LASF22:
+ 953 024e 504D5F44 		.ascii	"PM_DMA_LimitUV_SetSrcAddress\000"
+ 953      4D415F4C 
+ 953      696D6974 
+ 953      55565F53 
+ 953      65745372 
+ 954              	.LASF10:
+ 955 026b 75696E74 		.ascii	"uint32\000"
+ 955      333200
+ 956              	.LASF5:
+ 957 0272 6C6F6E67 		.ascii	"long unsigned int\000"
+ 957      20756E73 
+ 957      69676E65 
+ 957      6420696E 
+ 957      7400
+ 958              	.LASF11:
+ 959 0284 696E7433 		.ascii	"int32\000"
+ 959      3200
+ 960              	.LASF13:
+ 961 028a 646F7562 		.ascii	"double\000"
+ 961      6C6500
+ 962              	.LASF21:
+ 963 0291 504D5F44 		.ascii	"PM_DMA_LimitUV_ValidateDescriptor\000"
+ 963      4D415F4C 
+ 963      696D6974 
+ 963      55565F56 
+ 963      616C6964 
+ 964              	.LASF29:
+ 965 02b3 504D5F44 		.ascii	"PM_DMA_LimitUV_ChEnable\000"
+ 965      4D415F4C 
+ 965      696D6974 
+ 965      55565F43 
+ 965      68456E61 
+ 966              	.LASF19:
+ 967 02cb 64657363 		.ascii	"descriptor\000"
+ 967      72697074 
+ 967      6F7200
+ 968              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccDa64PR.s 			page 28
+
+

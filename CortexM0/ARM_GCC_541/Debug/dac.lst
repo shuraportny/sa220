@@ -1,0 +1,1608 @@
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"dac.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.AD5627_InitDAC,"ax",%progbits
+  20              		.align	2
+  21              		.global	AD5627_InitDAC
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	AD5627_InitDAC, %function
+  25              	AD5627_InitDAC:
+  26              	.LFB35:
+  27              		.file 1 "dac.c"
+   1:dac.c         **** /* ========================================
+   2:dac.c         ****  *
+   3:dac.c         ****  * Copyright YOUR COMPANY, THE YEAR
+   4:dac.c         ****  * All Rights Reserved
+   5:dac.c         ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:dac.c         ****  *
+   7:dac.c         ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:dac.c         ****  * WHICH IS THE PROPERTY OF your company.
+   9:dac.c         ****  *
+  10:dac.c         ****  * ========================================
+  11:dac.c         **** */
+  12:dac.c         **** #include "dac.h"
+  13:dac.c         **** 
+  14:dac.c         **** 
+  15:dac.c         **** void AD5627_InitDAC(){
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 16
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  16:dac.c         ****     uint8_t buffer[3]={0};
+  40              		.loc 1 16 0
+  41 0006 3B1D     		adds	r3, r7, #4
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 2
+
+
+  42 0008 1800     		movs	r0, r3
+  43 000a 0323     		movs	r3, #3
+  44 000c 1A00     		movs	r2, r3
+  45 000e 0021     		movs	r1, #0
+  46 0010 FFF7FEFF 		bl	memset
+  17:dac.c         **** 
+  18:dac.c         ****     // Set internal reference
+  19:dac.c         ****     buffer[0] = 0x38;                // 00111_000    
+  47              		.loc 1 19 0
+  48 0014 3B1D     		adds	r3, r7, #4
+  49 0016 3822     		movs	r2, #56
+  50 0018 1A70     		strb	r2, [r3]
+  20:dac.c         ****     buffer[1] = 0; // Upper 8 bits
+  51              		.loc 1 20 0
+  52 001a 3B1D     		adds	r3, r7, #4
+  53 001c 0022     		movs	r2, #0
+  54 001e 5A70     		strb	r2, [r3, #1]
+  21:dac.c         ****     buffer[2] = 1; // Lower 4 bits in upper nibble
+  55              		.loc 1 21 0
+  56 0020 3B1D     		adds	r3, r7, #4
+  57 0022 0122     		movs	r2, #1
+  58 0024 9A70     		strb	r2, [r3, #2]
+  22:dac.c         ****     I2C_I2CMasterClearStatus();
+  59              		.loc 1 22 0
+  60 0026 FFF7FEFF 		bl	I2C_I2CMasterClearStatus
+  23:dac.c         ****     I2C_I2CMasterWriteBuf(I2C_DAC_SLAVE_ADDR, buffer, 3, I2C_I2C_MODE_COMPLETE_XFER);
+  61              		.loc 1 23 0
+  62 002a 391D     		adds	r1, r7, #4
+  63 002c 0023     		movs	r3, #0
+  64 002e 0322     		movs	r2, #3
+  65 0030 0F20     		movs	r0, #15
+  66 0032 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  24:dac.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP); // Wait until transfer completes
+  67              		.loc 1 24 0
+  68 0036 C046     		nop
+  69              	.L2:
+  70              		.loc 1 24 0 is_stmt 0 discriminator 1
+  71 0038 FFF7FEFF 		bl	I2C_I2CMasterStatus
+  72 003c 0200     		movs	r2, r0
+  73 003e 0423     		movs	r3, #4
+  74 0040 1340     		ands	r3, r2
+  75 0042 F9D1     		bne	.L2
+  25:dac.c         ****     
+  26:dac.c         ****     // Software Reset
+  27:dac.c         ****     buffer[0] = 0x28;                // 00101_000
+  76              		.loc 1 27 0 is_stmt 1
+  77 0044 3B1D     		adds	r3, r7, #4
+  78 0046 2822     		movs	r2, #40
+  79 0048 1A70     		strb	r2, [r3]
+  28:dac.c         ****     buffer[1] = 0; // Upper 8 bits
+  80              		.loc 1 28 0
+  81 004a 3B1D     		adds	r3, r7, #4
+  82 004c 0022     		movs	r2, #0
+  83 004e 5A70     		strb	r2, [r3, #1]
+  29:dac.c         ****     buffer[2] = 0; // Lower 4 bits in upper nibble
+  84              		.loc 1 29 0
+  85 0050 3B1D     		adds	r3, r7, #4
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 3
+
+
+  86 0052 0022     		movs	r2, #0
+  87 0054 9A70     		strb	r2, [r3, #2]
+  30:dac.c         ****     I2C_I2CMasterClearStatus();
+  88              		.loc 1 30 0
+  89 0056 FFF7FEFF 		bl	I2C_I2CMasterClearStatus
+  31:dac.c         ****     I2C_I2CMasterWriteBuf(I2C_DAC_SLAVE_ADDR, buffer, 3, I2C_I2C_MODE_COMPLETE_XFER);
+  90              		.loc 1 31 0
+  91 005a 391D     		adds	r1, r7, #4
+  92 005c 0023     		movs	r3, #0
+  93 005e 0322     		movs	r2, #3
+  94 0060 0F20     		movs	r0, #15
+  95 0062 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  32:dac.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP); // Wait until transfer completes
+  96              		.loc 1 32 0
+  97 0066 C046     		nop
+  98              	.L3:
+  99              		.loc 1 32 0 is_stmt 0 discriminator 1
+ 100 0068 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 101 006c 0200     		movs	r2, r0
+ 102 006e 0423     		movs	r3, #4
+ 103 0070 1340     		ands	r3, r2
+ 104 0072 F9D1     		bne	.L3
+  33:dac.c         ****     
+  34:dac.c         ****     // LDAC Register Setup
+  35:dac.c         ****     buffer[0] = 0x30;                // 00110_000
+ 105              		.loc 1 35 0 is_stmt 1
+ 106 0074 3B1D     		adds	r3, r7, #4
+ 107 0076 3022     		movs	r2, #48
+ 108 0078 1A70     		strb	r2, [r3]
+  36:dac.c         ****     buffer[1] = 0; // Upper 8 bits
+ 109              		.loc 1 36 0
+ 110 007a 3B1D     		adds	r3, r7, #4
+ 111 007c 0022     		movs	r2, #0
+ 112 007e 5A70     		strb	r2, [r3, #1]
+  37:dac.c         ****     buffer[2] = 0; // Lower 4 bits in upper nibble
+ 113              		.loc 1 37 0
+ 114 0080 3B1D     		adds	r3, r7, #4
+ 115 0082 0022     		movs	r2, #0
+ 116 0084 9A70     		strb	r2, [r3, #2]
+  38:dac.c         ****     I2C_I2CMasterClearStatus();
+ 117              		.loc 1 38 0
+ 118 0086 FFF7FEFF 		bl	I2C_I2CMasterClearStatus
+  39:dac.c         ****     I2C_I2CMasterWriteBuf(I2C_DAC_SLAVE_ADDR, buffer, 3, I2C_I2C_MODE_COMPLETE_XFER);
+ 119              		.loc 1 39 0
+ 120 008a 391D     		adds	r1, r7, #4
+ 121 008c 0023     		movs	r3, #0
+ 122 008e 0322     		movs	r2, #3
+ 123 0090 0F20     		movs	r0, #15
+ 124 0092 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  40:dac.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP); // Wait until transfer completes
+ 125              		.loc 1 40 0
+ 126 0096 C046     		nop
+ 127              	.L4:
+ 128              		.loc 1 40 0 is_stmt 0 discriminator 1
+ 129 0098 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 130 009c 0200     		movs	r2, r0
+ 131 009e 0423     		movs	r3, #4
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 4
+
+
+ 132 00a0 1340     		ands	r3, r2
+ 133 00a2 F9D1     		bne	.L4
+  41:dac.c         **** }
+ 134              		.loc 1 41 0 is_stmt 1
+ 135 00a4 C046     		nop
+ 136 00a6 BD46     		mov	sp, r7
+ 137 00a8 02B0     		add	sp, sp, #8
+ 138              		@ sp needed
+ 139 00aa 80BD     		pop	{r7, pc}
+ 140              		.cfi_endproc
+ 141              	.LFE35:
+ 142              		.size	AD5627_InitDAC, .-AD5627_InitDAC
+ 143              		.section	.text.AD5627_SetDAC,"ax",%progbits
+ 144              		.align	2
+ 145              		.global	AD5627_SetDAC
+ 146              		.code	16
+ 147              		.thumb_func
+ 148              		.type	AD5627_SetDAC, %function
+ 149              	AD5627_SetDAC:
+ 150              	.LFB36:
+  42:dac.c         **** 
+  43:dac.c         **** 
+  44:dac.c         **** // Set DAC output (0–4095 is 0–100%)
+  45:dac.c         **** void AD5627_SetDAC(uint8_t ch,  uint16_t value12bit)
+  46:dac.c         **** {
+ 151              		.loc 1 46 0
+ 152              		.cfi_startproc
+ 153              		@ args = 0, pretend = 0, frame = 16
+ 154              		@ frame_needed = 1, uses_anonymous_args = 0
+ 155 0000 80B5     		push	{r7, lr}
+ 156              		.cfi_def_cfa_offset 8
+ 157              		.cfi_offset 7, -8
+ 158              		.cfi_offset 14, -4
+ 159 0002 84B0     		sub	sp, sp, #16
+ 160              		.cfi_def_cfa_offset 24
+ 161 0004 00AF     		add	r7, sp, #0
+ 162              		.cfi_def_cfa_register 7
+ 163 0006 0200     		movs	r2, r0
+ 164 0008 FB1D     		adds	r3, r7, #7
+ 165 000a 1A70     		strb	r2, [r3]
+ 166 000c 3B1D     		adds	r3, r7, #4
+ 167 000e 0A1C     		adds	r2, r1, #0
+ 168 0010 1A80     		strh	r2, [r3]
+  47:dac.c         ****     uint8_t buffer[3]={0};
+ 169              		.loc 1 47 0
+ 170 0012 0C23     		movs	r3, #12
+ 171 0014 FB18     		adds	r3, r7, r3
+ 172 0016 1800     		movs	r0, r3
+ 173 0018 0323     		movs	r3, #3
+ 174 001a 1A00     		movs	r2, r3
+ 175 001c 0021     		movs	r1, #0
+ 176 001e FFF7FEFF 		bl	memset
+  48:dac.c         ****     
+  49:dac.c         ****     buffer[0] = 0x18 | ch ;                // 0b00011(write and update)_xxx(channlel) 
+ 177              		.loc 1 49 0
+ 178 0022 FB1D     		adds	r3, r7, #7
+ 179 0024 1B78     		ldrb	r3, [r3]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 5
+
+
+ 180 0026 1822     		movs	r2, #24
+ 181 0028 1343     		orrs	r3, r2
+ 182 002a DAB2     		uxtb	r2, r3
+ 183 002c 0C23     		movs	r3, #12
+ 184 002e FB18     		adds	r3, r7, r3
+ 185 0030 1A70     		strb	r2, [r3]
+  50:dac.c         ****     buffer[1] = (value12bit >> 4) & 0xFF; // Upper 8 bits
+ 186              		.loc 1 50 0
+ 187 0032 3B1D     		adds	r3, r7, #4
+ 188 0034 1B88     		ldrh	r3, [r3]
+ 189 0036 1B09     		lsrs	r3, r3, #4
+ 190 0038 9BB2     		uxth	r3, r3
+ 191 003a DAB2     		uxtb	r2, r3
+ 192 003c 0C23     		movs	r3, #12
+ 193 003e FB18     		adds	r3, r7, r3
+ 194 0040 5A70     		strb	r2, [r3, #1]
+  51:dac.c         ****     buffer[2] = (value12bit & 0x0F) << 4; // Lower 4 bits in upper nibble
+ 195              		.loc 1 51 0
+ 196 0042 3B1D     		adds	r3, r7, #4
+ 197 0044 1B88     		ldrh	r3, [r3]
+ 198 0046 1B01     		lsls	r3, r3, #4
+ 199 0048 DAB2     		uxtb	r2, r3
+ 200 004a 0C23     		movs	r3, #12
+ 201 004c FB18     		adds	r3, r7, r3
+ 202 004e 9A70     		strb	r2, [r3, #2]
+  52:dac.c         ****     I2C_I2CMasterClearStatus();
+ 203              		.loc 1 52 0
+ 204 0050 FFF7FEFF 		bl	I2C_I2CMasterClearStatus
+  53:dac.c         ****     I2C_I2CMasterWriteBuf(I2C_DAC_SLAVE_ADDR, buffer, 3, I2C_I2C_MODE_COMPLETE_XFER);
+ 205              		.loc 1 53 0
+ 206 0054 0C23     		movs	r3, #12
+ 207 0056 F918     		adds	r1, r7, r3
+ 208 0058 0023     		movs	r3, #0
+ 209 005a 0322     		movs	r2, #3
+ 210 005c 0F20     		movs	r0, #15
+ 211 005e FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  54:dac.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP); // Wait until transfer completes
+ 212              		.loc 1 54 0
+ 213 0062 C046     		nop
+ 214              	.L6:
+ 215              		.loc 1 54 0 is_stmt 0 discriminator 1
+ 216 0064 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 217 0068 0200     		movs	r2, r0
+ 218 006a 0423     		movs	r3, #4
+ 219 006c 1340     		ands	r3, r2
+ 220 006e F9D1     		bne	.L6
+  55:dac.c         **** }
+ 221              		.loc 1 55 0 is_stmt 1
+ 222 0070 C046     		nop
+ 223 0072 BD46     		mov	sp, r7
+ 224 0074 04B0     		add	sp, sp, #16
+ 225              		@ sp needed
+ 226 0076 80BD     		pop	{r7, pc}
+ 227              		.cfi_endproc
+ 228              	.LFE36:
+ 229              		.size	AD5627_SetDAC, .-AD5627_SetDAC
+ 230              		.section	.text.MCP47VB02T_SetDAC,"ax",%progbits
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 6
+
+
+ 231              		.align	2
+ 232              		.global	MCP47VB02T_SetDAC
+ 233              		.code	16
+ 234              		.thumb_func
+ 235              		.type	MCP47VB02T_SetDAC, %function
+ 236              	MCP47VB02T_SetDAC:
+ 237              	.LFB37:
+  56:dac.c         **** 
+  57:dac.c         **** 
+  58:dac.c         **** 
+  59:dac.c         **** // Set DAC output (0–4095 is 0–100%)
+  60:dac.c         **** void MCP47VB02T_SetDAC(uint16_t value12bit)
+  61:dac.c         **** {
+ 238              		.loc 1 61 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 16
+ 241              		@ frame_needed = 1, uses_anonymous_args = 0
+ 242 0000 80B5     		push	{r7, lr}
+ 243              		.cfi_def_cfa_offset 8
+ 244              		.cfi_offset 7, -8
+ 245              		.cfi_offset 14, -4
+ 246 0002 84B0     		sub	sp, sp, #16
+ 247              		.cfi_def_cfa_offset 24
+ 248 0004 00AF     		add	r7, sp, #0
+ 249              		.cfi_def_cfa_register 7
+ 250 0006 0200     		movs	r2, r0
+ 251 0008 BB1D     		adds	r3, r7, #6
+ 252 000a 1A80     		strh	r2, [r3]
+  62:dac.c         ****     uint8_t buffer[3];
+  63:dac.c         ****     
+  64:dac.c         ****     buffer[0] = 0x08;                    // Volatile DAC input register (Channel A)
+ 253              		.loc 1 64 0
+ 254 000c 0C23     		movs	r3, #12
+ 255 000e FB18     		adds	r3, r7, r3
+ 256 0010 0822     		movs	r2, #8
+ 257 0012 1A70     		strb	r2, [r3]
+  65:dac.c         ****     buffer[1] = (value12bit >> 4) & 0xFF; // Upper 8 bits
+ 258              		.loc 1 65 0
+ 259 0014 BB1D     		adds	r3, r7, #6
+ 260 0016 1B88     		ldrh	r3, [r3]
+ 261 0018 1B09     		lsrs	r3, r3, #4
+ 262 001a 9BB2     		uxth	r3, r3
+ 263 001c DAB2     		uxtb	r2, r3
+ 264 001e 0C23     		movs	r3, #12
+ 265 0020 FB18     		adds	r3, r7, r3
+ 266 0022 5A70     		strb	r2, [r3, #1]
+  66:dac.c         ****     buffer[2] = (value12bit & 0x0F) << 4; // Lower 4 bits in upper nibble
+ 267              		.loc 1 66 0
+ 268 0024 BB1D     		adds	r3, r7, #6
+ 269 0026 1B88     		ldrh	r3, [r3]
+ 270 0028 1B01     		lsls	r3, r3, #4
+ 271 002a DAB2     		uxtb	r2, r3
+ 272 002c 0C23     		movs	r3, #12
+ 273 002e FB18     		adds	r3, r7, r3
+ 274 0030 9A70     		strb	r2, [r3, #2]
+  67:dac.c         ****     I2C_I2CMasterClearStatus();
+ 275              		.loc 1 67 0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 7
+
+
+ 276 0032 FFF7FEFF 		bl	I2C_I2CMasterClearStatus
+  68:dac.c         ****     I2C_I2CMasterWriteBuf(I2C_DAC_SLAVE_ADDR, buffer, 3, I2C_I2C_MODE_COMPLETE_XFER);
+ 277              		.loc 1 68 0
+ 278 0036 0C23     		movs	r3, #12
+ 279 0038 F918     		adds	r1, r7, r3
+ 280 003a 0023     		movs	r3, #0
+ 281 003c 0322     		movs	r2, #3
+ 282 003e 0F20     		movs	r0, #15
+ 283 0040 FFF7FEFF 		bl	I2C_I2CMasterWriteBuf
+  69:dac.c         ****     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP); // Wait until transfer completes
+ 284              		.loc 1 69 0
+ 285 0044 C046     		nop
+ 286              	.L8:
+ 287              		.loc 1 69 0 is_stmt 0 discriminator 1
+ 288 0046 FFF7FEFF 		bl	I2C_I2CMasterStatus
+ 289 004a 0200     		movs	r2, r0
+ 290 004c 0423     		movs	r3, #4
+ 291 004e 1340     		ands	r3, r2
+ 292 0050 F9D1     		bne	.L8
+  70:dac.c         **** }
+ 293              		.loc 1 70 0 is_stmt 1
+ 294 0052 C046     		nop
+ 295 0054 BD46     		mov	sp, r7
+ 296 0056 04B0     		add	sp, sp, #16
+ 297              		@ sp needed
+ 298 0058 80BD     		pop	{r7, pc}
+ 299              		.cfi_endproc
+ 300              	.LFE37:
+ 301              		.size	MCP47VB02T_SetDAC, .-MCP47VB02T_SetDAC
+ 302              		.global	__aeabi_fcmplt
+ 303              		.global	__aeabi_fcmpgt
+ 304              		.global	__aeabi_fdiv
+ 305              		.global	__aeabi_fmul
+ 306              		.global	__aeabi_f2uiz
+ 307 005a C046     		.section	.text.Convert_mA_to_DAC,"ax",%progbits
+ 308              		.align	2
+ 309              		.global	Convert_mA_to_DAC
+ 310              		.code	16
+ 311              		.thumb_func
+ 312              		.type	Convert_mA_to_DAC, %function
+ 313              	Convert_mA_to_DAC:
+ 314              	.LFB38:
+  71:dac.c         **** 
+  72:dac.c         **** ////--------------------------------------------------
+  73:dac.c         **** //// Convert 4–20 mA to 12-bit DAC value
+  74:dac.c         **** ////--------------------------------------------------
+  75:dac.c         **** //uint16_t Convert_mA_to_DAC(float mA)
+  76:dac.c         **** //{
+  77:dac.c         **** //    // This assumes external voltage-to-current converter maps DAC voltage to 4–20 mA
+  78:dac.c         **** //    //float vOut = (mA / 20.0f) * MCP47VB02T_VREF;
+  79:dac.c         **** //    //uint16_t dacValue = (uint16_t)((vOut / MCP47VB02T_VREF) * 4095.0f);
+  80:dac.c         **** //
+  81:dac.c         **** //    float vOut = (mA / 20.0f) * AD5627_VREF;
+  82:dac.c         **** //    uint16_t dacValue = (uint16_t)((vOut / AD5627_VREF) * 4095.0f);
+  83:dac.c         **** //    
+  84:dac.c         **** //    if (dacValue > 4095) dacValue = 4095;
+  85:dac.c         **** //    return dacValue;
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 8
+
+
+  86:dac.c         **** //}
+  87:dac.c         **** //
+  88:dac.c         **** //
+  89:dac.c         **** ////--------------------------------------------------
+  90:dac.c         **** //// Convert sensor value (float) to output current (mA)
+  91:dac.c         **** ////--------------------------------------------------
+  92:dac.c         **** //float SensorTo_mA(float sensor_value, float sensor_min, float sensor_max)
+  93:dac.c         **** //{
+  94:dac.c         **** //    if (sensor_value < sensor_min) sensor_value = sensor_min;
+  95:dac.c         **** //    if (sensor_value > sensor_max) sensor_value = sensor_max;
+  96:dac.c         **** //
+  97:dac.c         **** //    float percent = (sensor_value - sensor_min) / (sensor_max - sensor_min);
+  98:dac.c         **** //    return 4.0f + (percent * 16.0f); // Maps to 4–20 mA
+  99:dac.c         **** //}
+ 100:dac.c         **** //
+ 101:dac.c         **** //
+ 102:dac.c         **** //
+ 103:dac.c         **** //
+ 104:dac.c         **** //
+ 105:dac.c         **** //
+ 106:dac.c         **** ////--------------------------------------------------
+ 107:dac.c         **** //// Main update function: call this regularly
+ 108:dac.c         **** ////--------------------------------------------------
+ 109:dac.c         **** //void UpdateCurrentLoopOutput(uint8_t ch , float sensor_value, float sensor_min, float sensor_max)
+ 110:dac.c         **** //{
+ 111:dac.c         **** //    float current_mA = SensorTo_mA(sensor_value, sensor_min, sensor_max);
+ 112:dac.c         **** //    uint16_t dac_value = Convert_mA_to_DAC(current_mA);
+ 113:dac.c         **** //    AD5627_SetDAC(ch, dac_value);
+ 114:dac.c         **** //}
+ 115:dac.c         **** 
+ 116:dac.c         **** 
+ 117:dac.c         **** 
+ 118:dac.c         **** //--------------------------------------------------
+ 119:dac.c         **** // Convert desired current (4–20 mA) to DAC value
+ 120:dac.c         **** // Hardware: 0 mA at DAC=0, 22 mA at DAC=4095
+ 121:dac.c         **** //--------------------------------------------------
+ 122:dac.c         **** uint16_t Convert_mA_to_DAC(float mA)
+ 123:dac.c         **** {
+ 315              		.loc 1 123 0
+ 316              		.cfi_startproc
+ 317              		@ args = 0, pretend = 0, frame = 16
+ 318              		@ frame_needed = 1, uses_anonymous_args = 0
+ 319 0000 80B5     		push	{r7, lr}
+ 320              		.cfi_def_cfa_offset 8
+ 321              		.cfi_offset 7, -8
+ 322              		.cfi_offset 14, -4
+ 323 0002 84B0     		sub	sp, sp, #16
+ 324              		.cfi_def_cfa_offset 24
+ 325 0004 00AF     		add	r7, sp, #0
+ 326              		.cfi_def_cfa_register 7
+ 327 0006 7860     		str	r0, [r7, #4]
+ 124:dac.c         ****     if (mA < 0.0)   mA = 0.0;
+ 328              		.loc 1 124 0
+ 329 0008 0021     		movs	r1, #0
+ 330 000a 7868     		ldr	r0, [r7, #4]
+ 331 000c FFF7FEFF 		bl	__aeabi_fcmplt
+ 332 0010 031E     		subs	r3, r0, #0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 9
+
+
+ 333 0012 01D0     		beq	.L10
+ 334              		.loc 1 124 0 is_stmt 0 discriminator 1
+ 335 0014 0023     		movs	r3, #0
+ 336 0016 7B60     		str	r3, [r7, #4]
+ 337              	.L10:
+ 125:dac.c         ****     if (mA > 22.0)  mA = 22.0;
+ 338              		.loc 1 125 0 is_stmt 1
+ 339 0018 0D49     		ldr	r1, .L17
+ 340 001a 7868     		ldr	r0, [r7, #4]
+ 341 001c FFF7FEFF 		bl	__aeabi_fcmpgt
+ 342 0020 031E     		subs	r3, r0, #0
+ 343 0022 01D0     		beq	.L12
+ 344              		.loc 1 125 0 is_stmt 0 discriminator 1
+ 345 0024 0A4B     		ldr	r3, .L17
+ 346 0026 7B60     		str	r3, [r7, #4]
+ 347              	.L12:
+ 126:dac.c         **** 
+ 127:dac.c         ****     // Scale for 0–22 mA full DAC range
+ 128:dac.c         ****     float percent = mA / 22.0;
+ 348              		.loc 1 128 0 is_stmt 1
+ 349 0028 0949     		ldr	r1, .L17
+ 350 002a 7868     		ldr	r0, [r7, #4]
+ 351 002c FFF7FEFF 		bl	__aeabi_fdiv
+ 352 0030 031C     		adds	r3, r0, #0
+ 353 0032 FB60     		str	r3, [r7, #12]
+ 129:dac.c         ****     return (uint16_t)(percent * 4095 );
+ 354              		.loc 1 129 0
+ 355 0034 0749     		ldr	r1, .L17+4
+ 356 0036 F868     		ldr	r0, [r7, #12]
+ 357 0038 FFF7FEFF 		bl	__aeabi_fmul
+ 358 003c 031C     		adds	r3, r0, #0
+ 359 003e 181C     		adds	r0, r3, #0
+ 360 0040 FFF7FEFF 		bl	__aeabi_f2uiz
+ 361 0044 0300     		movs	r3, r0
+ 362 0046 9BB2     		uxth	r3, r3
+ 130:dac.c         **** }
+ 363              		.loc 1 130 0
+ 364 0048 1800     		movs	r0, r3
+ 365 004a BD46     		mov	sp, r7
+ 366 004c 04B0     		add	sp, sp, #16
+ 367              		@ sp needed
+ 368 004e 80BD     		pop	{r7, pc}
+ 369              	.L18:
+ 370              		.align	2
+ 371              	.L17:
+ 372 0050 0000B041 		.word	1102053376
+ 373 0054 00F07F45 		.word	1166012416
+ 374              		.cfi_endproc
+ 375              	.LFE38:
+ 376              		.size	Convert_mA_to_DAC, .-Convert_mA_to_DAC
+ 377              		.global	__aeabi_fsub
+ 378              		.global	__aeabi_fadd
+ 379              		.section	.text.SensorTo_mA,"ax",%progbits
+ 380              		.align	2
+ 381              		.global	SensorTo_mA
+ 382              		.code	16
+ 383              		.thumb_func
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 10
+
+
+ 384              		.type	SensorTo_mA, %function
+ 385              	SensorTo_mA:
+ 386              	.LFB39:
+ 131:dac.c         **** 
+ 132:dac.c         **** //--------------------------------------------------
+ 133:dac.c         **** // Convert sensor value to desired current (4–20 mA)
+ 134:dac.c         **** //--------------------------------------------------
+ 135:dac.c         **** float SensorTo_mA(float sensor_value, float sensor_min, float sensor_max)
+ 136:dac.c         **** {
+ 387              		.loc 1 136 0
+ 388              		.cfi_startproc
+ 389              		@ args = 0, pretend = 0, frame = 24
+ 390              		@ frame_needed = 1, uses_anonymous_args = 0
+ 391 0000 90B5     		push	{r4, r7, lr}
+ 392              		.cfi_def_cfa_offset 12
+ 393              		.cfi_offset 4, -12
+ 394              		.cfi_offset 7, -8
+ 395              		.cfi_offset 14, -4
+ 396 0002 87B0     		sub	sp, sp, #28
+ 397              		.cfi_def_cfa_offset 40
+ 398 0004 00AF     		add	r7, sp, #0
+ 399              		.cfi_def_cfa_register 7
+ 400 0006 F860     		str	r0, [r7, #12]
+ 401 0008 B960     		str	r1, [r7, #8]
+ 402 000a 7A60     		str	r2, [r7, #4]
+ 137:dac.c         ****     float percent;
+ 138:dac.c         ****     float increment; 
+ 139:dac.c         ****     
+ 140:dac.c         ****     
+ 141:dac.c         ****         //if (sensor_value < sensor_min) sensor_value = sensor_min;
+ 142:dac.c         ****         if (sensor_value > sensor_max) sensor_value = sensor_max;
+ 403              		.loc 1 142 0
+ 404 000c 7968     		ldr	r1, [r7, #4]
+ 405 000e F868     		ldr	r0, [r7, #12]
+ 406 0010 FFF7FEFF 		bl	__aeabi_fcmpgt
+ 407 0014 031E     		subs	r3, r0, #0
+ 408 0016 01D0     		beq	.L20
+ 409              		.loc 1 142 0 is_stmt 0 discriminator 1
+ 410 0018 7B68     		ldr	r3, [r7, #4]
+ 411 001a FB60     		str	r3, [r7, #12]
+ 412              	.L20:
+ 143:dac.c         **** 
+ 144:dac.c         ****         percent = (sensor_value - sensor_min) / (sensor_max - sensor_min);
+ 413              		.loc 1 144 0 is_stmt 1
+ 414 001c B968     		ldr	r1, [r7, #8]
+ 415 001e F868     		ldr	r0, [r7, #12]
+ 416 0020 FFF7FEFF 		bl	__aeabi_fsub
+ 417 0024 031C     		adds	r3, r0, #0
+ 418 0026 1C1C     		adds	r4, r3, #0
+ 419 0028 B968     		ldr	r1, [r7, #8]
+ 420 002a 7868     		ldr	r0, [r7, #4]
+ 421 002c FFF7FEFF 		bl	__aeabi_fsub
+ 422 0030 031C     		adds	r3, r0, #0
+ 423 0032 191C     		adds	r1, r3, #0
+ 424 0034 201C     		adds	r0, r4, #0
+ 425 0036 FFF7FEFF 		bl	__aeabi_fdiv
+ 426 003a 031C     		adds	r3, r0, #0
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 11
+
+
+ 427 003c 7B61     		str	r3, [r7, #20]
+ 145:dac.c         ****         increment = percent * 16.0;
+ 428              		.loc 1 145 0
+ 429 003e 8321     		movs	r1, #131
+ 430 0040 C905     		lsls	r1, r1, #23
+ 431 0042 7869     		ldr	r0, [r7, #20]
+ 432 0044 FFF7FEFF 		bl	__aeabi_fmul
+ 433 0048 031C     		adds	r3, r0, #0
+ 434 004a 3B61     		str	r3, [r7, #16]
+ 146:dac.c         ****         return 4.0 + increment;  // Map to 4–20 mA
+ 435              		.loc 1 146 0
+ 436 004c 8121     		movs	r1, #129
+ 437 004e C905     		lsls	r1, r1, #23
+ 438 0050 3869     		ldr	r0, [r7, #16]
+ 439 0052 FFF7FEFF 		bl	__aeabi_fadd
+ 440 0056 031C     		adds	r3, r0, #0
+ 147:dac.c         ****     
+ 148:dac.c         **** }
+ 441              		.loc 1 148 0
+ 442 0058 181C     		adds	r0, r3, #0
+ 443 005a BD46     		mov	sp, r7
+ 444 005c 07B0     		add	sp, sp, #28
+ 445              		@ sp needed
+ 446 005e 90BD     		pop	{r4, r7, pc}
+ 447              		.cfi_endproc
+ 448              	.LFE39:
+ 449              		.size	SensorTo_mA, .-SensorTo_mA
+ 450              		.section	.text.UpdateCurrentLoopOutput,"ax",%progbits
+ 451              		.align	2
+ 452              		.global	UpdateCurrentLoopOutput
+ 453              		.code	16
+ 454              		.thumb_func
+ 455              		.type	UpdateCurrentLoopOutput, %function
+ 456              	UpdateCurrentLoopOutput:
+ 457              	.LFB40:
+ 149:dac.c         **** 
+ 150:dac.c         **** //--------------------------------------------------
+ 151:dac.c         **** // Main update function
+ 152:dac.c         **** //--------------------------------------------------
+ 153:dac.c         **** void UpdateCurrentLoopOutput(uint8_t ch, float sensor_value, float sensor_min, float sensor_max)
+ 154:dac.c         **** {
+ 458              		.loc 1 154 0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 24
+ 461              		@ frame_needed = 1, uses_anonymous_args = 0
+ 462 0000 90B5     		push	{r4, r7, lr}
+ 463              		.cfi_def_cfa_offset 12
+ 464              		.cfi_offset 4, -12
+ 465              		.cfi_offset 7, -8
+ 466              		.cfi_offset 14, -4
+ 467 0002 87B0     		sub	sp, sp, #28
+ 468              		.cfi_def_cfa_offset 40
+ 469 0004 00AF     		add	r7, sp, #0
+ 470              		.cfi_def_cfa_register 7
+ 471 0006 B960     		str	r1, [r7, #8]
+ 472 0008 7A60     		str	r2, [r7, #4]
+ 473 000a 3B60     		str	r3, [r7]
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 12
+
+
+ 474 000c 0F23     		movs	r3, #15
+ 475 000e FB18     		adds	r3, r7, r3
+ 476 0010 021C     		adds	r2, r0, #0
+ 477 0012 1A70     		strb	r2, [r3]
+ 155:dac.c         ****     float desired_mA = SensorTo_mA(sensor_value, sensor_min, sensor_max);
+ 478              		.loc 1 155 0
+ 479 0014 3A68     		ldr	r2, [r7]
+ 480 0016 7968     		ldr	r1, [r7, #4]
+ 481 0018 BB68     		ldr	r3, [r7, #8]
+ 482 001a 181C     		adds	r0, r3, #0
+ 483 001c FFF7FEFF 		bl	SensorTo_mA
+ 484 0020 031C     		adds	r3, r0, #0
+ 485 0022 7B61     		str	r3, [r7, #20]
+ 156:dac.c         ****     uint16_t dac_value = Convert_mA_to_DAC(desired_mA);
+ 486              		.loc 1 156 0
+ 487 0024 1223     		movs	r3, #18
+ 488 0026 FC18     		adds	r4, r7, r3
+ 489 0028 7B69     		ldr	r3, [r7, #20]
+ 490 002a 181C     		adds	r0, r3, #0
+ 491 002c FFF7FEFF 		bl	Convert_mA_to_DAC
+ 492 0030 0300     		movs	r3, r0
+ 493 0032 2380     		strh	r3, [r4]
+ 157:dac.c         ****     AD5627_SetDAC(ch, dac_value);
+ 494              		.loc 1 157 0
+ 495 0034 1223     		movs	r3, #18
+ 496 0036 FB18     		adds	r3, r7, r3
+ 497 0038 1A88     		ldrh	r2, [r3]
+ 498 003a 0F23     		movs	r3, #15
+ 499 003c FB18     		adds	r3, r7, r3
+ 500 003e 1B78     		ldrb	r3, [r3]
+ 501 0040 1100     		movs	r1, r2
+ 502 0042 1800     		movs	r0, r3
+ 503 0044 FFF7FEFF 		bl	AD5627_SetDAC
+ 158:dac.c         **** }
+ 504              		.loc 1 158 0
+ 505 0048 C046     		nop
+ 506 004a BD46     		mov	sp, r7
+ 507 004c 07B0     		add	sp, sp, #28
+ 508              		@ sp needed
+ 509 004e 90BD     		pop	{r4, r7, pc}
+ 510              		.cfi_endproc
+ 511              	.LFE40:
+ 512              		.size	UpdateCurrentLoopOutput, .-UpdateCurrentLoopOutput
+ 513              		.section	.text.Set_Output_mA,"ax",%progbits
+ 514              		.align	2
+ 515              		.global	Set_Output_mA
+ 516              		.code	16
+ 517              		.thumb_func
+ 518              		.type	Set_Output_mA, %function
+ 519              	Set_Output_mA:
+ 520              	.LFB41:
+ 159:dac.c         **** 
+ 160:dac.c         **** 
+ 161:dac.c         **** void Set_Output_mA(uint8_t ch, float desired_mA)
+ 162:dac.c         **** {
+ 521              		.loc 1 162 0
+ 522              		.cfi_startproc
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 13
+
+
+ 523              		@ args = 0, pretend = 0, frame = 16
+ 524              		@ frame_needed = 1, uses_anonymous_args = 0
+ 525 0000 90B5     		push	{r4, r7, lr}
+ 526              		.cfi_def_cfa_offset 12
+ 527              		.cfi_offset 4, -12
+ 528              		.cfi_offset 7, -8
+ 529              		.cfi_offset 14, -4
+ 530 0002 85B0     		sub	sp, sp, #20
+ 531              		.cfi_def_cfa_offset 32
+ 532 0004 00AF     		add	r7, sp, #0
+ 533              		.cfi_def_cfa_register 7
+ 534 0006 0200     		movs	r2, r0
+ 535 0008 3960     		str	r1, [r7]
+ 536 000a FB1D     		adds	r3, r7, #7
+ 537 000c 1A70     		strb	r2, [r3]
+ 163:dac.c         ****     uint16_t dac_value = Convert_mA_to_DAC(desired_mA);
+ 538              		.loc 1 163 0
+ 539 000e 0E23     		movs	r3, #14
+ 540 0010 FC18     		adds	r4, r7, r3
+ 541 0012 3B68     		ldr	r3, [r7]
+ 542 0014 181C     		adds	r0, r3, #0
+ 543 0016 FFF7FEFF 		bl	Convert_mA_to_DAC
+ 544 001a 0300     		movs	r3, r0
+ 545 001c 2380     		strh	r3, [r4]
+ 164:dac.c         ****     AD5627_SetDAC(ch, dac_value);
+ 546              		.loc 1 164 0
+ 547 001e 0E23     		movs	r3, #14
+ 548 0020 FB18     		adds	r3, r7, r3
+ 549 0022 1A88     		ldrh	r2, [r3]
+ 550 0024 FB1D     		adds	r3, r7, #7
+ 551 0026 1B78     		ldrb	r3, [r3]
+ 552 0028 1100     		movs	r1, r2
+ 553 002a 1800     		movs	r0, r3
+ 554 002c FFF7FEFF 		bl	AD5627_SetDAC
+ 165:dac.c         **** }
+ 555              		.loc 1 165 0
+ 556 0030 C046     		nop
+ 557 0032 BD46     		mov	sp, r7
+ 558 0034 05B0     		add	sp, sp, #20
+ 559              		@ sp needed
+ 560 0036 90BD     		pop	{r4, r7, pc}
+ 561              		.cfi_endproc
+ 562              	.LFE41:
+ 563              		.size	Set_Output_mA, .-Set_Output_mA
+ 564              		.text
+ 565              	.Letext0:
+ 566              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 567              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 568              		.file 4 "Generated_Source\\PSoC4/cytypes.h"
+ 569              		.section	.debug_info,"",%progbits
+ 570              	.Ldebug_info0:
+ 571 0000 A1020000 		.4byte	0x2a1
+ 572 0004 0400     		.2byte	0x4
+ 573 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 574 000a 04       		.byte	0x4
+ 575 000b 01       		.uleb128 0x1
+ 576 000c F1000000 		.4byte	.LASF34
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 14
+
+
+ 577 0010 0C       		.byte	0xc
+ 578 0011 59000000 		.4byte	.LASF35
+ 579 0015 90000000 		.4byte	.LASF36
+ 580 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 581 001d 00000000 		.4byte	0
+ 582 0021 00000000 		.4byte	.Ldebug_line0
+ 583 0025 02       		.uleb128 0x2
+ 584 0026 01       		.byte	0x1
+ 585 0027 06       		.byte	0x6
+ 586 0028 6B000000 		.4byte	.LASF0
+ 587 002c 03       		.uleb128 0x3
+ 588 002d 0B000000 		.4byte	.LASF3
+ 589 0031 02       		.byte	0x2
+ 590 0032 1D       		.byte	0x1d
+ 591 0033 37000000 		.4byte	0x37
+ 592 0037 02       		.uleb128 0x2
+ 593 0038 01       		.byte	0x1
+ 594 0039 08       		.byte	0x8
+ 595 003a 82000000 		.4byte	.LASF1
+ 596 003e 02       		.uleb128 0x2
+ 597 003f 02       		.byte	0x2
+ 598 0040 05       		.byte	0x5
+ 599 0041 00020000 		.4byte	.LASF2
+ 600 0045 03       		.uleb128 0x3
+ 601 0046 7F010000 		.4byte	.LASF4
+ 602 004a 02       		.byte	0x2
+ 603 004b 2B       		.byte	0x2b
+ 604 004c 50000000 		.4byte	0x50
+ 605 0050 02       		.uleb128 0x2
+ 606 0051 02       		.byte	0x2
+ 607 0052 07       		.byte	0x7
+ 608 0053 34000000 		.4byte	.LASF5
+ 609 0057 02       		.uleb128 0x2
+ 610 0058 04       		.byte	0x4
+ 611 0059 05       		.byte	0x5
+ 612 005a 1A020000 		.4byte	.LASF6
+ 613 005e 02       		.uleb128 0x2
+ 614 005f 04       		.byte	0x4
+ 615 0060 07       		.byte	0x7
+ 616 0061 D5000000 		.4byte	.LASF7
+ 617 0065 02       		.uleb128 0x2
+ 618 0066 08       		.byte	0x8
+ 619 0067 05       		.byte	0x5
+ 620 0068 E5010000 		.4byte	.LASF8
+ 621 006c 02       		.uleb128 0x2
+ 622 006d 08       		.byte	0x8
+ 623 006e 07       		.byte	0x7
+ 624 006f 69020000 		.4byte	.LASF9
+ 625 0073 04       		.uleb128 0x4
+ 626 0074 04       		.byte	0x4
+ 627 0075 05       		.byte	0x5
+ 628 0076 696E7400 		.ascii	"int\000"
+ 629 007a 02       		.uleb128 0x2
+ 630 007b 04       		.byte	0x4
+ 631 007c 07       		.byte	0x7
+ 632 007d BA010000 		.4byte	.LASF10
+ 633 0081 03       		.uleb128 0x3
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 15
+
+
+ 634 0082 CC010000 		.4byte	.LASF11
+ 635 0086 03       		.byte	0x3
+ 636 0087 18       		.byte	0x18
+ 637 0088 2C000000 		.4byte	0x2c
+ 638 008c 03       		.uleb128 0x3
+ 639 008d 11020000 		.4byte	.LASF12
+ 640 0091 03       		.byte	0x3
+ 641 0092 24       		.byte	0x24
+ 642 0093 45000000 		.4byte	0x45
+ 643 0097 05       		.uleb128 0x5
+ 644 0098 B3010000 		.4byte	.LASF13
+ 645 009c 04       		.byte	0x4
+ 646 009d FD01     		.2byte	0x1fd
+ 647 009f 50000000 		.4byte	0x50
+ 648 00a3 02       		.uleb128 0x2
+ 649 00a4 04       		.byte	0x4
+ 650 00a5 04       		.byte	0x4
+ 651 00a6 15000000 		.4byte	.LASF14
+ 652 00aa 02       		.uleb128 0x2
+ 653 00ab 08       		.byte	0x8
+ 654 00ac 04       		.byte	0x4
+ 655 00ad 8A010000 		.4byte	.LASF15
+ 656 00b1 02       		.uleb128 0x2
+ 657 00b2 01       		.byte	0x1
+ 658 00b3 08       		.byte	0x8
+ 659 00b4 C7010000 		.4byte	.LASF16
+ 660 00b8 02       		.uleb128 0x2
+ 661 00b9 08       		.byte	0x8
+ 662 00ba 04       		.byte	0x4
+ 663 00bb 23020000 		.4byte	.LASF17
+ 664 00bf 02       		.uleb128 0x2
+ 665 00c0 04       		.byte	0x4
+ 666 00c1 07       		.byte	0x7
+ 667 00c2 D4010000 		.4byte	.LASF18
+ 668 00c6 06       		.uleb128 0x6
+ 669 00c7 3D020000 		.4byte	.LASF19
+ 670 00cb 01       		.byte	0x1
+ 671 00cc 0F       		.byte	0xf
+ 672 00cd 00000000 		.4byte	.LFB35
+ 673 00d1 AC000000 		.4byte	.LFE35-.LFB35
+ 674 00d5 01       		.uleb128 0x1
+ 675 00d6 9C       		.byte	0x9c
+ 676 00d7 EA000000 		.4byte	0xea
+ 677 00db 07       		.uleb128 0x7
+ 678 00dc 0A020000 		.4byte	.LASF22
+ 679 00e0 01       		.byte	0x1
+ 680 00e1 10       		.byte	0x10
+ 681 00e2 EA000000 		.4byte	0xea
+ 682 00e6 02       		.uleb128 0x2
+ 683 00e7 91       		.byte	0x91
+ 684 00e8 74       		.sleb128 -12
+ 685 00e9 00       		.byte	0
+ 686 00ea 08       		.uleb128 0x8
+ 687 00eb 81000000 		.4byte	0x81
+ 688 00ef FA000000 		.4byte	0xfa
+ 689 00f3 09       		.uleb128 0x9
+ 690 00f4 BF000000 		.4byte	0xbf
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 16
+
+
+ 691 00f8 02       		.byte	0x2
+ 692 00f9 00       		.byte	0
+ 693 00fa 06       		.uleb128 0x6
+ 694 00fb 1B000000 		.4byte	.LASF20
+ 695 00ff 01       		.byte	0x1
+ 696 0100 2D       		.byte	0x2d
+ 697 0101 00000000 		.4byte	.LFB36
+ 698 0105 78000000 		.4byte	.LFE36-.LFB36
+ 699 0109 01       		.uleb128 0x1
+ 700 010a 9C       		.byte	0x9c
+ 701 010b 39010000 		.4byte	0x139
+ 702 010f 0A       		.uleb128 0xa
+ 703 0110 636800   		.ascii	"ch\000"
+ 704 0113 01       		.byte	0x1
+ 705 0114 2D       		.byte	0x2d
+ 706 0115 81000000 		.4byte	0x81
+ 707 0119 02       		.uleb128 0x2
+ 708 011a 91       		.byte	0x91
+ 709 011b 6F       		.sleb128 -17
+ 710 011c 0B       		.uleb128 0xb
+ 711 011d 77000000 		.4byte	.LASF21
+ 712 0121 01       		.byte	0x1
+ 713 0122 2D       		.byte	0x2d
+ 714 0123 8C000000 		.4byte	0x8c
+ 715 0127 02       		.uleb128 0x2
+ 716 0128 91       		.byte	0x91
+ 717 0129 6C       		.sleb128 -20
+ 718 012a 07       		.uleb128 0x7
+ 719 012b 0A020000 		.4byte	.LASF22
+ 720 012f 01       		.byte	0x1
+ 721 0130 2F       		.byte	0x2f
+ 722 0131 EA000000 		.4byte	0xea
+ 723 0135 02       		.uleb128 0x2
+ 724 0136 91       		.byte	0x91
+ 725 0137 74       		.sleb128 -12
+ 726 0138 00       		.byte	0
+ 727 0139 06       		.uleb128 0x6
+ 728 013a 47000000 		.4byte	.LASF23
+ 729 013e 01       		.byte	0x1
+ 730 013f 3C       		.byte	0x3c
+ 731 0140 00000000 		.4byte	.LFB37
+ 732 0144 5A000000 		.4byte	.LFE37-.LFB37
+ 733 0148 01       		.uleb128 0x1
+ 734 0149 9C       		.byte	0x9c
+ 735 014a 6B010000 		.4byte	0x16b
+ 736 014e 0B       		.uleb128 0xb
+ 737 014f 77000000 		.4byte	.LASF21
+ 738 0153 01       		.byte	0x1
+ 739 0154 3C       		.byte	0x3c
+ 740 0155 8C000000 		.4byte	0x8c
+ 741 0159 02       		.uleb128 0x2
+ 742 015a 91       		.byte	0x91
+ 743 015b 6E       		.sleb128 -18
+ 744 015c 07       		.uleb128 0x7
+ 745 015d 0A020000 		.4byte	.LASF22
+ 746 0161 01       		.byte	0x1
+ 747 0162 3E       		.byte	0x3e
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 17
+
+
+ 748 0163 EA000000 		.4byte	0xea
+ 749 0167 02       		.uleb128 0x2
+ 750 0168 91       		.byte	0x91
+ 751 0169 74       		.sleb128 -12
+ 752 016a 00       		.byte	0
+ 753 016b 0C       		.uleb128 0xc
+ 754 016c 57020000 		.4byte	.LASF25
+ 755 0170 01       		.byte	0x1
+ 756 0171 7A       		.byte	0x7a
+ 757 0172 8C000000 		.4byte	0x8c
+ 758 0176 00000000 		.4byte	.LFB38
+ 759 017a 58000000 		.4byte	.LFE38-.LFB38
+ 760 017e 01       		.uleb128 0x1
+ 761 017f 9C       		.byte	0x9c
+ 762 0180 A0010000 		.4byte	0x1a0
+ 763 0184 0A       		.uleb128 0xa
+ 764 0185 6D4100   		.ascii	"mA\000"
+ 765 0188 01       		.byte	0x1
+ 766 0189 7A       		.byte	0x7a
+ 767 018a A3000000 		.4byte	0xa3
+ 768 018e 02       		.uleb128 0x2
+ 769 018f 91       		.byte	0x91
+ 770 0190 6C       		.sleb128 -20
+ 771 0191 07       		.uleb128 0x7
+ 772 0192 DD010000 		.4byte	.LASF24
+ 773 0196 01       		.byte	0x1
+ 774 0197 80       		.byte	0x80
+ 775 0198 A3000000 		.4byte	0xa3
+ 776 019c 02       		.uleb128 0x2
+ 777 019d 91       		.byte	0x91
+ 778 019e 74       		.sleb128 -12
+ 779 019f 00       		.byte	0
+ 780 01a0 0C       		.uleb128 0xc
+ 781 01a1 5F000000 		.4byte	.LASF26
+ 782 01a5 01       		.byte	0x1
+ 783 01a6 87       		.byte	0x87
+ 784 01a7 A3000000 		.4byte	0xa3
+ 785 01ab 00000000 		.4byte	.LFB39
+ 786 01af 60000000 		.4byte	.LFE39-.LFB39
+ 787 01b3 01       		.uleb128 0x1
+ 788 01b4 9C       		.byte	0x9c
+ 789 01b5 00020000 		.4byte	0x200
+ 790 01b9 0B       		.uleb128 0xb
+ 791 01ba F3010000 		.4byte	.LASF27
+ 792 01be 01       		.byte	0x1
+ 793 01bf 87       		.byte	0x87
+ 794 01c0 A3000000 		.4byte	0xa3
+ 795 01c4 02       		.uleb128 0x2
+ 796 01c5 91       		.byte	0x91
+ 797 01c6 64       		.sleb128 -28
+ 798 01c7 0B       		.uleb128 0xb
+ 799 01c8 29000000 		.4byte	.LASF28
+ 800 01cc 01       		.byte	0x1
+ 801 01cd 87       		.byte	0x87
+ 802 01ce A3000000 		.4byte	0xa3
+ 803 01d2 02       		.uleb128 0x2
+ 804 01d3 91       		.byte	0x91
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 18
+
+
+ 805 01d4 60       		.sleb128 -32
+ 806 01d5 0B       		.uleb128 0xb
+ 807 01d6 4C020000 		.4byte	.LASF29
+ 808 01da 01       		.byte	0x1
+ 809 01db 87       		.byte	0x87
+ 810 01dc A3000000 		.4byte	0xa3
+ 811 01e0 02       		.uleb128 0x2
+ 812 01e1 91       		.byte	0x91
+ 813 01e2 5C       		.sleb128 -36
+ 814 01e3 07       		.uleb128 0x7
+ 815 01e4 DD010000 		.4byte	.LASF24
+ 816 01e8 01       		.byte	0x1
+ 817 01e9 89       		.byte	0x89
+ 818 01ea A3000000 		.4byte	0xa3
+ 819 01ee 02       		.uleb128 0x2
+ 820 01ef 91       		.byte	0x91
+ 821 01f0 6C       		.sleb128 -20
+ 822 01f1 07       		.uleb128 0x7
+ 823 01f2 91010000 		.4byte	.LASF30
+ 824 01f6 01       		.byte	0x1
+ 825 01f7 8A       		.byte	0x8a
+ 826 01f8 A3000000 		.4byte	0xa3
+ 827 01fc 02       		.uleb128 0x2
+ 828 01fd 91       		.byte	0x91
+ 829 01fe 68       		.sleb128 -24
+ 830 01ff 00       		.byte	0
+ 831 0200 06       		.uleb128 0x6
+ 832 0201 9B010000 		.4byte	.LASF31
+ 833 0205 01       		.byte	0x1
+ 834 0206 99       		.byte	0x99
+ 835 0207 00000000 		.4byte	.LFB40
+ 836 020b 50000000 		.4byte	.LFE40-.LFB40
+ 837 020f 01       		.uleb128 0x1
+ 838 0210 9C       		.byte	0x9c
+ 839 0211 69020000 		.4byte	0x269
+ 840 0215 0A       		.uleb128 0xa
+ 841 0216 636800   		.ascii	"ch\000"
+ 842 0219 01       		.byte	0x1
+ 843 021a 99       		.byte	0x99
+ 844 021b 81000000 		.4byte	0x81
+ 845 021f 02       		.uleb128 0x2
+ 846 0220 91       		.byte	0x91
+ 847 0221 67       		.sleb128 -25
+ 848 0222 0B       		.uleb128 0xb
+ 849 0223 F3010000 		.4byte	.LASF27
+ 850 0227 01       		.byte	0x1
+ 851 0228 99       		.byte	0x99
+ 852 0229 A3000000 		.4byte	0xa3
+ 853 022d 02       		.uleb128 0x2
+ 854 022e 91       		.byte	0x91
+ 855 022f 60       		.sleb128 -32
+ 856 0230 0B       		.uleb128 0xb
+ 857 0231 29000000 		.4byte	.LASF28
+ 858 0235 01       		.byte	0x1
+ 859 0236 99       		.byte	0x99
+ 860 0237 A3000000 		.4byte	0xa3
+ 861 023b 02       		.uleb128 0x2
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 19
+
+
+ 862 023c 91       		.byte	0x91
+ 863 023d 5C       		.sleb128 -36
+ 864 023e 0B       		.uleb128 0xb
+ 865 023f 4C020000 		.4byte	.LASF29
+ 866 0243 01       		.byte	0x1
+ 867 0244 99       		.byte	0x99
+ 868 0245 A3000000 		.4byte	0xa3
+ 869 0249 02       		.uleb128 0x2
+ 870 024a 91       		.byte	0x91
+ 871 024b 58       		.sleb128 -40
+ 872 024c 07       		.uleb128 0x7
+ 873 024d 00000000 		.4byte	.LASF32
+ 874 0251 01       		.byte	0x1
+ 875 0252 9B       		.byte	0x9b
+ 876 0253 A3000000 		.4byte	0xa3
+ 877 0257 02       		.uleb128 0x2
+ 878 0258 91       		.byte	0x91
+ 879 0259 6C       		.sleb128 -20
+ 880 025a 07       		.uleb128 0x7
+ 881 025b E7000000 		.4byte	.LASF33
+ 882 025f 01       		.byte	0x1
+ 883 0260 9C       		.byte	0x9c
+ 884 0261 8C000000 		.4byte	0x8c
+ 885 0265 02       		.uleb128 0x2
+ 886 0266 91       		.byte	0x91
+ 887 0267 6A       		.sleb128 -22
+ 888 0268 00       		.byte	0
+ 889 0269 0D       		.uleb128 0xd
+ 890 026a 2F020000 		.4byte	.LASF37
+ 891 026e 01       		.byte	0x1
+ 892 026f A1       		.byte	0xa1
+ 893 0270 00000000 		.4byte	.LFB41
+ 894 0274 38000000 		.4byte	.LFE41-.LFB41
+ 895 0278 01       		.uleb128 0x1
+ 896 0279 9C       		.byte	0x9c
+ 897 027a 0A       		.uleb128 0xa
+ 898 027b 636800   		.ascii	"ch\000"
+ 899 027e 01       		.byte	0x1
+ 900 027f A1       		.byte	0xa1
+ 901 0280 81000000 		.4byte	0x81
+ 902 0284 02       		.uleb128 0x2
+ 903 0285 91       		.byte	0x91
+ 904 0286 67       		.sleb128 -25
+ 905 0287 0B       		.uleb128 0xb
+ 906 0288 00000000 		.4byte	.LASF32
+ 907 028c 01       		.byte	0x1
+ 908 028d A1       		.byte	0xa1
+ 909 028e A3000000 		.4byte	0xa3
+ 910 0292 02       		.uleb128 0x2
+ 911 0293 91       		.byte	0x91
+ 912 0294 60       		.sleb128 -32
+ 913 0295 07       		.uleb128 0x7
+ 914 0296 E7000000 		.4byte	.LASF33
+ 915 029a 01       		.byte	0x1
+ 916 029b A3       		.byte	0xa3
+ 917 029c 8C000000 		.4byte	0x8c
+ 918 02a0 02       		.uleb128 0x2
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 20
+
+
+ 919 02a1 91       		.byte	0x91
+ 920 02a2 6E       		.sleb128 -18
+ 921 02a3 00       		.byte	0
+ 922 02a4 00       		.byte	0
+ 923              		.section	.debug_abbrev,"",%progbits
+ 924              	.Ldebug_abbrev0:
+ 925 0000 01       		.uleb128 0x1
+ 926 0001 11       		.uleb128 0x11
+ 927 0002 01       		.byte	0x1
+ 928 0003 25       		.uleb128 0x25
+ 929 0004 0E       		.uleb128 0xe
+ 930 0005 13       		.uleb128 0x13
+ 931 0006 0B       		.uleb128 0xb
+ 932 0007 03       		.uleb128 0x3
+ 933 0008 0E       		.uleb128 0xe
+ 934 0009 1B       		.uleb128 0x1b
+ 935 000a 0E       		.uleb128 0xe
+ 936 000b 55       		.uleb128 0x55
+ 937 000c 17       		.uleb128 0x17
+ 938 000d 11       		.uleb128 0x11
+ 939 000e 01       		.uleb128 0x1
+ 940 000f 10       		.uleb128 0x10
+ 941 0010 17       		.uleb128 0x17
+ 942 0011 00       		.byte	0
+ 943 0012 00       		.byte	0
+ 944 0013 02       		.uleb128 0x2
+ 945 0014 24       		.uleb128 0x24
+ 946 0015 00       		.byte	0
+ 947 0016 0B       		.uleb128 0xb
+ 948 0017 0B       		.uleb128 0xb
+ 949 0018 3E       		.uleb128 0x3e
+ 950 0019 0B       		.uleb128 0xb
+ 951 001a 03       		.uleb128 0x3
+ 952 001b 0E       		.uleb128 0xe
+ 953 001c 00       		.byte	0
+ 954 001d 00       		.byte	0
+ 955 001e 03       		.uleb128 0x3
+ 956 001f 16       		.uleb128 0x16
+ 957 0020 00       		.byte	0
+ 958 0021 03       		.uleb128 0x3
+ 959 0022 0E       		.uleb128 0xe
+ 960 0023 3A       		.uleb128 0x3a
+ 961 0024 0B       		.uleb128 0xb
+ 962 0025 3B       		.uleb128 0x3b
+ 963 0026 0B       		.uleb128 0xb
+ 964 0027 49       		.uleb128 0x49
+ 965 0028 13       		.uleb128 0x13
+ 966 0029 00       		.byte	0
+ 967 002a 00       		.byte	0
+ 968 002b 04       		.uleb128 0x4
+ 969 002c 24       		.uleb128 0x24
+ 970 002d 00       		.byte	0
+ 971 002e 0B       		.uleb128 0xb
+ 972 002f 0B       		.uleb128 0xb
+ 973 0030 3E       		.uleb128 0x3e
+ 974 0031 0B       		.uleb128 0xb
+ 975 0032 03       		.uleb128 0x3
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 21
+
+
+ 976 0033 08       		.uleb128 0x8
+ 977 0034 00       		.byte	0
+ 978 0035 00       		.byte	0
+ 979 0036 05       		.uleb128 0x5
+ 980 0037 16       		.uleb128 0x16
+ 981 0038 00       		.byte	0
+ 982 0039 03       		.uleb128 0x3
+ 983 003a 0E       		.uleb128 0xe
+ 984 003b 3A       		.uleb128 0x3a
+ 985 003c 0B       		.uleb128 0xb
+ 986 003d 3B       		.uleb128 0x3b
+ 987 003e 05       		.uleb128 0x5
+ 988 003f 49       		.uleb128 0x49
+ 989 0040 13       		.uleb128 0x13
+ 990 0041 00       		.byte	0
+ 991 0042 00       		.byte	0
+ 992 0043 06       		.uleb128 0x6
+ 993 0044 2E       		.uleb128 0x2e
+ 994 0045 01       		.byte	0x1
+ 995 0046 3F       		.uleb128 0x3f
+ 996 0047 19       		.uleb128 0x19
+ 997 0048 03       		.uleb128 0x3
+ 998 0049 0E       		.uleb128 0xe
+ 999 004a 3A       		.uleb128 0x3a
+ 1000 004b 0B       		.uleb128 0xb
+ 1001 004c 3B       		.uleb128 0x3b
+ 1002 004d 0B       		.uleb128 0xb
+ 1003 004e 27       		.uleb128 0x27
+ 1004 004f 19       		.uleb128 0x19
+ 1005 0050 11       		.uleb128 0x11
+ 1006 0051 01       		.uleb128 0x1
+ 1007 0052 12       		.uleb128 0x12
+ 1008 0053 06       		.uleb128 0x6
+ 1009 0054 40       		.uleb128 0x40
+ 1010 0055 18       		.uleb128 0x18
+ 1011 0056 9642     		.uleb128 0x2116
+ 1012 0058 19       		.uleb128 0x19
+ 1013 0059 01       		.uleb128 0x1
+ 1014 005a 13       		.uleb128 0x13
+ 1015 005b 00       		.byte	0
+ 1016 005c 00       		.byte	0
+ 1017 005d 07       		.uleb128 0x7
+ 1018 005e 34       		.uleb128 0x34
+ 1019 005f 00       		.byte	0
+ 1020 0060 03       		.uleb128 0x3
+ 1021 0061 0E       		.uleb128 0xe
+ 1022 0062 3A       		.uleb128 0x3a
+ 1023 0063 0B       		.uleb128 0xb
+ 1024 0064 3B       		.uleb128 0x3b
+ 1025 0065 0B       		.uleb128 0xb
+ 1026 0066 49       		.uleb128 0x49
+ 1027 0067 13       		.uleb128 0x13
+ 1028 0068 02       		.uleb128 0x2
+ 1029 0069 18       		.uleb128 0x18
+ 1030 006a 00       		.byte	0
+ 1031 006b 00       		.byte	0
+ 1032 006c 08       		.uleb128 0x8
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 22
+
+
+ 1033 006d 01       		.uleb128 0x1
+ 1034 006e 01       		.byte	0x1
+ 1035 006f 49       		.uleb128 0x49
+ 1036 0070 13       		.uleb128 0x13
+ 1037 0071 01       		.uleb128 0x1
+ 1038 0072 13       		.uleb128 0x13
+ 1039 0073 00       		.byte	0
+ 1040 0074 00       		.byte	0
+ 1041 0075 09       		.uleb128 0x9
+ 1042 0076 21       		.uleb128 0x21
+ 1043 0077 00       		.byte	0
+ 1044 0078 49       		.uleb128 0x49
+ 1045 0079 13       		.uleb128 0x13
+ 1046 007a 2F       		.uleb128 0x2f
+ 1047 007b 0B       		.uleb128 0xb
+ 1048 007c 00       		.byte	0
+ 1049 007d 00       		.byte	0
+ 1050 007e 0A       		.uleb128 0xa
+ 1051 007f 05       		.uleb128 0x5
+ 1052 0080 00       		.byte	0
+ 1053 0081 03       		.uleb128 0x3
+ 1054 0082 08       		.uleb128 0x8
+ 1055 0083 3A       		.uleb128 0x3a
+ 1056 0084 0B       		.uleb128 0xb
+ 1057 0085 3B       		.uleb128 0x3b
+ 1058 0086 0B       		.uleb128 0xb
+ 1059 0087 49       		.uleb128 0x49
+ 1060 0088 13       		.uleb128 0x13
+ 1061 0089 02       		.uleb128 0x2
+ 1062 008a 18       		.uleb128 0x18
+ 1063 008b 00       		.byte	0
+ 1064 008c 00       		.byte	0
+ 1065 008d 0B       		.uleb128 0xb
+ 1066 008e 05       		.uleb128 0x5
+ 1067 008f 00       		.byte	0
+ 1068 0090 03       		.uleb128 0x3
+ 1069 0091 0E       		.uleb128 0xe
+ 1070 0092 3A       		.uleb128 0x3a
+ 1071 0093 0B       		.uleb128 0xb
+ 1072 0094 3B       		.uleb128 0x3b
+ 1073 0095 0B       		.uleb128 0xb
+ 1074 0096 49       		.uleb128 0x49
+ 1075 0097 13       		.uleb128 0x13
+ 1076 0098 02       		.uleb128 0x2
+ 1077 0099 18       		.uleb128 0x18
+ 1078 009a 00       		.byte	0
+ 1079 009b 00       		.byte	0
+ 1080 009c 0C       		.uleb128 0xc
+ 1081 009d 2E       		.uleb128 0x2e
+ 1082 009e 01       		.byte	0x1
+ 1083 009f 3F       		.uleb128 0x3f
+ 1084 00a0 19       		.uleb128 0x19
+ 1085 00a1 03       		.uleb128 0x3
+ 1086 00a2 0E       		.uleb128 0xe
+ 1087 00a3 3A       		.uleb128 0x3a
+ 1088 00a4 0B       		.uleb128 0xb
+ 1089 00a5 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 23
+
+
+ 1090 00a6 0B       		.uleb128 0xb
+ 1091 00a7 27       		.uleb128 0x27
+ 1092 00a8 19       		.uleb128 0x19
+ 1093 00a9 49       		.uleb128 0x49
+ 1094 00aa 13       		.uleb128 0x13
+ 1095 00ab 11       		.uleb128 0x11
+ 1096 00ac 01       		.uleb128 0x1
+ 1097 00ad 12       		.uleb128 0x12
+ 1098 00ae 06       		.uleb128 0x6
+ 1099 00af 40       		.uleb128 0x40
+ 1100 00b0 18       		.uleb128 0x18
+ 1101 00b1 9642     		.uleb128 0x2116
+ 1102 00b3 19       		.uleb128 0x19
+ 1103 00b4 01       		.uleb128 0x1
+ 1104 00b5 13       		.uleb128 0x13
+ 1105 00b6 00       		.byte	0
+ 1106 00b7 00       		.byte	0
+ 1107 00b8 0D       		.uleb128 0xd
+ 1108 00b9 2E       		.uleb128 0x2e
+ 1109 00ba 01       		.byte	0x1
+ 1110 00bb 3F       		.uleb128 0x3f
+ 1111 00bc 19       		.uleb128 0x19
+ 1112 00bd 03       		.uleb128 0x3
+ 1113 00be 0E       		.uleb128 0xe
+ 1114 00bf 3A       		.uleb128 0x3a
+ 1115 00c0 0B       		.uleb128 0xb
+ 1116 00c1 3B       		.uleb128 0x3b
+ 1117 00c2 0B       		.uleb128 0xb
+ 1118 00c3 27       		.uleb128 0x27
+ 1119 00c4 19       		.uleb128 0x19
+ 1120 00c5 11       		.uleb128 0x11
+ 1121 00c6 01       		.uleb128 0x1
+ 1122 00c7 12       		.uleb128 0x12
+ 1123 00c8 06       		.uleb128 0x6
+ 1124 00c9 40       		.uleb128 0x40
+ 1125 00ca 18       		.uleb128 0x18
+ 1126 00cb 9642     		.uleb128 0x2116
+ 1127 00cd 19       		.uleb128 0x19
+ 1128 00ce 00       		.byte	0
+ 1129 00cf 00       		.byte	0
+ 1130 00d0 00       		.byte	0
+ 1131              		.section	.debug_aranges,"",%progbits
+ 1132 0000 4C000000 		.4byte	0x4c
+ 1133 0004 0200     		.2byte	0x2
+ 1134 0006 00000000 		.4byte	.Ldebug_info0
+ 1135 000a 04       		.byte	0x4
+ 1136 000b 00       		.byte	0
+ 1137 000c 0000     		.2byte	0
+ 1138 000e 0000     		.2byte	0
+ 1139 0010 00000000 		.4byte	.LFB35
+ 1140 0014 AC000000 		.4byte	.LFE35-.LFB35
+ 1141 0018 00000000 		.4byte	.LFB36
+ 1142 001c 78000000 		.4byte	.LFE36-.LFB36
+ 1143 0020 00000000 		.4byte	.LFB37
+ 1144 0024 5A000000 		.4byte	.LFE37-.LFB37
+ 1145 0028 00000000 		.4byte	.LFB38
+ 1146 002c 58000000 		.4byte	.LFE38-.LFB38
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 24
+
+
+ 1147 0030 00000000 		.4byte	.LFB39
+ 1148 0034 60000000 		.4byte	.LFE39-.LFB39
+ 1149 0038 00000000 		.4byte	.LFB40
+ 1150 003c 50000000 		.4byte	.LFE40-.LFB40
+ 1151 0040 00000000 		.4byte	.LFB41
+ 1152 0044 38000000 		.4byte	.LFE41-.LFB41
+ 1153 0048 00000000 		.4byte	0
+ 1154 004c 00000000 		.4byte	0
+ 1155              		.section	.debug_ranges,"",%progbits
+ 1156              	.Ldebug_ranges0:
+ 1157 0000 00000000 		.4byte	.LFB35
+ 1158 0004 AC000000 		.4byte	.LFE35
+ 1159 0008 00000000 		.4byte	.LFB36
+ 1160 000c 78000000 		.4byte	.LFE36
+ 1161 0010 00000000 		.4byte	.LFB37
+ 1162 0014 5A000000 		.4byte	.LFE37
+ 1163 0018 00000000 		.4byte	.LFB38
+ 1164 001c 58000000 		.4byte	.LFE38
+ 1165 0020 00000000 		.4byte	.LFB39
+ 1166 0024 60000000 		.4byte	.LFE39
+ 1167 0028 00000000 		.4byte	.LFB40
+ 1168 002c 50000000 		.4byte	.LFE40
+ 1169 0030 00000000 		.4byte	.LFB41
+ 1170 0034 38000000 		.4byte	.LFE41
+ 1171 0038 00000000 		.4byte	0
+ 1172 003c 00000000 		.4byte	0
+ 1173              		.section	.debug_line,"",%progbits
+ 1174              	.Ldebug_line0:
+ 1175 0000 1D020000 		.section	.debug_str,"MS",%progbits,1
+ 1175      02003D01 
+ 1175      00000201 
+ 1175      FB0E0D00 
+ 1175      01010101 
+ 1176              	.LASF32:
+ 1177 0000 64657369 		.ascii	"desired_mA\000"
+ 1177      7265645F 
+ 1177      6D4100
+ 1178              	.LASF3:
+ 1179 000b 5F5F7569 		.ascii	"__uint8_t\000"
+ 1179      6E74385F 
+ 1179      7400
+ 1180              	.LASF14:
+ 1181 0015 666C6F61 		.ascii	"float\000"
+ 1181      7400
+ 1182              	.LASF20:
+ 1183 001b 41443536 		.ascii	"AD5627_SetDAC\000"
+ 1183      32375F53 
+ 1183      65744441 
+ 1183      4300
+ 1184              	.LASF28:
+ 1185 0029 73656E73 		.ascii	"sensor_min\000"
+ 1185      6F725F6D 
+ 1185      696E00
+ 1186              	.LASF5:
+ 1187 0034 73686F72 		.ascii	"short unsigned int\000"
+ 1187      7420756E 
+ 1187      7369676E 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 25
+
+
+ 1187      65642069 
+ 1187      6E7400
+ 1188              	.LASF23:
+ 1189 0047 4D435034 		.ascii	"MCP47VB02T_SetDAC\000"
+ 1189      37564230 
+ 1189      32545F53 
+ 1189      65744441 
+ 1189      4300
+ 1190              	.LASF35:
+ 1191 0059 6461632E 		.ascii	"dac.c\000"
+ 1191      6300
+ 1192              	.LASF26:
+ 1193 005f 53656E73 		.ascii	"SensorTo_mA\000"
+ 1193      6F72546F 
+ 1193      5F6D4100 
+ 1194              	.LASF0:
+ 1195 006b 7369676E 		.ascii	"signed char\000"
+ 1195      65642063 
+ 1195      68617200 
+ 1196              	.LASF21:
+ 1197 0077 76616C75 		.ascii	"value12bit\000"
+ 1197      65313262 
+ 1197      697400
+ 1198              	.LASF1:
+ 1199 0082 756E7369 		.ascii	"unsigned char\000"
+ 1199      676E6564 
+ 1199      20636861 
+ 1199      7200
+ 1200              	.LASF36:
+ 1201 0090 433A5C55 		.ascii	"C:\\Users\\alexport\\OneDrive - Safeguard Analytics"
+ 1201      73657273 
+ 1201      5C616C65 
+ 1201      78706F72 
+ 1201      745C4F6E 
+ 1202 00c0 5C53412D 		.ascii	"\\SA-220\\SA-220.cydsn\000"
+ 1202      3232305C 
+ 1202      53412D32 
+ 1202      32302E63 
+ 1202      7964736E 
+ 1203              	.LASF7:
+ 1204 00d5 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1204      20756E73 
+ 1204      69676E65 
+ 1204      6420696E 
+ 1204      7400
+ 1205              	.LASF33:
+ 1206 00e7 6461635F 		.ascii	"dac_value\000"
+ 1206      76616C75 
+ 1206      6500
+ 1207              	.LASF34:
+ 1208 00f1 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1208      43313120 
+ 1208      352E342E 
+ 1208      31203230 
+ 1208      31363036 
+ 1209 0124 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1209      20726576 
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 26
+
+
+ 1209      6973696F 
+ 1209      6E203233 
+ 1209      37373135 
+ 1210 0157 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1210      66756E63 
+ 1210      74696F6E 
+ 1210      2D736563 
+ 1210      74696F6E 
+ 1211              	.LASF4:
+ 1212 017f 5F5F7569 		.ascii	"__uint16_t\000"
+ 1212      6E743136 
+ 1212      5F7400
+ 1213              	.LASF15:
+ 1214 018a 646F7562 		.ascii	"double\000"
+ 1214      6C6500
+ 1215              	.LASF30:
+ 1216 0191 696E6372 		.ascii	"increment\000"
+ 1216      656D656E 
+ 1216      7400
+ 1217              	.LASF31:
+ 1218 019b 55706461 		.ascii	"UpdateCurrentLoopOutput\000"
+ 1218      74654375 
+ 1218      7272656E 
+ 1218      744C6F6F 
+ 1218      704F7574 
+ 1219              	.LASF13:
+ 1220 01b3 75696E74 		.ascii	"uint16\000"
+ 1220      313600
+ 1221              	.LASF10:
+ 1222 01ba 756E7369 		.ascii	"unsigned int\000"
+ 1222      676E6564 
+ 1222      20696E74 
+ 1222      00
+ 1223              	.LASF16:
+ 1224 01c7 63686172 		.ascii	"char\000"
+ 1224      00
+ 1225              	.LASF11:
+ 1226 01cc 75696E74 		.ascii	"uint8_t\000"
+ 1226      385F7400 
+ 1227              	.LASF18:
+ 1228 01d4 73697A65 		.ascii	"sizetype\000"
+ 1228      74797065 
+ 1228      00
+ 1229              	.LASF24:
+ 1230 01dd 70657263 		.ascii	"percent\000"
+ 1230      656E7400 
+ 1231              	.LASF8:
+ 1232 01e5 6C6F6E67 		.ascii	"long long int\000"
+ 1232      206C6F6E 
+ 1232      6720696E 
+ 1232      7400
+ 1233              	.LASF27:
+ 1234 01f3 73656E73 		.ascii	"sensor_value\000"
+ 1234      6F725F76 
+ 1234      616C7565 
+ 1234      00
+ 1235              	.LASF2:
+ARM GAS  C:\Users\alexport\AppData\Local\Temp\ccSzUPYv.s 			page 27
+
+
+ 1236 0200 73686F72 		.ascii	"short int\000"
+ 1236      7420696E 
+ 1236      7400
+ 1237              	.LASF22:
+ 1238 020a 62756666 		.ascii	"buffer\000"
+ 1238      657200
+ 1239              	.LASF12:
+ 1240 0211 75696E74 		.ascii	"uint16_t\000"
+ 1240      31365F74 
+ 1240      00
+ 1241              	.LASF6:
+ 1242 021a 6C6F6E67 		.ascii	"long int\000"
+ 1242      20696E74 
+ 1242      00
+ 1243              	.LASF17:
+ 1244 0223 6C6F6E67 		.ascii	"long double\000"
+ 1244      20646F75 
+ 1244      626C6500 
+ 1245              	.LASF37:
+ 1246 022f 5365745F 		.ascii	"Set_Output_mA\000"
+ 1246      4F757470 
+ 1246      75745F6D 
+ 1246      4100
+ 1247              	.LASF19:
+ 1248 023d 41443536 		.ascii	"AD5627_InitDAC\000"
+ 1248      32375F49 
+ 1248      6E697444 
+ 1248      414300
+ 1249              	.LASF29:
+ 1250 024c 73656E73 		.ascii	"sensor_max\000"
+ 1250      6F725F6D 
+ 1250      617800
+ 1251              	.LASF25:
+ 1252 0257 436F6E76 		.ascii	"Convert_mA_to_DAC\000"
+ 1252      6572745F 
+ 1252      6D415F74 
+ 1252      6F5F4441 
+ 1252      4300
+ 1253              	.LASF9:
+ 1254 0269 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1254      206C6F6E 
+ 1254      6720756E 
+ 1254      7369676E 
+ 1254      65642069 
+ 1255              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
