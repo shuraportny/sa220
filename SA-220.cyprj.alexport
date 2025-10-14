@@ -11,48 +11,6 @@
 <CyGuid_f44455c5-3770-4452-b988-0a7a7ff46256 type_name="CyDesigner.Common.ProjMgmt.Model.CyConfigDependencies" version="1">
 <dependency_info name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" xml_contents_version="2">
 <CyGuid_1173175f-1b9b-4ad4-a065-754a48a27021 type_name="CyDesigner.Common.Base.CyFileDeps" version="1">
-<file name=".\CortexM0\ARM_GCC_541\Debug\blue_gatt.o">
-<dep name=".\Generated_Source\PSoC4\CyFlash.h" />
-<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<dep name=".\Generated_Source\PSoC4\CyLib.h" />
-<dep name=".\Generated_Source\PSoC4\blue.h" />
-<dep name=".\Generated_Source\PSoC4\blue_Stack.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackGap.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackGatt.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackGattClient.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackGattDb.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackGattServer.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackHostMain.h" />
-<dep name=".\Generated_Source\PSoC4\blue_StackL2cap.h" />
-<dep name=".\Generated_Source\PSoC4\blue_custom.h" />
-<dep name=".\Generated_Source\PSoC4\blue_dis.h" />
-<dep name=".\Generated_Source\PSoC4\blue_eventHandler.h" />
-<dep name=".\Generated_Source\PSoC4\blue_gatt.c" />
-<dep name=".\Generated_Source\PSoC4\blue_gatt.h" />
-<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
-<dep name=".\Generated_Source\PSoC4\cytypes.h" />
-</file>
-<file name=".\Generated_Source\PSoC4\CyFlash.h" />
-<file name=".\Generated_Source\PSoC4\CyLFClk.h" />
-<file name=".\Generated_Source\PSoC4\CyLib.h" />
-<file name=".\Generated_Source\PSoC4\blue.h" />
-<file name=".\Generated_Source\PSoC4\blue_Stack.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackGap.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackGatt.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackGattClient.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackGattDb.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackGattServer.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackHostMain.h" />
-<file name=".\Generated_Source\PSoC4\blue_StackL2cap.h" />
-<file name=".\Generated_Source\PSoC4\blue_custom.h" />
-<file name=".\Generated_Source\PSoC4\blue_dis.h" />
-<file name=".\Generated_Source\PSoC4\blue_eventHandler.h" />
-<file name=".\Generated_Source\PSoC4\blue_gatt.c" />
-<file name=".\Generated_Source\PSoC4\blue_gatt.h" />
-<file name=".\Generated_Source\PSoC4\cydevice_trm.h" />
-<file name=".\Generated_Source\PSoC4\cyfitter.h" />
-<file name=".\Generated_Source\PSoC4\cytypes.h" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\runtime.o">
 <dep name=".\Generated_Source\PSoC4\BLETimer.h" />
 <dep name=".\Generated_Source\PSoC4\CPS.h" />
@@ -171,6 +129,9 @@
 <file name=".\Generated_Source\PSoC4\CSD_aliases.h" />
 <file name=".\Generated_Source\PSoC4\Clock_1.h" />
 <file name=".\Generated_Source\PSoC4\CyDMA.h" />
+<file name=".\Generated_Source\PSoC4\CyFlash.h" />
+<file name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<file name=".\Generated_Source\PSoC4\CyLib.h" />
 <file name=".\Generated_Source\PSoC4\EF1.h" />
 <file name=".\Generated_Source\PSoC4\EF1_aliases.h" />
 <file name=".\Generated_Source\PSoC4\EF2.h" />
@@ -223,9 +184,22 @@
 <file name=".\Generated_Source\PSoC4\UART2.h" />
 <file name=".\Generated_Source\PSoC4\UART2_IntClock.h" />
 <file name=".\Generated_Source\PSoC4\WdtIsr.h" />
+<file name=".\Generated_Source\PSoC4\blue.h" />
 <file name=".\Generated_Source\PSoC4\blue_HAL_PVT.h" />
 <file name=".\Generated_Source\PSoC4\blue_STACK_PVT.h" />
+<file name=".\Generated_Source\PSoC4\blue_Stack.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackGap.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackGatt.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackGattClient.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackGattDb.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackGattServer.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackHostMain.h" />
+<file name=".\Generated_Source\PSoC4\blue_StackL2cap.h" />
 <file name=".\Generated_Source\PSoC4\blue_bless_isr.h" />
+<file name=".\Generated_Source\PSoC4\blue_custom.h" />
+<file name=".\Generated_Source\PSoC4\blue_dis.h" />
+<file name=".\Generated_Source\PSoC4\blue_eventHandler.h" />
+<file name=".\Generated_Source\PSoC4\blue_gatt.h" />
 <file name=".\Generated_Source\PSoC4\byteIn2.h" />
 <file name=".\Generated_Source\PSoC4\cmsis_armcc.h" />
 <file name=".\Generated_Source\PSoC4\cmsis_compiler.h" />
@@ -234,9 +208,12 @@
 <file name=".\Generated_Source\PSoC4\core_cm0_psoc4.h" />
 <file name=".\Generated_Source\PSoC4\cyPm.h" />
 <file name=".\Generated_Source\PSoC4\cy_em_eeprom.h" />
+<file name=".\Generated_Source\PSoC4\cydevice_trm.h" />
 <file name=".\Generated_Source\PSoC4\cydisabledsheets.h" />
+<file name=".\Generated_Source\PSoC4\cyfitter.h" />
 <file name=".\Generated_Source\PSoC4\cyfitter_cfg.h" />
 <file name=".\Generated_Source\PSoC4\cypins.h" />
+<file name=".\Generated_Source\PSoC4\cytypes.h" />
 <file name=".\Generated_Source\PSoC4\isr_BLE.h" />
 <file name=".\Generated_Source\PSoC4\isr_ModbusByteIn.h" />
 <file name=".\Generated_Source\PSoC4\isr_NewMessage.h" />
@@ -254,6 +231,29 @@
 <file name=".\runtime.c" />
 <file name=".\runtime.h" />
 <file name=".\sensor.h" />
+<file name=".\CortexM0\ARM_GCC_541\Debug\blue_gatt.o">
+<dep name=".\Generated_Source\PSoC4\CyFlash.h" />
+<dep name=".\Generated_Source\PSoC4\CyLFClk.h" />
+<dep name=".\Generated_Source\PSoC4\CyLib.h" />
+<dep name=".\Generated_Source\PSoC4\blue.h" />
+<dep name=".\Generated_Source\PSoC4\blue_Stack.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackGap.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackGatt.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackGattClient.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackGattDb.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackGattServer.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackHostMain.h" />
+<dep name=".\Generated_Source\PSoC4\blue_StackL2cap.h" />
+<dep name=".\Generated_Source\PSoC4\blue_custom.h" />
+<dep name=".\Generated_Source\PSoC4\blue_dis.h" />
+<dep name=".\Generated_Source\PSoC4\blue_eventHandler.h" />
+<dep name=".\Generated_Source\PSoC4\blue_gatt.c" />
+<dep name=".\Generated_Source\PSoC4\blue_gatt.h" />
+<dep name=".\Generated_Source\PSoC4\cydevice_trm.h" />
+<dep name=".\Generated_Source\PSoC4\cyfitter.h" />
+<dep name=".\Generated_Source\PSoC4\cytypes.h" />
+</file>
+<file name=".\Generated_Source\PSoC4\blue_gatt.c" />
 <file name=".\CortexM0\ARM_GCC_541\Debug\eeprom.o">
 <dep name=".\Generated_Source\PSoC4\BLETimer.h" />
 <dep name=".\Generated_Source\PSoC4\CPS.h" />
@@ -3644,9 +3644,6 @@
 <v>Cypress Component Catalog\Thermal Management</v>
 <v>Cypress Component Catalog\Thermal Management\Fan Controller [v4.10]</v>
 <v>Cypress Component Catalog\Thermal Management\RTD Calculator [v1.20]</v>
-<v>Cypress Component Catalog\Thermal Management\Thermistor Calculator [v1.20]</v>
-<v>Cypress Component Catalog\Thermal Management\Thermocouple Calculator [v1.20]</v>
-<v>Cypress Component Catalog\Thermal Management\TMP05 Interface Macro [v1.10]</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Off-Chip Component Catalog\Passive\Resistor [v1.0]">
@@ -3675,7 +3672,7 @@
 <dataGuid v="769d31ea-68b1-4f0c-b90a-7c10a43ee563">
 <CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563 type_name="CyDesigner.Common.ProjMgmt.Model.CyLinkCustomData" version="1">
 <link_deps_times>
-<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="134049450139223183" />
+<name_val_pair name="c9323d49-d323-40b8-9b59-cc008d68a989@Debug@CortexM0" v="134049490821533539" />
 </link_deps_times>
 </CyGuid_769d31ea-68b1-4f0c-b90a-7c10a43ee563>
 </dataGuid>
@@ -3687,9 +3684,9 @@
 <dataGuid v="bf610382-39c6-441f-80b8-b04622ea7845">
 <CyGuid_bf610382-39c6-441f-80b8-b04622ea7845 type_name="CyDesigner.Common.Debugger.CyWatchedVariableList" version="1">
 <debugger_watch_list>
-<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="relay" radix="Default" />
-<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="wrReqParam-&gt;handleValPair.value.val" radix="Default" />
-<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="wrReqParam-&gt;handleValPair.value" radix="Default" />
+<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="gas_type" radix="Default" />
+<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="str" radix="Default" />
+<CyGuid_ccf7a56e-c00d-460c-82dd-56c8f54feb7f type_name="CyDesigner.Common.Debugger.CyWatchedVariableList+CyWatchedItem" version="1" window="0" name="sensor[1]" radix="Default" />
 </debugger_watch_list>
 </CyGuid_bf610382-39c6-441f-80b8-b04622ea7845>
 </dataGuid>
@@ -4652,7 +4649,7 @@
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\rtlpkg.vif</v>
 <v>C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\stdlogic\cy_psoc3.vif</v>
 </warp_dep>
-<deps_time v="134049450116285536" />
+<deps_time v="134049469249097806" />
 <top_block v="TopDesign" />
 <last_generation v="2" />
 <pdl_path v="" />

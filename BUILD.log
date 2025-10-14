@@ -1,22 +1,197 @@
---------------- Build Started: 10/14/2025 14:49:34 Project: SA-220, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
-cydsfit.exe -.appdatapath "C:\Users\alexport\AppData\Local\Cypress Semiconductor\PSoC Creator\4.4" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p "C:\Users\alexport\OneDrive - Safeguard Analytics\SA-220\SA-220.cydsn\SA-220.cyprj" -d CYBLE-224116-01 -s "C:\Users\alexport\OneDrive - Safeguard Analytics\SA-220\SA-220.cydsn\Generated_Source\PSoC4" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
-Elaborating Design...
-HDL Generation...
-Synthesis...
-Tech Mapping...
-ADD: pft.M0040: information: The following 2 pin(s) will be assigned a location by the fitter: CPS(0), CSD(0)
-Analog Placement...
-Analog Routing...
-Analog Code Generation...
-Digital Placement...
-Digital Routing...
-Bitstream Generation...
-Bitstream Verification...
-Static timing analysis...
-API Generation...
-Dependency Generation...
-Cleanup...
-arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/blue_gatt.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c Generated_Source\PSoC4\blue_gatt.c -o .\CortexM0\ARM_GCC_541\Debug\blue_gatt.o
+--------------- Build Started: 10/14/2025 15:57:58 Project: SA-220, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+The code generation step is up to date.
+arm-none-eabi-gcc.exe -mcpu=cortex-m0 -mthumb -I. -IGenerated_Source\PSoC4 -Wa,-alh=.\CortexM0\ARM_GCC_541\Debug/runtime.lst -g -D DEBUG -D CY_CORE_ID=0 -Wall -ffunction-sections -ffat-lto-objects -O0 -c runtime.c -o .\CortexM0\ARM_GCC_541\Debug\runtime.o
+runtime.c: In function 'InitSystem':
+runtime.c:199:12: warning: unused variable 'SensorSerialNumber' [-Wunused-variable]
+     uint32 SensorSerialNumber = 0x123456; 
+            ^
+runtime.c:161:10: warning: unused variable 'text' [-Wunused-variable]
+     char text[10];
+          ^
+runtime.c: In function 'LoadSensorInfo':
+runtime.c:414:20: warning: unused variable 'tmp2' [-Wunused-variable]
+    uint8_t tmp[4], tmp2[4];
+                    ^
+runtime.c: In function 'runtime_ProcessRequest':
+runtime.c:630:17: warning: variable 'alarm' set but not used [-Wunused-but-set-variable]
+         uint8_t alarm;
+                 ^
+runtime.c: In function 'updateOurBleData':
+runtime.c:1176:21: warning: unused variable 'prev_resolution' [-Wunused-variable]
+     static uint16_t prev_resolution;
+                     ^
+runtime.c:1049:11: warning: unused variable 'fval' [-Wunused-variable]
+     float fval;
+           ^
+runtime.c:1042:12: warning: unused variable 'testVal32' [-Wunused-variable]
+     uint32 testVal32 = 0;
+            ^
+runtime.c:1041:12: warning: unused variable 'testVal16' [-Wunused-variable]
+     uint16 testVal16 = 0;
+            ^
+runtime.c: In function 'Stack_Handler':
+runtime.c:1623:45: warning: passing argument 1 of 'EEPROM_SetMyAddress' makes pointer from integer without a cast [-Wint-conversion]
+                         EEPROM_SetMyAddress(System.CanNodeId);
+                                             ^
+In file included from runtime.c:18:0:
+eeprom.h:87:6: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'uint8 {aka unsigned char}'
+ void EEPROM_SetMyAddress(uint8_t* addr);
+      ^
+runtime.c:1704:41: warning: passing argument 1 of 'EEPROM_SetMyAddress' makes pointer from integer without a cast [-Wint-conversion]
+                     EEPROM_SetMyAddress(System.CanNodeId);
+                                         ^
+In file included from runtime.c:18:0:
+eeprom.h:87:6: note: expected 'uint8_t * {aka unsigned char *}' but argument is of type 'uint8 {aka unsigned char}'
+ void EEPROM_SetMyAddress(uint8_t* addr);
+      ^
+runtime.c: In function 'runtimeRealTime':
+runtime.c:2116:13: warning: unused variable 'cal_status2' [-Wunused-variable]
+     uint8_t cal_status2 = sensor[1][CALSTATUSLSB];
+             ^
+runtime.c:2115:13: warning: unused variable 'cal_status1' [-Wunused-variable]
+     uint8_t cal_status1 = sensor[0][CALSTATUSLSB];
+             ^
+runtime.c:2048:10: warning: unused variable 'units' [-Wunused-variable]
+     char units[4];
+          ^
+runtime.c:2047:10: warning: unused variable 'str' [-Wunused-variable]
+     char str[10];
+          ^
+runtime.c: In function 'HandleSensor1':
+runtime.c:2242:13: warning: unused variable 'in_alarm' [-Wunused-variable]
+     uint8_t in_alarm=0;
+             ^
+runtime.c: In function 'HandleSensor2':
+runtime.c:2951:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+         sprintf(str, "%02d:%02d:%02d",h,(warmupcnt - (h*3600))/60, warmupcnt%60  );
+                      ^
+runtime.c:2951:22: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:2951:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+runtime.c:2951:22: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:2850:13: warning: unused variable 'in_alarm' [-Wunused-variable]
+     uint8_t in_alarm=0;
+             ^
+runtime.c: In function 'DisplayRealTime':
+runtime.c:3293:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+         sprintf(str, "%02d:%02d:%02d",h,(warmupcnt - (h*3600))/60, warmupcnt%60  );
+                      ^
+runtime.c:3293:22: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:3293:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+runtime.c:3293:22: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:3333:26: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+             sprintf(str, "%02d:%02d:%02d",h,(warmupcnt-(h*3600))/60, warmupcnt%60  );
+                          ^
+runtime.c:3333:26: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:3333:26: warning: format '%d' expects argument of type 'int', but argument 4 has type 'long unsigned int' [-Wformat=]
+runtime.c:3333:26: warning: format '%d' expects argument of type 'int', but argument 5 has type 'long unsigned int' [-Wformat=]
+runtime.c:3226:20: warning: variable 'prev_status' set but not used [-Wunused-but-set-variable]
+     static uint8_t prev_status[2];
+                    ^
+runtime.c:3218:20: warning: unused variable 'inner_guage_base' [-Wunused-variable]
+     static uint8_t inner_guage_base;
+                    ^
+runtime.c:3217:20: warning: unused variable 'outer_guage_base' [-Wunused-variable]
+     static uint8_t outer_guage_base;
+                    ^
+runtime.c:3216:20: warning: unused variable 'dir' [-Wunused-variable]
+     static uint8_t dir;    
+                    ^
+runtime.c:3214:23: warning: unused variable 'ival2' [-Wunused-variable]
+     static float ival,ival2;
+                       ^
+runtime.c:3214:18: warning: unused variable 'ival' [-Wunused-variable]
+     static float ival,ival2;
+                  ^
+runtime.c:3213:22: warning: unused variable 'val2' [-Wunused-variable]
+     static int16 val,val2;
+                      ^
+runtime.c:3213:18: warning: unused variable 'val' [-Wunused-variable]
+     static int16 val,val2;
+                  ^
+runtime.c:3212:20: warning: unused variable 'prev_num' [-Wunused-variable]
+     static uint8_t prev_num;
+                    ^
+runtime.c: In function 'runtimeRealTimeCheckSwitches':
+runtime.c:3868:25: warning: unused variable 'temp' [-Wunused-variable]
+                 uint8_t temp = 10;
+                         ^
+runtime.c:3875:25: warning: unused variable 'temp' [-Wunused-variable]
+                 uint8_t temp = 20;
+                         ^
+runtime.c: In function 'runtimeZeroCal':
+runtime.c:4017:13: warning: unused variable 'cal_in_progeress' [-Wunused-variable]
+     uint8_t cal_in_progeress;
+             ^
+runtime.c:4015:14: warning: unused variable 'encoded_date' [-Wunused-variable]
+     uint16_t encoded_date;
+              ^
+runtime.c: In function 'runtimeSpanCal':
+runtime.c:4294:25: warning: null argument where non-null required (argument 2) [-Wnonnull]
+                         memcpy(str, 0 , sizeof(str));
+                         ^
+runtime.c:4142:14: warning: unused variable 'encoded_date' [-Wunused-variable]
+     uint16_t encoded_date;
+              ^
+runtime.c: In function 'runtimeRelayConfig':
+runtime.c:4781:21: warning: unused variable 'send' [-Wunused-variable]
+             uint8_t send[sizeof(relay)+1];
+                     ^
+runtime.c: In function 'runtimeGps':
+runtime.c:4882:21: warning: unused variable 'sleep_time' [-Wunused-variable]
+     static uint16_t sleep_time;
+                     ^
+runtime.c:4867:12: warning: unused variable 'number' [-Wunused-variable]
+     uint32 number = 374567891;
+            ^
+runtime.c: In function 'runtimeModbusAddress':
+runtime.c:5100:21: warning: unused variable 'sleep_time' [-Wunused-variable]
+     static uint16_t sleep_time;
+                     ^
+runtime.c: In function 'runtimeAlarmConfig':
+runtime.c:5324:21: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+         sprintf(str,"%s 0-%d %s", gas[0],range[0], units[0] );
+                     ^
+runtime.c:5324:21: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+runtime.c:5419:41: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+                             sprintf(str,"%s 0-%d %s", gas[curCh],range[curCh], units[curCh] );
+                                         ^
+runtime.c:5419:41: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+runtime.c:5575:41: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+                             sprintf(str,"%s 0-%d %s", gas[curCh],range[curCh], units[curCh] );
+                                         ^
+runtime.c:5575:41: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+runtime.c:5270:20: warning: variable 'resp_factor' set but not used [-Wunused-but-set-variable]
+     static uint8_t resp_factor[2];
+                    ^
+runtime.c:5257:14: warning: unused variable 'alarmLevel' [-Wunused-variable]
+     uint16_t alarmLevel;
+              ^
+runtime.c: In function 'runtimeInfo':
+runtime.c:6155:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+         sprintf(str, "CH1: %s 0 - %d %s", gas, sensor_status[0].fullScaleRange, units);
+                      ^
+runtime.c:6155:22: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+runtime.c:6199:26: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+             sprintf(str, "CH2: %s 0 - %d %s", gas, sensor_status[1].fullScaleRange, units);
+                          ^
+runtime.c:6199:26: warning: format '%d' expects argument of type 'int', but argument 4 has type 'uint32_t {aka long unsigned int}' [-Wformat=]
+runtime.c: In function 'ShowCalculatedWarmupTime':
+runtime.c:6307:14: warning: variable 'elapsed_time' set but not used [-Wunused-but-set-variable]
+     uint16_t elapsed_time;
+              ^
+runtime.c: In function 'handleBle':
+runtime.c:6576:24: warning: unused variable 'sec' [-Wunused-variable]
+         static uint8_t sec;
+                        ^
+runtime.c:6567:21: warning: unused variable 'remove_gas_delay' [-Wunused-variable]
+      static uint8_t remove_gas_delay;
+                     ^
+runtime.c:6563:21: warning: variable 'stab_cnt' set but not used [-Wunused-but-set-variable]
+       static uint16 stab_cnt;
+                     ^
+runtime.c:6562:22: warning: variable 'stab_check' set but not used [-Wunused-but-set-variable]
+       static uint8_t stab_check;
+                      ^
 arm-none-eabi-ar.exe -rs .\CortexM0\ARM_GCC_541\Debug\SA-220.a .\CortexM0\ARM_GCC_541\Debug\I2C.o .\CortexM0\ARM_GCC_541\Debug\I2C_I2C_INT.o .\CortexM0\ARM_GCC_541\Debug\I2C_I2C.o .\CortexM0\ARM_GCC_541\Debug\I2C_I2C_BOOT.o .\CortexM0\ARM_GCC_541\Debug\I2C_PM.o .\CortexM0\ARM_GCC_541\Debug\I2C_BOOT.o .\CortexM0\ARM_GCC_541\Debug\I2C_I2C_MASTER.o .\CortexM0\ARM_GCC_541\Debug\I2C_SCBCLK.o .\CortexM0\ARM_GCC_541\Debug\I2C_sda.o .\CortexM0\ARM_GCC_541\Debug\I2C_sda_PM.o .\CortexM0\ARM_GCC_541\Debug\I2C_scl.o .\CortexM0\ARM_GCC_541\Debug\I2C_scl_PM.o .\CortexM0\ARM_GCC_541\Debug\I2C_SCB_IRQ.o .\CortexM0\ARM_GCC_541\Debug\CyFlash.o .\CortexM0\ARM_GCC_541\Debug\CyLib.o .\CortexM0\ARM_GCC_541\Debug\cyPm.o .\CortexM0\ARM_GCC_541\Debug\cyutils.o .\CortexM0\ARM_GCC_541\Debug\CyDMA.o .\CortexM0\ARM_GCC_541\Debug\CyLFClk.o .\CortexM0\ARM_GCC_541\Debug\cy_em_eeprom.o .\CortexM0\ARM_GCC_541\Debug\SW.o .\CortexM0\ARM_GCC_541\Debug\SW_PM.o .\CortexM0\ARM_GCC_541\Debug\CSD.o .\CortexM0\ARM_GCC_541\Debug\CSD_PM.o .\CortexM0\ARM_GCC_541\Debug\TXEN.o .\CortexM0\ARM_GCC_541\Debug\TXEN_PM.o .\CortexM0\ARM_GCC_541\Debug\CPS.o .\CortexM0\ARM_GCC_541\Debug\CPS_PM.o .\CortexM0\ARM_GCC_541\Debug\UART2.o .\CortexM0\ARM_GCC_541\Debug\UART2_PM.o .\CortexM0\ARM_GCC_541\Debug\UART2_INT.o .\CortexM0\ARM_GCC_541\Debug\UART2_BOOT.o .\CortexM0\ARM_GCC_541\Debug\UART2_IntClock.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_SPI_UART.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_SPI_UART_INT.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_PM.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_UART.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_BOOT.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_UART_BOOT.o .\CortexM0\ARM_GCC_541\Debug\isr_ModbusByteIn.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_SCBCLK.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_tx.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_tx_PM.o .\CortexM0\ARM_GCC_541\Debug\isr_SW.o .\CortexM0\ARM_GCC_541\Debug\Clock_1.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_rx_wake.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_rx_wake_PM.o .\CortexM0\ARM_GCC_541\Debug\ModbusUART_RX_WAKEUP_IRQ.o .\CortexM0\ARM_GCC_541\Debug\blue.o .\CortexM0\ARM_GCC_541\Debug\blue_gatt.o .\CortexM0\ARM_GCC_541\Debug\blue_eventHandler.o .\CortexM0\ARM_GCC_541\Debug\blue_HAL_INT.o .\CortexM0\ARM_GCC_541\Debug\blue_HAL_PVT.o .\CortexM0\ARM_GCC_541\Debug\blue_dis.o .\CortexM0\ARM_GCC_541\Debug\blue_custom.o .\CortexM0\ARM_GCC_541\Debug\blue_bless_isr.o .\CortexM0\ARM_GCC_541\Debug\BLETimer.o .\CortexM0\ARM_GCC_541\Debug\BLETimer_PM.o .\CortexM0\ARM_GCC_541\Debug\isr_BLE.o .\CortexM0\ARM_GCC_541\Debug\WdtIsr.o .\CortexM0\ARM_GCC_541\Debug\MessageTimer.o .\CortexM0\ARM_GCC_541\Debug\MessageTimer_PM.o .\CortexM0\ARM_GCC_541\Debug\isr_NewMessage.o .\CortexM0\ARM_GCC_541\Debug\byteIn2.o .\CortexM0\ARM_GCC_541\Debug\LEDB.o .\CortexM0\ARM_GCC_541\Debug\LEDB_PM.o .\CortexM0\ARM_GCC_541\Debug\LEDG.o .\CortexM0\ARM_GCC_541\Debug\LEDG_PM.o .\CortexM0\ARM_GCC_541\Debug\LEDR.o .\CortexM0\ARM_GCC_541\Debug\LEDR_PM.o .\CortexM0\ARM_GCC_541\Debug\SWTimer.o .\CortexM0\ARM_GCC_541\Debug\SWTimer_PM.o .\CortexM0\ARM_GCC_541\Debug\isr_SW2.o .\CortexM0\ARM_GCC_541\Debug\SW2.o .\CortexM0\ARM_GCC_541\Debug\SW2_PM.o .\CortexM0\ARM_GCC_541\Debug\ScreenCounter.o .\CortexM0\ARM_GCC_541\Debug\ScreenCounter_PM.o .\CortexM0\ARM_GCC_541\Debug\EF2.o .\CortexM0\ARM_GCC_541\Debug\EF2_PM.o .\CortexM0\ARM_GCC_541\Debug\EF1.o .\CortexM0\ARM_GCC_541\Debug\EF1_PM.o .\CortexM0\ARM_GCC_541\Debug\RTC_RST.o .\CortexM0\ARM_GCC_541\Debug\RTC_RST_PM.o .\CortexM0\ARM_GCC_541\Debug\TBD.o .\CortexM0\ARM_GCC_541\Debug\TBD_PM.o .\CortexM0\ARM_GCC_541\Debug\CyBootAsmGnu.o
 arm-none-eabi-ar.exe: creating .\CortexM0\ARM_GCC_541\Debug\SA-220.a
 arm-none-eabi-gcc.exe -Wl,--start-group -o "C:\Users\alexport\OneDrive - Safeguard Analytics\SA-220\SA-220.cydsn\CortexM0\ARM_GCC_541\Debug\SA-220.elf" .\CortexM0\ARM_GCC_541\Debug\main.o .\CortexM0\ARM_GCC_541\Debug\interrupts.o .\CortexM0\ARM_GCC_541\Debug\modbus.o .\CortexM0\ARM_GCC_541\Debug\runtime.o .\CortexM0\ARM_GCC_541\Debug\sensor.o .\CortexM0\ARM_GCC_541\Debug\i2c_master.o .\CortexM0\ARM_GCC_541\Debug\display.o .\CortexM0\ARM_GCC_541\Debug\relay.o .\CortexM0\ARM_GCC_541\Debug\rtc.o .\CortexM0\ARM_GCC_541\Debug\led.o .\CortexM0\ARM_GCC_541\Debug\dac.o .\CortexM0\ARM_GCC_541\Debug\eeprom.o .\CortexM0\ARM_GCC_541\Debug\cyfitter_cfg.o .\CortexM0\ARM_GCC_541\Debug\cymetadata.o .\CortexM0\ARM_GCC_541\Debug\Cm0Start.o .\CortexM0\ARM_GCC_541\Debug\SA-220.a "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\BLE_v3_40\Library\gccCyBLEStack_BLE_SOC_PERIPHERAL.a" -mcpu=cortex-m0 -mthumb -l m -L Generated_Source\PSoC4 -Wl,-Map,.\CortexM0\ARM_GCC_541\Debug/SA-220.map -T Generated_Source\PSoC4\cm0gcc.ld -specs=nano.specs -Wl,--gc-sections -u_printf_float -g -ffunction-sections -O0 -ffat-lto-objects -Wl,--end-group
@@ -25,6 +200,6 @@ No ELF section .cychecksum found, creating one
 Application checksum calculated and stored in ELF section .cychecksum
 Checksum calculated and stored in ELF section .cymeta
 cyelftool.exe -S "C:\Users\alexport\OneDrive - Safeguard Analytics\SA-220\SA-220.cydsn\CortexM0\ARM_GCC_541\Debug\SA-220.elf"
-Flash used: 194068 of 262144 bytes (74.0%).
-SRAM used: 19200 of 32768 bytes (58.6%). Stack: 2304 bytes. Heap: 2304 bytes.
---------------- Build Succeeded: 10/14/2025 14:50:14 ---------------
+Flash used: 194212 of 262144 bytes (74.1%).
+SRAM used: 19224 of 32768 bytes (58.7%). Stack: 2304 bytes. Heap: 2304 bytes.
+--------------- Build Succeeded: 10/14/2025 15:58:02 ---------------

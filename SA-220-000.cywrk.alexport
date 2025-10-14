@@ -253,55 +253,6 @@
 <VisibleNodeIds>
 <v>SA-220-000</v>
 <v>SA-220-000\SA-220</v>
-<v>SA-220-000\SA-220\CortexM0</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\BLETimer.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\BLETimer_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_bless_isr.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_custom.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_dis.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_eventHandler.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_gatt.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_HAL_INT.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\blue_HAL_PVT.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\byteIn2.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CPS.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CPS_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CSD.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CSD_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CyDMA.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\dac.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\display.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\eeprom.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\EF1.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\EF1_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\EF2.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\EF2_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_BOOT.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_I2C.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_I2C_BOOT.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_I2C_INT.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_I2C_MASTER.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\i2c_master.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_PM.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_SCB_IRQ.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_SCBCLK.lst</v>
-<v>SA-220-000\SA-220\CortexM0\ARM_GCC_541\Debug\Listing Files\I2C_scl.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>

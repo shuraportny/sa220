@@ -159,6 +159,9 @@ void Test_Increment(uint8 reg , uint8 bytes_to_send){
 
 void InitSystem(){
     char text[10];
+    static char gas_type[12];
+    static char str[12];
+    
     RTC_RST_Write(1);
     CyDelay(100);
     
@@ -196,6 +199,7 @@ void InitSystem(){
     uint32 SensorSerialNumber = 0x123456; 
     
     
+    memset(gas_type , 0 , sizeof(gas_type));
     
     //Load Sensors Info HERE
     if(LoadSensorInfo(0)!=POLL_SENSOR_STATUS_ABSENT){
@@ -205,19 +209,29 @@ void InitSystem(){
                                             (uint32_t)(sensor[0][FULLSCALERANGE2]<<16)|
                                             (uint32_t)(sensor[0][FULLSCALERANGE3]<<8)|
                                             (uint32_t)sensor[0][FULLSCALERANGE4];
+        memset(str , 0 , sizeof(str));
+        remove_trailing_spaces(str, (char*) &sensor[0][COMPAUND1]);
+        strncat(gas_type, str, strlen(str));
+    }else{
+        strcat(gas_type, " ");
     }
     
     
-    
-    if(LoadSensorInfo(1)!=POLL_SENSOR_STATUS_ABSENT){
-        RecalculateAlarms(1);
-        decodeLastCalDate(1);
-        sensor_status[1].fullScaleRange =   (uint32_t)(sensor[1][FULLSCALERANGE1]<<24)|
-                                            (uint32_t)(sensor[1][FULLSCALERANGE2]<<16)|
-                                            (uint32_t)(sensor[1][FULLSCALERANGE3]<<8)|
-                                            (uint32_t)sensor[1][FULLSCALERANGE4];
+    if(ch2Active){
+        if(LoadSensorInfo(1)!=POLL_SENSOR_STATUS_ABSENT){
+            RecalculateAlarms(1);
+            decodeLastCalDate(1);
+            sensor_status[1].fullScaleRange =   (uint32_t)(sensor[1][FULLSCALERANGE1]<<24)|
+                                                (uint32_t)(sensor[1][FULLSCALERANGE2]<<16)|
+                                                (uint32_t)(sensor[1][FULLSCALERANGE3]<<8)|
+                                                (uint32_t)sensor[1][FULLSCALERANGE4];
+            memset(str , 0 , sizeof(str)); 
+            strcat(gas_type, "-");
+            memset(str , 0 , sizeof(str));
+            remove_trailing_spaces(str, (char*) &sensor[1][COMPAUND1]);
+            strncat(gas_type, str, strlen(str));
+        }
     }
-    
     
     
     // Get Relays Settings
@@ -269,16 +283,18 @@ void InitSystem(){
 //    CyDelay(50);
 //    
 //    
-    char str[12];
-    memset(str , 0 , sizeof(str));
-    remove_trailing_spaces(str, (char*) &sensor[0][COMPAUND1]);
+    
+    
+    
     
     char BleName[30];
     memset(BleName, 0 , sizeof(BleName));
     strcpy( BleName, "SA-220-" );
-    strncat(BleName, str,strlen(str) );
-    strcat(BleName, " ");
-    strncat(BleName, (char*)&sensor[0][SERIALNUMBER1],6 );
+    strncat(BleName, gas_type,strlen(gas_type) );
+    
+    //strcat(BleName, " ");
+    //strncat(BleName, (char*)&sensor[0][SERIALNUMBER1],6 );
+    
     
     CyBle_GapSetLocalName( BleName );
     CyBle_DissSetCharacteristicValue(CYBLE_DIS_SYSTEM_ID, 8, (uint8 *)SysSerialNumber);
@@ -415,7 +431,8 @@ int32_t LoadSensorInfo(uint8_t ch){
                 // Reset I2C peripheral . It helps to recover I2C bus
                 I2C_Recover();
             }
-        Set_Output_mA(ch,0);     
+        Set_Output_mA(ch,0);  
+        status= POLL_SENSOR_STATUS_ABSENT;
     }
     else{
         sensor[ch][STATUSLSB]=POLL_SENSOR_STATUS_OK;
@@ -463,26 +480,6 @@ int32_t LoadSensorInfo(uint8_t ch){
                 wait[ch]=0;
                 prev_state[ch]=POLL_SENSOR_STATUS_OK;
                 
-//                char str[10];
-//                char units[5];
-//            
-//                memset(str , 0 , sizeof(str));
-//                remove_trailing_spaces(str, (char*) &sensor[ch][COMPAUND1]);
-//                if(ch==0)
-//                    Nextion_SetText(DISP_OBJ_GAS_TYPE1,str);
-//                else
-//                    Nextion_SetText(DISP_OBJ_GAS_TYPE2,str);
-//            
-//                memset(str , 0 , sizeof(str));
-//                strncpy(units, (char *)&sensor[ch][UNIT1], 4);
-//                units[4] = '\0';
-//                remove_leading_spaces((char *)units);
-//                remove_trailing_spaces(str, (char*) units);
-//            
-//                if(ch==0)
-//                    Nextion_SetText(DISP_OBJ_ENG_UNIT1,str);
-//                else
-//                    Nextion_SetText(DISP_OBJ_ENG_UNIT2,str);
                     ReloadSensorGasType(ch);
             }
         }
@@ -1644,21 +1641,6 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                         relay[i].ack = wrReqParam->handleValPair.value.val[i]& 0x1;
                     }
                     EEPROM_WriteBytes(EEPROM_RELAY1_ENERG_REG, (uint8_t*)relay, sizeof(relay));
-                    
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_ENERG_REG, relay[0].energ);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_ENERG_REG, relay[1].energ);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_ENERG_REG, relay[2].energ);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_ENERG_REG, relay[3].energ);
-//                    
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_LATCH_REG, relay[0].latched);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_LATCH_REG, relay[1].latched);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_LATCH_REG, relay[2].latched);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_LATCH_REG, relay[3].latched);
-//                    
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_ACK_REG, relay[0].ack);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_ACK_REG, relay[1].ack);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_ACK_REG, relay[2].ack);
-//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_ACK_REG, relay[3].ack);
                 }
             }
             
