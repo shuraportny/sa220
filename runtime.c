@@ -239,6 +239,7 @@ void InitSystem(){
     }
     
     
+    
     // Get Relays Settings
     EEPROM_GetRelaySetting((uint8_t*)relay);
     if(relay[0].energ>1)relay[0].energ = RELAY1_ENRGD_DEFAULT;
@@ -292,11 +293,13 @@ void InitSystem(){
     
     
     
-    char BleName[30];
+    char BleName[50];
     memset(BleName, 0 , sizeof(BleName));
     strcpy( BleName, "SA-220-" );
     strncat(BleName, gas_type,strlen(gas_type) );
+    strcat(BleName, " ");
     
+    strncat(BleName, device_tag,strlen(device_tag) );
     //strcat(BleName, " ");
     //strncat(BleName, (char*)&sensor[0][SERIALNUMBER1],6 );
     

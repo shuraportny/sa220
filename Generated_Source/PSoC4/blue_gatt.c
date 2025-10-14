@@ -278,10 +278,11 @@ CYBLE_STATE_T cyBle_state;
     0x000Fu,    /* Handle of the Client Characteristic Configuration descriptor */
 };
     
-    static uint8 cyBle_attValues[0x0450u] = {
+    static uint8 cyBle_attValues[0x0454u] = {
     /* Device Name */
     (uint8)'A', (uint8)'L', (uint8)'E', (uint8)'X', (uint8)'_', (uint8)'P', (uint8)'O', (uint8)'R', (uint8)'T',
     (uint8)' ', (uint8)'0', (uint8)'1', (uint8)'2', (uint8)'3', (uint8)'4', (uint8)'5', (uint8)'6', (uint8)'7',
+    (uint8)'_', (uint8)'_', (uint8)'_', (uint8)'_',
 
     /* Appearance */
     0x00u, 0x00u,
@@ -706,161 +707,161 @@ uint8 cyBle_attValuesCCCD[CYBLE_GATT_DB_CCCD_COUNT];
 #endif /* CYBLE_GATT_DB_CCCD_COUNT != 0u */
 
 CYBLE_GATTS_ATT_GEN_VAL_LEN_T cyBle_attValuesLen[CYBLE_GATT_DB_ATT_VAL_COUNT] = {
-    { 0x0012u, (void *)&cyBle_attValues[0] }, /* Device Name */
-    { 0x0002u, (void *)&cyBle_attValues[18] }, /* Appearance */
-    { 0x0008u, (void *)&cyBle_attValues[20] }, /* Peripheral Preferred Connection Parameters */
-    { 0x0001u, (void *)&cyBle_attValues[28] }, /* Central Address Resolution */
-    { 0x0001u, (void *)&cyBle_attValues[29] }, /* Resolvable Private Address Only */
-    { 0x0004u, (void *)&cyBle_attValues[30] }, /* Service Changed */
+    { 0x0016u, (void *)&cyBle_attValues[0] }, /* Device Name */
+    { 0x0002u, (void *)&cyBle_attValues[22] }, /* Appearance */
+    { 0x0008u, (void *)&cyBle_attValues[24] }, /* Peripheral Preferred Connection Parameters */
+    { 0x0001u, (void *)&cyBle_attValues[32] }, /* Central Address Resolution */
+    { 0x0001u, (void *)&cyBle_attValues[33] }, /* Resolvable Private Address Only */
+    { 0x0004u, (void *)&cyBle_attValues[34] }, /* Service Changed */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[0] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[34] }, /* SYS_REMOTE */
-    { 0x000Au, (void *)&cyBle_attValues[35] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[38] }, /* SYS_REMOTE */
+    { 0x000Au, (void *)&cyBle_attValues[39] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[2] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[45] }, /* SYS_READING */
-    { 0x000Bu, (void *)&cyBle_attValues[47] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[49] }, /* SYS_READING */
+    { 0x000Bu, (void *)&cyBle_attValues[51] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[4] }, /* SYS_READING_CCCD */
-    { 0x0002u, (void *)&cyBle_attValues[58] }, /* SYS_STATUS */
-    { 0x000Au, (void *)&cyBle_attValues[60] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[62] }, /* SYS_STATUS */
+    { 0x000Au, (void *)&cyBle_attValues[64] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[6] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[70] }, /* SYS_CAN_CHAN */
-    { 0x000Cu, (void *)&cyBle_attValues[71] }, /* Characteristic User Description */
-    { 0x0001u, (void *)&cyBle_attValues[83] }, /* SYS_CAN_ID */
-    { 0x000Au, (void *)&cyBle_attValues[84] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[94] }, /* SYS_CAL_LOOP */
-    { 0x000Cu, (void *)&cyBle_attValues[96] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[108] }, /* SYS_ADC */
-    { 0x0007u, (void *)&cyBle_attValues[110] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[74] }, /* SYS_CAN_CHAN */
+    { 0x000Cu, (void *)&cyBle_attValues[75] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[87] }, /* SYS_CAN_ID */
+    { 0x000Au, (void *)&cyBle_attValues[88] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[98] }, /* SYS_CAL_LOOP */
+    { 0x000Cu, (void *)&cyBle_attValues[100] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[112] }, /* SYS_ADC */
+    { 0x0007u, (void *)&cyBle_attValues[114] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[8] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[117] }, /* SYS_ALERT_1 */
-    { 0x000Bu, (void *)&cyBle_attValues[119] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[130] }, /* SYS_ALERT_2 */
-    { 0x000Bu, (void *)&cyBle_attValues[132] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[143] }, /* SYS_ALERT_1_ASC */
-    { 0x000Fu, (void *)&cyBle_attValues[145] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[160] }, /* SYS_ALERT_2_ASC */
-    { 0x000Fu, (void *)&cyBle_attValues[162] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[177] }, /* SYS_FRACTIONAL */
-    { 0x000Eu, (void *)&cyBle_attValues[179] }, /* Characteristic User Description */
-    { 0x0001u, (void *)&cyBle_attValues[193] }, /* RESOLUTION */
-    { 0x0001u, (void *)&cyBle_attValues[194] }, /* Custom Descriptor */
-    { 0x000Au, (void *)&cyBle_attValues[211] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[121] }, /* SYS_ALERT_1 */
+    { 0x000Bu, (void *)&cyBle_attValues[123] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[134] }, /* SYS_ALERT_2 */
+    { 0x000Bu, (void *)&cyBle_attValues[136] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[147] }, /* SYS_ALERT_1_ASC */
+    { 0x000Fu, (void *)&cyBle_attValues[149] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[164] }, /* SYS_ALERT_2_ASC */
+    { 0x000Fu, (void *)&cyBle_attValues[166] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[181] }, /* SYS_FRACTIONAL */
+    { 0x000Eu, (void *)&cyBle_attValues[183] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[197] }, /* RESOLUTION */
+    { 0x0001u, (void *)&cyBle_attValues[198] }, /* Custom Descriptor */
+    { 0x000Au, (void *)&cyBle_attValues[215] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[10] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[221] }, /* RELAYS */
-    { 0x0006u, (void *)&cyBle_attValues[225] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[225] }, /* RELAYS */
+    { 0x0006u, (void *)&cyBle_attValues[229] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[12] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[231] }, /* LOG1 */
+    { 0x0028u, (void *)&cyBle_attValues[235] }, /* LOG1 */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[14] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[271] }, /* Characteristic User Description */
-    { 0x0028u, (void *)&cyBle_attValues[275] }, /* LOG2 */
-    { 0x0004u, (void *)&cyBle_attValues[315] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[275] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[279] }, /* LOG2 */
+    { 0x0004u, (void *)&cyBle_attValues[319] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[16] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[319] }, /* LOG3 */
-    { 0x0004u, (void *)&cyBle_attValues[359] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[323] }, /* LOG3 */
+    { 0x0004u, (void *)&cyBle_attValues[363] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[18] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[363] }, /* LOG4 */
+    { 0x0028u, (void *)&cyBle_attValues[367] }, /* LOG4 */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[20] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[403] }, /* Characteristic User Description */
-    { 0x0028u, (void *)&cyBle_attValues[407] }, /* LOG5 */
-    { 0x0004u, (void *)&cyBle_attValues[447] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[407] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[411] }, /* LOG5 */
+    { 0x0004u, (void *)&cyBle_attValues[451] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[22] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[451] }, /* LOG6 */
-    { 0x0004u, (void *)&cyBle_attValues[491] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[455] }, /* LOG6 */
+    { 0x0004u, (void *)&cyBle_attValues[495] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[24] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[495] }, /* LOG7 */
-    { 0x0004u, (void *)&cyBle_attValues[535] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[499] }, /* LOG7 */
+    { 0x0004u, (void *)&cyBle_attValues[539] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[26] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[539] }, /* LOG8 */
-    { 0x0004u, (void *)&cyBle_attValues[579] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[543] }, /* LOG8 */
+    { 0x0004u, (void *)&cyBle_attValues[583] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[28] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[583] }, /* LOG9 */
-    { 0x0004u, (void *)&cyBle_attValues[623] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[587] }, /* LOG9 */
+    { 0x0004u, (void *)&cyBle_attValues[627] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[30] }, /* Client Characteristic Configuration */
-    { 0x0028u, (void *)&cyBle_attValues[627] }, /* LOG10 */
-    { 0x0005u, (void *)&cyBle_attValues[667] }, /* Characteristic User Description */
+    { 0x0028u, (void *)&cyBle_attValues[631] }, /* LOG10 */
+    { 0x0005u, (void *)&cyBle_attValues[671] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[32] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[672] }, /* SLEEP_TIME */
-    { 0x000Au, (void *)&cyBle_attValues[674] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[676] }, /* SLEEP_TIME */
+    { 0x000Au, (void *)&cyBle_attValues[678] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[34] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[684] }, /* GPS_LAT */
-    { 0x0007u, (void *)&cyBle_attValues[688] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[688] }, /* GPS_LAT */
+    { 0x0007u, (void *)&cyBle_attValues[692] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[36] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[695] }, /* GPS_LONG */
-    { 0x0008u, (void *)&cyBle_attValues[699] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[699] }, /* GPS_LONG */
+    { 0x0008u, (void *)&cyBle_attValues[703] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[38] }, /* Client Characteristic Configuration */
-    { 0x0005u, (void *)&cyBle_attValues[707] }, /* DATE_TIME */
-    { 0x0009u, (void *)&cyBle_attValues[712] }, /* Characteristic User Description */
+    { 0x0005u, (void *)&cyBle_attValues[711] }, /* DATE_TIME */
+    { 0x0009u, (void *)&cyBle_attValues[716] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[40] }, /* Client Characteristic Configuration */
-    { 0x0013u, (void *)&cyBle_attValues[721] }, /* Manufacturer Name String */
-    { 0x0006u, (void *)&cyBle_attValues[740] }, /* Model Number String */
-    { 0x000Cu, (void *)&cyBle_attValues[746] }, /* Serial Number String */
-    { 0x0004u, (void *)&cyBle_attValues[758] }, /* Hardware Revision String */
-    { 0x0004u, (void *)&cyBle_attValues[762] }, /* Firmware Revision String */
-    { 0x0002u, (void *)&cyBle_attValues[766] }, /* Software Revision String */
-    { 0x0008u, (void *)&cyBle_attValues[768] }, /* System ID */
-    { 0x0001u, (void *)&cyBle_attValues[776] }, /* IEEE 11073-20601 Regulatory Certification Data List */
-    { 0x0007u, (void *)&cyBle_attValues[777] }, /* PnP ID */
-    { 0x0004u, (void *)&cyBle_attValues[784] }, /* PIN */
-    { 0x0003u, (void *)&cyBle_attValues[788] }, /* Characteristic User Description */
-    { 0x0001u, (void *)&cyBle_attValues[791] }, /* SENSOR_TYPE */
-    { 0x000Bu, (void *)&cyBle_attValues[792] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[803] }, /* SENSOR_RANGE */
-    { 0x000Cu, (void *)&cyBle_attValues[805] }, /* Characteristic User Description */
-    { 0x000Au, (void *)&cyBle_attValues[817] }, /* SENSOR_GAS_NOTE */
-    { 0x000Fu, (void *)&cyBle_attValues[827] }, /* Characteristic User Description */
-    { 0x0014u, (void *)&cyBle_attValues[842] }, /* SENSOR_TAG */
-    { 0x000Au, (void *)&cyBle_attValues[862] }, /* Characteristic User Description */
-    { 0x0001u, (void *)&cyBle_attValues[872] }, /* SENSOR_TEMPERATURE */
-    { 0x0012u, (void *)&cyBle_attValues[873] }, /* Characteristic User Description */
+    { 0x0013u, (void *)&cyBle_attValues[725] }, /* Manufacturer Name String */
+    { 0x0006u, (void *)&cyBle_attValues[744] }, /* Model Number String */
+    { 0x000Cu, (void *)&cyBle_attValues[750] }, /* Serial Number String */
+    { 0x0004u, (void *)&cyBle_attValues[762] }, /* Hardware Revision String */
+    { 0x0004u, (void *)&cyBle_attValues[766] }, /* Firmware Revision String */
+    { 0x0002u, (void *)&cyBle_attValues[770] }, /* Software Revision String */
+    { 0x0008u, (void *)&cyBle_attValues[772] }, /* System ID */
+    { 0x0001u, (void *)&cyBle_attValues[780] }, /* IEEE 11073-20601 Regulatory Certification Data List */
+    { 0x0007u, (void *)&cyBle_attValues[781] }, /* PnP ID */
+    { 0x0004u, (void *)&cyBle_attValues[788] }, /* PIN */
+    { 0x0003u, (void *)&cyBle_attValues[792] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[795] }, /* SENSOR_TYPE */
+    { 0x000Bu, (void *)&cyBle_attValues[796] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[807] }, /* SENSOR_RANGE */
+    { 0x000Cu, (void *)&cyBle_attValues[809] }, /* Characteristic User Description */
+    { 0x000Au, (void *)&cyBle_attValues[821] }, /* SENSOR_GAS_NOTE */
+    { 0x000Fu, (void *)&cyBle_attValues[831] }, /* Characteristic User Description */
+    { 0x0014u, (void *)&cyBle_attValues[846] }, /* SENSOR_TAG */
+    { 0x000Au, (void *)&cyBle_attValues[866] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[876] }, /* SENSOR_TEMPERATURE */
+    { 0x0012u, (void *)&cyBle_attValues[877] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[42] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[891] }, /* SENSOR_CAL_LEVEL */
-    { 0x0010u, (void *)&cyBle_attValues[893] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[895] }, /* SENSOR_CAL_LEVEL */
+    { 0x0010u, (void *)&cyBle_attValues[897] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[44] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[909] }, /* CAL_Z_COUNTS */
-    { 0x000Cu, (void *)&cyBle_attValues[911] }, /* Characteristic User Description */
-    { 0x0002u, (void *)&cyBle_attValues[923] }, /* ZERO_READING */
-    { 0x000Cu, (void *)&cyBle_attValues[925] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[913] }, /* CAL_Z_COUNTS */
+    { 0x000Cu, (void *)&cyBle_attValues[915] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[927] }, /* ZERO_READING */
+    { 0x000Cu, (void *)&cyBle_attValues[929] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[46] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[937] }, /* CAL_ZERO_ERROR */
-    { 0x000Eu, (void *)&cyBle_attValues[938] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[941] }, /* CAL_ZERO_ERROR */
+    { 0x000Eu, (void *)&cyBle_attValues[942] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[48] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[952] }, /* CAL_STEP */
-    { 0x0008u, (void *)&cyBle_attValues[953] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[956] }, /* CAL_STEP */
+    { 0x0008u, (void *)&cyBle_attValues[957] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[50] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[961] }, /* CAL_SPEED */
-    { 0x0009u, (void *)&cyBle_attValues[963] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[965] }, /* CAL_SPEED */
+    { 0x0009u, (void *)&cyBle_attValues[967] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[52] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[972] }, /* CAL_AS_FOUND */
-    { 0x000Cu, (void *)&cyBle_attValues[976] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[976] }, /* CAL_AS_FOUND */
+    { 0x000Cu, (void *)&cyBle_attValues[980] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[54] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[988] }, /* CAL_ADJUSTED */
-    { 0x000Cu, (void *)&cyBle_attValues[989] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[992] }, /* CAL_ADJUSTED */
+    { 0x000Cu, (void *)&cyBle_attValues[993] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[56] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[1001] }, /* CAL_COUNTS */
-    { 0x000Au, (void *)&cyBle_attValues[1003] }, /* Characteristic User Description */
-    { 0x0001u, (void *)&cyBle_attValues[1013] }, /* SENSOR_LIFE */
-    { 0x000Bu, (void *)&cyBle_attValues[1014] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[1005] }, /* CAL_COUNTS */
+    { 0x000Au, (void *)&cyBle_attValues[1007] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[1017] }, /* SENSOR_LIFE */
+    { 0x000Bu, (void *)&cyBle_attValues[1018] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[58] }, /* Client Characteristic Configuration */
-    { 0x0002u, (void *)&cyBle_attValues[1025] }, /* CAL_CLEARING */
-    { 0x000Cu, (void *)&cyBle_attValues[1027] }, /* Characteristic User Description */
+    { 0x0002u, (void *)&cyBle_attValues[1029] }, /* CAL_CLEARING */
+    { 0x000Cu, (void *)&cyBle_attValues[1031] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[60] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[1039] }, /* CAL_SPAN_ERROR */
-    { 0x000Eu, (void *)&cyBle_attValues[1040] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[1043] }, /* CAL_SPAN_ERROR */
+    { 0x000Eu, (void *)&cyBle_attValues[1044] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[62] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[1054] }, /* CALIBRATION_STATUS */
-    { 0x0012u, (void *)&cyBle_attValues[1055] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[1058] }, /* CALIBRATION_STATUS */
+    { 0x0012u, (void *)&cyBle_attValues[1059] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[64] }, /* Client Characteristic Configuration */
-    { 0x0004u, (void *)&cyBle_attValues[1073] }, /* READING_SCALED */
-    { 0x000Eu, (void *)&cyBle_attValues[1077] }, /* Characteristic User Description */
+    { 0x0004u, (void *)&cyBle_attValues[1077] }, /* READING_SCALED */
+    { 0x000Eu, (void *)&cyBle_attValues[1081] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[66] }, /* Client Characteristic Configuration */
-    { 0x0001u, (void *)&cyBle_attValues[1091] }, /* ALERT_STATUS */
-    { 0x000Cu, (void *)&cyBle_attValues[1092] }, /* Characteristic User Description */
+    { 0x0001u, (void *)&cyBle_attValues[1095] }, /* ALERT_STATUS */
+    { 0x000Cu, (void *)&cyBle_attValues[1096] }, /* Characteristic User Description */
     { 0x0002u, (void *)&cyBle_attValuesCCCD[68] }, /* Client Characteristic Configuration */
 };
 
 const CYBLE_GATTS_DB_T cyBle_gattDB[0xDAu] = {
     { 0x0001u, 0x2800u /* Primary service                     */, 0x00000001u /*           */, 0x000Bu, {{0x1800u, NULL}}                           },
     { 0x0002u, 0x2803u /* Characteristic                      */, 0x00020001u /* rd        */, 0x0003u, {{0x2A00u, NULL}}                           },
-    { 0x0003u, 0x2A00u /* Device Name                         */, 0x01020001u /* rd        */, 0x0003u, {{0x0012u, (void *)&cyBle_attValuesLen[0]}} },
+    { 0x0003u, 0x2A00u /* Device Name                         */, 0x01020001u /* rd        */, 0x0003u, {{0x0016u, (void *)&cyBle_attValuesLen[0]}} },
     { 0x0004u, 0x2803u /* Characteristic                      */, 0x00020001u /* rd        */, 0x0005u, {{0x2A01u, NULL}}                           },
     { 0x0005u, 0x2A01u /* Appearance                          */, 0x01020001u /* rd        */, 0x0005u, {{0x0002u, (void *)&cyBle_attValuesLen[1]}} },
     { 0x0006u, 0x2803u /* Characteristic                      */, 0x00020001u /* rd        */, 0x0007u, {{0x2A04u, NULL}}                           },
