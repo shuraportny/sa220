@@ -1749,11 +1749,14 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 /* Only update and respond if the write to the GATT Database is allowed */
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
-//                    for( uint8 i = 0; i < SENSOR_TAG_LENGTH; i++ )
-//                    {
-//                        System.SensorTag[i] = wrReqParam->handleValPair.value.val[i];  /* Update our local copy */
-//                    }
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    memset(device_tag, 0, sizeof(device_tag));
+                    for( uint8 i = 0; i < SENSOR_TAG_LENGTH; i++ )
+                    {
+                        device_tag[i] = wrReqParam->handleValPair.value.val[i];  /* Update our local copy */
+                    }
+                    
+                    SetDeviceTag(device_tag);
 //                    SysSaveSensorTagString();
                 }
             }
