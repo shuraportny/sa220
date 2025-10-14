@@ -113,6 +113,7 @@ void GetLogEntry(uint8_t idx, char* txt);
 void EraseLog(void);
 
 void GetDeviceTag(char* tag);
+void SetDeviceTag(char* tag);
 
 #endif /* EEProm_H */
 /* [] END OF FILE */

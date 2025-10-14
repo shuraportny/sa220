@@ -272,4 +272,9 @@ void GetDeviceTag(char* tag){
     EEPROM_ReadBytes(EEPROM_DEVICE_TAG_REG, (uint8_t*)tag, DEVICE_TAG_LENGTH );
 }
 
+void SetDeviceTag(char* tag){
+    EEPROM_WriteBytes(EEPROM_DEVICE_TAG_REG, (uint8_t*)tag, DEVICE_TAG_LENGTH);
+}
+
+
 /* [] END OF FILE */

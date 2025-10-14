@@ -1282,7 +1282,7 @@ void updateOurBleData()
 
     /* Update SENSOR_TAG value */
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TAG_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.SensorTag;
+    tempHandle.value.val = (uint8*)device_tag;//&System.SensorTag;
     tempHandle.value.len = SENSOR_TAG_LENGTH;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
