@@ -1633,18 +1633,49 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
 //                    SA100CEC_Reset( CEC_RESET_COMMS );
                 }
             }
+            
+            // Relays settings
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_RELAYS_CHAR_HANDLE){
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    for(uint8_t i=0;i<4;i++){
+                        relay[i].energ = (wrReqParam->handleValPair.value.val[i]>>2)& 0x1;
+                        relay[i].latched = (wrReqParam->handleValPair.value.val[i]>>1)& 0x1;
+                        relay[i].ack = wrReqParam->handleValPair.value.val[i]& 0x1;
+                    }
+                    EEPROM_WriteBytes(EEPROM_RELAY1_ENERG_REG, (uint8_t*)relay, sizeof(relay));
+                    
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_ENERG_REG, relay[0].energ);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_ENERG_REG, relay[1].energ);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_ENERG_REG, relay[2].energ);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_ENERG_REG, relay[3].energ);
+//                    
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_LATCH_REG, relay[0].latched);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_LATCH_REG, relay[1].latched);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_LATCH_REG, relay[2].latched);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_LATCH_REG, relay[3].latched);
+//                    
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY1_ACK_REG, relay[0].ack);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY2_ACK_REG, relay[1].ack);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY3_ACK_REG, relay[2].ack);
+//                    EEPROM_SetRelaySetting(EEPROM_RELAY4_ACK_REG, relay[3].ack);
+                }
+            }
+            
+            // Sleep Time Setting
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SLEEP_TIME_CHAR_HANDLE){
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     uint16_t par = (wrReqParam->handleValPair.value.val[1]<<8) + wrReqParam->handleValPair.value.val[0];
                     sleepPeriod = par;
-                    if(sleepPeriod<MINIMAL_SLEEP_PERIOD ) sleepPeriod =0;
-                    if( sleepPeriod > MAXIMAL_SLEEP_PERIOD) sleepPeriod = MAXIMAL_SLEEP_PERIOD;
+                    if(sleepPeriod<MINIMAL_SLEEP_PERIOD ) {sleepPeriod =0;sleepEnable=0;}
+                    else if( sleepPeriod > MAXIMAL_SLEEP_PERIOD) {sleepPeriod = MAXIMAL_SLEEP_PERIOD; sleepEnable=1;}
+                    else {sleepEnable=1;}
                     EEPROM_SetSleepPeriod(sleepPeriod);
                 }
             }
             
-            
+            // GPS Lattitude setting
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_GPS_LAT_CHAR_HANDLE){
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
@@ -1655,7 +1686,7 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                     EEPROM_SaveGPSLat(flatitude);
                 }
             }
-            
+            // GPS Longitude setting
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_GPS_LONG_CHAR_HANDLE){
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
@@ -1667,6 +1698,7 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 }
             }
             
+            // Date and Time setting
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_DATE_TIME_CHAR_HANDLE){
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
