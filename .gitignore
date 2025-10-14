@@ -1,0 +1,26 @@
+# Ignore all build outputs
+*.elf
+*.hex
+*.a
+*.map
+*.lst
+*.o
+*.log
+*.rpt
+*.cywrk.*
+*.cyprj.*
+*.alexport
+
+# Ignore all generated/debug folders
+/Debug/
+/CortexM0/
+/codegentemp/
+/Generated_Source/
+/build/
+/obj/
+/bin/
+
+# Allow source files
+!*.c
+!*.h
+!*.gitignore
