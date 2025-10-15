@@ -218,7 +218,7 @@ void InitSystem(){
         remove_trailing_spaces(str, (char*) &sensor[0][COMPAUND1]);
         strncat(gas_type, str, strlen(str));
     }else{
-        strcat(gas_type, " ");
+        strcat(gas_type, "?");
     }
     
     
@@ -235,6 +235,9 @@ void InitSystem(){
             memset(str , 0 , sizeof(str));
             remove_trailing_spaces(str, (char*) &sensor[1][COMPAUND1]);
             strncat(gas_type, str, strlen(str));
+        }else{
+            strcat(gas_type, "-");
+            strcat(gas_type, "?");
         }
     }
     
