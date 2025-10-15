@@ -26,7 +26,7 @@
 /* Maximum supported Custom Services */
 #define CYBLE_CUSTOMS_SERVICE_COUNT                  (0x02u)
 #define CYBLE_CUSTOMC_SERVICE_COUNT                  (0x00u)
-#define CYBLE_CUSTOM_SERVICE_CHAR_COUNT              (0x1Du)
+#define CYBLE_CUSTOM_SERVICE_CHAR_COUNT              (0x1Eu)
 #define CYBLE_CUSTOM_SERVICE_CHAR_DESCRIPTORS_COUNT  (0x02u)
 
 /* Below are the indexes and handles of the defined Custom Services and their characteristics */
@@ -109,6 +109,8 @@
 #define CYBLE_SGA1_DATE_TIME_CHAR_INDEX   (0x1Cu) /* Index of DATE_TIME characteristic */
 #define CYBLE_SGA1_DATE_TIME_CHARACTERISTIC_USER_DESCRIPTION_DESC_INDEX   (0x00u) /* Index of Characteristic User Description descriptor */
 #define CYBLE_SGA1_DATE_TIME_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_INDEX   (0x01u) /* Index of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA1_SELECTED_CHANNEL_CHAR_INDEX   (0x1Du) /* Index of SELECTED_CHANNEL characteristic */
+#define CYBLE_SGA1_SELECTED_CHANNEL_CHARACTERISTIC_USER_DESCRIPTION_DESC_INDEX   (0x00u) /* Index of Characteristic User Description descriptor */
 
 #define CYBLE_SGA2_SERVICE_INDEX   (0x01u) /* Index of SGA2 service in the cyBle_customs array */
 #define CYBLE_SGA2_PIN_CHAR_INDEX   (0x00u) /* Index of PIN characteristic */
@@ -283,94 +285,97 @@
 #define CYBLE_SGA1_DATE_TIME_CHAR_HANDLE   (0x0079u) /* Handle of DATE_TIME characteristic */
 #define CYBLE_SGA1_DATE_TIME_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x007Au) /* Handle of Characteristic User Description descriptor */
 #define CYBLE_SGA1_DATE_TIME_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x007Bu) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA1_SELECTED_CHANNEL_DECL_HANDLE   (0x007Cu) /* Handle of SELECTED_CHANNEL characteristic declaration */
+#define CYBLE_SGA1_SELECTED_CHANNEL_CHAR_HANDLE   (0x007Du) /* Handle of SELECTED_CHANNEL characteristic */
+#define CYBLE_SGA1_SELECTED_CHANNEL_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x007Eu) /* Handle of Characteristic User Description descriptor */
 
-#define CYBLE_SGA2_SERVICE_HANDLE   (0x008Fu) /* Handle of SGA2 service */
-#define CYBLE_SGA2_PIN_DECL_HANDLE   (0x0090u) /* Handle of PIN characteristic declaration */
-#define CYBLE_SGA2_PIN_CHAR_HANDLE   (0x0091u) /* Handle of PIN characteristic */
-#define CYBLE_SGA2_PIN_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x0092u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_TYPE_DECL_HANDLE   (0x0093u) /* Handle of SENSOR_TYPE characteristic declaration */
-#define CYBLE_SGA2_SENSOR_TYPE_CHAR_HANDLE   (0x0094u) /* Handle of SENSOR_TYPE characteristic */
-#define CYBLE_SGA2_SENSOR_TYPE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x0095u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_TYPE2_DECL_HANDLE   (0x0096u) /* Handle of SENSOR_TYPE2 characteristic declaration */
-#define CYBLE_SGA2_SENSOR_TYPE2_CHAR_HANDLE   (0x0097u) /* Handle of SENSOR_TYPE2 characteristic */
-#define CYBLE_SGA2_SENSOR_TYPE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x0098u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_RANGE_DECL_HANDLE   (0x0099u) /* Handle of SENSOR_RANGE characteristic declaration */
-#define CYBLE_SGA2_SENSOR_RANGE_CHAR_HANDLE   (0x009Au) /* Handle of SENSOR_RANGE characteristic */
-#define CYBLE_SGA2_SENSOR_RANGE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x009Bu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_RANGE2_DECL_HANDLE   (0x009Cu) /* Handle of SENSOR_RANGE2 characteristic declaration */
-#define CYBLE_SGA2_SENSOR_RANGE2_CHAR_HANDLE   (0x009Du) /* Handle of SENSOR_RANGE2 characteristic */
-#define CYBLE_SGA2_SENSOR_RANGE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x009Eu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE_DECL_HANDLE   (0x009Fu) /* Handle of SENSOR_GAS_NOTE characteristic declaration */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE   (0x00A0u) /* Handle of SENSOR_GAS_NOTE characteristic */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A1u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE2_DECL_HANDLE   (0x00A2u) /* Handle of SENSOR_GAS_NOTE2 characteristic declaration */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE2_CHAR_HANDLE   (0x00A3u) /* Handle of SENSOR_GAS_NOTE2 characteristic */
-#define CYBLE_SGA2_SENSOR_GAS_NOTE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A4u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_TAG_DECL_HANDLE   (0x00A5u) /* Handle of SENSOR_TAG characteristic declaration */
-#define CYBLE_SGA2_SENSOR_TAG_CHAR_HANDLE   (0x00A6u) /* Handle of SENSOR_TAG characteristic */
-#define CYBLE_SGA2_SENSOR_TAG_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A7u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_TEMPERATURE_DECL_HANDLE   (0x00A8u) /* Handle of SENSOR_TEMPERATURE characteristic declaration */
-#define CYBLE_SGA2_SENSOR_TEMPERATURE_CHAR_HANDLE   (0x00A9u) /* Handle of SENSOR_TEMPERATURE characteristic */
-#define CYBLE_SGA2_SENSOR_TEMPERATURE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00AAu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_TEMPERATURE_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00ABu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_SENSOR_CAL_LEVEL_DECL_HANDLE   (0x00ACu) /* Handle of SENSOR_CAL_LEVEL characteristic declaration */
-#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CHAR_HANDLE   (0x00ADu) /* Handle of SENSOR_CAL_LEVEL characteristic */
-#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00AEu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00AFu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_Z_COUNTS_DECL_HANDLE   (0x00B0u) /* Handle of CAL_Z_COUNTS characteristic declaration */
-#define CYBLE_SGA2_CAL_Z_COUNTS_CHAR_HANDLE   (0x00B1u) /* Handle of CAL_Z_COUNTS characteristic */
-#define CYBLE_SGA2_CAL_Z_COUNTS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B2u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_ZERO_READING_DECL_HANDLE   (0x00B3u) /* Handle of ZERO_READING characteristic declaration */
-#define CYBLE_SGA2_ZERO_READING_CHAR_HANDLE   (0x00B4u) /* Handle of ZERO_READING characteristic */
-#define CYBLE_SGA2_ZERO_READING_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B5u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_ZERO_READING_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00B6u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_ZERO_ERROR_DECL_HANDLE   (0x00B7u) /* Handle of CAL_ZERO_ERROR characteristic declaration */
-#define CYBLE_SGA2_CAL_ZERO_ERROR_CHAR_HANDLE   (0x00B8u) /* Handle of CAL_ZERO_ERROR characteristic */
-#define CYBLE_SGA2_CAL_ZERO_ERROR_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B9u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_ZERO_ERROR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00BAu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_STEP_DECL_HANDLE   (0x00BBu) /* Handle of CAL_STEP characteristic declaration */
-#define CYBLE_SGA2_CAL_STEP_CHAR_HANDLE   (0x00BCu) /* Handle of CAL_STEP characteristic */
-#define CYBLE_SGA2_CAL_STEP_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00BDu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_STEP_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00BEu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_SPEED_DECL_HANDLE   (0x00BFu) /* Handle of CAL_SPEED characteristic declaration */
-#define CYBLE_SGA2_CAL_SPEED_CHAR_HANDLE   (0x00C0u) /* Handle of CAL_SPEED characteristic */
-#define CYBLE_SGA2_CAL_SPEED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C1u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_SPEED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00C2u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_AS_FOUND_DECL_HANDLE   (0x00C3u) /* Handle of CAL_AS_FOUND characteristic declaration */
-#define CYBLE_SGA2_CAL_AS_FOUND_CHAR_HANDLE   (0x00C4u) /* Handle of CAL_AS_FOUND characteristic */
-#define CYBLE_SGA2_CAL_AS_FOUND_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C5u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_AS_FOUND_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00C6u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_ADJUSTED_DECL_HANDLE   (0x00C7u) /* Handle of CAL_ADJUSTED characteristic declaration */
-#define CYBLE_SGA2_CAL_ADJUSTED_CHAR_HANDLE   (0x00C8u) /* Handle of CAL_ADJUSTED characteristic */
-#define CYBLE_SGA2_CAL_ADJUSTED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C9u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_ADJUSTED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00CAu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_COUNTS_DECL_HANDLE   (0x00CBu) /* Handle of CAL_COUNTS characteristic declaration */
-#define CYBLE_SGA2_CAL_COUNTS_CHAR_HANDLE   (0x00CCu) /* Handle of CAL_COUNTS characteristic */
-#define CYBLE_SGA2_CAL_COUNTS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00CDu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_LIFE_DECL_HANDLE   (0x00CEu) /* Handle of SENSOR_LIFE characteristic declaration */
-#define CYBLE_SGA2_SENSOR_LIFE_CHAR_HANDLE   (0x00CFu) /* Handle of SENSOR_LIFE characteristic */
-#define CYBLE_SGA2_SENSOR_LIFE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D0u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_SENSOR_LIFE_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00D1u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_CLEARING_DECL_HANDLE   (0x00D2u) /* Handle of CAL_CLEARING characteristic declaration */
-#define CYBLE_SGA2_CAL_CLEARING_CHAR_HANDLE   (0x00D3u) /* Handle of CAL_CLEARING characteristic */
-#define CYBLE_SGA2_CAL_CLEARING_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D4u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_CLEARING_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00D5u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CAL_SPAN_ERROR_DECL_HANDLE   (0x00D6u) /* Handle of CAL_SPAN_ERROR characteristic declaration */
-#define CYBLE_SGA2_CAL_SPAN_ERROR_CHAR_HANDLE   (0x00D7u) /* Handle of CAL_SPAN_ERROR characteristic */
-#define CYBLE_SGA2_CAL_SPAN_ERROR_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D8u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CAL_SPAN_ERROR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00D9u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_CALIBRATION_STATUS_DECL_HANDLE   (0x00DAu) /* Handle of CALIBRATION_STATUS characteristic declaration */
-#define CYBLE_SGA2_CALIBRATION_STATUS_CHAR_HANDLE   (0x00DBu) /* Handle of CALIBRATION_STATUS characteristic */
-#define CYBLE_SGA2_CALIBRATION_STATUS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00DCu) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_CALIBRATION_STATUS_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00DDu) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_READING_SCALED_DECL_HANDLE   (0x00DEu) /* Handle of READING_SCALED characteristic declaration */
-#define CYBLE_SGA2_READING_SCALED_CHAR_HANDLE   (0x00DFu) /* Handle of READING_SCALED characteristic */
-#define CYBLE_SGA2_READING_SCALED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00E0u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_READING_SCALED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00E1u) /* Handle of Client Characteristic Configuration descriptor */
-#define CYBLE_SGA2_ALERT_STATUS_DECL_HANDLE   (0x00E2u) /* Handle of ALERT_STATUS characteristic declaration */
-#define CYBLE_SGA2_ALERT_STATUS_CHAR_HANDLE   (0x00E3u) /* Handle of ALERT_STATUS characteristic */
-#define CYBLE_SGA2_ALERT_STATUS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00E4u) /* Handle of Characteristic User Description descriptor */
-#define CYBLE_SGA2_ALERT_STATUS_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00E5u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_SERVICE_HANDLE   (0x0092u) /* Handle of SGA2 service */
+#define CYBLE_SGA2_PIN_DECL_HANDLE   (0x0093u) /* Handle of PIN characteristic declaration */
+#define CYBLE_SGA2_PIN_CHAR_HANDLE   (0x0094u) /* Handle of PIN characteristic */
+#define CYBLE_SGA2_PIN_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x0095u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_TYPE_DECL_HANDLE   (0x0096u) /* Handle of SENSOR_TYPE characteristic declaration */
+#define CYBLE_SGA2_SENSOR_TYPE_CHAR_HANDLE   (0x0097u) /* Handle of SENSOR_TYPE characteristic */
+#define CYBLE_SGA2_SENSOR_TYPE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x0098u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_TYPE2_DECL_HANDLE   (0x0099u) /* Handle of SENSOR_TYPE2 characteristic declaration */
+#define CYBLE_SGA2_SENSOR_TYPE2_CHAR_HANDLE   (0x009Au) /* Handle of SENSOR_TYPE2 characteristic */
+#define CYBLE_SGA2_SENSOR_TYPE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x009Bu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_RANGE_DECL_HANDLE   (0x009Cu) /* Handle of SENSOR_RANGE characteristic declaration */
+#define CYBLE_SGA2_SENSOR_RANGE_CHAR_HANDLE   (0x009Du) /* Handle of SENSOR_RANGE characteristic */
+#define CYBLE_SGA2_SENSOR_RANGE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x009Eu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_RANGE2_DECL_HANDLE   (0x009Fu) /* Handle of SENSOR_RANGE2 characteristic declaration */
+#define CYBLE_SGA2_SENSOR_RANGE2_CHAR_HANDLE   (0x00A0u) /* Handle of SENSOR_RANGE2 characteristic */
+#define CYBLE_SGA2_SENSOR_RANGE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A1u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE_DECL_HANDLE   (0x00A2u) /* Handle of SENSOR_GAS_NOTE characteristic declaration */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE   (0x00A3u) /* Handle of SENSOR_GAS_NOTE characteristic */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A4u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE2_DECL_HANDLE   (0x00A5u) /* Handle of SENSOR_GAS_NOTE2 characteristic declaration */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE2_CHAR_HANDLE   (0x00A6u) /* Handle of SENSOR_GAS_NOTE2 characteristic */
+#define CYBLE_SGA2_SENSOR_GAS_NOTE2_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00A7u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_TAG_DECL_HANDLE   (0x00A8u) /* Handle of SENSOR_TAG characteristic declaration */
+#define CYBLE_SGA2_SENSOR_TAG_CHAR_HANDLE   (0x00A9u) /* Handle of SENSOR_TAG characteristic */
+#define CYBLE_SGA2_SENSOR_TAG_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00AAu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_TEMPERATURE_DECL_HANDLE   (0x00ABu) /* Handle of SENSOR_TEMPERATURE characteristic declaration */
+#define CYBLE_SGA2_SENSOR_TEMPERATURE_CHAR_HANDLE   (0x00ACu) /* Handle of SENSOR_TEMPERATURE characteristic */
+#define CYBLE_SGA2_SENSOR_TEMPERATURE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00ADu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_TEMPERATURE_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00AEu) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_SENSOR_CAL_LEVEL_DECL_HANDLE   (0x00AFu) /* Handle of SENSOR_CAL_LEVEL characteristic declaration */
+#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CHAR_HANDLE   (0x00B0u) /* Handle of SENSOR_CAL_LEVEL characteristic */
+#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B1u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_CAL_LEVEL_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00B2u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_Z_COUNTS_DECL_HANDLE   (0x00B3u) /* Handle of CAL_Z_COUNTS characteristic declaration */
+#define CYBLE_SGA2_CAL_Z_COUNTS_CHAR_HANDLE   (0x00B4u) /* Handle of CAL_Z_COUNTS characteristic */
+#define CYBLE_SGA2_CAL_Z_COUNTS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B5u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_ZERO_READING_DECL_HANDLE   (0x00B6u) /* Handle of ZERO_READING characteristic declaration */
+#define CYBLE_SGA2_ZERO_READING_CHAR_HANDLE   (0x00B7u) /* Handle of ZERO_READING characteristic */
+#define CYBLE_SGA2_ZERO_READING_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00B8u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_ZERO_READING_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00B9u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_ZERO_ERROR_DECL_HANDLE   (0x00BAu) /* Handle of CAL_ZERO_ERROR characteristic declaration */
+#define CYBLE_SGA2_CAL_ZERO_ERROR_CHAR_HANDLE   (0x00BBu) /* Handle of CAL_ZERO_ERROR characteristic */
+#define CYBLE_SGA2_CAL_ZERO_ERROR_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00BCu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_ZERO_ERROR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00BDu) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_STEP_DECL_HANDLE   (0x00BEu) /* Handle of CAL_STEP characteristic declaration */
+#define CYBLE_SGA2_CAL_STEP_CHAR_HANDLE   (0x00BFu) /* Handle of CAL_STEP characteristic */
+#define CYBLE_SGA2_CAL_STEP_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C0u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_STEP_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00C1u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_SPEED_DECL_HANDLE   (0x00C2u) /* Handle of CAL_SPEED characteristic declaration */
+#define CYBLE_SGA2_CAL_SPEED_CHAR_HANDLE   (0x00C3u) /* Handle of CAL_SPEED characteristic */
+#define CYBLE_SGA2_CAL_SPEED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C4u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_SPEED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00C5u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_AS_FOUND_DECL_HANDLE   (0x00C6u) /* Handle of CAL_AS_FOUND characteristic declaration */
+#define CYBLE_SGA2_CAL_AS_FOUND_CHAR_HANDLE   (0x00C7u) /* Handle of CAL_AS_FOUND characteristic */
+#define CYBLE_SGA2_CAL_AS_FOUND_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00C8u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_AS_FOUND_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00C9u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_ADJUSTED_DECL_HANDLE   (0x00CAu) /* Handle of CAL_ADJUSTED characteristic declaration */
+#define CYBLE_SGA2_CAL_ADJUSTED_CHAR_HANDLE   (0x00CBu) /* Handle of CAL_ADJUSTED characteristic */
+#define CYBLE_SGA2_CAL_ADJUSTED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00CCu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_ADJUSTED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00CDu) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_COUNTS_DECL_HANDLE   (0x00CEu) /* Handle of CAL_COUNTS characteristic declaration */
+#define CYBLE_SGA2_CAL_COUNTS_CHAR_HANDLE   (0x00CFu) /* Handle of CAL_COUNTS characteristic */
+#define CYBLE_SGA2_CAL_COUNTS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D0u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_LIFE_DECL_HANDLE   (0x00D1u) /* Handle of SENSOR_LIFE characteristic declaration */
+#define CYBLE_SGA2_SENSOR_LIFE_CHAR_HANDLE   (0x00D2u) /* Handle of SENSOR_LIFE characteristic */
+#define CYBLE_SGA2_SENSOR_LIFE_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D3u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_SENSOR_LIFE_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00D4u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_CLEARING_DECL_HANDLE   (0x00D5u) /* Handle of CAL_CLEARING characteristic declaration */
+#define CYBLE_SGA2_CAL_CLEARING_CHAR_HANDLE   (0x00D6u) /* Handle of CAL_CLEARING characteristic */
+#define CYBLE_SGA2_CAL_CLEARING_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00D7u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_CLEARING_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00D8u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CAL_SPAN_ERROR_DECL_HANDLE   (0x00D9u) /* Handle of CAL_SPAN_ERROR characteristic declaration */
+#define CYBLE_SGA2_CAL_SPAN_ERROR_CHAR_HANDLE   (0x00DAu) /* Handle of CAL_SPAN_ERROR characteristic */
+#define CYBLE_SGA2_CAL_SPAN_ERROR_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00DBu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CAL_SPAN_ERROR_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00DCu) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_CALIBRATION_STATUS_DECL_HANDLE   (0x00DDu) /* Handle of CALIBRATION_STATUS characteristic declaration */
+#define CYBLE_SGA2_CALIBRATION_STATUS_CHAR_HANDLE   (0x00DEu) /* Handle of CALIBRATION_STATUS characteristic */
+#define CYBLE_SGA2_CALIBRATION_STATUS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00DFu) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_CALIBRATION_STATUS_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00E0u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_READING_SCALED_DECL_HANDLE   (0x00E1u) /* Handle of READING_SCALED characteristic declaration */
+#define CYBLE_SGA2_READING_SCALED_CHAR_HANDLE   (0x00E2u) /* Handle of READING_SCALED characteristic */
+#define CYBLE_SGA2_READING_SCALED_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00E3u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_READING_SCALED_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00E4u) /* Handle of Client Characteristic Configuration descriptor */
+#define CYBLE_SGA2_ALERT_STATUS_DECL_HANDLE   (0x00E5u) /* Handle of ALERT_STATUS characteristic declaration */
+#define CYBLE_SGA2_ALERT_STATUS_CHAR_HANDLE   (0x00E6u) /* Handle of ALERT_STATUS characteristic */
+#define CYBLE_SGA2_ALERT_STATUS_CHARACTERISTIC_USER_DESCRIPTION_DESC_HANDLE   (0x00E7u) /* Handle of Characteristic User Description descriptor */
+#define CYBLE_SGA2_ALERT_STATUS_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE   (0x00E8u) /* Handle of Client Characteristic Configuration descriptor */
 
 
 

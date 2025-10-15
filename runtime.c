@@ -146,6 +146,8 @@ uint8_t alarm_mask[2]={0};
 
 uint8_t relay_present;
 
+uint8_t BLE_ch;
+
 
 void Test_Increment(uint8 reg , uint8 bytes_to_send){
     txarr.reg=reg;
@@ -1073,7 +1075,13 @@ void updateOurBleData()
         System.BleControlPrevious = System.BleControl;
     }
     
-    ////////////////////////////////////////////////////////
+    ///////////////////SELECTED CHANNEL////////////////////////
+    tempHandle.attrHandle = CYBLE_SGA1_SELECTED_CHANNEL_CHAR_HANDLE;
+    tempHandle.value.val = (uint8_t*)&BLE_ch;
+    tempHandle.value.len = 1;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+////////////////////////////////////////////////////////////////////////    
     memset(rly, '\0', sizeof(rly));
     for(uint8_t i=0;i<4;i++){
         rly[i]|= (relay[i].energ<<2);
@@ -1673,6 +1681,15 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
 //                    if( SA100_I2C_INSTALLED ) SA100I2C_Write_8( SA100_CEC_I2C_ADDR, SA100_I2C_CanNodeId, System.CanNodeId );
 //                    SA100CEC_Write_8( CEC_OD_SYS_U8_CANNodeID, 0, System.CanNodeId );
 //                    SA100CEC_Reset( CEC_RESET_COMMS );
+                }
+            }
+            
+            // SELECTED CHANNEL
+            
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SELECTED_CHANNEL_CHAR_HANDLE){
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    BLE_ch = wrReqParam->handleValPair.value.val[0];
                 }
             }
             
