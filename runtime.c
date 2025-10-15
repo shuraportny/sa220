@@ -1051,7 +1051,7 @@ void updateData(void){
 void updateOurBleData()
 {
     uint8 testVal8 = 0;
-    uint16 testVal16 = 0;
+    uint16 par16 = 0;
     uint32 testVal32 = 0;
     
     CYBLE_GATTS_HANDLE_VALUE_NTF_T tempHandle;
@@ -1259,18 +1259,54 @@ void updateOurBleData()
         System.AdcCountsPrevious = System.AdcCounts;
     }
 
+    
+    ///////////////////    ALERTS ///////////////////////////////////////
     /* Update SYS_ALERT_1 value */
+    par16 = (sensor[0][ALARM1MSB]<<8)+sensor[0][ALARM1LSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&testVal8;
+    tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
     /* Update SYS_ALERT_2 value */
+    par16 = (sensor[0][ALARM2MSB]<<8)+sensor[0][ALARM2LSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&testVal8;
+    tempHandle.value.val = (uint8*)&par16;
+    tempHandle.value.len = 2;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    /* Update SYS_ALERT_3 value */
+    par16 = (sensor[0][ALARM3MSB]<<8)+sensor[0][ALARM3LSB];
+    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&par16;
+    tempHandle.value.len = 2;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    
+    /* Update SYS_ALERT_1_ASC  value */
+    par16 = sensor[0][ALARM1ASCLSB];
+    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_ASC_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
+    /* Update SYS_ALERT_2_ASC  value */
+    par16 = sensor[0][ALARM2ASCLSB];
+    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_ASC_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&par16;
+    tempHandle.value.len = 2;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+
+    
+    /* Update SYS_ALERT_3_ASC  value */
+    par16 = sensor[0][ALARM3ASCLSB];
+    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_ASC_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&par16;
+    tempHandle.value.len = 2;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+////////////////////////////////////////////////////////////////////////////////////////
+    
+    
     /* Update PIN value */
     tempHandle.attrHandle = CYBLE_SGA2_PIN_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&System.Pin;
@@ -1619,7 +1655,8 @@ CYBLE_CONN_HANDLE_T connectionHandle;
 void Stack_Handler( uint32 eventCode, void *eventParam )
 {
     CYBLE_GATTS_WRITE_REQ_PARAM_T *wrReqParam;    
-
+    uint16_t par16;
+    
     switch( eventCode )                                                         /* Handle any BLE events */
     {
         case CYBLE_EVT_STACK_ON:                                                /* Handle BLE stack started */
@@ -1779,6 +1816,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM1LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM1MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(0 , ALARM1MSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
                 }
             }
             /* It's our ALERT_2 variable */            
@@ -1788,8 +1832,87 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM2LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM2MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(0 , ALARM2MSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
                 }
             }
+            
+            /* It's our ALERT_3 variable */            
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_ALERT_3_CHAR_HANDLE)
+            {
+                /* Only update and respond if the write to the GATT Database is allowed */
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
+                {
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM3LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[0][ALARM3MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(0 , ALARM3MSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
+                }
+            }
+            
+            
+            
+            /* It's our ALERT_1_ASC variable */            
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_ALERT_1_ASC_CHAR_HANDLE)
+            {
+                /* Only update and respond if the write to the GATT Database is allowed */
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
+                {
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    if(par16>1)par16=1;
+                    sensor[0][ALARM1ASCLSB] =  par16;
+                    runtime_UpdateSensor(0 , ALARM1ASCMSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
+                }
+            }
+            
+            
+            /* It's our ALERT_2_ASC variable */            
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_ALERT_2_ASC_CHAR_HANDLE)
+            {
+                /* Only update and respond if the write to the GATT Database is allowed */
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
+                {
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    if(par16>1)par16=1;
+                    sensor[0][ALARM2ASCLSB] =  par16;
+                    runtime_UpdateSensor(0 , ALARM2ASCMSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
+                }
+            }
+            
+            /* It's our ALERT_3_ASC variable */            
+            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_ALERT_3_ASC_CHAR_HANDLE)
+            {
+                /* Only update and respond if the write to the GATT Database is allowed */
+                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
+                {
+                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    if(par16>1)par16=1;
+                    sensor[0][ALARM3ASCLSB] =  par16;
+                    runtime_UpdateSensor(0 , ALARM3ASCMSB-4, par16);
+                    SelectChannel(0);
+                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(0);
+                }
+            }
+            
             /* It's our PIN variable */            
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA2_PIN_CHAR_HANDLE)
             {

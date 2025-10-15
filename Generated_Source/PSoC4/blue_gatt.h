@@ -35,8 +35,8 @@
 
 #if(CYBLE_GATT_ROLE_SERVER)
 
-#define CYBLE_GATT_DB_INDEX_COUNT                    (0x00E8u)
-#define CYBLE_GATT_DB_ATT_VAL_COUNT                  (0x9Eu)
+#define CYBLE_GATT_DB_INDEX_COUNT                    (0x00EEu)
+#define CYBLE_GATT_DB_ATT_VAL_COUNT                  (0xA2u)
 #define CYBLE_GATT_DB_MAX_VALUE_LEN                  (0x0028u)
 
 #endif /* CYBLE_GATT_ROLE_SERVER */

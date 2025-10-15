@@ -359,39 +359,39 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
                 }, 
             },
+
+            /* SYS_ALERT_3 characteristic */
+            {
+                0x0080u, /* Handle of the SYS_ALERT_3 characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x0081u, /* Handle of the Characteristic User Description descriptor */ 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+
+            /* SYS_ALERT_3_ASC characteristic */
+            {
+                0x0083u, /* Handle of the SYS_ALERT_3_ASC characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x0084u, /* Handle of the Characteristic User Description descriptor */ 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
         }, 
     },
 
     /* SGA2 service */
     {
-        0x0092u, /* Handle of the SGA2 service */ 
+        0x0098u, /* Handle of the SGA2 service */ 
         {
 
             /* PIN characteristic */
             {
-                0x0094u, /* Handle of the PIN characteristic */ 
-                
-                /* Array of Descriptors handles */
-                {
-                    0x0095u, /* Handle of the Characteristic User Description descriptor */ 
-                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
-                }, 
-            },
-
-            /* SENSOR_TYPE characteristic */
-            {
-                0x0097u, /* Handle of the SENSOR_TYPE characteristic */ 
-                
-                /* Array of Descriptors handles */
-                {
-                    0x0098u, /* Handle of the Characteristic User Description descriptor */ 
-                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
-                }, 
-            },
-
-            /* SENSOR_TYPE2 characteristic */
-            {
-                0x009Au, /* Handle of the SENSOR_TYPE2 characteristic */ 
+                0x009Au, /* Handle of the PIN characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -400,9 +400,9 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_RANGE characteristic */
+            /* SENSOR_TYPE characteristic */
             {
-                0x009Du, /* Handle of the SENSOR_RANGE characteristic */ 
+                0x009Du, /* Handle of the SENSOR_TYPE characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -411,9 +411,9 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_RANGE2 characteristic */
+            /* SENSOR_TYPE2 characteristic */
             {
-                0x00A0u, /* Handle of the SENSOR_RANGE2 characteristic */ 
+                0x00A0u, /* Handle of the SENSOR_TYPE2 characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -422,9 +422,9 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_GAS_NOTE characteristic */
+            /* SENSOR_RANGE characteristic */
             {
-                0x00A3u, /* Handle of the SENSOR_GAS_NOTE characteristic */ 
+                0x00A3u, /* Handle of the SENSOR_RANGE characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -433,9 +433,9 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_GAS_NOTE2 characteristic */
+            /* SENSOR_RANGE2 characteristic */
             {
-                0x00A6u, /* Handle of the SENSOR_GAS_NOTE2 characteristic */ 
+                0x00A6u, /* Handle of the SENSOR_RANGE2 characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -444,9 +444,9 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_TAG characteristic */
+            /* SENSOR_GAS_NOTE characteristic */
             {
-                0x00A9u, /* Handle of the SENSOR_TAG characteristic */ 
+                0x00A9u, /* Handle of the SENSOR_GAS_NOTE characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
@@ -455,179 +455,219 @@ const CYBLE_CUSTOMS_T cyBle_customs[0x02u] = {
                 }, 
             },
 
-            /* SENSOR_TEMPERATURE characteristic */
+            /* SENSOR_GAS_NOTE2 characteristic */
             {
-                0x00ACu, /* Handle of the SENSOR_TEMPERATURE characteristic */ 
+                0x00ACu, /* Handle of the SENSOR_GAS_NOTE2 characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
                     0x00ADu, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00AEu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+
+            /* SENSOR_TAG characteristic */
+            {
+                0x00AFu, /* Handle of the SENSOR_TAG characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x00B0u, /* Handle of the Characteristic User Description descriptor */ 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+
+            /* SENSOR_TEMPERATURE characteristic */
+            {
+                0x00B2u, /* Handle of the SENSOR_TEMPERATURE characteristic */ 
+                
+                /* Array of Descriptors handles */
+                {
+                    0x00B3u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00B4u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* SENSOR_CAL_LEVEL characteristic */
             {
-                0x00B0u, /* Handle of the SENSOR_CAL_LEVEL characteristic */ 
+                0x00B6u, /* Handle of the SENSOR_CAL_LEVEL characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00B1u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00B2u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00B7u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00B8u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_Z_COUNTS characteristic */
             {
-                0x00B4u, /* Handle of the CAL_Z_COUNTS characteristic */ 
+                0x00BAu, /* Handle of the CAL_Z_COUNTS characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00B5u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00BBu, /* Handle of the Characteristic User Description descriptor */ 
                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
                 }, 
             },
 
             /* ZERO_READING characteristic */
             {
-                0x00B7u, /* Handle of the ZERO_READING characteristic */ 
+                0x00BDu, /* Handle of the ZERO_READING characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00B8u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00B9u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00BEu, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00BFu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_ZERO_ERROR characteristic */
             {
-                0x00BBu, /* Handle of the CAL_ZERO_ERROR characteristic */ 
+                0x00C1u, /* Handle of the CAL_ZERO_ERROR characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00BCu, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00BDu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00C2u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00C3u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_STEP characteristic */
             {
-                0x00BFu, /* Handle of the CAL_STEP characteristic */ 
+                0x00C5u, /* Handle of the CAL_STEP characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00C0u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00C1u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00C6u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00C7u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_SPEED characteristic */
             {
-                0x00C3u, /* Handle of the CAL_SPEED characteristic */ 
+                0x00C9u, /* Handle of the CAL_SPEED characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00C4u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00C5u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00CAu, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00CBu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_AS_FOUND characteristic */
             {
-                0x00C7u, /* Handle of the CAL_AS_FOUND characteristic */ 
+                0x00CDu, /* Handle of the CAL_AS_FOUND characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00C8u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00C9u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00CEu, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00CFu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_ADJUSTED characteristic */
             {
-                0x00CBu, /* Handle of the CAL_ADJUSTED characteristic */ 
+                0x00D1u, /* Handle of the CAL_ADJUSTED characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00CCu, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00CDu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00D2u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00D3u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_COUNTS characteristic */
             {
-                0x00CFu, /* Handle of the CAL_COUNTS characteristic */ 
+                0x00D5u, /* Handle of the CAL_COUNTS characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00D0u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00D6u, /* Handle of the Characteristic User Description descriptor */ 
                     CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
                 }, 
             },
 
             /* SENSOR_LIFE characteristic */
             {
-                0x00D2u, /* Handle of the SENSOR_LIFE characteristic */ 
+                0x00D8u, /* Handle of the SENSOR_LIFE characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00D3u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00D4u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00D9u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00DAu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_CLEARING characteristic */
             {
-                0x00D6u, /* Handle of the CAL_CLEARING characteristic */ 
+                0x00DCu, /* Handle of the CAL_CLEARING characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00D7u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00D8u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00DDu, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00DEu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CAL_SPAN_ERROR characteristic */
             {
-                0x00DAu, /* Handle of the CAL_SPAN_ERROR characteristic */ 
+                0x00E0u, /* Handle of the CAL_SPAN_ERROR characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00DBu, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00DCu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00E1u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00E2u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* CALIBRATION_STATUS characteristic */
             {
-                0x00DEu, /* Handle of the CALIBRATION_STATUS characteristic */ 
+                0x00E4u, /* Handle of the CALIBRATION_STATUS characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00DFu, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00E0u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00E5u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00E6u, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* READING_SCALED characteristic */
             {
-                0x00E2u, /* Handle of the READING_SCALED characteristic */ 
+                0x00E8u, /* Handle of the READING_SCALED characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00E3u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00E4u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00E9u, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00EAu, /* Handle of the Client Characteristic Configuration descriptor */ 
                 }, 
             },
 
             /* ALERT_STATUS characteristic */
             {
-                0x00E6u, /* Handle of the ALERT_STATUS characteristic */ 
+                0x00ECu, /* Handle of the ALERT_STATUS characteristic */ 
                 
                 /* Array of Descriptors handles */
                 {
-                    0x00E7u, /* Handle of the Characteristic User Description descriptor */ 
-                    0x00E8u, /* Handle of the Client Characteristic Configuration descriptor */ 
+                    0x00EDu, /* Handle of the Characteristic User Description descriptor */ 
+                    0x00EEu, /* Handle of the Client Characteristic Configuration descriptor */ 
+                }, 
+            },
+            {
+                CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                
+                /* Array of Descriptors handles */
+                {
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                }, 
+            },
+            {
+                CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                
+                /* Array of Descriptors handles */
+                {
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
+                    CYBLE_GATT_INVALID_ATTR_HANDLE_VALUE, 
                 }, 
             },
             {
