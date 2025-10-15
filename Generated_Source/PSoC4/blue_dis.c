@@ -20,17 +20,17 @@
 
 const CYBLE_DISS_T cyBle_diss =
 {
-    0x007Au,    /* Handle of the DIS service */
+    0x007Cu,    /* Handle of the DIS service */
     {
-        0x007Cu, /* Handle of the Manufacturer Name String characteristic */ 
-        0x007Eu, /* Handle of the Model Number String characteristic */ 
-        0x0080u, /* Handle of the Serial Number String characteristic */ 
-        0x0082u, /* Handle of the Hardware Revision String characteristic */ 
-        0x0084u, /* Handle of the Firmware Revision String characteristic */ 
-        0x0086u, /* Handle of the Software Revision String characteristic */ 
-        0x0088u, /* Handle of the System ID characteristic */ 
-        0x008Au, /* Handle of the IEEE 11073-20601 Regulatory Certification Data List characteristic */ 
-        0x008Cu, /* Handle of the PnP ID characteristic */ 
+        0x007Eu, /* Handle of the Manufacturer Name String characteristic */ 
+        0x0080u, /* Handle of the Model Number String characteristic */ 
+        0x0082u, /* Handle of the Serial Number String characteristic */ 
+        0x0084u, /* Handle of the Hardware Revision String characteristic */ 
+        0x0086u, /* Handle of the Firmware Revision String characteristic */ 
+        0x0088u, /* Handle of the Software Revision String characteristic */ 
+        0x008Au, /* Handle of the System ID characteristic */ 
+        0x008Cu, /* Handle of the IEEE 11073-20601 Regulatory Certification Data List characteristic */ 
+        0x008Eu, /* Handle of the PnP ID characteristic */ 
     },
 };
 

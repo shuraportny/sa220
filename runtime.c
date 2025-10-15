@@ -1190,7 +1190,13 @@ void updateOurBleData()
     tempHandle.value.len = 1;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     
-
+    tempHandle.attrHandle = CYBLE_SGA1_RESOLUTION2_CHAR_HANDLE;
+    tempHandle.value.val = (uint8_t*)&sensor[1][RESOLUTIONLSB];
+    tempHandle.value.len = 1;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    
+    
     tempHandle.attrHandle = CYBLE_SGA1_SYS_READING_CHAR_HANDLE;
     Sensor.Reading = iReading;
     tempHandle.value.val = (uint8*)&iReading;
@@ -1263,19 +1269,35 @@ void updateOurBleData()
     tempHandle.value.len = 4;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
+///////         DEVICE TYPE      //////////////////////////////////////////////////    
     /* Update SENSOR_TYPE value ( This is actually mfg ) */
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TYPE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&testVal8;
+    tempHandle.value.val = (uint8*)&sensor[0][DEVTYPELSB];
     tempHandle.value.len = 1;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
+    
+    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TYPE2_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&sensor[1][DEVTYPELSB];
+    tempHandle.value.len = 1;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+/////////////////////////////////////////////////////////////////////////////
+    
+///////        FULL SCALE RANGE      ////////////////////////////////////////////////    
     /* Update gas range value */
     Sensor.Range= (sensor[0][FULLSCALERANGE3]<<8)+sensor[0][FULLSCALERANGE4];
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_RANGE_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&Sensor.Range; //&sensor[FULLSCALERANGE3];//&testVal8;  
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
+    
+    Sensor.Range= (sensor[1][FULLSCALERANGE3]<<8)+sensor[1][FULLSCALERANGE4];
+    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_RANGE2_CHAR_HANDLE;
+    tempHandle.value.val = (uint8*)&Sensor.Range; //&sensor[FULLSCALERANGE3];//&testVal8;  
+    tempHandle.value.len = 2;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+////////////////////////////////////////////////////////////////////////////    
+    
+//////           GAS NOTE          ///////////////////////////////////////////////////////////
     /* Update SENSOR_NOTE value */
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE;
     char str[12];
@@ -1285,7 +1307,19 @@ void updateOurBleData()
     tempHandle.value.val = (uint8*)str;
     tempHandle.value.len = 10;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
+    
+    
+    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_GAS_NOTE2_CHAR_HANDLE;
+    memset(str , 0 , sizeof(str));
+    remove_trailing_spaces(str, (char*)&sensor[1][COMPAUND1]);
+    strcat(str, " ");
+    strncat(str ,(char*)&sensor[1][UNIT1], 4 );
+    tempHandle.value.val = (uint8*)str;
+    tempHandle.value.len = 10;
+    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+/////////////////////////////////////////////////////////////////////////////
+    
+    
     /* Update SENSOR_TAG value */
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TAG_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)device_tag;//&System.SensorTag;
