@@ -1262,21 +1262,21 @@ void updateOurBleData()
     
     ///////////////////    ALERTS ///////////////////////////////////////
     /* Update SYS_ALERT_1 value */
-    par16 = (sensor[0][ALARM1MSB]<<8)+sensor[0][ALARM1LSB];
+    par16 = (sensor[BLE_ch][ALARM1MSB]<<8)+sensor[BLE_ch][ALARM1LSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
     /* Update SYS_ALERT_2 value */
-    par16 = (sensor[0][ALARM2MSB]<<8)+sensor[0][ALARM2LSB];
+    par16 = (sensor[BLE_ch][ALARM2MSB]<<8)+sensor[BLE_ch][ALARM2LSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     
     /* Update SYS_ALERT_3 value */
-    par16 = (sensor[0][ALARM3MSB]<<8)+sensor[0][ALARM3LSB];
+    par16 = (sensor[BLE_ch][ALARM3MSB]<<8)+sensor[BLE_ch][ALARM3LSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
@@ -1284,14 +1284,14 @@ void updateOurBleData()
     
     
     /* Update SYS_ALERT_1_ASC  value */
-    par16 = sensor[0][ALARM1ASCLSB];
+    par16 = sensor[BLE_ch][ALARM1ASCLSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_ASC_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
     /* Update SYS_ALERT_2_ASC  value */
-    par16 = sensor[0][ALARM2ASCLSB];
+    par16 = sensor[BLE_ch][ALARM2ASCLSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_ASC_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
@@ -1299,7 +1299,7 @@ void updateOurBleData()
 
     
     /* Update SYS_ALERT_3_ASC  value */
-    par16 = sensor[0][ALARM3ASCLSB];
+    par16 = sensor[BLE_ch][ALARM3ASCLSB];
     tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_ASC_CHAR_HANDLE;
     tempHandle.value.val = (uint8*)&par16;
     tempHandle.value.len = 2;
@@ -1726,7 +1726,14 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
             if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SELECTED_CHANNEL_CHAR_HANDLE){
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED)){
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    BLE_ch = wrReqParam->handleValPair.value.val[0];
+                    if(wrReqParam->handleValPair.value.val[0]>=1){
+                        if(ch2Active)
+                            BLE_ch=1;
+                        else
+                            BLE_ch=0;
+                    }else{
+                        BLE_ch=0;
+                    }
                 }
             }
             
@@ -1817,12 +1824,12 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM1LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM1MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(0 , ALARM1MSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM1LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[BLE_ch][ALARM1MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(BLE_ch , ALARM1MSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             /* It's our ALERT_2 variable */            
@@ -1833,12 +1840,12 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM2LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM2MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(0 , ALARM2MSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM2LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[BLE_ch][ALARM2MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(BLE_ch , ALARM2MSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1850,12 +1857,12 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM3LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[0][ALARM3MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(0 , ALARM3MSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM3LSB] =  wrReqParam->handleValPair.value.val[0];
+                    sensor[BLE_ch][ALARM3MSB] =  wrReqParam->handleValPair.value.val[1];
+                    runtime_UpdateSensor(BLE_ch , ALARM3MSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1870,11 +1877,11 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
                     if(par16>1)par16=1;
-                    sensor[0][ALARM1ASCLSB] =  par16;
-                    runtime_UpdateSensor(0 , ALARM1ASCMSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM1ASCLSB] =  par16;
+                    runtime_UpdateSensor(BLE_ch , ALARM1ASCMSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1888,11 +1895,11 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
                     if(par16>1)par16=1;
-                    sensor[0][ALARM2ASCLSB] =  par16;
-                    runtime_UpdateSensor(0 , ALARM2ASCMSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM2ASCLSB] =  par16;
+                    runtime_UpdateSensor(BLE_ch , ALARM2ASCMSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1905,11 +1912,11 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
                     if(par16>1)par16=1;
-                    sensor[0][ALARM3ASCLSB] =  par16;
-                    runtime_UpdateSensor(0 , ALARM3ASCMSB-4, par16);
-                    SelectChannel(0);
-                    runtime_CtrlSensor(0 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(0);
+                    sensor[BLE_ch][ALARM3ASCLSB] =  par16;
+                    runtime_UpdateSensor(BLE_ch , ALARM3ASCMSB-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    RecalculateAlarms(BLE_ch);
                 }
             }
             
