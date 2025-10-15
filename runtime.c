@@ -774,7 +774,7 @@ void runtime_ProcessRequest(void){
                 runtime_CtrlSensor(dev-1 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
                 sensor_status[dev-1].alarm1asc = ARRtoINT16(sensor[dev-1],ALARM1ASCMSB);
                 //UpdateSensorStatus(dev-1);
-                
+               RecalculateAlarms(dev-1); 
             }
         }
         if(startRegister ==MODBUS_ALARM2_REG){
@@ -792,6 +792,7 @@ void runtime_ProcessRequest(void){
                 runtime_CtrlSensor(dev-1 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
                 sensor_status[dev-1].alarm1asc = ARRtoINT16(sensor[dev-1],ALARM1ASCMSB);
                 //UpdateSensorStatus(dev-1);
+                RecalculateAlarms(dev-1);
             }
         }
         if(startRegister ==MODBUS_ALARM3_REG){
@@ -808,6 +809,7 @@ void runtime_ProcessRequest(void){
                 runtime_CtrlSensor(dev-1 , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
                 sensor_status[dev-1].alarm1asc = ARRtoINT16(sensor[dev-1],ALARM1ASCMSB);
                 //UpdateSensorStatus(dev-1);
+                RecalculateAlarms(dev-1);
             }
         }
         if(startRegister ==MODBUS_CAL_LEVEL_REG){
