@@ -28,7 +28,7 @@ void EEPROM_WriteBytes(uint16_t memAddr, uint8_t *data, uint16_t len)
     while (I2C_I2CMasterStatus() & I2C_I2C_MSTAT_XFER_INP);
 
     // Wait for internal write cycle (~5 ms for EEPROM)
-    //CyDelay(5);
+    CyDelay(5);
 }
 
 

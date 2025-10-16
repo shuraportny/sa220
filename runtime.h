@@ -226,6 +226,7 @@ void SetSleepPeriod(uint32_t period);
 
 void isBLEDisconneted(void);
 void updateData(void);
+void InitBLEStaticData();
 void updateOurBleData(void);
 void Stack_Handler(uint32 eventCode, void *eventParam);
 

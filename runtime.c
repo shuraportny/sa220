@@ -146,6 +146,8 @@ uint8_t alarm_mask[2]={0};
 
 uint8_t relay_present;
 
+uint8_t bleConnected;
+uint8_t bleNewConnection;
 uint8_t BLE_ch;
 
 
@@ -277,26 +279,9 @@ void InitSystem(){
     
     
 
-    // Get Log Entries
-    //GetLog((char*) &log_record);
-    
     log_last_entry_idx= LoadLogIndex()+1;
     for(uint8_t i=0;i<LOG_MAX_ENTRIES;i++ )
         GetLogEntry((log_last_entry_idx+i)%LOG_MAX_ENTRIES, log_record[i]);
-        
-    
-    
-    
-//    // UPDATE TEXT in DISPLY INFO PAGE
-//    Nextion_SetTextIncognito(PAGE_INFO, DISP_OBJ_CH1 , "SFDGFHGHHJHJGHKGJLKJGL");
-//    CyDelay(50);
-//    Nextion_SetTextIncognito(PAGE_INFO, DISP_OBJ_CH2 , "fgfdgsfgfgsfgfgsfgsfg");
-//    CyDelay(50);
-//    
-//    
-    
-    
-    
     
     char BleName[50];
     memset(BleName, 0 , sizeof(BleName));
@@ -319,7 +304,7 @@ void InitSystem(){
     CyBle_DissSetCharacteristicValue(CYBLE_DIS_SERIAL_NUMBER, 12, (uint8 *)&sensor[0][SERIALNUMBER1]);
     CyBle_DissSetCharacteristicValue(CYBLE_DIS_HARDWARE_REV, 4, (uint8 *)HARDWARE_VISION);
     
-    
+    InitBLEStaticData();
     
 }
 
@@ -977,77 +962,122 @@ void BLE_Start(){
 }
 
 
-void updateData(void){
-    uint8_t sys[4];
-    
-    
-    CYBLE_GATTS_HANDLE_VALUE_NTF_T tempHandle;
-    
-    if( CyBle_GetState() != CYBLE_STATE_CONNECTED ) return;
-    
-    /* Update sys gas reading value */
-    sys[0] =  sensor[0][SYSREADING1];
-    sys[1] =  sensor[0][SYSREADING2];
-    sys[2] =  sensor[0][SYSREADING3];
-    sys[3] =  sensor[0][SYSREADING4];
-    
-    
-    
-    
-    /* Update sys remote control value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.BleControl;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for remote control value */
-    if( System.BleNotifyControl && ( System.BleControl != System.BleControlPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.BleControlPrevious = System.BleControl;
-    }
-    
-    
-    
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_READING_CHAR_HANDLE;
-    tempHandle.value.val= (uint8* )&sys;
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    if(System.BleNotifyReading){
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        Sensor.ReadingPrevious = Sensor.Reading;
-    }
-    
-    /* Update SENSOR_STATUS value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_STATUS_CHAR_HANDLE;
-    tempHandle.value.val=(uint8*)&sensor[CALSTATUSMSB];
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    if(System.BleNotifyReading){
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        Sensor.StatusPrevious = Sensor.Status;
-    }
-    
-    
-    /* Update SENSOR_NOTE value */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[COMPAUND1];
-    tempHandle.value.len = 10;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    /* Update SENSOR_PIN value */
-    tempHandle.attrHandle = CYBLE_SGA2_PIN_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[UNIT1];
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    // Indication of SYS REMOTE control
-//    switch(BleControl){
-//    case 10: LED_Write(0); LED3_Write(0); break;
-//    case 20: LED_Write(0); LED3_Write(1); break;
-//    default: LED_Write(1); LED3_Write(1); break;    
+//void updateData(void){
+//    uint8_t sys[4];
+//    
+//    
+//    CYBLE_GATTS_HANDLE_VALUE_NTF_T tempHandle;
+//    
+//    if( CyBle_GetState() != CYBLE_STATE_CONNECTED ) return;
+//    
+//    /* Update sys gas reading value */
+//    sys[0] =  sensor[0][SYSREADING1];
+//    sys[1] =  sensor[0][SYSREADING2];
+//    sys[2] =  sensor[0][SYSREADING3];
+//    sys[3] =  sensor[0][SYSREADING4];
+//    
+//    
+//    
+//    
+//    /* Update sys remote control value */
+//    tempHandle.attrHandle = CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.BleControl;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for remote control value */
+//    if( System.BleNotifyControl && ( System.BleControl != System.BleControlPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.BleControlPrevious = System.BleControl;
 //    }
-    
+//    
+//    
+//    
+//    tempHandle.attrHandle = CYBLE_SGA1_SYS_READING_CHAR_HANDLE;
+//    tempHandle.value.val= (uint8* )&sys;
+//    tempHandle.value.len = 4;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    if(System.BleNotifyReading){
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        Sensor.ReadingPrevious = Sensor.Reading;
+//    }
+//    
+//    /* Update SENSOR_STATUS value */
+//    tempHandle.attrHandle = CYBLE_SGA1_SYS_STATUS_CHAR_HANDLE;
+//    tempHandle.value.val=(uint8*)&sensor[CALSTATUSMSB];
+//    tempHandle.value.len = 2;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    if(System.BleNotifyReading){
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        Sensor.StatusPrevious = Sensor.Status;
+//    }
+//    
+//    
+//    /* Update SENSOR_NOTE value */
+//    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&sensor[COMPAUND1];
+//    tempHandle.value.len = 10;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    
+//    /* Update SENSOR_PIN value */
+//    tempHandle.attrHandle = CYBLE_SGA2_PIN_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&sensor[UNIT1];
+//    tempHandle.value.len = 4;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    // Indication of SYS REMOTE control
+////    switch(BleControl){
+////    case 10: LED_Write(0); LED3_Write(0); break;
+////    case 20: LED_Write(0); LED3_Write(1); break;
+////    default: LED_Write(1); LED3_Write(1); break;    
+////    }
+//    
+//}
+
+
+static void Ble_WriteAttribute(uint16 handle, uint8 *data, uint8 len)
+{
+    CYBLE_GATTS_HANDLE_VALUE_NTF_T h;
+    h.attrHandle = handle;
+    h.value.val = data;
+    h.value.len = len;
+    CyBle_GattsWriteAttributeValue(&h, 0, &cyBle_connHandle, 0);
 }
 
+void InitBLEStaticData(){
+
+    Ble_WriteAttribute(CYBLE_SGA1_LOG1_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-1], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG2_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-2], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG3_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-3], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG4_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-4], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG5_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-5], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG6_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-6], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG7_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-7], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG8_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-8], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG9_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-9], LOG_INFO_LENGTH);
+    Ble_WriteAttribute(CYBLE_SGA1_LOG10_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-10], LOG_INFO_LENGTH);
+    
+    Ble_WriteAttribute(CYBLE_SGA1_SLEEP_TIME_CHAR_HANDLE, (uint8_t *)&sleepPeriod, 2);
+    
+    Ble_WriteAttribute(CYBLE_SGA1_GPS_LAT_CHAR_HANDLE, (uint8_t *)&flatitude, 4);
+    Ble_WriteAttribute(CYBLE_SGA1_GPS_LONG_CHAR_HANDLE, (uint8_t *)&flongitude, 4);
+    
+    
+    
+    Ble_WriteAttribute(CYBLE_SGA1_RESOLUTION_CHAR_HANDLE, (uint8_t *)&sensor[0][RESOLUTIONLSB], 1);
+    Ble_WriteAttribute(CYBLE_SGA1_RESOLUTION2_CHAR_HANDLE, (uint8_t *)&sensor[1][RESOLUTIONLSB], 1);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_1_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM1MSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_2_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM2MSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_3_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM3MSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_1_ASC_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM1ASCMSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_2_ASC_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM2ASCMSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_ALERT_3_ASC_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][ALARM3ASCMSB], 2);
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_TYPE_CHAR_HANDLE, (uint8_t *)&sensor[0][DEVTYPELSB], 1);
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_TYPE2_CHAR_HANDLE, (uint8_t *)&sensor[1][DEVTYPELSB], 1);
+    
+    
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_RANGE_CHAR_HANDLE, (uint8_t *)&sensor[0][FULLSCALERANGE3], 2); 
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_RANGE2_CHAR_HANDLE, (uint8_t *)&sensor[1][FULLSCALERANGE3], 2); 
+}
 
 
 void updateOurBleData()
@@ -1056,26 +1086,39 @@ void updateOurBleData()
     uint16 par16 = 0;
     uint32 testVal32 = 0;
     
+    uint32_t bleState;
+    
+    static uint8_t update_chunk;
+    
+    update_chunk++;
+    if(update_chunk>3)update_chunk=0;
+    
     CYBLE_GATTS_HANDLE_VALUE_NTF_T tempHandle;
     
     uint8_t rly[4];
-    uint8_t dt[5];
+    
     char log[LOG_INFO_LENGTH];
     float fval;
     
-    if( CyBle_GetState() != CYBLE_STATE_CONNECTED ) return;
+    
+    
 
-    /* Update sys remote control value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.BleControl;//&sensor[0][SYSREMOTELSB];//&System.BleControl;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for remote control value */
-    if( System.BleNotifyControl && ( System.BleControl != System.BleControlPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.BleControlPrevious = System.BleControl;
+    if( CyBle_GetState() != CYBLE_STATE_CONNECTED ){
+        return;
     }
+
+//    /* Update sys remote control value */
+//    tempHandle.attrHandle = CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.BleControl;//&sensor[0][SYSREMOTELSB];//&System.BleControl;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    /* If notifications have been requested for remote control value */
+//    if( System.BleNotifyControl && ( System.BleControl != System.BleControlPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.BleControlPrevious = System.BleControl;
+//    }
     
     ///////////////////SELECTED CHANNEL////////////////////////
     tempHandle.attrHandle = CYBLE_SGA1_SELECTED_CHANNEL_CHAR_HANDLE;
@@ -1083,268 +1126,34 @@ void updateOurBleData()
     tempHandle.value.len = 1;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     
-////////////////////////////////////////////////////////////////////////    
+/////////////RELAYS SETIINGS//////////////////////////////////////    
     memset(rly, '\0', sizeof(rly));
     for(uint8_t i=0;i<4;i++){
         rly[i]|= (relay[i].energ<<2);
         rly[i]|= (relay[i].latched<<1);
         rly[i]|= relay[i].ack;
     }
-    tempHandle.attrHandle = CYBLE_SGA1_RELAYS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)rly;
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-1]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG1_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-2]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-3]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG3_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-4]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG4_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-5]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG5_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-6]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG6_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-7]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG7_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-8]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG8_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-9]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG9_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    memset(log, 0, sizeof(log));
-    strcpy(log, log_record[LOG_MAX_ENTRIES-10]);
-    tempHandle.attrHandle = CYBLE_SGA1_LOG10_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)log;
-    tempHandle.value.len = LOG_INFO_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    Ble_WriteAttribute(CYBLE_SGA1_RELAYS_CHAR_HANDLE, (uint8_t *)&rly,4); 
     
     
-    tempHandle.attrHandle = CYBLE_SGA1_SLEEP_TIME_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sleepPeriod;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    
-    tempHandle.attrHandle = CYBLE_SGA1_GPS_LAT_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&flatitude;
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    tempHandle.attrHandle = CYBLE_SGA1_GPS_LONG_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&flongitude;
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    
+    ////////////DATE and TIME///////////////////////////////////////
+    uint8_t dt[5];
     dt[0]=date_time.month;
     dt[1]=date_time.day;
     dt[2]=date_time.year;
     dt[3]=date_time.hours;
     dt[4]=date_time.minutes;
-    tempHandle.attrHandle = CYBLE_SGA1_DATE_TIME_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&dt;
-    tempHandle.value.len = 5;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /////////////////////////////////////////////////////////////////////
-    
-    static uint16_t prev_resolution;
-    tempHandle.attrHandle = CYBLE_SGA1_RESOLUTION_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)&sensor[0][RESOLUTIONLSB];
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    tempHandle.attrHandle = CYBLE_SGA1_RESOLUTION2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8_t*)&sensor[1][RESOLUTIONLSB];
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    Ble_WriteAttribute(CYBLE_SGA1_DATE_TIME_CHAR_HANDLE, (uint8_t *)&dt, 5);
     
     
-    
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_READING_CHAR_HANDLE;
-    Sensor.Reading = iReading;
-    tempHandle.value.val = (uint8*)&iReading;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor Reading */
-    if( System.BleNotifyReading && ( Sensor.Reading != Sensor.ReadingPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        Sensor.ReadingPrevious = Sensor.Reading;
-    }
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_READING_CHAR_HANDLE, (uint8_t *)&iReading, 2);
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_STATUS_CHAR_HANDLE, (uint8_t *)&System.Status, 2); 
+    Ble_WriteAttribute(CYBLE_SGA1_SYS_CAN_ID_CHAR_HANDLE, (uint8_t *)&mySlaveAddr, 1); 
 
-    /* Update sys remote status value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_STATUS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.Status;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor Status */
-    if( System.BleNotifyStatus)// && ( System.Status != System.StatusPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.StatusPrevious = System.Status;
-    }
-
-    /* Update CAN Channel value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_CAN_CHAN_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CanChannel;//&Sensor.CountsHalfScale;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    /* Update CAN Node ID value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_CAN_ID_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&mySlaveAddr;//&System.CanNodeId;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    /* Update SYS_CAL_LOOP value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_CAL_LOOP_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.BleCalLoop;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    /* Update SYS_ADC value */
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ADC_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.AdcCounts;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for AdcCounts */
-    if( System.BleNotifyAdcCounts && ( System.AdcCounts != System.AdcCountsPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.AdcCountsPrevious = System.AdcCounts;
-    }
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_CAL_LEVEL_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][CALLEVEL3],2); 
 
     
-    ///////////////////    ALERTS ///////////////////////////////////////
-    /* Update SYS_ALERT_1 value */
-    par16 = (sensor[BLE_ch][ALARM1MSB]<<8)+sensor[BLE_ch][ALARM1LSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    /* Update SYS_ALERT_2 value */
-    par16 = (sensor[BLE_ch][ALARM2MSB]<<8)+sensor[BLE_ch][ALARM2LSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    /* Update SYS_ALERT_3 value */
-    par16 = (sensor[BLE_ch][ALARM3MSB]<<8)+sensor[BLE_ch][ALARM3LSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    
-    /* Update SYS_ALERT_1_ASC  value */
-    par16 = sensor[BLE_ch][ALARM1ASCLSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_1_ASC_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    /* Update SYS_ALERT_2_ASC  value */
-    par16 = sensor[BLE_ch][ALARM2ASCLSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_2_ASC_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-    
-    /* Update SYS_ALERT_3_ASC  value */
-    par16 = sensor[BLE_ch][ALARM3ASCLSB];
-    tempHandle.attrHandle = CYBLE_SGA1_SYS_ALERT_3_ASC_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&par16;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-////////////////////////////////////////////////////////////////////////////////////////
-    
-    
-    /* Update PIN value */
-    tempHandle.attrHandle = CYBLE_SGA2_PIN_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.Pin;
-    tempHandle.value.len = 4;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-
-///////         DEVICE TYPE      //////////////////////////////////////////////////    
-    /* Update SENSOR_TYPE value ( This is actually mfg ) */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TYPE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[0][DEVTYPELSB];
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TYPE2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[1][DEVTYPELSB];
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-/////////////////////////////////////////////////////////////////////////////
-    
-///////        FULL SCALE RANGE      ////////////////////////////////////////////////    
-    /* Update gas range value */
-    Sensor.Range= (sensor[0][FULLSCALERANGE3]<<8)+sensor[0][FULLSCALERANGE4];
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_RANGE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&Sensor.Range; //&sensor[FULLSCALERANGE3];//&testVal8;  
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    
-    Sensor.Range= (sensor[1][FULLSCALERANGE3]<<8)+sensor[1][FULLSCALERANGE4];
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_RANGE2_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&Sensor.Range; //&sensor[FULLSCALERANGE3];//&testVal8;  
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-////////////////////////////////////////////////////////////////////////////    
-    
-//////           GAS NOTE          ///////////////////////////////////////////////////////////
-    /* Update SENSOR_NOTE value */
+      /* Update SENSOR_NOTE value */
     tempHandle.attrHandle = CYBLE_SGA2_SENSOR_GAS_NOTE_CHAR_HANDLE;
     char str[12];
     remove_trailing_spaces(str, (char*)&sensor[0][COMPAUND1]);
@@ -1363,82 +1172,56 @@ void updateOurBleData()
     tempHandle.value.val = (uint8*)str;
     tempHandle.value.len = 10;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-/////////////////////////////////////////////////////////////////////////////
     
     
-    /* Update SENSOR_TAG value */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TAG_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)device_tag;//&System.SensorTag;
-    tempHandle.value.len = SENSOR_TAG_LENGTH;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    
+    
+//    /* Update CAL_Z_COUNTS value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_Z_COUNTS_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalZCounts;
+//    tempHandle.value.len = 2;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
-    /* Update temperature */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_TEMPERATURE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[0][TEMPERATURELSB];//&testVal8;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor CalLevel */
-//    if( System.BleNotifyTemperature && ( Sensor.Temperature != Sensor.TemperaturePrevious ) )
+//    /* Update CAL_ZERO_ERROR value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_ZERO_ERROR_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalZeroError;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for System.CalZeroError */
+//    if( System.BleNotifyCalZeroError && ( System.CalZeroError != System.CalZeroErrorPrevious ) )
 //    {
 //        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-//        Sensor.TemperaturePrevious = Sensor.Temperature;
+//        System.CalZeroErrorPrevious = System.CalZeroError;
 //    }
 
-    /* Update SENSOR_CAL_LEVEL value */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_CAL_LEVEL_CHAR_HANDLE;
-    memcpy(&Sensor.CalLevel, &sensor[0][CALLEVEL3],2);
-    tempHandle.value.val = (uint8*)&Sensor.CalLevel;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor CalLevel */
-//    if( System.BleNotifyCalLevel && ( Sensor.CalLevel != Sensor.CalLevelPrevious ) )
+//    /* Update CAL_STEP value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_STEP_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalStep;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for Sensor Life */
+//    if( System.BleNotifyCalStep && ( System.CalStep != System.CalStepPrevious ) )
 //    {
 //        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-//        Sensor.CalLevelPrevious = Sensor.CalLevel;
+//        System.CalStepPrevious = System.CalStep;
 //    }
 
-    /* Update CAL_Z_COUNTS value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_Z_COUNTS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalZCounts;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* Update CAL_SPEED value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_SPEED_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalSpeed;
+//    tempHandle.value.len = 2;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for System.CalSpeed */
+//    if( System.BleNotifyCalSpeed && ( System.CalSpeed != System.CalSpeedPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalSpeedPrevious = System.CalSpeed;
+//    }
 
-    /* Update CAL_ZERO_ERROR value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_ZERO_ERROR_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalZeroError;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for System.CalZeroError */
-    if( System.BleNotifyCalZeroError && ( System.CalZeroError != System.CalZeroErrorPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalZeroErrorPrevious = System.CalZeroError;
-    }
-
-    /* Update CAL_STEP value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_STEP_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalStep;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor Life */
-    if( System.BleNotifyCalStep && ( System.CalStep != System.CalStepPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalStepPrevious = System.CalStep;
-    }
-
-    /* Update CAL_SPEED value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_SPEED_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalSpeed;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for System.CalSpeed */
-    if( System.BleNotifyCalSpeed && ( System.CalSpeed != System.CalSpeedPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalSpeedPrevious = System.CalSpeed;
-    }
-
+    
+    
+    
     /* Update CAL_AS_FOUND value */
     tempHandle.attrHandle = CYBLE_SGA2_CAL_AS_FOUND_CHAR_HANDLE;
     memcpy(&System.CalAsFound,&as_found,sizeof(float));
@@ -1446,11 +1229,11 @@ void updateOurBleData()
     tempHandle.value.len = 4;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     /* If notifications have been requested for System.CalAsFound */
-    if( System.BleNotifyCalAsFound && ( System.CalAsFound != System.CalAsFoundPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalAsFoundPrevious = System.CalAsFound;
-    }
+//    if( System.BleNotifyCalAsFound && ( System.CalAsFound != System.CalAsFoundPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalAsFoundPrevious = System.CalAsFound;
+//    }
 
     /* Update CAL_ADJUSTED value */
     tempHandle.attrHandle = CYBLE_SGA2_CAL_ADJUSTED_CHAR_HANDLE;
@@ -1458,23 +1241,29 @@ void updateOurBleData()
     tempHandle.value.len = 1;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     /* If notifications have been requested for System.CalAsFound */
-    if( System.BleNotifyCalAdjusted && ( System.CalAdjusted != System.CalAdjustedPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalAdjustedPrevious = System.CalAdjusted;
-    }
+//    if( System.BleNotifyCalAdjusted && ( System.CalAdjusted != System.CalAdjustedPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalAdjustedPrevious = System.CalAdjusted;
+//    }
 
-    /* Update CAL_COUNTS value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_COUNTS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalCounts;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    
+    ///////// ?????????????????  
+//    /* Update CAL_COUNTS value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_COUNTS_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalCounts;
+//    tempHandle.value.len = 2;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
 
-    /* Update SENSOR_LIFE value */
-    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_LIFE_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&sensor[0][SENSORLIFELSB];
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    
+    
+//    /* Update SENSOR_LIFE value */
+//    tempHandle.attrHandle = CYBLE_SGA2_SENSOR_LIFE_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&sensor[0][SENSORLIFELSB];
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    Ble_WriteAttribute(CYBLE_SGA2_SENSOR_LIFE_CHAR_HANDLE, (uint8_t *)&sensor[BLE_ch][SENSORLIFELSB],1); 
     /* If notifications have been requested for Sensor Life */
 //    if( System.BleNotifyLife && ( Sensor.Life != Sensor.LifePrevious ) )
 //    {
@@ -1482,43 +1271,47 @@ void updateOurBleData()
 //        Sensor.LifePrevious = Sensor.Life;
 //    }
 
-    /* Update CAL_CLEARING value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_CLEARING_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalClearing;
-    tempHandle.value.len = 2;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for Sensor CalClearing */
-    if( System.BleNotifyCalClearing && ( System.CalClearing != System.CalClearingPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalClearingPrevious = System.CalClearing;
-    }
+    ///////// ?????????????????  
+//    /* Update CAL_CLEARING value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_CLEARING_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalClearing;
+//    tempHandle.value.len = 2;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for Sensor CalClearing */
+//    if( System.BleNotifyCalClearing && ( System.CalClearing != System.CalClearingPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalClearingPrevious = System.CalClearing;
+//    }
 
-    /* Update CAL_SPAN_ERROR value */
-    tempHandle.attrHandle = CYBLE_SGA2_CAL_SPAN_ERROR_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalSpanError;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
-    /* If notifications have been requested for System.CalSpanError */
-    if( System.BleNotifyCalSpanError && ( System.CalSpanError != System.CalSpanErrorPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalSpanErrorPrevious = System.CalSpanError;
-    }
-
-    /* Update CALIBRATION_STATUS value */
-    tempHandle.attrHandle = CYBLE_SGA2_CALIBRATION_STATUS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.CalibrationStatus;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     
-    /* If notifications have been requested for System.CalibrationStatus */
-    if(( System.CalibrationStatus != System.CalibrationStatusPrevious ) )
-    //if( System.BleNotifyCalibrationStatus && ( System.CalibrationStatus != System.CalibrationStatusPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.CalibrationStatusPrevious = System.CalibrationStatus;
-    }
+    ///////// ?????????????????  
+//    /* Update CAL_SPAN_ERROR value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CAL_SPAN_ERROR_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalSpanError;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* If notifications have been requested for System.CalSpanError */
+//    if( System.BleNotifyCalSpanError && ( System.CalSpanError != System.CalSpanErrorPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalSpanErrorPrevious = System.CalSpanError;
+//    }
+
+    ///////// ?????????????????  
+//    /* Update CALIBRATION_STATUS value */
+//    tempHandle.attrHandle = CYBLE_SGA2_CALIBRATION_STATUS_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.CalibrationStatus;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    
+//    /* If notifications have been requested for System.CalibrationStatus */
+//    if(( System.CalibrationStatus != System.CalibrationStatusPrevious ) )
+//    //if( System.BleNotifyCalibrationStatus && ( System.CalibrationStatus != System.CalibrationStatusPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.CalibrationStatusPrevious = System.CalibrationStatus;
+//    }
     
     
     /* Update READING_SCALED value */
@@ -1528,25 +1321,30 @@ void updateOurBleData()
     tempHandle.value.len = 4;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     /* If notifications have been requested for Sensor.ReadingScaled */
-    if( System.BleNotifyReadingScaled && ( Sensor.ReadingScaled != Sensor.ReadingScaledPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        Sensor.ReadingScaledPrevious = Sensor.ReadingScaled;
-    }
+//    if( System.BleNotifyReadingScaled && ( Sensor.ReadingScaled != Sensor.ReadingScaledPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        Sensor.ReadingScaledPrevious = Sensor.ReadingScaled;
+//    }
 
-    /* Update ALERT_STATUS value */
-    memcpy(&System.AlertStatus, &alarm_status[0], 1);
-    tempHandle.attrHandle = CYBLE_SGA2_ALERT_STATUS_CHAR_HANDLE;
-    tempHandle.value.val = (uint8*)&System.AlertStatus;
-    tempHandle.value.len = 1;
-    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+//    /* Update ALERT_STATUS value */
+//    memcpy(&System.AlertStatus, &alarm_status[0], 1);
+//    tempHandle.attrHandle = CYBLE_SGA2_ALERT_STATUS_CHAR_HANDLE;
+//    tempHandle.value.val = (uint8*)&System.AlertStatus;
+//    tempHandle.value.len = 1;
+//    CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
+    Ble_WriteAttribute(CYBLE_SGA2_ALERT_STATUS_CHAR_HANDLE, (uint8_t *)&alarm_status[BLE_ch],1); 
+    
     /* If notifications have been requested for System.AlertStatus */
-    if( System.BleNotifyAlertStatus && ( System.AlertStatus != System.AlertStatusPrevious ) )
-    {
-        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
-        System.AlertStatusPrevious = System.AlertStatus;
-    }
-
+//    if( System.BleNotifyAlertStatus && ( System.AlertStatus != System.AlertStatusPrevious ) )
+//    {
+//        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
+//        System.AlertStatusPrevious = System.AlertStatus;
+//    }
+    
+    
+    
+    
 }
 
 
@@ -1554,7 +1352,7 @@ void updateOurBleData()
 
 
 int capsenseNotify;
-uint8_t bleConnected;
+
 
 CYBLE_CONN_HANDLE_T connectionHandle;
 
@@ -1680,6 +1478,7 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
             updateOurBleData();                                                 /* Update the GATT DB with our data */
             connectionHandle = *(CYBLE_CONN_HANDLE_T *)eventParam;
             bleConnected =1;
+            
             
 #ifdef DEEPSLEEP            
             ResetBLETimer();
@@ -1825,13 +1624,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM1LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM1MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(BLE_ch , ALARM1MSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM1LSB] =  wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM1MSB] =  wrReqParam->handleValPair.value.val[1];
+//                    runtime_UpdateSensor(BLE_ch , ALARM1MSB-4, par16);
+//                    SelectChannel(BLE_ch);
+                    //runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             /* It's our ALERT_2 variable */            
@@ -1841,13 +1640,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM2LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM2MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(BLE_ch , ALARM2MSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM2LSB] =  wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM2MSB] =  wrReqParam->handleValPair.value.val[1];
+//                    runtime_UpdateSensor(BLE_ch , ALARM2MSB-4, par16);
+//                    SelectChannel(BLE_ch);
+//                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1857,14 +1656,14 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 /* Only update and respond if the write to the GATT Database is allowed */
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
-                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM3LSB] =  wrReqParam->handleValPair.value.val[0];
-                    sensor[BLE_ch][ALARM3MSB] =  wrReqParam->handleValPair.value.val[1];
-                    runtime_UpdateSensor(BLE_ch , ALARM3MSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM3LSB] =  wrReqParam->handleValPair.value.val[0];
+//                    sensor[BLE_ch][ALARM3MSB] =  wrReqParam->handleValPair.value.val[1];
+//                    runtime_UpdateSensor(BLE_ch , ALARM3MSB-4, par16);
+//                    SelectChannel(BLE_ch);
+//                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1877,13 +1676,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    if(par16>1)par16=1;
-                    sensor[BLE_ch][ALARM1ASCLSB] =  par16;
-                    runtime_UpdateSensor(BLE_ch , ALARM1ASCMSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    if(par16>1)par16=1;
+//                    sensor[BLE_ch][ALARM1ASCLSB] =  par16;
+//                    runtime_UpdateSensor(BLE_ch , ALARM1ASCMSB-4, par16);
+//                    SelectChannel(BLE_ch);
+//                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1895,13 +1694,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    if(par16>1)par16=1;
-                    sensor[BLE_ch][ALARM2ASCLSB] =  par16;
-                    runtime_UpdateSensor(BLE_ch , ALARM2ASCMSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    if(par16>1)par16=1;
+//                    sensor[BLE_ch][ALARM2ASCLSB] =  par16;
+//                    runtime_UpdateSensor(BLE_ch , ALARM2ASCMSB-4, par16);
+//                    SelectChannel(BLE_ch);
+//                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1912,13 +1711,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
-                    if(par16>1)par16=1;
-                    sensor[BLE_ch][ALARM3ASCLSB] =  par16;
-                    runtime_UpdateSensor(BLE_ch , ALARM3ASCMSB-4, par16);
-                    SelectChannel(BLE_ch);
-                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
-                    RecalculateAlarms(BLE_ch);
+//                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+//                    if(par16>1)par16=1;
+//                    sensor[BLE_ch][ALARM3ASCLSB] =  par16;
+//                    runtime_UpdateSensor(BLE_ch , ALARM3ASCMSB-4, par16);
+//                    SelectChannel(BLE_ch);
+//                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    //RecalculateAlarms(BLE_ch);
                 }
             }
             
@@ -1956,6 +1755,13 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                 if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
                 {
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
+                    par16 = (wrReqParam->handleValPair.value.val[1]<<8)+wrReqParam->handleValPair.value.val[0];
+                    sensor[BLE_ch][CALLEVEL3] =  (par16>>8)&0xFF;
+                    sensor[BLE_ch][CALLEVEL4] =  par16&0xFF;
+                    runtime_UpdateSensor(BLE_ch , CALLEVEL3-4, par16);
+                    SelectChannel(BLE_ch);
+                    runtime_CtrlSensor(BLE_ch , SENSOR_SYS_REMOTE_REG, RUNTIME_SMART_SENSOR_SYS_REMOTE_SAVE_TO_EEPROM);
+                    
                 }                    
             }
             /* It's our CAL LOOP Channel variable */            
@@ -2362,9 +2168,13 @@ void runtimeRealTime(void){
         HandleRelays();
         
         
+        if((CyBle_GetState() == CYBLE_STATE_CONNECTED) &&!bleConnected){
+            bleNewConnection=1;
+        }
         if(bleConnected){//bleConnected variable is controlled by Stack_Handler() in runtime.c
             updateOurBleData();
         }
+        
         Nextion_ObjVisible(DISP_OBJ_BLE_CONNECTED,bleConnected);
         
         // Gettting Relays State;
