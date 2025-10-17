@@ -1034,7 +1034,7 @@ void BLE_Start(){
 //}
 
 
-static void Ble_WriteAttribute(uint16 handle, uint8 *data, uint8 len)
+void Ble_WriteAttribute(uint16 handle, uint8 *data, uint8 len)
 {
     CYBLE_GATTS_HANDLE_VALUE_NTF_T h;
     h.attrHandle = handle;
@@ -1045,6 +1045,7 @@ static void Ble_WriteAttribute(uint16 handle, uint8 *data, uint8 len)
 
 void InitBLEStaticData(){
 
+     
     Ble_WriteAttribute(CYBLE_SGA1_LOG1_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-1], LOG_INFO_LENGTH);
     Ble_WriteAttribute(CYBLE_SGA1_LOG2_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-2], LOG_INFO_LENGTH);
     Ble_WriteAttribute(CYBLE_SGA1_LOG3_CHAR_HANDLE, (uint8_t *)&log_record[LOG_MAX_ENTRIES-3], LOG_INFO_LENGTH);
@@ -1082,16 +1083,7 @@ void InitBLEStaticData(){
 
 void updateOurBleData()
 {
-    uint8 testVal8 = 0;
     uint16 par16 = 0;
-    uint32 testVal32 = 0;
-    
-    uint32_t bleState;
-    
-    static uint8_t update_chunk;
-    
-    update_chunk++;
-    if(update_chunk>3)update_chunk=0;
     
     CYBLE_GATTS_HANDLE_VALUE_NTF_T tempHandle;
     
@@ -1100,9 +1092,6 @@ void updateOurBleData()
     char log[LOG_INFO_LENGTH];
     float fval;
     
-    
-    
-
     if( CyBle_GetState() != CYBLE_STATE_CONNECTED ){
         return;
     }
@@ -1173,10 +1162,6 @@ void updateOurBleData()
     tempHandle.value.len = 10;
     CyBle_GattsWriteAttributeValue(&tempHandle,0,&cyBle_connHandle,0);
     
-    
-    
-    
-    
 //    /* Update CAL_Z_COUNTS value */
 //    tempHandle.attrHandle = CYBLE_SGA2_CAL_Z_COUNTS_CHAR_HANDLE;
 //    tempHandle.value.val = (uint8*)&System.CalZCounts;
@@ -1218,9 +1203,6 @@ void updateOurBleData()
 //        CyBle_GattsNotification( cyBle_connHandle, &tempHandle );               /* Notify the client */
 //        System.CalSpeedPrevious = System.CalSpeed;
 //    }
-
-    
-    
     
     /* Update CAL_AS_FOUND value */
     tempHandle.attrHandle = CYBLE_SGA2_CAL_AS_FOUND_CHAR_HANDLE;
@@ -1359,99 +1341,11 @@ CYBLE_CONN_HANDLE_T connectionHandle;
 /* define the test register to switch the PA/LNA hardware control pins */
 #define CYREG_SRSS_TST_DDFT_CTRL 0x40030008
 
-//void Stack_Handler(uint32 eventCode, void *eventParam){
-//    
-//    CYBLE_GATTS_WRITE_REQ_PARAM_T *wrReqParam;
-//    
-//    switch (eventCode){
-//        case CYBLE_EVT_STACK_ON:
-//            /* Enable the Skyworks SE2438T PA/LNA */
-//            CSD_Write(1);
-//            CPS_Write(1);
-//            /* Configure the Link Layer to automatically switch PA control pin P3[2] and LNA control pin P3[3] */
-//            CY_SET_XTND_REG32((void CYFAR *)(CYREG_BLE_BLESS_RF_CONFIG), 0x0331);
-//            CY_SET_XTND_REG32((void CYFAR *)(CYREG_SRSS_TST_DDFT_CTRL), 0x80000302);
-//        case CYBLE_EVT_GAP_DEVICE_DISCONNECTED:
-//            CyBle_GappStartAdvertisement(CYBLE_ADVERTISING_FAST);
-//            bleConnected =0;
-//            BLETimer_Start();
-//            
-//            break;
-//            
-//        case CYBLE_EVT_GATT_CONNECT_IND:
-//            connectionHandle = *(CYBLE_CONN_HANDLE_T *)eventParam;
-//            bleConnected =1;
-//            
-//#ifdef DEEPSLEEP            
-//            ResetBLETimer();
-//#endif            
-//            //updateData();
-//            updateOurBleData();
-//            
-//            break;
-//        
-//        case CYBLE_EVT_GATTS_WRITE_REQ:
-//            wrReqParam = (CYBLE_GATTS_WRITE_REQ_PARAM_T *)eventParam;
-//            
-//            /* Requests to write variables */
-//            /* It's our sgaBleRemote variable */            
-//            if(wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE)
-//            {
-//                /* Only update and respond if the write to the GATT Database is allowed */
-//                if(CYBLE_GATT_ERR_NONE == CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED))
-//                {
-//                    BleControl = wrReqParam->handleValPair.value.val[0];      /* Update our local copy */
-//                    CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
-//                }
-//                
-//                // send i2c command here?
-//                runtime_CtrlSensor( CYBLE_SGA1_SYS_REMOTE_CHAR_HANDLE+2 , BleControl);
-//            }
-//            
-//            /* It's a request for notifications for our Sensor.Reading (SYS_READING) */
-//            if( wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_READING_SYS_READING_CCCD_DESC_HANDLE )
-//            {
-//                CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED);
-//                System.BleNotifyReading = wrReqParam->handleValPair.value.val[0] & 0x01; /* Update local notification state */
-//                CyBle_GattsWriteRsp(cyBle_connHandle);                          /* respond to the client */
-//            }
-//            
-//            /* It's a request for notifications for our Sensor.Status (SYS_STATUS) */
-//            if( wrReqParam->handleValPair.attrHandle == CYBLE_SGA1_SYS_STATUS_CLIENT_CHARACTERISTIC_CONFIGURATION_DESC_HANDLE )
-//            {
-//                CyBle_GattsWriteAttributeValue(&wrReqParam->handleValPair,0, &cyBle_connHandle, CYBLE_GATT_DB_PEER_INITIATED);
-//                System.BleNotifyReading = wrReqParam->handleValPair.value.val[0] & 0x01; /* Update local notification state */
-//                CyBle_GattsWriteRsp(cyBle_connHandle);                          /* respond to the client */
-//            }
-//            break;
-//            
-//            break;
-//        default:
-//            break;    
-//    }
-//    
-//    
-//    
-//    
-//    
-//    
-//}
 
 
-/*******************************************************************************
-* Function Name: Stack_Handler
-********************************************************************************
-* Summary:
-*  Stack handler for BLE communications.
-* 
-* Parameters:
-*  eventCode
-*  eventParam
-*
-* Return:
-*  None
-*
-*******************************************************************************/
+
+
+
 void Stack_Handler( uint32 eventCode, void *eventParam )
 {
     CYBLE_GATTS_WRITE_REQ_PARAM_T *wrReqParam;    
@@ -1511,14 +1405,9 @@ void Stack_Handler( uint32 eventCode, void *eventParam )
                     CyBle_GattsWriteRsp(cyBle_connHandle);                      /* respond to the client */
                     if(wrReqParam->handleValPair.value.val[0]>0 && wrReqParam->handleValPair.value.val[0]<=MODBUS_MAXIMAL_ADDRESS){
                         System.CanNodeId = wrReqParam->handleValPair.value.val[0];  /* Update our local copy */
-                        EEPROM_SetMyAddress(System.CanNodeId);
+                        EEPROM_SetMyAddress((uint8_t*)&System.CanNodeId);
                         mySlaveAddr =System.CanNodeId; 
                     }
-                    
-//                    FM24VN10_Write_8( SYS_I2C_FRAM_ADDR_B0, SYS_EE8_CAN_NODE_ID, System.CanNodeId );
-//                    if( SA100_I2C_INSTALLED ) SA100I2C_Write_8( SA100_CEC_I2C_ADDR, SA100_I2C_CanNodeId, System.CanNodeId );
-//                    SA100CEC_Write_8( CEC_OD_SYS_U8_CANNodeID, 0, System.CanNodeId );
-//                    SA100CEC_Reset( CEC_RESET_COMMS );
                 }
             }
             

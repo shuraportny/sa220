@@ -227,7 +227,12 @@ void SetSleepPeriod(uint32_t period);
 void isBLEDisconneted(void);
 void updateData(void);
 void InitBLEStaticData();
+
+void Ble_WriteAttribute(uint16 handle, uint8 *data, uint8 len);
 void updateOurBleData(void);
+void InitBLEStaticData();
+
+
 void Stack_Handler(uint32 eventCode, void *eventParam);
 
 void remove_leading_spaces(char *str);
